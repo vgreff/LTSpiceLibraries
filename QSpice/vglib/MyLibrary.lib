@@ -1,0 +1,27 @@
+* Qspice Library
+* (C) Marcos Alonso - February 2024
+* For educational purpose only
+*
+*
+********************************************
+* Ideal comparator
+********************************************
+.subckt comparator in+ in- out
+E1 out 0 Value = {if(V(in+, in-)>0, {Vhigh}, {Vlow})}
+Rin+ in+ 0 10Meg
+Rin- in- 0 10Meg
+.ends comparator
+
+*****************************************************
+* Basic Operational Amplifier
+* Ri, input resistance; Ro, output resistace
+* Ao, DC gain; FBW, 0-dB crossover frequency
+*****************************************************
+.subckt Opamp in+ in- out
+Ri in+ in- {Ri}
+E1 a 0 value={Ao*V(in+, in-)}
+R1 a b 1
+C1 b 0 {1/( 2*pi*1*(FBW/Ao) )}
+E2 c 0 value={v(b)}
+Ro c out {Ro}
+.ends Opamp
