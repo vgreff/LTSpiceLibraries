@@ -1,0 +1,27 @@
+Version 4
+SymbolType CELL
+LINE Normal -80 24 -72 32
+LINE Normal -80 40 -72 32
+LINE Normal -80 -64 128 -64
+LINE Normal -80 -64 -80 128
+LINE Normal -80 128 128 128
+LINE Normal 128 128 128 -64
+LINE Normal 144 0 128 0
+CIRCLE Normal 144 72 128 56
+WINDOW 0 -64 -80 Left 2
+WINDOW 3 -64 152 Left 2
+SYMATTR Prefix A
+SYMATTR SpiceModel COUNTER
+SYMATTR Description Behavioral counter
+PIN -80 32 LEFT 12
+PINATTR PinName CLK
+PINATTR SpiceOrder 1
+PIN 144 64 RIGHT 20
+PINATTR PinName Phi2
+PINATTR SpiceOrder 6
+PIN 144 0 RIGHT 20
+PINATTR PinName Phi1
+PINATTR SpiceOrder 7
+PIN -80 128 NONE 0
+PINATTR PinName com
+PINATTR SpiceOrder 8

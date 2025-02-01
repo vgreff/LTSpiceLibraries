@@ -1,0 +1,15 @@
+LTspice 24.0.12 for Windows
+Circuit: * C:\Users\vince\OneDrive\Documents\LTspice\tutorial\OP27_integrator.asc
+Start Time: Sat Jan  4 12:55:23 2025
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = modified trap
+Limiting rise time of source vin to 5e-06
+Limiting fall time of source vin to 5e-06
+WARNING: Less than two connections to node in.  This node is used by vin.
+WARNING: Less than two connections to node in1.  This node is used by vin1.
+Direct Newton iteration for .op point succeeded.
+Total elapsed time: 0.037 seconds.
+

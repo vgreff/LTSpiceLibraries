@@ -1,0 +1,115 @@
+.subckt <triode> A G K
+or ~
+.subckt <tetrode> A S G K
+params: MU EX KG1 KG2 KP KVB CCG CPG CCP RGI (see notes below)
+
+Triodes: EP = V(A,K); EG = V(G,K)
+Pentodes: EP = V(A,K); EG = V(G,K); EG2 = V(S,K)
+
+Triodes:
+Ee1 E1 0 Value = (EP/kP) * log(1 + exp(kP * (1/mu + EG/sqrt(kVB + EP**2))))
+GIP A K Value = (E1**EX/kG1) * (1 + sgn(E1))
+
+becomes e.g.:
+Ee1 E1 0 Value={(V(A,K)/{kP}) * log(1 + exp({kP} * (1/{mu} + V(G,K)/sqrt({kVB} + pwr(V(A,K),2)))))}
+GIP A K Value={(pwr(V(E1),{EX})/{kG1}) * (1 + sgn(V(E1)))}
+
+
+Pentodes (as tetrodes):
+Ee1 E1 0 Value = (EG2/kP) * log(1+exp(kP * (1/Mu+EG/EG2)))
+GIP A K Value = (E1 * EX/kG1) * (1 + sgn(E1)) * arctan(EP/kVB)
+GIG2 S K Value = (EG+EG2/mu)**1.5/kG2
+
+becomes e.g.:
+Ee1 E1 0 Value={(V(S,K)/{kP}) * log(1+exp({kP} * (1/{Mu}+V(G,K)/V(S,K))))}
+GIP A K Value={(V(E1) * {EX}/{kG1}) * (1 + sgn(V(E1))) * arctan(V(A,K)/{kVB})}
+GIG2 S K Value={pwr((V(G,K)+V(S,K)/{mu}),1.5)/{kG2}}
+
+
+
+MU is the amplification factor, 
+
+EX (typical range from 1.3 to 1.4, but see below)
+
+kG1 is a factor used to fit the equation to data (for anode current)
+
+kG2 is a constant similar in function to kG1 (for screen current, pentode)
+
+KP (kP) (behaviour region (A), see below)
+
+KVB ("knee" of the characteristic curves, see below)
+
+CCG cap. cathode to grid,
+
+CPG cap. plate to grid,
+
+CCP cap. cathode to plate.
+
+EG is control grid voltage, 
+
+EP is plate voltage, 
+
+IP is plate current, (product)
+
+EG2 is screen grid voltage 
+
+IG2 is the screen grid current (product)
+
+RGI is the grid-to-cathode resistance that controls grid current when EG > 0. (No grid current flows during 
+normal operation, when EG < 0.) The numbers in Table 1 are rough estimates based on measurements of similar 
+tubes in old texts.3 Good up-to-date data is very scarce, and would be most welcome.
+
+KP (kP) dominates the behavior of the new model in region (A), which is characterized by large negative grid 
+voltage, large plate voltage, and low plate current. Plate current is inversely proportional to KP in this 
+region. Determining KP for a given tube is done entirely by trial-and-error. Triode-mode curves must be used 
+to obtain an accurate estimate of KP for pentodes because published pentode curves tend to have insufficient
+resolution in region (A). 
+3/2 = 1.5 (!)
+
+KVB (kVB) relates to the "knee" of the characteristic curves, and is defined differently in the triode and 
+pentode equations. For pentodes, the knee is proportional to KVB, and is most visible in the pentode-mode 
+curves (Figure 3 for the 6550). Equation (5) does not give an accurate estimate of the knee for all levels 
+of grid voltage, EG. Fortunately, this is not a serious limitation because load lines for practical designs 
+pass close to the knee for EG = 0. (Otherwise there would be a serious impedance mismatch.) The location of 
+the knee for EG = 0 was used to determine KVB in Table 1. For triodes, the knee is proportional to the square 
+root of KVB, and is only apparent when the tube is operated with positive grid voltage.
+
+EX ~ To determine EX and KG1 (X and kG1), run the appropriate plate curve program (Appendix A1 or A2), and 
+observe plate current I(VP) using Probe. Adjust EX and KG1 so that curves for relatively low negative grid 
+voltages (e.g., Vg = 0 or -0.5 for the 12AX7 in Figure 2) match experimental data. Typical values of EX range 
+from 1.3 to 1.4. Line curvature increases with EX. The textbook value of 3/2 for EX is appropriate for 
+equations (1) and (2), where it gives a reasonable average representation of tube operation, but is not 
+really accurate in all regions. KG1 is inversely proportional to plate current for given grid and plate 
+voltages. It usually requires several runs to get a really good match for EX and KG1. MU may need to be 
+adjusted slightly in the process.
+
+
+Triodes:
+OLD ~ IP = ((EG+EP/mu)**1.5)/kG1     for    (EG+EP/mu) >= 0 (else 0)
+
+NEW ~
+E1 = (EP/kP) * log(1 + exp(kP * (1/mu + EG/sqrt(kVB + EP**2))))
+IP = (E1 * EX/kG1)(1 + sgn(E1))
+
+
+Pentodes (as tetrodes):
+
+OLD ~ Anode:
+IP = (2/kG1p) * ((EG+EG2/mu)**1.5) * arctan(EP/kVB)      for    (EG+EG2/mu) >= 0 (else 0)
+OLD ~ Screen:
+IG2 = ((EG+EG2/mu)**1.5)/kG2     for    (EG+EG2/mu) >= 0 (else 0)
+
+NEW ~
+E1 = (EG2/kP) * log(1+exp(kP * (1/Mu+EG/EG2))) 
+IP = (E1 * X/kG1) * (1 + sgn(E1)) * arctan(EP/kVB)
+IG2 = (EG+EG2/mu)**1.5/kG2     for    EG+EG2/mu >= 0 (else 0)
+
+
+TUBE MU EX KG1 KG2 KP KVB CCG CPG CCP RGI 
+6DJ8 28 1.3 330   320 300 2.3P 2.1P 0.7P 2k 
+6L6CG 8.7 1.35 1460 4500 48 12 14P 0.85P 12P 1k 
+12AX7 100 1.4 1060   600 300 2.3P 2.4P 0.9P 2k 
+12AU7 21.5 1.3 1180   84 300 2.3P 2.2P 1.0P 2k 
+6550 7.9 1.35 890 4800 60 24 14P 0.85P 12P 1k 
+KT88 8.8 1.35 730 4200  32 16 14P 0.85P 12P 1k 
+

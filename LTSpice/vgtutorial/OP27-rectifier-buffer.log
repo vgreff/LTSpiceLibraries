@@ -1,0 +1,12 @@
+LTspice 24.0.12 for Windows
+Circuit: * C:\Users\vince\OneDrive\Documents\LTspice\tutorial\OP27-rectifier-buffer.asc
+Start Time: Thu Jan  2 07:00:01 2025
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = modified trap
+WARNING: Less than two connections to node n002.  This node is used by r6.
+Direct Newton iteration for .op point succeeded.
+Total elapsed time: 0.109 seconds.
+

@@ -1,0 +1,51 @@
+LTspice 24.0.12 for Windows
+Circuit: * C:\Users\vince\OneDrive\Documents\LTspice\tutorial\OP27-rectifier.asc
+Start Time: Thu Jan  2 10:14:31 2025
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = modified trap
+Direct Newton iteration failed to find .op point.  (Use ".option noopiter" to skip.)
+Starting Gmin stepping
+Gmin = 10
+Gmin = 1.07374
+Gmin = 0.115292
+Gmin = 0.0123794
+Gmin = 0.00132923
+Gmin = 0.000142725
+Gmin = 1.5325e-05
+vernier = 0.5
+vernier = 0.25
+Gmin = 5.23326e-06
+vernier = 0.333333
+vernier = 0.444444
+Gmin = 2.32288e-06
+vernier = 0.592592
+Gmin = 6.65288e-07
+vernier = 0.790123
+vernier = 1
+Gmin = 9.23953e-08
+Gmin = 9.92087e-09
+Gmin = 1.06525e-09
+Gmin = 1.1438e-10
+Gmin = 1.22814e-11
+Gmin = 1.31871e-12
+Gmin = 1.41595e-13
+Gmin = 0
+Gmin stepping succeeded in finding the operating point.
+
+Ignoring empty pin current: Ix(u1:vc+)
+Ignoring empty pin current: Ix(u1:vc-)
+Ignoring empty pin current: Ix(u1:vout+)
+Ignoring empty pin current: Ix(u1:vout-)
+Ignoring empty pin current: Ix(u2:a)
+Ignoring empty pin current: Ix(u2:c)
+Ignoring empty pin current: Ix(u1:vc+)
+Ignoring empty pin current: Ix(u1:vc-)
+Ignoring empty pin current: Ix(u1:vout+)
+Ignoring empty pin current: Ix(u1:vout-)
+Ignoring empty pin current: Ix(u2:a)
+Ignoring empty pin current: Ix(u2:c)
+Total elapsed time: 0.239 seconds.
+
