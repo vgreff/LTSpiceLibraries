@@ -1,0 +1,8 @@
+.Subckt BipolarPin C Ci B Bi E Ei params: Lc=2n Lb=2n Le=2n Ccb=50f Cce=50f Ceb=50f
+Ccb c b {Ccb}
+Cce c e {Cce}
+Ceb E b {Ceb}
+Lc C Ci {Lc} Rser=0 Rpar={10.e9*Lc}
+Le E Ei {Le} Rser=0 Rpar={10.e9*Le}
+Lb B Bi {Lb} Rser=0 Rpar={10.e9*Lb}
+.ends BipolarPin

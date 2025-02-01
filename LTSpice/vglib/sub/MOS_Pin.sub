@@ -1,0 +1,5 @@
+.Subckt MOS_Pin D Di G Gi S Si params: Ld=7n Lg=4n Ls=4n
+Ld d di {Ld} Rser=0 Rpar={6.e9*Ld}
+Ls s si {Ls} Rser=0 Rpar={6.e9*Ls}
+Lg g gi {Lg} Rser=0 Rpar={6.e9*Lg}
+.ends MOS_Pin

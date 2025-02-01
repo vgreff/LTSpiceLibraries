@@ -1,0 +1,142 @@
+* PSpice Model Editor - Version 16.6.0
+
+***************************************************************************************
+***************************************************************************************
+*
+* DEVICE        : AL8860 - Diodes Incorporated
+* DATE          : 14AUG2019
+* SIMULATOR     : PSPICE 16.6
+* MODEL VERSION : 1.0
+*
+***************************************************************************************
+***************************************************************************************
+*
+* DEVICE NOTES:
+* Following features are been modelled:
+* 	1. Soft-Start
+* 	2. PWM Dimming
+* 	3. Analog Dimming
+* 	4. Pulse Skip Mode
+* 	5. Ron variation vs Temperature
+* 	6. LED Open circuit protection
+* 	7. LED Short circuit protection
+* 	8. Over Temperature Protection
+*
+***************************************************************************************
+***************************************************************************************
+.SUBCKT AL8860 CTRL GND SET SW VIN PARAMS: TEMP_CHANGE_RATE=500U TAMB=27
++  RTJA=147
+E_E4         N148834 GND N148696 GND 1
+C_C15         GND N148696  1n
+E_ABM15         N148964 0 VALUE { if(V(TEMP) > 150-(30*V(OTP)),1,0)    }
+R_R7         N146146 REF  0.1
+X_U12         PWM ISW I_WR IP_INT N07827 ipeaksampler
+R_R2         RISING_THRS N145465  50
+E_ABM3         RISING_THRS 0 VALUE { V(CTRL_LIMIT)*1.2    }
+E_ABM20         VRON 0 VALUE { ((0.0016m*V(TEMP)*V(TEMP)) + (0.5137m*V(TEMP)) +  17.383m)*V(ISW)    }
+C_C12         OTP GND  1n
+E_ABM22         RON 0 VALUE { V(SW)/(V(ISW)+10u)    }
+C_C9         GND N148806  1n
+X_U11         N148806 N148802 diode PARAMS:
+C_C17         GND CTRL  71.43p
+E_ABM16         VIN_UVLO 0 VALUE { if(V(VIN) > 4.2-(0.2*V(VIN_UVLO)),1,0)    }
+E_ABM4         N145295 0 VALUE { V(RISING_THRS)-V(CTRL_LIMIT)*0.8    }
+E_ABM8         IOUT 0 VALUE { (V(N07827))/1.1    }
+R_R11         N148964 OTP  500
+E_ABM7         IRMS 0 VALUE { ((V(IOUT)**2)+((0.26*V(IOUT))**2)/12)*V(D)    }
+E_ABM1         REF 0 VALUE { min(max((0.8928*(V(VIN)-0.75)),0),2.5)    }
+C_C5         GND N140441  1u
+R_R10         N140441 D  6
+E_ABM27         N148696 0 VALUE { V(IRMS)*((V(VRON)/V(Isw))+0.2)*{Rtja}    }
+E_ABM2         CTRL_LIMIT 0 VALUE { min(V(CTRL),2.5)    }
+C_C13         GND N145359  1n
+C_C1         GND N145465  1n
+R_R5         N140479 N140441  6
+G_G2         N148802 N148806 N149178 GND 1
+X_U3         SENSE N145465 N145295 N145353 COMPHYS2_SAN PARAMS:  VDD=1.8 VSS=0
+X_U16         GND CTRL diode PARAMS:
+E_E3         N145603 GND VRON GND 1
+E_ABM24         N149178 0 VALUE { 1n/{Temp_Change_rate}    }
+X_U10         N148834 N148802 diode PARAMS:
+C_C11         GND D  1u
+X_H1    SW SW1 ISW GND AL8860_H1
+E_E1         SENSE GND VIN SET 25
+X_U6         GND SW1 diode PARAMS:
+E_ABM5         PWM 0 VALUE { IF( V(N145353)>0.5 | V(N145359)>0.5,1,0)    }
+V_V1         N146278 GND 4.5
+X_U15         CTRL N146146 diode PARAMS:
+E_ABM12         N145529 0 VALUE { if((V(CTRL_LIMIT)<0.3) | (V(VIN_UVLO)<0.5) |
++  (V(OTP)>0.5) ,1,0)    }
+E_ABM13         N140413 0 VALUE { IF(V(PWM)>0.5,0,1)    }
+R_R12         N145529 N145359  1
+X_S1    PWM GND SW1 N145603 AL8860_S1
+I_I5         N146278 CTRL DC 1.786u
+E_E2         N140479 GND N140413 GND 1
+G_G1         N148802 N148834 N149178 GND 1
+E_ABM10         TEMP 0 VALUE { (V(N148806)+{Tamb})    }
+.ENDS
+.subckt AL8860_H1 1 2 3 4
+H_H1         3 4 VH_H1 1
+VH_H1         1 2 0V
+.ends AL8860_H1
+
+.subckt AL8860_S1 1 2 3 4
+S_S1         3 4 1 2 _S1
+RS_S1         1 2 1G
+.MODEL         _S1 VSWITCH Roff=1G Ron=200m Voff=0.8 Von=0.2
+.ends AL8860_S1
+
+.subckt ipeaksampler pwm isw i_wr ip_int ip
+c5          ip 0 1n
+xu7         pwm 5 rise_edge_det_san_0
++ params: VDD=1 VSS=0 T=100n
+sw3         ip ip_int 5 0  s_vswitch_1
+c4          i_wr 0 1u
+r4          isw i_wr 100m
+c3          ip_int 0 1n
+sw2         ip_int i_wr pwm 0  s_vswitch_2
+.model s_vswitch_1 vswitch
++ ron=0.01
++ roff=1e+009
++ von=0.8
++ voff=0.2
+.model s_vswitch_2 vswitch
++ ron=0.01
++ roff=1e+009
++ von=0.2
++ voff=0.8
+.ends ipeaksampler
+
+.subckt diode 1 2
+d1 1 2 ideal
+.model ideal d
++vfwd=0.5m Ron=10m Roff=99Meg
+C 1 2 20f
+*+ n=0.001
+*+ is=1e-015 cjo=10f
+.ends diode
+
+.subckt COMPHYS2_SAN INP INM HYS VOUT PARAMS: VDD=1 VSS=0
+.PARAM VTH = (VDD +VSS)/2
+EHYS INM INM_INT value = {if (V(VOUT)>{VTH},V(HYS),0)}
+E1 VOUT_PRE 0 value = {if(V(INP)>V(INM_INT),{VDD},{VSS})}
+R1 VOUT_PRE VOUT 1
+C1 VOUT 0 1n
+.ends COMPHYS2_SAN
+
+.SUBCKT RISE_EDGE_DET_SAN_0  IN OUT PARAMS:VDD=1 VSS=0 T=100N
+.PARAM VTH=(VDD +VSS)/2
+XU1 IN IN2 OUT AND PARAMS:VDD={VDD} VSS={VSS}
+XU2 IN OUT_IN INV PARAMS:VDD={VDD} VSS={VSS}
+XU3 OUT_IN IN2 DIODE
+R1 OUT_IN IN2 {T*1E9}
+C1 IN2 0 1.443N
+.ENDS RISE_EDGE_DET_SAN_0
+
+.SUBCKT AND A B Y PARAMS: VDD=1.8 VSS=0
+A A B 0 0 0 0 Y 0 AND Vhigh={VDD} Vlow={VSS} td=1n Trise=2n
+.ENDS AND
+.SUBCKT INV A  Y PARAMS: VDD=1.8 VSS=0
+A A 0 0 0 0  Y 0 0 BUF  Vhigh={VDD} Vlow={VSS} td=1n Trise=2n
+.ENDS INV
+

@@ -1,0 +1,666 @@
+* To make a new model use tool 'Graph new tetrode - template.asc'
+
+******************************************************
+* Model generated on 6 Jan 2010
+* modified: 16 Dec 2011, experiment with 'more realistic' screen model (?) see 'tetrode4'
+* modified: 16 Aug 2010, correct for more realistic screen grid currents!
+* modified: 11 Feb 2010 (triode model where wired as triode, suffixed '_at')
+* Model format: LTspice
+* New tetrodes macro model
+* as by Norman L. Koren
+* formulas @ http://www.normankoren.com/Audio/Tubemodspice_article.html
+* External node designations
+* Node A -> Anode
+* Node S -> Screen
+* Node G -> Grid
+* Node K -> Cathode
+*
+* MU = amplification factor.
+* EX = line curvature, typical range from 1.3 to 1.4, increases with EX.
+* kG1 = used to fit the equation to data for anode current.
+* kG2 = similar to kG1 for screen current (pentode).
+* KP (kP) behaviour region (A) (large negative grid voltage,
+* large plate voltage, and low plate current).
+* KVB "knee" of the characteristic curves, for positive bias.
+
+******************************************************
+* NOTE for most of these kg2 was 4500, this makes for
+* unrealistically small screen current! All changed to
+* 1500, 14/08/2010
+
+******************************************************
+* MODEL VARIATIONS! (notes 17/12/2012)
+* Tetrode  - the original tetrode template.
+* Tetrode2 - a variation for RF pentodes EF80/85 only.
+* Tetrode3 - for ECF82 only. Can't remember why but it's a bit of a weird one.
+* Tetrode4 - I have a problem with the screen grid of 'Tetrode' - only works properly
+* if screen is absolutely set with a V source! I.e. not work properly if sourced with
+* a resistor/cap like real circuit, especially, almost zero current until valve is
+* given an input signal! This seriously messes up trying to DC bias the valve accurately,
+* all params otherwise being correct, never mind amplify a signal.
+* So Tetrode4 uses the triode model equation to represent the screen current, which
+* seems to produce much more realistic behaviour. Note this may need tweaking for
+* individual cases to make it match datasheet or actual observed behaviour of a real 
+* amplifier stage.
+
+
+.subckt Tetrode A S G K ; = 6L6CG - base generic
++params: mu=8.7 ex=1.35 kg1=1460 kg2=1500 kp=48 kvb=12 ccg=14p cpg=0.85p ccp=12p rgi=1k
+
+RE1   E1 0  1MEG ; dummy so node E1 has two connections
+Ee1   E1 0  Value={(V(S,K)/kP) * log(1+exp(kP * (1/Mu+V(G,K)/V(S,K))))}
+GIP   A  K  Value={(PWR(V(E1),EX)+PWRS(V(E1),EX))/KG1*ATAN(V(A,K)/KVB)}
+GIG2  S  K  Value={(EXP(EX*(LOG((V(S,K)/MU)+V(G,K)))))/KG2}
+
+* 'old' version:
+* GIG2  S  K  Value={pwr((V(G,K)+V(S,K)/mu),1.5)/kG2}
+* G2 8 3 VALUE={(PWR(V(E1),EX)+PWRS(V(E1),EX))/KG2*(2.5708-ATAN(V(A,K)/KVB))} ; ???
+
+R1    G  5  {rgi} ; for grid forward current
+D3    5  K  DX ; for grid diode action
+RZ    5  0  1G
+CM1   G  K  {ccg}
+CM2   A  G  {cpg}
+CM3   A  K  {ccp}
+RF1   A  0  1G ; }
+RF2   S  0  1G ; } prevent floating nodes
+RF3   G  0  1G ; }
+RF4   K  0  1G ; } 
+.MODEL DX D(Ron=1 Roff=1G Vfwd=.75)
+.ends
+
+.subckt Tetrode2 A S G K
+* Only used by EF80 & EF85
+RE1   E1 0  1MEG
+Ee1   E1 0  Value={(V(S,K)/{kP}) * log(1+exp({kP} * (1/{Mu}+V(G,K)/V(S,K))))}
+GIP   A  K  VALUE={pi/2*(PWR(V(E1),EX)+PWRS(V(E1),EX))/KG1*(1-exp(-2*V(A,K)/(pi*KVB)))}
+GIG2  S  K  Value={(EXP(EX*(LOG((V(S,K)/MU)+V(G,K)))))/KG2}
+
+R1    G  5  {rgi} ; for grid forward current
+D3    5  K  DX ; for grid diode action
+CM1   G  K  {ccg}
+CM2   A  G  {cpg}
+CM3   A  K  {ccp}
+RF1   A  0  1G ; }
+RF2   S  0  1G ; } prevent floating nodes
+RF3   G  0  1G ; }
+RF4   K  0  1G ; } 
+.MODEL DX D(Ron=1 Roff=1G Vfwd=.75)
+.ends
+
+.subckt Tetrode3 A S G K
+* ECF82 pentode only!
+RE1   E1 0  1MEG
+Ee1   E1 0  Value={(V(S,K)/{kP}) * log(1+exp({kP} * (1/{Mu}+V(G,K)/V(S,K))))}
+GIP   A  K  VALUE={pi/2*(PWR(V(E1),EX)+PWRS(V(E1),EX))/KG1*tanh(2*V(A,K)/(pi*KVB))}
+GIG2  S  K  Value={(EXP(EX*(LOG((V(S,K)/MU)+V(G,K)))))/KG2}
+* GZ1   S  K  K  G  table=(0 6m, 1 3.5m, 2 2m, 3 1m, 4 0.5m)
+RS1   S  K  200k
+
+R1    G  5  {rgi} ; for grid forward current
+D3    5  K  DX ; for grid diode action
+CM1   G  K  {ccg}
+CM2   A  G  {cpg}
+CM3   A  K  {ccp}
+RF1   A  0  1G ; }
+RF2   S  0  1G ; } prevent floating nodes
+RF3   G  0  1G ; }
+RF4   K  0  1G ; } 
+.MODEL DX D(Ron=1 Roff=1G Vfwd=.75)
+.ends
+
+* With modified screen model, duplicates triode model formula
+.subckt Tetrode4 A S G K ; = 6L6CG - base generic
++params: mu=8.7 ex=1.35 kg1=1460 kg2=1500 kp=48 kvb=12 ccg=14p cpg=0.85p ccp=12p rgi=1k
+.param VCT=0.00
+
+RE1   E1 0  1MEG ; dummy so node E1 has two connections
+Ee1   E1 0  Value={(V(S,K)/kP) * log(1+exp(kP * (1/Mu+V(G,K)/V(S,K))))}
+
+* RE2   E2 0  1MEG ; dummy so node E1 has two connections
+* Ee2   E2 0  Value {(V(S,K)/{kP}) * log(1 + exp({kP} * (1/{mu} + (V(G,K)+VCT)/sqrt({kVB} + pwr(V(S,K),2)))))}
+* Ee2   E2 0  Value={(V(S,K)/kP) * log(1+exp(kP * (1/Mu+V(G,K)/V(S,K))))}
+
+GIP   A  K  Value={(PWR(V(E1),EX)+PWRS(V(E1),EX))/KG1*ATAN(V(A,K)/KVB)}
+* GIG2  S  K  Value={(EXP(EX*(LOG((V(S,K)/MU)+V(G,K)))))/KG2} ; previous tetrode version
+
+GIG2  S  K  Value={(pwr(V(E1),EX) + pwrs(V(E1),EX))/KG2} ; as triode version
+
+
+* 'old' version:
+* GIG2  S  K  Value={pwr((V(G,K)+V(S,K)/mu),1.5)/kG2}
+
+R1    G  5  {rgi} ; for grid forward current
+D3    5  K  DX ; for grid diode action
+RZ    5  0  1G
+CM1   G  K  {ccg}
+CM2   A  G  {cpg}
+CM3   A  K  {ccp}
+RF1   A  0  1G ; }
+RF2   S  0  1G ; } prevent floating nodes
+RF3   G  0  1G ; }
+RF4   K  0  1G ; } 
+.MODEL DX D(Ron=1 Roff=1G Vfwd=.75)
+.ends
+
+.subckt 6AC7 A S G K ; applies to 6AC7 pentode only, rough approximation! (Octal, metal envelope)
+* Sharp cut-off pentode, behaviour of real item may not exactly match model. To ensure output 
+* remains as linear as possible, signal grid needs to be driven from a very low impedance source!
+*
++params: MU=37.97 EX=1.350 KG1=823 KG2=974 KP=90.97 KVB=20.1 VCT=0.00 RGI=100 CCG=5.0p cpg=0.007p CCP=3.5p
+.param weighting = 0.845
+* ^ curves are pretty close match to ECF82 (6U8), just slightly over double the anode current
+* for same signal grid bias, but depends on screen Voltage, default 150V, so tweak weighting
+* as required:
+* BASE TEST: Va = 300V, Vg2 = 150V, Vg1 = -2V, Ia should then = 10mA, Ig2 = 2.5mA (tweak KG2). Rk = 160R (2V / 12.5mA).
+*
+* From datasheet, G2 is sourced via 60k resistor from 300V, giving 150V, real valves may vary!
+* Sharp cut-off characteristic is reduced ('delayed') if G2 is NOT capacitor coupled to cathode.
+* This is a RF bandwidth valve. Datasheet says to improve stability may be necessary to connect
+* suppressor grid to ground instead of cathode.
+
+RE1   E1 0  1MEG ; dummy so node E1 has two connections
+Ee1   E1 0  Value={(V(S,K)/kP) * log(1+exp(kP * (1/Mu+V(G,K)/V(S,K))))}
+* GIP   A  K  Value={(PWR(V(E1),EX)+PWRS(V(E1),EX))/KG1*ATAN(V(A,K)/KVB)}
+GIP   A  K  Value={((PWR(V(E1),EX)+PWRS(V(E1),EX))/KG1*ATAN(V(A,K)/KVB))*weighting}
+GIG2  S  K  Value={(EXP(EX*(LOG((V(S,K)/MU)+V(G,K)))))/KG2}
+
+* 'old' version:
+* GIG2  S  K  Value={pwr((V(G,K)+V(S,K)/mu),1.5)/kG2}
+
+R1    G  5  {rgi} ; for grid forward current
+D3    5  K  DX ; for grid diode action
+RZ    5  0  1G
+CM1   G  K  {ccg}
+CM2   A  G  {cpg}
+CM3   A  K  {ccp}
+RF1   A  0  1G ; }
+RF2   S  0  1G ; } prevent floating nodes
+RF3   G  0  1G ; }
+RF4   K  0  1G ; } 
+.MODEL DX D(Ron=1 Roff=1G Vfwd=.75)
+.ends
+
+
+.subckt EL34 A S G K ; screen edited!
+* Mullard Data Book Apr 1962 
+XV1 A S G K Tetrode
++params: MU=12.02 EX=1.169 KG1=380 KG2=840 KP=61.11 KVB=29.9 VCT=0.00 RGI=1000 CCG=15.0p cpg=1.0p CCP=8.0p
+.ends
+
+.subckt EL34_JJ A S G K ; screen edited!
+* JJ Data Sheet 
+XV1 A S G K Tetrode
++params: MU=11.55 EX=1.350 KG1=650.2 KG2=1360 KP=51.85 KVB=25.4 VCT=0.00 RGI=1000 CCG=15.0p cpg=1.0p CCP=8.0p
+.ends
+
+.subckt EL84 A S G K ; screen edited!
+* Mullard Data Sheet AKA 7189 6BQ5 N709 
+XV1 A S G K Tetrode
++params: MU=21.29 EX=1.240 KG1=425 KG2=1150 KP=111.04 KVB=17.9 VCT=0.00 RGI=1000 CCG=10.0p cpg=0.6p CCP=5.1p
+.ends
+
+.subckt EL84_JJ A S G K ; screen edited!
+* JJ Data Sheet AKA 6BQ5  
+XV1 A S G K Tetrode
++params: MU=19.56 EX=1.350 KG1=640 KG2=1840 KP=131.34 KVB=17.5 VCT=0.00 RGI=1000 CCG=10.0p cpg=0.6p CCP=5.1p
+.ends
+
+.subckt KT66 A S G K
+* M-O Valve Co AKA Genalex 
+XV1 A S G K Tetrode
++params: MU=11.68 EX=1.197 KG1=510.9 KG2=1500 KP=34.89 KVB=22.3 VCT=0.00 RGI=1000 CCG=16.0p cpg=2.3p CCP=10.0p
+.ends
+
+.subckt KT66_JJ A S G K
+* JJ Data Sheet 
+XV1 A S G K Tetrode
++params: MU=10.50 EX=1.314 KG1=866.5 KG2=1500 KP=36.12 KVB=25.3 VCT=0.00 RGI=1000 CCG=16.0p cpg=2.3p CCP=10.0p
+.ends
+
+.subckt KT77 A S G K
+* The M-O Valve Co AKA Genalex 
+XV1 A S G K Tetrode
++params: MU=12.49 EX=1.487 KG1=1058.5 KG2=1500 KP=56.64 KVB=19.4 VCT=0.00 RGI=1000 CCG=16.5p cpg=1.0p CCP=9.0p
+.ends
+
+.subckt KT77_JJ A S G K
+* JJ Data Sheet 
+XV1 A S G K Tetrode
++params: MU=13.27 EX=1.350 KG1=460.2 KG2=1500 KP=31.98 KVB=55.7 VCT=0.00 RGI=1000 CCG=16.5p cpg=1.0p CCP=9.0p
+.ends
+
+.subckt KT88 A S G K
+* The M-O Valve Co AKA Genalex 
+XV1 A S G K Tetrode
++params: MU=12.38 EX=1.246 KG1=340.4 KG2=1500 KP=26.48 KVB=36.5 VCT=0.00 RGI=1000 CCG=14.0p cpg=0.8p CCP=12.0p
+.ends
+
+.subckt KT88_JJ A S G K
+* JJ Data Sheet 
+XV1 A S G K Tetrode
++params: MU=12.43 EX=1.218 KG1=315.7 KG2=1500 KP=26.72 KVB=36.1 VCT=0.00 RGI=1000 CCG=14.0p cpg=0.8p CCP=12.0p
+.ends
+
+.subckt 6L6GC A S G K
+XV1 A S G K Tetrode
++params: MU=9.88 EX=1.442 KG1=1686.6 KG2=1500 KP=30.98 KVB=19.4 VCT=0.00 RGI=1000 CCG=10.0p cpg=0.6p CCP=6.5p
+.ends
+
+.subckt 6L6GC_JJ A S G K
+* JJ Data sheet 
+XV1 A S G K Tetrode
++params: MU=13.94 EX=1.063 KG1=320.2 KG2=1500 KP=33.20 KVB=29.6 VCT=0.00 RGI=1000 CCG=10.0p cpg=0.6p CCP=6.5p
+.ends
+
+.subckt 6L6GB A S G K
+* Sylvania
+XV1 A S G K Tetrode
++params: MU=8.77 EX=1.265 KG1=1210.3 KP=47.50 KG2=1500 KVB=11.6 VCT=0.00 CCG=14P cpg=.85P CCP=12P RGI=1K
+.ends
+
+.subckt 6550 A S G K
+XV1 A S G K Tetrode
++params: MU=8.61 EX=1.435 KG1=1066.6 KG2=1500 KP=39.55 KVB=20.5 VCT=0.00 RGI=1000 CCG=15.0p cpg=0.8p CCP=10.0p
+.ends
+
+.subckt 6550A A S G K
+* GE Data sheet 1973 
+XV1 A S G K Tetrode
++params: MU=10.81 EX=1.397 KG1=703.2 KG2=1500 KP=27.68 KVB=19.1 VCT=0.00 RGI=1000 CCG=15.0p cpg=0.8p CCP=10.0p
+.ends
+
+.subckt 5881 A S G K
+* Tung-Sol Data Book 
+XV1 A S G K Tetrode
++params: MU=8.35 EX=1.484 KG1=2507.1 KG2=1500 KP=53.86 KVB=14.4 VCT=0.00 RGI=1000 CCG=10.0p cpg=0.6p CCP=6.5p
+.ends
+
+.subckt 6BQ5 A S G K
+* Mullard Data Sheet AKA 7189 EL84 N709 
+XV1 A S G K Tetrode
++params: MU=21.29 EX=1.240 KG1=401.7 KG2=1500 KP=111.04 KVB=17.9 VCT=0.00 RGI=1000 CCG=10.0p cpg=0.6p CCP=5.1p
+.ends
+
+
+
+*************************************
+* Small Signal and Vary Mu Pentodes *
+*************************************
+
+.subckt EF80 A S G K ; screen edited!
+* Philips data sheet AKA 6BX6
+XV1 A S G K Tetrode2
++params: MU=49.11 EX=1.420 KG1=620 KG2=690 KP=375.96 KVB=42.9 VCT=0.50 RGI=100 CCG=2.6p cpg=0.007p CCP=3.3p
+.ends
+
+.subckt EF83 A S G K ; screen edited!
+* Philips data sheet
+XV1 A S G K Tetrode
++params: MU=12.01 EX=1.350 KG1=2800.0 KG2=3000 KP=35.24 KVB=39.1 VCT=0.00 RGI=2000 CCG=4.5p cpg=0.6p CCP=5.6p
+.ends
+
+.subckt EF85 A S G K ; variable mu pentode ; screen edited!
+* Philips data sheet
+XV1 A S G K Tetrode2
++params: MU=22.39 EX=1.350 KG1=1050 KG2=1350 KP=160.84 KVB=40.9 VCT=0.00 RGI=100 CCG=6.9p cpg=0.007p CCP=3.2p
+.ends
+
+.subckt EF86 A S G K ; screen tested, Vg2 = 140V as per datasheet (by KP).
+* Philips data sheet AKA 6CF8 and 6267 Z729 EF806
+XV1 A S G K Tetrode
++params: MU=34.90 EX=1.350 KG1=2648.1 KG2=4627 KP=222.06 KVB=4.7 VCT=0.00 RGI=2000 CCG=4.3p CPG1=0.6p CCP=5.1p
+.ends
+
+.subckt EF86-4 A S G K ; screen edited!
+* Philips data sheet AKA 6CF8 and 6267 Z729 EF806
+XV1 A S G K Tetrode4
++params: MU=34.90 EX=1.350 KG1=2648.1 KG2=4627 KP=222.06 KVB=4.7 VCT=0.00 RGI=2000 CCG=4.3p cpg=0.6p CCP=5.1p
+.ends
+
+.SUBCKT EF36 A S G K ; as Mullard datasheet, tested at Vg2 = 100V (KP modified).
+XV1 A S G K Tetrode
+*+params: MU=34.90 EX=1.350 KG1=2648.1 KG2=2000 KP=222.06 KVB=4.7 VCT=0.00 RGI=2000 CCG=4.3p cpg=0.6p CCP=5.1p
++params: MU=33 EX=1.40 KG1=2150 KG2=4300 KP=77 KVB=4.7 VCT=0.00 RGI=2000 CCG=4.3p CPG1=0.6p CCP=5.1p
+.ENDS
+
+.SUBCKT EF36-4 A S G K ; hi-current plots match graph, Vg2 = 100V
+XV1 A S G K Tetrode4
++params: MU=33 EX=1.40 KG1=2150 KG2=4300 KP=63 KVB=4.7 VCT=0.00 RGI=2000 CCG=4.3p CPG1=0.6p CCP=5.1p
+.ENDS
+
+.SUBCKT EF37A A S G K ; = EF36 above
+XV1 A S G K Tetrode
++params: MU=33 EX=1.43 KG1=2150 KG2=4300 KP=77 KVB=4.7 VCT=0.00 RGI=2000 CCG=4.3p CPG1=0.6p CCP=5.1p
+.ENDS
+
+.SUBCKT EF37A-4 A S G K ; = EF36-4 above
+XV1 A S G K Tetrode4
++params: MU=33 EX=1.40 KG1=2150 KG2=4300 KP=63 KVB=4.7 VCT=0.00 RGI=2000 CCG=4.3p CPG1=0.6p CCP=5.1p
+.ENDS
+
+.subckt EF89 A S G K ; variable mu pentode ; screen edited!
+* Philips data sheet AKA 6DA6
+XV1 A S G K Tetrode
++params: MU=30.52 EX=1.350 KG1=1110 KG2=460 KP=39.49 KVB=23.6 VCT=0.00 RGI=100 CCG=5.5p cpg=0.002p CCP=5.1p
+.ends
+
+
+********************************
+* Triode small signal Pentodes *
+********************************
+
+.subckt 7199_pentode A S G K
+* RCA 
+XV1 A S G K Tetrode
++params: MU=97.92 EX=1.350 KG1=361.8 KG2=1500 KP=79.56 KVB=6.4 VCT=0.00 RGI=2000 CCG=5.7p cpg=0.6p CCP=2.5p
+.ends
+
+.subckt 6AN8_pentode A S G K
+* Sylvania Data sheet 
+XV1 A S G K Tetrode
++params: MU=47.04 EX=1.350 KG1=487.2 KG2=1500 KP=113.02 KVB=17.0 VCT=0.00 RGI=2000 CCG=5.7p cpg=0.6p CCP=2.5p
+.ends
+
+.subckt ECF80_pentode A S G K ; screen edited!
+* Philips data sheet AKA 6BL8  
+XV1 A S G K Tetrode
++params: MU=46.13 EX=1.350 KG1=730 KG2=720 KP=149.94 KVB=8.0 VCT=0.00 RGI=100 CCG=5.2p cpg=0.0025p CCP=3.4p
+.ends
+
+.subckt ECF82_pentode A S G K ; screen edited!
+* AKA 6U8
+XV1 A S G K Tetrode4
++params: MU=37.97 EX=1.350 KG1=823 KG2=674 KP=90.97 KVB=20.1 VCT=0.00 RGI=100 CCG=5.0p cpg=0.007p CCP=3.5p
+.ends
+
+.subckt 6U8A_pentode A S G K ; screen edited!
+* Universal Vademecum (1960) AKA ECF82
+XV1 A S G K Tetrode
++params: MU=37.97 EX=1.350 KG1=823 KG2=674 KP=90.97 KVB=20.1 VCT=0.00 RGI=100 CCG=5.0p cpg=0.007p CCP=3.5p
+.ends
+
+.subckt ECF83_pentode A S G K ; screen edited!
+* Universal Vademecum (1960) 
+XV1 A S G K Tetrode
++params: MU=12.24 EX=1.350 KG1=2401.0 KG2=1740 KP=27.36 KVB=23.5 VCT=0.00 RGI=100 CCG=4.1p cpg=0.025p CCP=4.1p
+.ends
+
+.subckt ECF86_pentode
+* Sylvania Technical Manual AKA 6HG8 
+XV1 A S G K Tetrode
++params: MU=64.17 EX=1.350 KG1=328.7 KG2=1500 KP=394.31 KVB=26.0 VCT=0.00 RGI=2000 CCG=6.7p cpg=0.6p CCP=4.1p
+.ends
+
+
+**************************
+* Triode Output Pentodes *
+**************************
+
+.subckt ECL80_pentode A S G K
+* Philips Data book 1951 AKA 6AB8 
+XV1 A S G K Tetrode
++params: MU=39.01 EX=0.925 KG1=228.9 KG2=1500 KP=50.26 KVB=21.2 VCT=0.00 RGI=2000 CCG=6.7p cpg=0.6p CCP=4.1p
+.ends
+
+.subckt ECL81_pentode A S G K
+* universal vademecum (1960) 
+XV1 A S G K Tetrode
++params: MU=17.51 EX=1.350 KG1=590.8 KG2=1500 KP=209.03 KVB=32.5 VCT=0.00 RGI=2000 CCG=6.7p cpg=0.6p CCP=4.1p
+.ends
+
+.subckt ECL82_pentode A S G K
+* Philips Data Book 17-02-1956 AKA 6BM8 
+XV1 A S G K Tetrode
++params: MU=12.19 EX=1.350 KG1=522.0 KG2=1500 KP=38.60 KVB=25.8 VCT=0.00 RGI=2000 CCG=6.7p cpg=0.6p CCP=4.1p
+.ends
+
+.subckt ECL83_pentode A S G K
+* Mullard Data Book 1960 
+XV1 A S G K Tetrode
++params: MU=10.96 EX=1.350 KG1=1249.7 KG2=1500 KP=54.82 KVB=14.5 VCT=0.00 RGI=2000 CCG=6.7p cpg=0.6p CCP=4.1p
+.ends
+
+.subckt ECL84_pentode A S G K
+* Philips Data Book sept 1968 AKA 6DX8 
+XV1 A S G K Tetrode
++params: MU=43.66 EX=1.350 KG1=344.3 KG2=1500 KP=201.06 KVB=26.0 VCT=0.00 RGI=2000 CCG=6.7p cpg=0.6p CCP=4.1p
+.ends
+
+.subckt ECL85_pentode A S G K
+* Philips Data Book Jan 1960 AKA 6GV8 
+XV1 A S G K Tetrode
++params: MU=9.35 EX=1.350 KG1=556.4 KG2=1500 KP=35.28 KVB=21.3 VCT=0.00 RGI=2000 CCG=6.7p cpg=0.6p CCP=4.1p
+.ends
+
+.subckt ECL86_pentode A S G K
+* Philips Data Book Jan 1970 AKA 6GW8 
+XV1 A S G K Tetrode
++params: MU=23.15 EX=1.350 KG1=479.1 KG2=1500 KP=128.94 KVB=36.0 VCT=0.00 RGI=2000 CCG=6.7p cpg=0.6p CCP=4.1p
+.ends
+
+
+
+********************************************
+* Use this part for where is wired as triode
+* (screen to anode). In this implementation
+* screen grid has no effect but is just 
+* included here to make the schematic
+* drawing complete showing all terminals.
+* Note in this case param kg2 is ignored.
+********************************************
+
+.subckt TetrodeT A S G K ; base generic = KT66
++params: MU=8 EX=1.4 KG1=1050 KG2=0 KP=80 KVB=22.3 VCT=0.00 RGI=1000 CCG=16.0p cpg=2.3p CCP=10.0p
+
+RE1   E1 0  1MEG ; dummy so node E1 has two connections
+Ee1   E1 0  Value {(V(A,K)/{kP}) * log(1 + exp({kP} * (1/{mu} + (V(G,K)+VCT)/sqrt({kVB} + pwr(V(A,K),2)))))}
+GIP   A  K  Value {(pwr(V(E1),EX) + pwrs(V(E1),EX))/KG1} ; Norman Koren's
+
+R1    G  5  {rgi} ; for grid forward current
+D1    5  K  DX ; for grid diode action
+CM1   G  K  {ccg}
+CM2   A  G  {cpg}
+CM3   A  K  {ccp}
+RF1   A  0  1G
+RF2   S  0  1G
+RF3   G  0  1G ; prevent floating nodes
+RF4   K  0  1G
+.MODEL DX D(IS=1N RS=1)
+.ends
+
+
+.subckt EL34_at A S G K ; wired as triode
+XV1 A S G K TetrodeT
++params: mu=11.17 ex=1.48 kg1=597 kp=40.5 kvb=24.6 cpg=1.1p ccg=15p ccp=8.5p rgi=1000
+.ends
+
+.subckt KT66_at A S G K ; wired as triode
+* Marconi datasheet
+XV1 A S G K TetrodeT
++params: MU=8 EX=1.4 KG1=1050 KG2=1500 KP=80 KVB=22.3 VCT=0.00 RGI=1000 CCG=16.0p cpg=2.3p CCP=10.0p
+.ends
+
+.subckt ECF82_at A S G K ; pentode wired as triode
+* graph by Tom Schlangen
+XV1 A S G K TetrodeT
++params: MU=35 EX=1.3 KG1=670 KG2=1500 KP=200 KVB=20.1 VCT=0.00 RGI=2000 CCG=5.7p cpg=0.6p CCP=4.1p
+.ends
+
+.subckt 6U8A_at A S G K ; wired as triode
+* Universal Vademecum (1960) AKA 6U8
+XV1 A S G K TetrodeT
++params: MU=37.97 EX=1.350 KG1=849.8 KG2=1500 KP=90.97 KVB=20.1 VCT=0.00 RGI=2000 CCG=5.7p cpg=0.6p CCP=4.1p
+.ends
+
+.subckt 6V6-1 A S G K
+* loosely based on EL84, with some tweaks
+* 13/11/2012 - NOT ACCURATE! SEE NEW ADDITIONS
+XV1 A S G K Tetrode4
++params: MU=13.49 EX=1.24 KG1=401.7 KG2=2400 KP=111.04 KVB=17.9 VCT=0.00 RGI=1000 CCG=4.5p cpg=0.7p CCP=7.5p
+.ends
+
+
+*
+* Generic pentode model: C3G
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved
+* Version 3.10, Generated on Tue Jun 23 00:59:12 2009
+* MODIFIED FOR LTSPICE SYNTAX
+*           Plate
+*           | Screen Grid
+*           | | Control Grid
+*           | | | Cathode
+*           | | | |
+.SUBCKT C3G A S G K
+.PARAM X1=-0.16053394 X2=0.0043084008 X3=-0.28973288
+.PARAM X4=0.8381139 X5=37.574522 X6=1.7897329
+.PARAM X7=0.0098836949 X8=44.832238 X9=0.0061379447
+.PARAM Y1=0.0049418474 Y2=0.79240682 Y3=0.20759318
+.PARAM Y4=0.005274374 EA=7975
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(S,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(S,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(S,K))/X5))**X6
+BL IL 0 V=(V(IK)-Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4))*(1-.4*(EXP(-URAMP(V(A,K))/URAMP(V(S,K))*15)-EXP(-15)))
+BM IM 0 V=V(IL)*(URAMP(V(A,K))+EA)/(URAMP(V(S,K))+EA)-URAMP(V(IL)*(URAMP(V(A,K))+EA)/(URAMP(V(S,K))+EA)-(Y4*(URAMP(V(A,K))+URAMP(URAMP(V(S,K))-URAMP(V(A,K))))**1.5))
+BA A K I=URAMP(Y4*URAMP(V(A,K))**1.5-URAMP(Y4*URAMP(V(A,K))**1.5-V(IM)+V(IL)*(Y2*(1-URAMP(V(A,K))/(URAMP(V(A,K))+10))**1.5+Y3)))+1E-10*V(A,K)
+BS S K I=URAMP(V(IM)-URAMP(Y4*URAMP(V(A,K))**1.5-URAMP(Y4*URAMP(V(A,K))**1.5-V(IM)+V(IL)*(Y2*(1-URAMP(V(A,K))/(URAMP(V(A,K))+10))**1.5+Y3))))
+BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+CGA G A 0.012p
+CGK G K 4.9p
+CGS G S 3.3p
+CAK A K 3.5p
+.ENDS C3G
+
+
+.SUBCKT 813 1 4 2 3
++ PARAMS: MU=8.5 EX=1.414 KG1=2720 KP=46.2 KVB=132
++ CCG=16.3P CPG1=.25P CCP=14P RGI=3.3K
+RE1 7 0 1MEG ; DUMMY SO NODE 7 HAS 2 CONNECTIONS
+E1 7 0 VALUE= ; E1 BREAKS UP LONG EQUATION FOR G1.
++{V(4,3)/KP*LOG(1+EXP((1/MU+V(2,3)/V(4,3))*KP))}
+G1 1 3 VALUE={(PWR(V(7),EX)+PWRS(V(7),EX))/KG1*ATAN(V(1,3)/KVB)}
+* G2 4 3 VALUE={(EXP(EX*(LOG((V(4,3)/MU)+V(2,3)))))/KG2}
+g2 4 3 value= {(I(G1)*50/(V(1,3) + 2))} ; models change in current
+with change in plate
+RCP 1 3 1G ; FOR CONVERGENCE
+C1 2 3 {CCG} ; CATHODE-GRID 1
+C2 1 2 {CPG1} ; GRID 1-PLATE
+C3 1 3 {CCP} ; CATHODE-PLATE
+R1 2 5 {RGI} ; FOR GRID CURRENT
+D3 5 3 DX ; FOR GRID CURRENT
+.MODEL DX D(IS=1N RS=1 CJO=10PF TT=1N)
+.ENDS
+
+
+* The following Added 13/11/2012 from diyAudio topic http://www.diyaudio.com/forums/tubes-valves/102352-6v6-line-preamp.html
+* posted by Robert McClean
+*
+* 6V6 tube has same curves as 6AQ5
+* capacitances are slightly different
+*
+* This is the most accurate gain compared with real 6V6GT I've got! - M.H.
+*
+.SUBCKT 6V6 A S G K
++ PARAMS: Vn=4.683375986 Exd=1.498943398 Kd=5.985681E-04 Mua=135.8092472 Mug=0.792313597 Mus=7.857142857 Kp=7.41E-04
++ Ks=0.7455 Ex=1.429346869
++ Cgk=9.0P Cgs=8.0P Cga=0.7P Cak=7.5P
+Eat at 0 VALUE={limit(0.636*ATAN(V(A,K)/{Vn}),0,1e6)} ; arctangent shaping
+Eme me 0 VALUE={PWR(LIMIT(V(A,K),0,2000),{Exd})*{Kd}} ; the diode line
+Egs gs1 0 VALUE={LIMIT(V(A,K)/{Mua}+V(S,K)/{Mus}+V(G,K)/{Mug},0,1E6)} ;the basic voltage
+Egs2 gs2 0 VALUE={PWRS(V(gs1),{Ex})*{Kp}} ;raise to the power and mult by perveance
+Ecath cc 0 VALUE={LIMIT(V(gs2)*V(at),0,V(me))} ;shaped per Eat and the diode line
+*
+* Calculate anode current
+*
+Ga A K VALUE={V(cc)}
+*
+* Calculate screen current
+*
+Escrn sc 0 VALUE={{Ks}*V(gs2)*(1.1-V(at))}; reverse arctangent shaping
+Gs S K VALUE={V(sc)}
+*
+* Grid current
+
+R1 G 5 1K ; FOR GRID CURRENT
+D3 5 K Dx ; FOR GRID CURRENT
+.MODEL Dx D(IS=1N RS=1 CJO=10PF TT=1N)
+* Capacitances
+C1 G K {Cgk}
+C2 G S {Cgs}
+C3 G A {Cga}
+C4 A K {Cak}
+.ENDS 6V6
+
+
+
+*********************
+*
+* 6V6GT
+* 28 Nov 2004
+* new model based on measurements
+* parameters revised 29 Nov 2004
+*
+**********************
+.subckt 6V6GT A S G K
+XV1 A S G K Pentode2
++ PARAMS: Ex=1.41031468452635 Mug=11.7888046293233 Mus=36.3212284562041 Kg1=1084.30402294001 Kp=36.0452435978759 
++ Kvb=899.32403046434 Go=-0.467417459629955 Kd=0.000106867654972877 Exd=1.26175320982325 Exsd=0.425953018509995 
++ C1=-2.85604234699625 A1=-5.68835011136307E-05 B1=3.49035244298882 X1=0.015108363529097 Y1=0.00926342558705693 Sr=0.198544592645026
++ Cgk=9P Cgs=5P Cga=0.7P Cak=7.5P
+.ends 6V6GT
+
+
+*******************
+* 
+* This model is for pentodes with remote cutoff grid characteristics and with
+* knees that blend into a smooth line, ie a diode line, typical of Beam type tubes.
+*
+* this model therefore uses Korens method for total current, and diode lines.
+*
+* default parameters are for the 6V6
+*
+* RCM 2004 November 28
+* 2004 Nov 29 revised capture ratio formula to correct problem when Vg > Vp or Vg > Vs
+*
+************************
+.Subckt Pentode2 A S G K 
++ Params: Ex=1.42596448566733 Mug=11.7822188645457 Mus=27.5137445137459 Kg1=1447.15506010676 Kp=36.3066403677756
++ Kvb=756.918578086785 Go=-0.557407825110845 Kd=0.000103636138847149 Exd=1.26335466904983 Exsd=0.431363489073363
++ C1= -0.940657929992395 A1=-0.000127738832949614 B1=1.72299135911867 X1=0.0345083152949822 Y1= 0.0177418846473534 Sr=0.0471284218217744
++ Cgk=9P Cgs=5P Cga=0.7P Cak=7.5P
+
+* calculate the total space current based on Koren's triode equations,
+* but with an equivalent triode plate volatage equal to the pentode Vs + Vp/Mus
+En1 n1 0 VALUE={(V(A,K)/Mus+V(S,K))/Kp*LN(1+EXP(Kp*(1/Mug+(V(G,K)-Go)/SQRT(Kvb+(V(A,K)/Mus+V(S,K))**2))))}
+Esc sc 0 VALUE={ (PWR(V(n1),Ex)+PWRS(V(n1), Ex))/(Kg1) } 
+
+* calculate the plate current capture ratio
+Ecr cr 0 Value={If(V(A,K)<=0,0,C1+A1*V(A,K)+B1*((limit(V(A, G),1,1e6)**X1)/(limit(V(S,G),1,1e6)**Y1)))}
+
+* the tentative plate current is total space current multiplied by capture ratio
+Ept pt 0 Value={V(sc)*V(cr)}
+
+* calculate the diode line current
+Ed d 0 value={Kd*V(A,K)**Exd*V(S,K)**Exsd}
+
+* the actual Plate current is the lesser of pt and d
+Ep p 0 value={Min(V(d),V(pt))}
+Ga A K value={V(p)}
+
+* calculate the screen current capture ratio
+* if Vg <= 0 then the screen gets all the remaining current, otherwise the grid gets some
+Escr scr 0 value={Limit(if(V(G,K)>0,1-Sr*V(G,K),1),0,1)}
+
+* screen current is anything not captured by the plate, multiplied by screen capture ratio
+Esg sg 0 value={(V(sc)-V(p))*V(scr)}
+Gs S K value={V(sg)}
+
+* grid current is anything not captured by the plate or the screen
+Gg G K value={V(sc)-v(p)-V(sg)}
+
+* interelectrode capacitances
+C1 G K {Cgk}
+C2 G S {Cgs}
+C3 G A {Cga}
+C4 A K {Cak}
+.ENDS Pentode2 
+

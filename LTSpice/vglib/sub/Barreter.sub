@@ -1,0 +1,3 @@
+.subckt Barreter a b ilimit=117mA Vlin=100mV Rshunt=1g cshunt=10f
+b a b i=limit(-vlin,v(a,b),vlin)*ilimit/vlin Rpar={Rshunt} cpar={cshunt}
+.ends Barreter

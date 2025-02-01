@@ -1,0 +1,7 @@
+*******************************************************************
+* Triangle
+*******************************************************************
+.subckt triangle out
+V1 out 0 PULSE({Vlow} {Vhigh} {Tdelay} {tratio*(Tperiod-Ton)} {(1-tratio)*(Tperiod-Ton)} {Ton} {Tperiod} {Ncycles})
+.param Vlow=-1 Vhigh=1 Tdelay=0 Tperiod={1/f} tratio=0.5 Ton=0.1m*Tperiod Ncycles=0
+.ends Triangle

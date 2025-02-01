@@ -1,0 +1,133 @@
+.subckt MIC4416 4  3   9   2 
+*               In Out Vcc Gnd
+Rin 4 Vind 2k
+C1 4 2 6P
+D2 2 Vind DN 
+D3 4 9 DN 
+RT 4 2 10MEG
+
+Vsctl 13 0   5
+XSctl 13 VindH Vind 2 SWhyste PARAMS: VT=2.175 VH=.225 RON=1 ROFF=1G
+Rsctl VindH 2 1MEG
+
+I2 9 2   42u Load
+R2 9 2 600k
+I1 9 8   280U
+R4 9 8 150k
+D4 8 9 DN 
+cpara 8 2 100f
+.MODEL DN D Vfwd=0.6 Ron=10m epsilon=100m Roff=1g
+
+BLin 12 2 V= IF ( V(VindH) > 2 , 5 , 0 ) 
+Rind 12 10 100  
+Cind 10 11 160p 
+Vinput 11 2
+Bind 10 2 i= IF ( 7.5-V(9) > 0 , 0.33*I(Vinput)*(7.5-V(9)) , 0 ) 
+XSinput 8 6 10 2 SWhyste PARAMS: VT=2.8 VH=.65 RON=1 ROFF=1G
+Rinput 6 2 6k
+
+B3 7 3 V= IF ( V(8,2) < 0.5*V(9,2) , V(9,2) , -V(9,2) ) 
+Rout 1 7 800 
+bVS 99 0 V=IF ( V(9)/1.7 < 1 , 1 , V(9)/1.7 ) 
+XCout 99 0 98     1 2 yx
+*     Ctl  Ref Cap+ -
+Cref  98 0 1p  
+C2 3 2 50p
+M4 9 1 3 3 _M4_mod L=1U W=1.65U 
+M5 2 1 3 3 _M5_mod L=1U W=1.65U 
+.MODEL _M5_mod PMOS KP=47m RD=2.7 VTO=-2.4
+.MODEL _M4_mod NMOS KP=47m RD=2.7 VTO=2.4
+.ENDS
+*$
+.subckt MIC4417 4  3   9   2 
+*               In Out Vcc Gnd
+Rin 4 Vind 2k
+C1 4 2 6P
+D2 2 Vind DN 
+D3 4 9 DN 
+RT 4 2 10MEG
+
+Vsctl 13 0   5
+XSctl 13 VindH Vind 2 SWhyste PARAMS: VT=2.175 VH=.225 RON=1 ROFF=1G
+Rsctl VindH 2 1MEG
+
+I2 9 2   42u Load
+R2 9 2 600k
+I1 9 8   280U
+R4 9 8 150k
+D4 8 9 DN 
+cpara 8 2 100f
+.MODEL DN D Vfwd=0.6 Ron=10m epsilon=100m Roff=1g
+BLin 12 2 V= IF ( V(VindH) > 2 , 5 , 0 ) 
+Rind 12 10 100  
+Cind 10 11 160p 
+Vinput 11 2
+Bind 10 2 i=IF ( 7.5-V(9) > 0 , 0.33*I(Vinput)*(7.5-V(9)) , 0 )
+XSinput 8 6 10 2 SWhyste PARAMS: VT=2.8 VH=.65 RON=1 ROFF=1G
+Rinput 6 2 6k
+
+B3 7 3 V= IF ( V(8,2) < 0.5*V(9,2) , -V(9,2) , V(9,2) ) 
+Rout 1 7 800 
+bVS 99 0 V=IF ( V(9)/1.7 < 1 , 1 , V(9)/1.7 )
+XCout 99 0 98     1 2 yx
+*     Ctl  Ref Cap+ -
+Cref 98 0 1p  
+C2 3 2 50p
+M4 9 1 3 3 _M4_mod L=1U W=1.65U 
+M5 2 1 3 3 _M5_mod L=1U W=1.65U 
+.MODEL _M5_mod PMOS KP=47m RD=2.7 VTO=-2.4
+.MODEL _M4_mod NMOS KP=47m RD=2.7 VTO=2.4
+.ENDS
+*$
+
+
+* Variable admittance: Yout = Yref * V
+*           control input: voltage
+*           |  reference capacitor/conductance (connect other lead to ground)
+*          / \ |  output: floating admittance
+*          + - | / \
+.subckt yx 1 2 3 4 5
+  ecopy  3 6 poly(2) (1,2) (4,5) 0 0 0 0 1
+  fout   4 5 vsense 1
+  rin    1 2 1G
+  vsense 0 6 0
+.ends
+*$
+.subckt SWhyste NodeMinus NodePlus Plus Minus PARAMS: RON=1 ROFF=100MEG VT=1.5 VH=.5
+S5 NodePlus NodeMinus plus  minus  SW
+.model SW sw (RON={RON} ROFF={ROFF} Vt={vt} Vt={vt})
+.ends SWhyste
+*$
+.SUBCKT ONESHOTA1 In Out PARAMS: DELAY=473n
+R3 1 0 10k
+C3 1 2 10pF
+X2 Out 4 DLOS PARAMS: TD={DELAY}
+X9 4 5 INVOS
+X10 1 6 Out Qbb LATCHOS
+R4 0 6 10k
+C4 7 6 10pF
+X11 5 Out 7 NAND2OS
+X12 In 8 2 AND2OS
+R5 8 Qbb 100
+C5 8 0 100p
+.ENDS
+.SUBCKT DLOS 1 2 PARAMS: TD=473n
+*
+RIN 1 0 1E15
+B 0 2 i=delay(v(1),td) Rpar=1 Cpar=100p
+.ENDS
+.SUBCKT INVOS 1 2
+A1 1 0 0 0 0 2 0 0 BUF Rout=100 Cout=10p REF=0.35 Vhigh=5 td=1n
+.ENDS
+.SUBCKT LATCHOS 6 8 2 1
+*             S R Q Q\
+A1 8 2 0 0 0 1 0 0 AND Rout=100 Cout=10p REF=0.35 Vhigh=5 ic=5 td=1n
+A2 6 1 0 0 0  2 0 0 AND Rout=100 Cout=10p REF=0.35 Vhigh=5 ic=0 td=1n
+.ENDS
+.SUBCKT NAND2OS 1 2 3
+A1 1 2 0 0 0 3 0 0 AND Rout=100 Cout=10p REF=0.35 Vhigh=5 td=1n
+.ENDS
+.SUBCKT AND2OS 1 2 3
+A1 1 2 0 0 0 0 3 0 AND Rout=100 Cout=10p REF=0.35 Vhigh=5 td=1n
+.ENDS
+*$

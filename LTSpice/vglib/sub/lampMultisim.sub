@@ -1,0 +1,35 @@
+*
+* Вольфрамовая Лампа Накаливания (Lightbulb) * RAP 6/2/97 *
+*
+* Чтобы определить напряжение, ток через клеммы (H и L)
+* воспринимается и умножается на мгновенное сопротивление нитей.
+
+.subckt LampMultisim H L Vnom=220V Pnom=100W HCtau=4.082
+Vsense H c 0   ;terminal current sense
+.param Rhi={Vnom*Vnom/Pnom}
+*
+* Current is multiplied by nominal resistance and scaled to get voltage  
+BR c L R={Rhi}*FR1(   Ln( max(1,V(tempe)/300)) )
+*
+bGpow 0 tempe i=I(Vsense) * V(H,L) ;instantaneous power
+*
+* HCtau is used to set the heat capacity time constant. Different
+* bulbs may have different time constants.
+Rtherml tempe ambnt {2600/Pnom} ;temperature for nominal power=2600K+300K
+Ctherml tempe ambnt {(HCtau / 2600) * Pnom} ic=0 ;thermal capacitity
+Vambnt ambnt 0 300 ;ambient temperature in degrees Kelvin
+*
+* Normalized resistance as a function of temperature.
+.func FR1(x) {TaBLe(x ,
++ -1., 0.06,
++ 0.0, 0.06,
++ 0.5, 0.29,
++ 1.0, 0.56,
++ 1.5, 0.82,
++ 2.0, 0.94,
++ 2.33, 0.98,
++ 2.405, 1.04,
++ 2.53, 1.08)}
+*
+.ends
+*$

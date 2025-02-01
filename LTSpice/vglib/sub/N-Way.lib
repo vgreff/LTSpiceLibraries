@@ -1,0 +1,82 @@
+* Library for N-way switches
+* Static switches - control with "Ctl" parameter
+*
+.subckt SPST0 1 2 params: Ctl=0
+R1 1 2 {Sw1}
+.param Sw1 if(Ctl==1,1m,1G)
+.ends SPST
+*
+.subckt SPDT0 1 2 SW params: Ctl=1
+R1 1 SW {Sw1}
+R2 2 SW {Sw2}
+.param Sw1 if(Ctl==1,1m,1G)
+.param Sw2 if(Ctl==2,1m,1G)
+.ends SPDT
+*
+.subckt SP3T 1 2 3 SW params: Ctl=1
+R1 1 SW {Sw1}
+R2 2 SW {Sw2}
+R3 3 SW {Sw3}
+.param Sw1 if(Ctl==1,1m,1G)
+.param Sw2 if(Ctl==2,1m,1G)
+.param Sw3 if(Ctl==3,1m,1G)
+.ends SP3T
+*
+.subckt SP4T 1 2 3 4 SW params: Ctl=1
+R1 1 SW {Sw1}
+R2 2 SW {Sw2}
+R3 3 SW {Sw3}
+R4 4 SW {Sw4}
+.param Sw1 if(Ctl==1,1m,1G)
+.param Sw2 if(Ctl==2,1m,1G)
+.param Sw3 if(Ctl==3,1m,1G)
+.param Sw4 if(Ctl==4,1m,1G)
+.ends SP4T
+*
+.subckt SP5T 1 2 3 4 5 SW params: Ctl=1
+R1 1 SW {Sw1}
+R2 2 SW {Sw2}
+R3 3 SW {Sw3}
+R4 4 SW {Sw4}
+R5 5 SW {Sw5}
+.param Sw1 if(Ctl==1,1m,1G)
+.param Sw2 if(Ctl==2,1m,1G)
+.param Sw3 if(Ctl==3,1m,1G)
+.param Sw4 if(Ctl==4,1m,1G)
+.param Sw5 if(Ctl==5,1m,1G)
+.ends SP5T
+*
+.subckt SP6T 1 2 3 4 5 6 SW params: Ctl=1
+R1 1 SW {Sw1}
+R2 2 SW {Sw2}
+R3 3 SW {Sw3}
+R4 4 SW {Sw4}
+R5 5 SW {Sw5}
+R6 6 SW {Sw6}
+.param Sw1 if(Ctl==1,1m,1G)
+.param Sw2 if(Ctl==2,1m,1G)
+.param Sw3 if(Ctl==3,1m,1G)
+.param Sw4 if(Ctl==4,1m,1G)
+.param Sw5 if(Ctl==5,1m,1G)
+.param Sw6 if(Ctl==6,1m,1G)
+.ends SP6T
+*
+.subckt SP8T 1 2 3 4 5 6 7 8 SW params: Ctl=1
+R1 1 SW {Sw1}
+R2 2 SW {Sw2}
+R3 3 SW {Sw3}
+R4 4 SW {Sw4}
+R5 5 SW {Sw5}
+R6 6 SW {Sw6}
+R7 7 SW {Sw7}
+R8 8 SW {Sw8}
+.param Sw1 if(Ctl==1,1m,1G)
+.param Sw2 if(Ctl==2,1m,1G)
+.param Sw3 if(Ctl==3,1m,1G)
+.param Sw4 if(Ctl==4,1m,1G)
+.param Sw5 if(Ctl==5,1m,1G)
+.param Sw6 if(Ctl==6,1m,1G)
+.param Sw7 if(Ctl==7,1m,1G)
+.param Sw8 if(Ctl==8,1m,1G)
+.ends SP8T
+*

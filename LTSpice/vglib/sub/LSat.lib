@@ -1,0 +1,39 @@
+.subckt  Lsat   L0 L2 110 100 params: Feddy=25k IVSEC=0 Ae=0.000067 lm=0.037
++lg=0 Bsat=350m ur=6000 N=15 Hc=50 Rser=1m Cpar=0
+*Reference:
+* "Switch-Mode Power Supplies Spice Simulations and Practical Designs", Christophe P. Basso,  McGraw-Hill, 2008, ISBN-13: 978-0071508582
+* For more information and sample circuits, please refer to the book.
+*
+.param VSEC={N*Ae*Bsat}
+.param u0={1.25u}
+.param u1={u0*ur/(1+ur*(lg/lm))}
+.param Lmag={u1*N**2*Ae/lm}
+.param Lsat={u0*N**2*Ae/(lm+lg)}
+.param IHyst={Hc*lm/N}
+.param Cjo={3*VSEC/(6.28*Feddy*clamp*Lmag)}
+.param clamp={250}
+*
+Cpar L0 L2 {Cpar}
+Rser L0 L1 {Rser}
+Rdum phi 0 10G
+F1 L1 12 VM 1
+Gint 0 phi 12 L1 -1
+C1 phi 0 {VSEC/Clamp} IC={IVSEC/VSEC*clamp}
+Ebuf 5 0 phi 0 1
+Rmag 8 0 {Lmag*clamp/VSEC}
+VM 5 8
+D3 2 9 D2mod
+V6 9 0 {Clamp}
+R2 2 8 {Lsat*clamp/VSEC}
+V8 0 10 {Clamp}
+Vdum 12 L2 0
+D4 10 2 D2mod
+I1 6 L1 {IHYST}
+B1 100 0 V=  (N/lm)*I(VDUM)
+B2 110 0 V=  V(phi)*VSEC/(N*Ae)/CLAMP
+I6 6 12 IHYST
+D1 L1 6 coresat
+D2 12 6 coresat
+.MODEL coresat  D N=1 cjo=1f
+.MODEL D2mod D CJO={Cjo} VJ=25
+.ENDS Lsat

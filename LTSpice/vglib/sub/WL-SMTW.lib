@@ -1,0 +1,132 @@
+**************************************************
+* Manufacturer:       Wurth Elektronik
+* Kinds:    Visible PLCC LED 
+* Matchcode:          WL-SMTW SMT Mono-color TOP LED  Waterclear
+* Library Type:       Pspice
+* Version:        rev18a       
+* Date and Time   :       2018-8-4
+* Team:           eiSos EDA Service  
+* Contact:        libraries@we-online.com
+**************************************************
+.subckt  3528_150141AS73100  1  2
+D1 1 2 led
+.MODEL led D
++ IS=1E-20
++ N=1.8166
++ RS=4.4501
++ IKF=10.719
++ CJO=0.000000000043186
++ M=0.1001
++ VJ=9.99
+.ends
+******
+
+.subckt  3528_150141BS73100  1  2
+D1 1 2 led
+.MODEL led D
++ IS=1.4694E-12
++ N=4.9950
++ RS=8.3467
++ IKF=999
++ CJO=4.9689E-9
++ M=.1001
++ VJ=9.9900
+.ends
+******
+.subckt  3528_150141RS73100  1  2
+D1 1 2 led
+.MODEL led D
++ IS=1.4366E-9
++ N=4.9950
++ RS=1.8496
++ IKF=999
++ CJO=6.7087E-9
++ M=.1001
++ VJ=9.9900
+.ends
+******
+.subckt  3528_150141VS73100  1  2
+D1 1 2 led
+.MODEL led D
++ IS=1E-20
++ N=1.8457
++ RS=1.1328
++ IKF=4.8875
++ CJO=0.000000000088401
++ M=0.1001
++ VJ=9.99
+.ends
+*****
+.subckt  3528_150141YS73100  1  2
+D1 1 2 led
+.MODEL led D
++ IS=2.2769E-9
++ N=4.9950
++ RS=.66519
++ IKF=999
++ CJO=4.0174E-9
++ M=.1001
++ VJ=9.9900
+.ends
+******
+
+.subckt  2214_150224AS73100  1  2
+D1 1 2 led
+.MODEL led D
++ IS=1.5163E-9
++ N=4.9950
++ RS=.84121
++ IKF=999
++ CJO=7.0732E-9
++ M=.1001
++ VJ=9.9900
+.ends
+******
+.subckt  2214_150224BS73100  1  2
+D1 1 2 led
+.MODEL led D
++ IS=2.0044E-12
++ N=4.9950
++ RS=5.2026
++ IKF=999
++ CJO=7.3519E-9
++ M=.1001
++ VJ=9.9900
+.ends
+******
+.subckt  2214_150224GS73100  1  2
+D1 1 2 led
+.MODEL led D
++ IS=59.124E-12
++ N=4.9950
++ RS=15.122
++ IKF=999
++ CJO=4.1540E-9
++ M=10
++ VJ=9.9900
+.ends
+******
+.subckt  2214_150224SS73100  1  2
+D1 1 2 led
+.MODEL led D
++ IS=2.0268E-9
++ N=4.9950
++ RS=2.3257
++ IKF=999
++ CJO=8.2791E-9
++ M=.1
++ VJ=9.9900
+.ends
+******
+.subckt  2214_150224YS73100  1  2
+D1 1 2 led
+.MODEL led D
++ IS=2.0293E-9
++ N=4.9950
++ RS=.58731
++ IKF=999
++ CJO=6.6815E-9
++ M=.1
++ VJ=9.9900
+.ends
+******

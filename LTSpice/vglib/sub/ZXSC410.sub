@@ -1,0 +1,80 @@
+.Subckt zxsc410 v+ve ven gnd vsense vfb vdrv
+*
+r2 v+ve gnd r=if(v(u2_out)<0.5,2Meg,37k)
+xarb1 v+ve u2_out ven v+ve vdrv arbsourcearb1
+R Ven 0 1T
+.global gnd
+.Subckt arbsourcearb1 n1 n2 n3 outp outn
+b1 0 n0  i=((v(n2)< .5)&((v(n3)-0.93)>0))*v(n1)   cpar=10n Rpar=1 tripdt=2n
+s2  gnd outn n0 gnd swL
+s1 outn outp n0 gnd swH
+.model swH sw von=1.8 vh=0.5 ron=100 ilimit=3.5ma roff=100meg Vser=0.4
+.model swL sw von=1.5 vh=0.3 ron=100Meg ilimit=10ma roff=100 Vser=0.2
+
+v1 vr gnd 0
+
+D1 Vr  outn dm
+
+Bv2 vr2 gnd v=v(n1)-0.4
+D2 n1 vr2 dm
+.model dm d vfwd=0.2 Ron=1 Roff=100meg Epsilon=100m
+.Ends
+
+*a$u1 u3_d u5_in1 u1$tp_digdly
+*.Model u1$tp_digdly d_buffer stored_delay=msdel input_load=0
+a$u1 u3_d  0 0 0 0 0  u5_in1 0 buf  td={msdel} trise=10n tfall=10n
+
+*x$s1 vdrv gnd u2_out gnd gen_switch : ron=50 roff=1meg von=3 voff=2
+s1      vdrv gnd u2_out gnd gen_switch
+.model gen_switch vswitch ron=50 roff=1meg von=3 voff=2
+
+*a$u2 [u4_out u3_clk ] u2_out u2$tp_gate
+*.Model u2$tp_gate d_or rise_delay=1e-008 fall_delay=1e-008
+a1 u4_out  u3_clk 0 0 0 0 u2_out 0 or  trise=10n tfall=10n
+
+*a$u3 u3_d u3_clk gnd gnd u3_q u3_d dtype
+A7     u3_d  0 u3_clk gnd gnd  u3_d u3_q  0  DFLOP trise=10n tfall=10n
+
+x$s3 vdrv gnd vfb gnd vc_switch params: roff=1meg ron=1 threshold=270m hystwd=60m 
+
+*a$u4 [u6_out u4_in2 ] u4_out u4$tp_gate
+*.Model u4$tp_gate d_and rise_delay=1e-008 fall_delay=1e-008
+a2 u6_out  u4_in2 0 0 0 0 u4_out 0 and  trise=10n tfall=10n
+
+*a$u5 [u5_in1 u3_d ] u4_in2 u5$tp_gate
+*.Model u5$tp_gate d_nand rise_delay=1e-008 fall_delay=1e-008
+A3 u5_in1  u3_d 0 0 0  u4_in2 0 0 and  Trise=10n Tfall=10n
+
+*a$u6 [u5_in1 u3_d ] u6_out u6$tp_gate
+*.Model u6$tp_gate d_or rise_delay=1e-008 fall_delay=1e-008
+a4 u5_in1  u3_d  0 0 0 0 u6_out 0 or  trise=10n tfall=10n
+
+*a$u7 u8_out u3_clk u7$tp_digdly
+*.Model u7$tp_digdly d_buffer stored_delay=propdel input_load=0
+a6 u8_out  0 0 0 0 0  u3_clk 0 buf td={propdel} trise=10n tfall=10n
+
+*a$u8 vsense u8_out kadc1
+A5 vsense 0 0 0 0  0 u8_out 0 SCHMITT Vt=20m Vh=5m trise=10n tfall=10n
+
+*.Model dtype d_dff
+.Param propdel=300n
+.Param msdel=2.3u ;msdel=2.3u
+
+
+ *.Model kadc1 adc_schmitt in_low=15.0m  in_high=25.0m
+
+.SUBCKT VC_SWITCH 1 2 3 4 params: ROFF=1MEG RON=1 THRESHOLD=2.5 HYSTWD=1 IC=0
+*#LABELS ,Off Resistance::1n,On Resistance::1n,Threshold,Hysteresis::1f,Initial Condition:LIST:0 Off|1 On
+*A1 %gd 3 4 out schmitt
+A1 3  4 0 0 0  0   switch_control 0 SCHMITT Vt=270m Vh=30m   trise=10n tfall=10n 
+*A2 out switch_control dabridge
+S1 1 2 switch_control 0 SW
+
+*.MODEL dabridge dac_bridge t_rise=10n t_fall=10n
+*.MODEL schmitt adc_Schmitt in_low={THRESHOLD-HYSTWD/2} in_high={THRESHOLD+HYSTWD/2} init_cond={IC}
+.MODEL SW sw roff=1Meg RON=1  vt=0.5 vh=0.3
+.ENDS
+
+.Ends zxsc410
+
+

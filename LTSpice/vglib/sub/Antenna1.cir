@@ -1,0 +1,4 @@
+*
+.subckt Antenna1 1   p c=20p r=0.1 L=100n
+C p 1 {c} Rser={r} Lser={L}
+.ends Antenna1

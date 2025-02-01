@@ -1,0 +1,290 @@
+********************************************************************************
+**	Cree SiC Schottky Diode C4D Family Spice Model Library
+**      v1.0_Beta
+**	11/24/2014
+********************************************************************************
+**	Terms:
+**	
+**	By using this SPICE Model (a "Model") from Cree, Inc. ("Cree"), you on 
+**	behalf of your organization (or you personally, if you are requesting the 
+**	model for personal use) agree to the following conditions of its use:
+**	
+**	1. The Model, or any portion of the Model, is for your own use and may not 
+**	be distributed outside your organization (or to any other person or company,
+**	if you are acquiring the Model for personal use);
+**	
+**	2. You may use the Model only for the purpose of evaluating the performance 
+**	of Cree products in proposed circuits;
+**	
+**	3. The Model is provided “AS IS”, and Cree disclaims any warranty either 
+**	express or implied in connection with the Model, including but not limited 
+**	to any warranty
+**	
+**	4. In no event, will Cree be liable for any damages arising from the use 
+**	of the Model, regardless of the legal theory or any prior knowledge of Cree;
+**	
+**	5. Cree retains all copyrights and other intellectual property rights in 
+**	the Model. 
+**	
+********************************************************************************
+********************************************************************************
+**	Notes:
+**	1.  The model is designed to be accurate over the ranges presented in the
+**	    corresponding datasheet typical characteristic curves.
+**	2.  The model is valid over the 25C to 175C temperature range.
+**	3.  Reverse leakage currents are modeled as a breakdown voltage at 250uA.
+**	    No low current detail is provided.
+**	4.  The surge response of the PiN structure is not included in this 
+**          version.
+**	5.  Recombination current is assumed to be zero.
+**	6.  Currently, the model is electrical only. No thermal model is included.
+**	7.  LT Spice users: please note that a LTSpice symbol library is also 
+**	    available. Please refer to the file "Cree_C4D_CPW4_LTSPICE_Symbols.zip" 
+**	    for further details.
+**
+********************************************************************************
+
+********************************************************************************
+**	Discrete Diodes
+********************************************************************************
+********************************************************************************
+**	TO-220-2 package
+********************************************************************************
+
+.subckt C4D02120A A K Case
+L_anode		A	AD	6.5n
+D1		AD	Case	CPW41200S002B	
+L_cathode	K	Case	6.5n		
+.ends
+
+.subckt C4D05120A A K Case
+L_anode		A	AD	6.5n
+D1		AD	Case	CPW41200S005B	
+L_cathode	K	Case	6.5n		
+.ends
+
+.subckt C4D08120A A K Case
+L_anode		A	AD	6.5n
+D1		AD	Case	CPW41200S008B	
+L_cathode	K	Case	6n		
+.ends
+
+.subckt C4D10120A A K Case
+L_anode		A	AD	6.5n
+D1		AD	Case	CPW41200S010B	
+L_cathode	K	Case	6.5n
+.ends
+
+.subckt C4D15120A A K Case
+L_anode		A	AD	6.5n
+D1		AD	Case	CPW41200S015B	
+L_cathode	K	Case	6.5n
+.ends
+
+.subckt C4D20120A A K Case
+L_anode		A	AD	6.5n
+D1		AD	Case	CPW41200S020B	
+L_cathode	K	Case	6.5n
+.ends
+
+
+********************************************************************************
+**	TO-252-2 package
+********************************************************************************
+
+.subckt C4D02120E A K Case
+L_anode		A	AD	6n
+D1		AD	Case	CPW41200S002B	
+L_cathode	K	Case	6n		
+.ends
+
+.subckt C4D05120E A K Case
+L_anode		A	AD	6n
+D1		AD	Case	CPW41200S005B	
+L_cathode	K	Case	6n		
+.ends
+
+.subckt C4D08120E A K Case
+L_anode		A	AD	6n
+D1		AD	Case	CPW41200S008B	
+L_cathode	K	Case	6n		
+.ends
+
+.subckt C4D10120E A K Case
+L_anode		A	AD	6n
+D1		AD	Case	CPW41200S010B	
+L_cathode	K	Case	6n		
+.ends
+
+
+********************************************************************************
+**	TO-247-3 package
+********************************************************************************
+
+.subckt C4D10120D A1 A2 K Case
+L_anode1	A1	AD1	6.5n
+D1		AD1	Case	CPW41200S005B	
+L_anode2	A2	AD2	6.5n
+D2		AD2	Case	CPW41200S005B	
+L_cathode	K	Case	6.5n		
+.ends
+
+.subckt C4D20120D A1 A2 K Case
+L_anode1	A1	AD1	6.5n
+D1		AD1	Case	CPW41200S010B	
+L_anode2	A2	AD2	6.5n
+D2		AD2	Case	CPW41200S010B	
+L_cathode	K	Case	6.5n		
+.ends
+
+.subckt C4D30120D A1 A2 K Case
+L_anode1	A1	AD1	6.5n
+D1		AD1	Case	CPW41200S015B	
+L_anode2	A2	AD2	6.5n
+D2		AD2	Case	CPW41200S015B	
+L_cathode	K	Case	6.5n		
+.ends
+
+.subckt C4D40120D A1 A2 K Case
+L_anode1	A1	AD1	6.5n
+D1		AD1	Case	CPW41200S020B	
+L_anode2	A2	AD2	6.5n
+D2		AD2	Case	CPW41200S020B	
+L_cathode	K	Case	6.5n		
+.ends
+
+
+********************************************************************************
+
+********************************************************************************
+********************************************************************************
+
+
+********************************************************************************
+**	Die Models
+********************************************************************************
+
+
+.model CPW41200S002B			
++	d(		
++	level	=	1
++	Is	=	6.99983E-13
++	N	=	1.320735113
++	Eg	=	1.251495861
++	xti	=	0.1
++	Rs	=	0.207862748
++	trs1	=	0.005385655
++	trs2	=	2.95075E-05
++	Cjo	=	1.65706E-10
++	VJ	=	1.127534358
++	M	=	0.458351103
++	bv	=	1697
++	tbv1	=	0.000744794
++	tbv2	=	-7.92914E-06
++	tt	=	0
++	)		
+		
+
+.model CPW41200S005B
++	d(		
++	level	=	1
++	Is	=	5.90598E-14
++	N	=	1.178186661
++	Eg	=	1.043467419
++	xti	=	7.950669626
++	Rs	=	0.098142507
++	trs1	=	0.004297495
++	trs2	=	2.59929E-05
++	Cjo	=	4.05432E-10
++	VJ	=	1.114512
++	M	=	0.467955771
++	bv	=	1639.597225
++	tbv1	=	-0.00013199
++	tbv2	=	-4.71787E-06
++	tt	=	0
++	)		
+		
+
+.model CPW41200S008B
++	d(		
++	level	=	1
++	Is	=	1.92494E-14
++	N	=	1.11594604
++	Eg	=	1.035085337
++	xti	=	8.055126484
++	Rs	=	0.077114784
++	trs1	=	0.004446064
++	trs2	=	3.01628E-05
++	Cjo	=	5.56085E-10
++	VJ	=	1.441868153
++	M	=	0.487814696
++	bv	=	1566
++	tbv1	=	0.000611407
++	tbv2	=	-6.93579E-06
++	tt	=	0
++	)		
+
+
+.model CPW41200S010B
++	d(		
++	level	=	1
++	Is	=	1.87454E-12
++	N	=	1.320015963
++	Eg	=	1.157943508
++	xti	=	4.026312737
++	Rs	=	0.050396905
++	trs1	=	0.005173515
++	trs2	=	2.80776E-05
++	Cjo	=	7.83471E-10
++	VJ	=	1.130882326
++	M	=	0.470404256
++	bv	=	1591.862027
++	tbv1	=	0.000157501
++	tbv2	=	-5.61728E-06
++	tt	=	0
++	)		
+
+
+.model CPW41200S015B
++	d(		
++	level	=	1
++	Is	=	2.05199E-13
++	N	=	1.180245487
++	Eg	=	0.88047351
++	xti	=	12.65333425
++	Rs	=	0.042877267
++	trs1	=	0.004020008
++	trs2	=	2.59515E-05
++	Cjo	=	1.21052E-09
++	VJ	=	1.083744739
++	M	=	0.485774559
++	bv	=	1577.656188
++	tbv1	=	-4.43126E-05
++	tbv2	=	-7.15079E-06
++	tt	=	0
++	)		
+
+
+.model CPW41200S020B
++	d(		
++	level	=	1
++	Is	=	3.07768E-10
++	N	=	1.583842411
++	Eg	=	1.1120996
++	xti	=	5.433552149
++	Rs	=	0.028252912
++	trs1	=	0.005793999
++	trs2	=	2.29807E-05
++	Cjo	=	1.54979E-09
++	VJ	=	1.102078536
++	M	=	0.472648604
++	bv	=	1515
++	tbv1	=	0.001073165
++	tbv2	=	-1.10208E-05
++	tt	=	0
++	)		
+		
+       
+
+
+

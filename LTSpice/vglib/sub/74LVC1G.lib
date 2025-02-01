@@ -1,0 +1,776 @@
+* 74LVC1G.lib
+*
+* 74LVC1Gxxx Picogate Model library for LTspice
+*
+* Tony Casey, tony@ritecom.com
+*
+* Revision 1   - 20190803
+* Revision 1.1 - 20190805 - added 74LVC1G74, 74LVC1G79, 74LVC1G80, 74LVC1G175
+* Revision 1.2 - 20190808 - added 74LVC1G06, 74LVC1G07, 74LVC1G16,
+*                                 74LVC1G34, 74LVC1G53, 74LVC1G66
+*
+* Models Included:
+*
+* 74LVC1G00  74LVC1G07  74LVC1G125  74LVC1G175  74LVC1G34   74LVC1G66  74LVC1G86
+* 74LVC1G02  74LVC1G08  74LVC1G126  74LVC1G27   74LVC1G386  74LVC1G74  74LVC1GU04
+* 74LVC1G04  74LVC1G10  74LVC1G14   74LVC1G32   74LVC1G38   74LVC1G79
+* 74LVC1G06  74LVC1G11  74LVC1G16   74LVC1G332  74LVC1G53   74LVC1G80
+*
+* This model library is heavily based on the 74HC_V series CMOS libraries written by Helmut Sennewald
+* and uses exactly the same general methodology, but with two important changes:
+*
+* (1) The power pins have been brought out as separate connections, and need not necessarily be
+* connected to VCC and GND nodes.
+*
+* (2) The output stages are designed using voltage controlled switches and conduct real current
+* from the supplies. Within the limits of what can be done with SW elements, they model the
+* real CMOS output devices adequately well to provide the designer with a realistic way to model
+* supply currents and output voltages under dynamic conditions. Although the library name
+* doesn't carry the "_V" suffix, the logic output voltage tracks the supply voltage as a consequence.
+*
+* The library may be used in conjunction with the corresponding symbol library contained in 74LVC1G.zip
+*
+* As with Helmut's libraries, all parts have been constructed in three sections.
+*
+* >--| ESD/LEVEL SHIFT |----| 1V-LOGIC Axx |----| LEVEL SHIFT/ESD |-->
+*
+* Delays have been adjusted for Vcc = 1V8/2V7/3V3/5V (LVC) using the test conditions stated in the
+* Nexperia data sheets, and generally achieve Tpd errors less than 10%. The actual VCC voltage needs
+* to be passed to each device as a parameter, either a fixed value, or a variable by placing:
+*
+* - VCC={VCC} Speed=1 Tripdt=100p
+*
+* in the Value field of the symbol, where {VCC} denotes that it is defined somewhere in the schematic.
+*
+* Temperature effects are currently not modelled.
+*
+* https://www.nexperia.com/products/analog-logic-ics/family/LVC/#/p=1,s=0,f=,c=,rpp=,fs=0,sc=,so=,es=
+*
+*========================= NEXPERIA LVC PICOLOGIC DEVICES ======================
+*
+* 2-input NAND gate
+* tpd 3n3,2n6,2n2,1n8
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G00 A B Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 600p*(5/VCC1)**1.1*Speed1
+*
+XIN1 A Ai VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+XIN2 B Bi VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+*
+A2 0 Ai 0 Bi 0 Yi 0 0 AND TRIPDT={Tripdt1} TD={TD1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+.ENDS 74LVC1G00
+*-------------------------------------------------------------------------------
+*
+*
+* 2-input NOR gate
+* tpd 3n2,2n5,2n1,1n7
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G02 A B Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 550p*(5/VCC1)**1.1*Speed1
+*
+XIN1 A Ai VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+XIN2 B Bi VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+*
+A1 0 Ai 0 Bi 0 Yi 0 0 OR TRIPDT={Tripdt1} TD={TD1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+.ENDS 74LVC1G02
+*-------------------------------------------------------------------------------
+*
+*
+* Unbuffered inverter
+* tpd 1n7,1n7,1n6n,1n3
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1GU04 A Y VCC VGND vcc1={vcc} speed1={speed}
+*
+XIN A Yi VCC VGND 74LVC_IN_UNBUF vcc2={vcc1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1GU04
+*-------------------------------------------------------------------------------
+*
+*
+* Inverter
+* tpd 3n,2n6,2n,1n6
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G04 A Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 450p*(5/VCC1)**1.2*Speed1
+*
+XIN A Ai VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+*
+A1 Ai 0 0 0 0 Yi 0 0 BUF TRIPDT={Tripdt1} TD={TD1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1G04
+*-------------------------------------------------------------------------------
+*
+*
+* Inverter with open drain O/P
+* tpd 3n,2n5,2n3,1n7
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G06 A Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 650p*(5/VCC1)**0.95*Speed1
+*
+XIN A Ai VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+*
+A1 Ai 0 0 0 0 Yi 0 0 BUF TRIPDT={Tripdt1} TD={TD1}
+*
+XOUT Yi Y VGND 74LVC_OD vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1G06
+*-------------------------------------------------------------------------------
+*
+*
+* Buffer with open drain O/P
+* tpd 2n6,2n3,2n2,1n6
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G07 A Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 500p*(5/VCC1)**0.8*Speed1+50p
+*
+XIN A Ai VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+*
+A1 Ai 0 0 0 0 0 Yi 0 BUF TRIPDT={Tripdt1} TD={TD1}
+*
+XOUT Yi Y VGND 74LVC_OD vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1G07
+*-------------------------------------------------------------------------------
+*
+*
+* 2-input AND gate
+* tpd 3n4,2n5,2n1,1n7
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G08 A B Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 600p*(5/VCC1)**1.1*Speed1
+*
+XIN1 A Ai VCC VGND 74LVC_IN vcc2={vcc1} speed2={speed1} tripdt2={tripdt1}
+XIN2 B Bi VCC VGND 74LVC_IN vcc2={vcc1} speed2={speed1} tripdt2={tripdt1}
+*
+A1 Ai Bi 0 0 0 0 Yi 0 AND TRIPDT={Tripdt1} TD={TD1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1G08
+*-------------------------------------------------------------------------------
+*
+*
+* 3-input NAND gate
+* tpd 4n7,3n,2n6,1n9
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G10 A B C Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 750p*(5/VCC1)**1.4*Speed1
+*
+XIN1 A Ai VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+XIN2 B Bi VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+XIN3 C Ci VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+*
+A1 Ai Bi Ci 0 0 Yi 0 0 AND TRIPDT={Tripdt1} TD={TD1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1G10
+*-------------------------------------------------------------------------------
+*
+*
+* 3-input AND gate
+* tpd 4n7,3n,2n6,1n9
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G11 A B C Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 750p*(5/VCC1)**1.4*Speed1
+*
+XIN1 A Ai VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+XIN2 B Bi VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+XIN3 C Ci VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+*
+A1 Ai Bi Ci 0 0 0 Yi 0 AND TRIPDT={Tripdt1} TD={TD1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1G11
+*-------------------------------------------------------------------------------
+*
+*
+* Schmitt inverter
+* tpd 4n1,3n2,3n,2n2
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G14 A Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 800p*(5/VCC1)**1.1*Speed1
+*
+XIN A Ai VCC VGND 74LVC_IN_SCH vcc2={vcc1} tripdt2={tripdt1}
+*
+A1 Ai 0 0 0 0 Yi 0 0 BUF TRIPDT={Tripdt1} TD={TD1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1G14
+*-------------------------------------------------------------------------------
+*
+*
+* Buffer
+* tpd 4n,2n3,2n,1n6
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G16 A Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 500p*((5+1)/(VCC1+1))**2*Speed1
+*
+XIN A Ai VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+*
+A1 Ai 0 0 0 0 0 Yi 0 BUF TRIPDT={Tripdt1} TD={TD1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1G16
+*-------------------------------------------------------------------------------
+*
+*
+* 3-input NOR gate
+* tpd 4n7,3n,2n6,1n9
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G27 A B C Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 750p*(5/VCC1)**1.4*Speed1
+*
+XIN1 A Ai VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+XIN2 B Bi VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+XIN3 C Ci VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+*
+A1 Ai Bi Ci 0 0 Yi 0 0 OR TRIPDT={Tripdt1} TD={TD1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1G27
+*-------------------------------------------------------------------------------
+*
+*
+* 2-input OR gate
+* tpd 3n2,2n5,2n1,1n7
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G32 A B Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 550p*(5/VCC1)**1.1*Speed1
+*
+XIN1 A Ai VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+XIN2 B Bi VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+*
+A1 Ai Bi 0 0 0 0 Yi 0 OR tripdt={tripdt1} td={td1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1G32
+*-------------------------------------------------------------------------------
+*
+*
+* Buffer
+* tpd 4n,2n3,2n,1n6
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G34 A Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 500p*((5+1)/(VCC1+1))**2*Speed1
+*
+XIN A Ai VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+*
+A1 Ai 0 0 0 0 0 Yi 0 BUF TRIPDT={Tripdt1} TD={TD1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1G34
+*-------------------------------------------------------------------------------
+*
+*
+* 2-input NAND gate with open drain O/P
+* tpd 3n,2n5,2n3,1n5
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G38 A B Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 550p*(5/VCC1)**1.1*Speed1-100p
+*
+XIN1 A Ai VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2={tripdt1}
+XIN2 B Bi VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2={tripdt1}
+*
+A1 0 Ai 0 Bi 0 Yi 0 0 AND TRIPDT={Tripdt1} TD={TD1}
+*
+XOUT Yi Y VGND 74LVC_OD VCC2={VCC1} Speed2={Speed1}
+.ENDS 74LVC1G38
+*-------------------------------------------------------------------------------
+*
+*
+* 2 I/P multiplexer with active low enable
+* tpd 800p,400p,300p,200p
+* ten 4n,2n6,2n2,1n7
+* tsw 6n7,4n,3n4,2n6
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G53 Y0 Y1 Z S _EN VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param Ron1=6
+.param TD1 2n05*(5/VCC1)**1.05*Speed1-300p
+.param TD2 1n45*(5/VCC1)**0.95*Speed1-250p
+*
+XIN1 S Si VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2={Tripdt1}
+XIN2 _EN _ENi VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2={Tripdt1}
+*
+A1 Si 0 0 0 0 Sid 0 0 BUF TD={TD1} TRIPDT={Tripdt1}
+A2 Si 0 0 0 0 0 _Sid 0 BUF TD={TD1} TRIPDT={Tripdt1}
+A3 _ENi 0 0 0 0 _ENid 0 0 BUF TD={TD2} TRIPDT={Tripdt1}
+A4 0 Sid 0 _ENid 0 0 EN1i 0 AND TRIPDT={Tripdt1}
+A5 0 _Sid 0 _ENid 0 0 EN2i 0 AND TRIPDT={Tripdt1}
+*
+XSW1 Y0 Z EN1i VCC VGND 74LVC_BISW VCC2={VCC1} Speed2={Speed1} Ron2={Ron1}
+XSW2 Y1 Z EN2i VCC VGND 74LVC_BISW VCC2={VCC1} Speed2={Speed1} Ron2={Ron1}
+*
+.ENDS 74LVC1G53
+*-------------------------------------------------------------------------------
+*
+*
+* Single bilateral switch
+* tpd 800p,400p,300p,200p
+* ten 5n3,2n6,2n5,1n9
+* tdis 4n2,3n6,3n4,2n5
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G66 Y Z EN VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.model nSW SW(Ron=1 Roff=1Meg Vt=-500m)
+.model pSW SW(Ron=1Meg Roff=1 Vt=-500m)
+.param  Ron1=5.5
+.param TD1 2n*(5/VCC1)**0.4*Speed1-800p
+.param TD2 1n45*(5/VCC1)**1*Speed1-350p
+*
+XIN EN ENi VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2={Tripdt1}
+*
+A1 ENi 0 0 0 0 0 ENin 0 BUF TD={TD1} TRIPDT={Tripdt1}
+A2 ENi 0 0 0 0 0 ENip 0 BUF TD={TD2} TRIPDT={Tripdt1}
+S1 ENin ENinp 0 ENi nSW
+S2 ENip ENinp 0 ENi pSW
+*
+XSW Y Z ENinp VCC VGND 74LVC_BISW VCC2={VCC1} Speed2={Speed1} Ron2={Ron1}
+*
+.ENDS 74LVC1G66
+*-------------------------------------------------------------------------------
+*
+*
+* D type Flip-flop with Q, Qbar O/Ps and asynchronous Set and Reset
+* tpd 6n,3n5,3n5,2n5
+* tps 6n,3n5,3n5,2n5
+* tpr 5n,3n5,3n5,2n5
+* d->clk 600p  - setup time
+* d->clk -500p - hold time
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G74 D CLK _S _R Q _Q VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 600p*Speed1
+.param TD2 750p*((5+1)/(VCC1+1))**1.9*Speed1
+*
+XIN1 _S _Si VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+XIN2 D Di VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+XIN3 CLK CLKi VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+XIN4 _R _Ri VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+*
+A1 _Si 0 0 0 0 Si 0 0 BUF TD={TD2} TRIPDT={Tripdt1}
+A2 Di 0 0 0 0 0 Did 0 BUF TD={TD2} TRIPDT={Tripdt1}
+A3 CLKi 0 0 0 0 0 CLKid 0 BUF TD={TD2} TRIPDT={Tripdt1}
+A4 _Ri 0 0 0 0 Ri 0 0 BUF TD={TD2} TRIPDT={Tripdt1}
+A5 Did 0 CLKid Si Ri _Qi Qi 0 DFLOP TD={TD1} TRIPDT={Tripdt1}
+A6 Si 0 0 0 0 0 Sid 0 BUF TD={TD1} TRIPDT={Tripdt1}
+A7 Ri 0 0 0 0 0 Rid 0 BUF TD={TD1} TRIPDT={Tripdt1}
+A8 0 Sid 0 Qi 0 0 Qoi 0 OR TRIPDT={Tripdt1}
+A9 0 _Qi 0 Rid 0 0 _Qoi 0 OR TRIPDT={Tripdt1}
+*
+XOUT1 Qoi Q VCC VGND 74LVC_OUT VCC2={VCC1} SPEED2={speed1} TRIPDT2=tripdt1
+XOUT2 _Qoi _Q VCC VGND 74LVC_OUT VCC2={VCC1} SPEED2={speed1} TRIPDT2=tripdt1
+*
+.ENDS 74LVC1G74
+*-------------------------------------------------------------------------------
+*
+*
+* D type Flip-flop with Q
+* tpd 3n6,2n6,2n2,1n7
+* d->clk 600p  - setup time
+* d->clk -500p - hold time
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G79 D CLK Q VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 550p*(5/VCC1)**0.8*Speed1
+.param TD2 400p*((5)/(VCC1))**1.1*Speed1-400p
+*
+XIN1 D Di VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+XIN2 CLK CLKi VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+*
+A1 Di 0 0 0 0 0 Did 0 BUF TD={TD2} TRIPDT={Tripdt1}
+A2 CLKi 0 0 0 0 0 CLKid 0 BUF TD={TD2} TRIPDT={Tripdt1}
+A3 Did 0 CLKid 0 0 0 Qi 0 DFLOP TD={TD1} TRIPDT={Tripdt1}
+*
+XOUT Qi Q VCC VGND 74LVC_OUT VCC2={VCC1} SPEED2={speed1} TRIPDT2=tripdt1
+*
+.ENDS 74LVC1G79
+*-------------------------------------------------------------------------------
+*
+*
+* D type Flip-flop with Qbar
+* tpd 3n4,2n5,2n4,1n8
+* d->clk 600p  - setup time
+* d->clk -500p - hold time
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G80 D CLK _Q VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 500p*(5/VCC1)**0.8*Speed1
+.param TD2 300p*((5)/(VCC1))**1.1*Speed1-150p
+*
+XIN1 D Di VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+XIN2 CLK CLKi VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+*
+A1 Di 0 0 0 0 0 Did 0 BUF TD={TD2} TRIPDT={Tripdt1}
+A2 CLKi 0 0 0 0 0 CLKid 0 BUF TD={TD2} TRIPDT={Tripdt1}
+A3 Did 0 CLKid 0 0 _Qi 0 0 DFLOP TD={TD1} TRIPDT={Tripdt1}
+*
+XOUT _Qi _Q VCC VGND 74LVC_OUT VCC2={VCC1} SPEED2={speed1} TRIPDT2=tripdt1
+*
+.ENDS 74LVC1G80
+*-------------------------------------------------------------------------------
+*
+*
+* 2-input XOR gate
+* tpd 3n7,2n8,2n3,1n9
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G86 A B Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 710p*(5/VCC1)**1.1*Speed1
+*
+XIN1 A Ai VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+XIN2 B Bi VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+*
+A1 Ai Bi 0 0 0 0 Yi 0 XOR tripdt={tripdt1} td={td1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1G86
+*-------------------------------------------------------------------------------
+*
+*
+* Tristate buffer with active low Enable
+* tpd 3n3,2n6,2n2,1n8
+* tr 2n,2n5,2n5,2n5
+* Tpzen 4n1,3n3,2n4,2n1 (tpzl & tpzh) > check datasheet for definitions
+* Tpzdis 4n3,3n,3n1,2n2 (tplz & tphz) > and measurement conditions
+.SUBCKT 74LVC1G125 A _EN Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.model nSW SW(Ron=1 Roff=1Meg Vt=500m)
+.model pSW SW(Ron=1Meg Roff=1 Vt=500m)
+.param TD1 650p*(5/VCC1)**1*Speed1
+.param TD2 800p*(5/VCC1)**0.9*Speed1
+.param TD3 1000p*(5/VCC1)**0.9*Speed1
+*
+XIN1 A Ai VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+XIN2 _EN _ENi VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+*
+A1 Ai 0 0 0 0 0 Yi 0 BUF TD={TD1} TRIPDT={Tripdt1}
+A2 _ENi 0 0 0 0 ENin 0 0 BUF TD={TD2} TRIPDT={Tripdt1}
+A3 _ENi 0 0 0 0 ENip 0 0 BUF TD={TD3} TRIPDT={Tripdt1}
+S1 ENi ENin _ENi 0 nSW
+S2 ENi ENip _ENi 0 pSW
+*
+XOUT Yi Y ENi VCC 0 74lvc_out_tri 74LVC_OUT_TRI VCC2={VCC1} SPEED2={Speed1}
+*
+.ENDS 74LVC1G125
+*-------------------------------------------------------------------------------
+*
+*
+*-------------------------------------------------------------------------------
+*
+*
+* Tristate buffer with active high Enable
+* tpd 3n,2n3,2n,1n7
+* tr 2n,2n5,2n5,2n5
+* Tpzen 3n2,2n4,2n1,1n6 > check datasheet for definitions
+* Tpzdis 4n3,3n4,3n,2n2 > and measurement conditions
+.SUBCKT 74LVC1G126 A EN Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.model nSW SW(Ron=1 Roff=1Meg Vt=-500m)
+.model pSW SW(Ron=1Meg Roff=1 Vt=-500m)
+.param TD1 550p*(5/VCC1)**1*Speed1
+.param TD2 800p*(5/VCC1)**0.9*Speed1
+.param TD3 475p*(5/VCC1)**1.3*Speed1
+*
+XIN1 A Ai VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+XIN2 EN ENi VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+*
+A1 Ai 0 0 0 0 0 Yi 0 BUF TD={TD1} TRIPDT={Tripdt1}
+A2 ENi 0 0 0 0 0 ENin 0 BUF TD={TD2} TRIPDT={Tripdt1}
+A3 ENi 0 0 0 0 0 ENip 0 BUF TD={TD3} TRIPDT={Tripdt1}
+S1 ENin ENid 0 ENi nSW
+S2 ENip ENid 0 ENi pSW
+*
+XOUT Yi Y ENid VCC 0 74lvc_out_tri 74LVC_OUT_TRI VCC2={VCC1} SPEED2={Speed1}
+*
+.ENDS 74LVC1G126
+*-------------------------------------------------------------------------------
+*
+*
+* D type Flip-flop with Q O/P and asynchronous Master Reset
+* tpd 4n9,3n2,3n1,2n2
+* tpr 4n3,3n,2n5,2n
+* d->clk 500p  - setup time
+* d->clk -200p - hold time
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G175 D CLK _MR Q VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 500p*Speed1
+.param TD2 600p*(5/VCC1)**1.55*Speed1-50p
+.param TD3 450p*(5/VCC1)**1.6*Speed1
+*
+XIN1 D Di VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+XIN2 CLK CLKi VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+XIN3 _MR _MRi VCC VGND 74LVC_IN VCC2={VCC1} TRIPDT2=tripdt1
+*
+A1 Di 0 0 0 0 0 Did 0 BUF TD={TD2} TRIPDT={Tripdt1}
+A2 CLKi 0 0 0 0 0 CLKid 0 BUF TD={TD2} TRIPDT={Tripdt1}
+A3 _MRi 0 0 0 0 Ri 0 0 BUF TD={TD3} TRIPDT={Tripdt1}
+A4 Did 0 CLKid 0 Ri N001 Qi 0 DFLOP TD={TD1} TRIPDT={Tripdt1}
+*
+XOUT Qi Q VCC VGND 74LVC_OUT VCC2={VCC1} SPEED2={speed1} TRIPDT2=tripdt1
+*
+.ENDS 74LVC1G175
+*-------------------------------------------------------------------------------
+*
+*
+* 3-input AND gate
+* tpd 4n7,3n,2n6,1n9
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G332 A B C Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 750p*(5/VCC1)**1.4*Speed1
+*
+XIN1 A Ai VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+XIN2 B Bi VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+XIN3 C Ci VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+*
+A1 Ai Bi Ci 0 0 0 Yi 0 OR TRIPDT={Tripdt1} TD={TD1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1G332
+*-------------------------------------------------------------------------------
+*
+*
+* 3-input XOR gate
+* tpd 8n,5n,4n5,3n5
+* tr 2n,2n5,2n5,2n5
+.SUBCKT 74LVC1G386_AB A B C Y VCC VGND vcc1={vcc} speed1={speed} tripdt1={tripdt}
+.param TD1 2n3*(5/VCC1)*Speed1
+*
+XIN1 A Ai VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+XIN2 B Bi VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+XIN3 C Ci VCC VGND 74LVC_IN vcc2={vcc1} tripdt2={tripdt1}
+*
+Bxor 0 yL   i=v(ai)^v(bi)^v(ci) Rpar=1 Cpar={TD1/ln(2)/4} Tripdt={tripdt1/3}
+A  0 yL 0 0 0 0 yi 0 or Td={TD1*3/4} Tripdt={tripdt1}
+*
+XOUT Yi Y VCC VGND 74LVC_OUT vcc2={vcc1} speed2={speed1}
+*
+.ENDS 74LVC1G386
+
+*
+*
+*============================ INPUT LEVEL TRANSLATORS ==========================
+*
+*
+* Unbuffered input (no hysteresis) for 74LVC1GU04 only
+.subckt 74lvc_in_unbuf IN DRV VCC VGND vcc3={vcc2}
+.model Desd D(Vfwd=0.65 Ron=10)
+*
+* I/P ESD structure
+D1 VGND IN Desd
+R1 IN INR 100
+D2 VGND INR Desd
+* No ESD diode to VCC because I/P is 5V tolerant at VCC<5V
+*
+* Input parasitics
+C1 INR VGND 1p5
+C2 VCC INR 1p5
+*
+* VCC to 1V translator
+E1 DRV 0 INR VGND table(0,1 {VCC3/2},500m {VCC3},0)
+*
+.ends 74lvc_in_unbuf
+*-------------------------------------------------------------------------------
+*
+*
+* Standard Picogate input has ~100mV of hysteresis
+.subckt 74lvc_in IN OUT VCC VGND vcc3={vcc2} tripdt3={tripdt2}
+.param Vh1 10m*(5/VCC3)
+.model Desd D(Vfwd=0.65 Ron=10)
+*
+* I/P ESD structure
+D1 VGND IN Desd
+R1 IN INR 100
+D2 VGND INR Desd
+* No ESD diode to VCC because I/P is 5V tolerant at VCC<5V
+*
+* Input parasitics
+C1 INR VGND 1p5
+C2 VCC INR 1p5
+*
+* VCC to 1V translator
+E1 DRV 0 INR VGND table(0,1 {VCC3/2},500m {VCC3},0)
+*
+* Output buffer with hysteresis
+A1 DRV 0 0 0 0 OUT 0 0 SCHMITT Vt=0.5 Vh={Vh1} tripdt={tripdt3}
+*
+.ends 74lvc_in
+*-------------------------------------------------------------------------------
+*
+*
+* Schmitt input has VCC-dependent hysteresis
+.subckt 74LVC_IN_SCH in out VCC VGND vcc3={vcc2} tripdt3={tripdt2}
+.model Desd D(Vfwd=0.65 Ron=10)
+.param Vt1 1-0.44*(5/VCC3)**0.1
+.param Vh1 105m*(5+6)/(VCC3+6)
+*
+* I/P ESD structure
+D1 VGND IN Desd
+R1 IN INR 100
+D2 VGND INR Desd
+* No ESD diode to VCC because I/P is 5V tolerant at VCC<5V
+*
+* Input parasitics
+C1 INR VGND 1p5
+C2 VCC INR 1p5
+*
+* VCC to 1V translator
+E1 DRV 0 INR VGND table(0,1 {VCC3/2},500m {VCC3},0)
+*
+* Output buffer with hysteresis
+A1 DRV 0 0 0 0 OUT 0 0 SCHMITT Vh=Vh1 Vt=Vt1 Tripdt={Tripdt3}
+.ends
+*-------------------------------------------------------------------------------
+*
+*
+*======================= OUTPUT LEVEL TRANSLATORS, DRIVERS =====================
+*
+*
+* Standard output driver
+* There is only one driver strength used in the Picogate series, rated at ±32mA/5V
+.subckt 74lvc_out IN OUT VCC VGND vcc3={vcc2} speed3={speed2}
+.model Desd D(Vfwd=0.65 Ron=10)
+.model strSW SW(Ron={Ron} Roff=1G Vt={0.48*VCC3} Vh=-100m Ilimit={Ilimit} level=2)
+.model wkSW SW(Ron={Ron*10} Roff=1G Vt=500m Vh=-210m Ilimit={Ilimit/10} level=2
+.param Ilimit 215m*(VCC-1.1)/(5-1.1)
+.param Ron 7.5*(5/VCC)**0.5
+.param Cval 1p*Speed3
+*
+* 1V to VCC translator
+E1 DRV VGND IN 0 table(0,{VCC3} 500m,{VCC3/2} 1,0)
+*
+* Speed control
+R1 DRV DRVF 250
+C3 DRVF VGND {Cval}
+*
+* Output driver
+S1 VGND OUT DRVF VGND strSW
+S2 OUT VCC VCC DRVF strSW
+S3 VGND OUT DRVF VGND wkSW
+S4 OUT VCC VCC DRVF wkSW
+C1 VCC OUT 5p
+C2 OUT VGND 5p
+*
+* ESD structure
+D1 OUT VCC Desd
+D2 VGND OUT Desd
+*
+.ends 74lvc_out
+*-------------------------------------------------------------------------------
+*
+*
+* Open drain output driver, rated at -32mA/5V
+.subckt 74lvc_od IN OUT VGND vcc3={vcc2} speed3={speed2}
+.model Desd D(Vfwd=0.65 Ron=10)
+.model strSW SW(Ron={Ron} Roff=1G Vt={0.48*VCC3} Vh=-100m Ilimit={Ilimit} level=2)
+.model wkSW SW(Ron={Ron*10} Roff=1G Vt=500m Vh=-210m Ilimit={Ilimit/10} level=2
+.param Ilimit 215m*(VCC-1.1)/(5-1.1)
+.param Ron 7.5*(5/VCC)**0.5
+.param Cval 1p*Speed3
+*
+* 1V to VCC translator
+E1 DRV VGND IN 0 table(0,{VCC3} 500m,{VCC3/2} 1,0)
+*
+* Speed control
+R1 DRV DRVF 250
+C3 DRVF VGND {Cval}
+*
+* Output driver
+S1 VGND OUT DRVF VGND strSW
+S2 VGND OUT DRVF VGND wkSW
+C1 OUT VGND 5p
+*
+* ESD structure
+D1 VGND OUT Desd
+*
+.ends 74lvc_od
+*-------------------------------------------------------------------------------
+*
+*
+* Tristate output driver, otherwise broadly similar to standard driver
+.subckt 74lvc_out_tri IN OUT EN VCC VGND vcc3={vcc2} speed3={speed2}
+.model Desd D(Vfwd=0.65 Ron=10)
+.model strSW SW(Ron={Ron} Roff=1G Vt={0.48*VCC3} Vh=-100m Ilimit={Ilimit} level=2)
+.model wkSW SW(Ron={Ron*10} Roff=1G Vt=500m Vh=-210m Ilimit={Ilimit/10} level=2
+.model triSW SW(Ron=10 Roff=1G Vt=500m Vh=-10m)
+.param Ilimit 215m*(VCC3-1.1)/(5-1.1)
+.param Ron 7.5*(5/VCC3)**0.5
+.param Cval 1p*Speed3
+*
+* 1V to VCC translator
+E1 DRV VGND IN 0 table(0,{VCC3} 500m,{VCC3/2} 1,0)
+*
+* 1V to 1V Buffer
+E2 ENV VGND EN 0 1
+*
+* Speed control
+R1 DRV DRVF 250
+C3 DRVF VGND {Cval}
+R4 ENV ENVF 250
+C4 ENVF VGND {Cval}
+*
+* Tri-state control
+S5 DRVFSP DRVF ENVF VGND triSW
+S6 DRVFSN DRVF ENVF VGND triSW
+R2 VCC DRVFSP 100k
+R3 DRVFSN VGND 100k
+C1 VCC OUT 5p
+C2 OUT VGND 5p
+*
+* Output driver
+S1 VGND OUT DRVFSN VGND strSW
+S2 OUT VCC VCC DRVFSP strSW
+S3 VGND OUT DRVFSN VGND wkSW
+S4 OUT VCC VCC DRVFSP wkSW
+*
+* ESD structure
+D1 OUT VCC Desd
+D2 VGND OUT Desd
+*
+.ends 74lvc_out_tri
+*-------------------------------------------------------------------------------
+*
+*
+* Bilateral switch
+.subckt 74lvc_bisw IN OUT CTL VCC VGND vcc3={vcc2} speed3={speed2} Ron3={Ron2}
+.model Desd D(Vfwd=0.65 Ron=10)
+.model strSWN SW(Ron={1*Rsw} Roff=10Meg Vt=650m Vh=-100m level=2)
+.model strSWP SW(Ron=10Meg Roff={0.9*Rsw} Vt=-550m Vh=-160m level=2)
+.param Rsw Ron3*(5/VCC3)**0.1
+.param Cval 1p*Speed3
+.param Cpar 3p5
+*
+* Speed control
+R1 CTL CTLF 250
+C1 CTLF 0 {Cval}
+*
+* 1V to VCC translators
+E1 _EN VGND CTLF 0 table(0,{VCC3} 500m,{VCC3/2} 1,0)
+E2 EN VGND CTLF 0 table(0,0 500m,{VCC3/2} 1,{VCC3})
+*
+* Analogue switch path
+C2 IN VGND 2p
+S1 IN OUT EN IN strSWN
+S2 IN OUT _EN IN strSWP
+C3 OUT IN {Cpar}
+C5 OUT IN {Cpar}
+D3 IN VCC Desd
+D4 VGND IN Desd
+C4 OUT VGND 2p
+D1 OUT VCC Desd
+D2 VGND OUT Desd
+*
+.ends 74lvc_bisw
+*-------------------------------------------------------------------------------
+*
+*
+*====================== END NEXPERIA LVC PICOLOGIC DEVICES =====================

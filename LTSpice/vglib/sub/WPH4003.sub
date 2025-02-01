@@ -1,0 +1,38 @@
+.SUBCKT WPH4003 1 2 3
+* DATE : 2016/02/17
+* ON Semiconductor
+* Information herein is for example only.
+* It is not guaranteed for volume production.
+* Node 1: Drain  Node 2: Gate  Node 3: Source
+* Model:BSIM3V3.2
+M1 1 4 3 5 WPH4003N W=478910E-6 L=4.0E-6 AD=478910E-12
+RG 2 4 12
+RB 3 5 0.018
+.MODEL WPH4003N NMOS (                               LEVEL    = 8
++VERSION  = 3.2            TNOM     = 27             TOX      = 1.0E-07
++VTH0     = 3.28           K1       = 3.86           K2       = -0.04
++NLX      = 4.70E-07       DVT0     = 3.12           DVT1     = 0.09
++DVT2     = -0.01          U0       = 620            UA       = 7.90E-09
++UB       = 1.00E-21       VSAT     = 1.75E05        A0       = 0.19
++AGS      = 1.00           A1       = 0              A2       = 1
++RDSW     = 1.38E06        PRWG     = 1.0E-03        WR       = 0.92
++WINT     = 0              LINT     = 0              VOFF     = 0.05
++NFACTOR  = 0.60           CIT      = 0              CDSC     = 2.40E-04
++CDSCD    = 0              ETA0     = 0.00E00        DSUB     = 0.96
++PCLM     = 0.10           PDIBLC1  = 0.00           PDIBLC2  = 1.00E-05
++DROUT    = 0.96           PSCBE1   = 2.70E08        PSCBE2   = 1.00E-08
++PVAG     = 0.01           DELTA    = 0.06           NGATE    = 1.0E19
++MOBMOD   = 1              NQSMOD   = 0              NOIMOD   = 1
++CAPMOD   = 3              XPART    = 0.5            CGSO     = 5.00E-10
++CGDO     = 1.00E-12       CGBO     = 0              CGSL     = 0
++CGDL     = 4.00E-09       CKAPPA   = 1.20           CF       = 0
++CLC      = 3.0E-08        CLE      = 0.8            DWC      = 0
++DLC      = -5.00E-10      NOFF     = 3.66           VOFFCV   = -0.40
++ACDE     = 1.0            MOIN     = 15             CJ       = 3.70E-03
++MJ       = 0.55           PB       = 0.50           JS       = 2.00E-05
++NJ       = 1.05           XTI      = 3.0            IJTH     = 0
++KT1      = -2.0           UTE      = -1.7           PRT      = 4.00E06
++AT       = 3.3E04         )
+*
+.ENDS WPH4003
+

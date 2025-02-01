@@ -1,0 +1,35 @@
+.subckt indmot3ph A B C W N RPM M Np=2 J=0.62 k=0.97 Ls=29.4m Lr=29.7m Rs=67m Rr=32m
+C n 0 100p Rpar=100Meg
+Ra A P001 {Rs}
+La P001 N {Ls}
+Rb B N001 {Rs}
+Lb N001 N {Ls}
+Rc C N004 {Rs}
+Lc N004 N {Ls}
+Lx N006 N005 {Lr2}
+Rx N005 0 {Rr2}
+Bx N006 0 V=-Np*V(w)*(Lm*s3/2*(I(Lb)-I(Lc))+Lr2*I(Ly))
+Ly N002 N003 {Lr2}
+Ry N003 0 {Rr2}
+By N002 0 V=Np*V(w)*(3/2*Lm*I(La)+Lr2*I(Lx))
+Bt 0 W I=Np*s3/2*Lm*((I(Lb)-I(Lc))*I(Lx)-s3*I(La)*I(Ly))
+Cw W 0 {J}
+Bn RPM 0 V=V(W)/2/Pi*60
+Bm M 0 V=I(Bt)
+*.param Np=2; Stator Pole Number
+*.param J=0.62; Moment of Inertia
+*.param k=0.97; Mutual Coupling Coeff
+*.param Ls=29.4m; Stator Induction
+*.param Lr=29.7m; Rotor Induction
+*.param Rs=67m; Stator Resistance
+*.param Rr=32m; Rotor Resistance
+.param Lr2=Lr*3/2 Rr2=Rr*3/2
++ Lm=sqrt(Ls*Lr)*k
++ k0=Lm/sqrt(Ls*Lr2)
++ s3=sqrt(3)
+Kax La Lx {k0}
+Kbx Lb Lx {-k0/2}
+Kby Lb Ly {k0*s3/2}
+Kcx Lc Lx {-k0/2}
+Kcy Lc Ly {-k0*s3/2}
+.ends indmot3ph

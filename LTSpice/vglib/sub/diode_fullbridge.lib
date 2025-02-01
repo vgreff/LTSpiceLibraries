@@ -1,0 +1,2194 @@
+*$
+.subckt GBPC3510 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=695.01E-9
++ N=1.0129
++ RS=1.3982E-3
++ IKF=2.5727
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=1.8101E-6
++ NR=4.9950
++ BV=1.0000E3
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC3510
+*$
+.subckt GBPC3508 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=695.01E-9
++ N=1.0129
++ RS=1.3982E-3
++ IKF=2.5727
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=1.9497E-6
++ NR=4.9950
++ BV=800
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC3508
+*$
+.subckt GBPC3506 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=695.01E-9
++ N=1.0129
++ RS=1.3982E-3
++ IKF=2.5727
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=2.1454E-6
++ NR=4.9950
++ BV=600
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC3506
+*$
+.subckt GBPC3504 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=695.01E-9
++ N=1.0129
++ RS=1.3982E-3
++ IKF=2.5727
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=2.4548E-6
++ NR=4.9950
++ BV=400
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC3504
+*$
+.subckt GBPC3502 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=695.01E-9
++ N=1.0129
++ RS=1.3982E-3
++ IKF=2.5727
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=3.0888E-6
++ NR=4.9950
++ BV=200
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC3502
+*$
+.subckt GBPC3501 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=695.01E-9
++ N=1.0129
++ RS=1.3982E-3
++ IKF=2.5727
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=3.8815E-6
++ NR=4.9950
++ BV=100
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC3501
+*$
+.subckt GBPC35005 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=695.01E-9
++ N=1.0129
++ RS=1.3982E-3
++ IKF=2.5727
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=4.8656E-6
++ NR=4.9950
++ BV=50
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC35005
+*$
+.subckt GBPC2510 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=3.8266E-6
++ N=1.1539
++ RS=2.2224E-3
++ IKF=1.8649
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=1.4987E-6
++ NR=4.9950
++ BV=1.0000E3
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC2510
+*$
+.subckt GBPC2508 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=3.8266E-6
++ N=1.1539
++ RS=2.2224E-3
++ IKF=1.8649
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=1.6142E-6
++ NR=4.9950
++ BV=800
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC2508
+*$
+.subckt GBPC2506 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=3.8266E-6
++ N=1.1539
++ RS=2.2224E-3
++ IKF=1.8649
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=1.7762E-6
++ NR=4.9950
++ BV=600
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC2506
+*$
+.subckt GBPC2504 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=3.8266E-6
++ N=1.1539
++ RS=2.2224E-3
++ IKF=1.8649
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=2.0323E-6
++ NR=4.9950
++ BV=400
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC2504
+*$
+.subckt GBPC2502 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=3.8266E-6
++ N=1.1539
++ RS=2.2224E-3
++ IKF=1.8649
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=2.5569E-6
++ NR=4.9950
++ BV=200
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC2502
+*$
+.subckt GBPC2501 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=3.8266E-6
++ N=1.1539
++ RS=2.2224E-3
++ IKF=1.8649
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=3.2125E-6
++ NR=4.9950
++ BV=100
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC2501
+*$
+.subckt GBPC25005 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=3.8266E-6
++ N=1.1539
++ RS=2.2224E-3
++ IKF=1.8649
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=4.0253E-6
++ NR=4.9950
++ BV=50
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC25005
+*$
+.subckt GBPC1510 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=12.929E-6
++ N=1.2812
++ RS=3.4902E-3
++ IKF=1.7549
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=593.42E-9
++ NR=4.9950
++ BV=1.0000E3
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC1510
+*$
+.subckt GBPC1508 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=12.929E-6
++ N=1.2812
++ RS=3.4902E-3
++ IKF=1.7549
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=639.08E-9
++ NR=4.9950
++ BV=800
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC1508
+*$
+.subckt GBPC1506 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=12.929E-6
++ N=1.2812
++ RS=3.4902E-3
++ IKF=1.7549
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=703.13E-9
++ NR=4.9950
++ BV=600
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC1506
+*$
+.subckt GBPC1502 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=12.929E-6
++ N=1.2812
++ RS=3.4902E-3
++ IKF=1.7549
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=1.0109E-6
++ NR=4.9950
++ BV=200
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC1502
+*$
+.subckt GBPC1504 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=12.929E-6
++ N=1.2812
++ RS=3.4902E-3
++ IKF=1.7549
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=804.25E-9
++ NR=4.9950
++ BV=400
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC1504
+*$
+.subckt GBPC1501 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=12.929E-6
++ N=1.2812
++ RS=3.4902E-3
++ IKF=1.7549
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=1.2678E-6
++ NR=4.9950
++ BV=100
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC1501
+*$
+.subckt GBPC15005 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=12.929E-6
++ N=1.2812
++ RS=3.4902E-3
++ IKF=1.7549
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=1.5829E-6
++ NR=4.9950
++ BV=50
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC15005
+*$
+.subckt GBPC1202 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=12.929E-6
++ N=1.2812
++ RS=3.4902E-3
++ IKF=1.7549
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=1.0109E-6
++ NR=4.9950
++ BV=200
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC1202
+*$
+.subckt GBPC1201 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=12.929E-6
++ N=1.2812
++ RS=3.4902E-3
++ IKF=1.7549
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=1.2678E-6
++ NR=4.9950
++ BV=100
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC1201
+*$
+.subckt GBPC1210 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=12.929E-6
++ N=1.2812
++ RS=3.4902E-3
++ IKF=1.7549
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=593.42E-9
++ NR=4.9950
++ BV=1.0000E3
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC1210
+*$
+.subckt GBPC1208 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=12.929E-6
++ N=1.2812
++ RS=3.4902E-3
++ IKF=1.7549
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=639.08E-9
++ NR=4.9950
++ BV=800
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC1208
+*$
+.subckt GBPC1206 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=12.929E-6
++ N=1.2812
++ RS=3.4902E-3
++ IKF=1.7549
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=703.13E-9
++ NR=4.9950
++ BV=600
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC1206
+*$
+.subckt GBPC1204 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=12.929E-6
++ N=1.2812
++ RS=3.4902E-3
++ IKF=1.7549
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=804.25E-9
++ NR=4.9950
++ BV=400
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC1204
+*$
+.subckt GBPC12005 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=12.929E-6
++ N=1.2812
++ RS=3.4902E-3
++ IKF=1.7549
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=1.5829E-6
++ NR=4.9950
++ BV=50
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBPC12005
+*$
+.subckt KBU8M 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=863.49E-9
++ N=1.1514
++ RS=876.27E-6
++ IKF=1.8396
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=42.029E-6
++ NR=5
++ BV=1000
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU8M
+*$
+.subckt KBU8K 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=863.49E-9
++ N=1.1514
++ RS=876.27E-6
++ IKF=1.8396
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=45.270E-6
++ NR=5
++ BV=800
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU8K
+*$
+.subckt KBU8J 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=863.49E-9
++ N=1.1514
++ RS=876.27E-6
++ IKF=1.8396
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=49.817E-6
++ NR=5
++ BV=600
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU8J
+*$
+.subckt KBU8G 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=863.49E-9
++ N=1.1514
++ RS=876.27E-6
++ IKF=1.8396
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=57.006E-6
++ NR=5
++ BV=400
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU8G
+*$
+.subckt KBU8D 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=863.49E-9
++ N=1.1514
++ RS=876.27E-6
++ IKF=1.8396
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=71.749E-6
++ NR=5
++ BV=200
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU8D
+*$
+.subckt KBU8B 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=863.49E-9
++ N=1.1514
++ RS=876.27E-6
++ IKF=1.8396
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=90.213E-6
++ NR=5
++ BV=100
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU8B
+*$
+.subckt KBU8A 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=863.49E-9
++ N=1.1514
++ RS=876.27E-6
++ IKF=1.8396
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=119.36E-6
++ NR=5
++ BV=50
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU8A
+*$
+.subckt KBU6M 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=33.599E-9
++ N=.88938
++ RS=821.49E-6
++ IKF=1.6290
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=42.112E-6
++ NR=5
++ BV=1000
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU6M
+*$
+.subckt KBU6K 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=33.599E-9
++ N=.88938
++ RS=821.49E-6
++ IKF=1.6290
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=45.359E-6
++ NR=5
++ BV=800
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU6K
+*$
+.subckt KBU6J 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=33.599E-9
++ N=.88938
++ RS=821.49E-6
++ IKF=1.6290
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=49.915E-6
++ NR=5
++ BV=600
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU6J
+*$
+.subckt KBU6G 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=33.599E-9
++ N=.88938
++ RS=821.49E-6
++ IKF=1.6290
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=57.118E-6
++ NR=5
++ BV=400
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU6G
+*$
+.subckt KBU6D 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=33.599E-9
++ N=.88938
++ RS=821.49E-6
++ IKF=1.6290
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=71.890E-6
++ NR=5
++ BV=200
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU6D
+*$
+.subckt KBU6B 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=33.599E-9
++ N=.88938
++ RS=821.49E-6
++ IKF=1.6290
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=90.391E-6
++ NR=5
++ BV=100
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU6B
+*$
+.subckt KBU6A 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=33.599E-9
++ N=.88938
++ RS=821.49E-6
++ IKF=1.6290
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=113.43E-6
++ NR=5
++ BV=50
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU6A
+*$
+.subckt KBU4M 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=34.468E-9
++ N=.89084
++ RS=2.5883E-3
++ IKF=1.7448
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=42.112E-6
++ NR=4.9950
++ BV=1000
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU4M
+*$
+.subckt KBU4K 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=34.468E-9
++ N=.89084
++ RS=2.5883E-3
++ IKF=1.7448
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=45.359E-6
++ NR=4.9950
++ BV=800
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU4K
+*$
+.subckt KBU4J 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=34.468E-9
++ N=.89084
++ RS=2.5883E-3
++ IKF=1.7448
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=49.915E-6
++ NR=4.9950
++ BV=600
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU4J
+*$
+.subckt KBU4G 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=34.468E-9
++ N=.89084
++ RS=2.5883E-3
++ IKF=1.7448
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=57.118E-6
++ NR=4.9950
++ BV=400
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU4G
+*$
+.subckt KBU4D 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=34.468E-9
++ N=.89084
++ RS=2.5883E-3
++ IKF=1.7448
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=71.889E-6
++ NR=4.9950
++ BV=200
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU4D
+*$
+.subckt KBU4B 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=34.468E-9
++ N=.89084
++ RS=2.5883E-3
++ IKF=1.7448
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=90.391E-6
++ NR=4.9950
++ BV=100
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU4B
+*$
+.subckt KBU4A 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=34.468E-9
++ N=.89084
++ RS=2.5883E-3
++ IKF=1.7448
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=113.43E-6
++ NR=4.9950
++ BV=50
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends KBU4A
+*$
+.subckt DF10M_S 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=770.35E-15
++ N=.57636
++ RS=12.990E-3
++ IKF=71.597E-3
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=4.3061E-6
++ NR=4.9950
++ BV=1.0000E3
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends DF10M_S
+*$
+.subckt DF08M_S 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=770.35E-15
++ N=.57636
++ RS=12.990E-3
++ IKF=71.597E-3
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=4.6381E-6
++ NR=4.9950
++ BV=800
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends DF08M_S
+*$
+.subckt DF06M_S 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=770.35E-15
++ N=.57636
++ RS=12.990E-3
++ IKF=71.597E-3
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=5.1038E-6
++ NR=4.9950
++ BV=600
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends DF06M_S
+*$
+.subckt DF04M_S 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=770.35E-15
++ N=.57636
++ RS=12.990E-3
++ IKF=71.597E-3
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=5.8401E-6
++ NR=4.9950
++ BV=400
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends DF04M_S
+*$
+.subckt DF02M_S 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=770.35E-15
++ N=.57636
++ RS=12.990E-3
++ IKF=71.597E-3
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=7.3495E-6
++ NR=4.1368
++ BV=200
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends DF02M_S
+*$
+.subckt DF01M_S 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=770.35E-15
++ N=.57636
++ RS=12.990E-3
++ IKF=71.597E-3
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=9.2384E-6
++ NR=3.8180
++ BV=100
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends DF01M_S
+*$
+.subckt DF005M_S 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=770.35E-15
++ N=.57636
++ RS=12.990E-3
++ IKF=71.597E-3
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=11.587E-6
++ NR=3.7184
++ BV=50
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends DF005M_S
+*$
+.subckt GBU6M 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=26.424E-12
++ N=.66768
++ RS=731.46E-6
++ IKF=1.9322
++ CJO=495.17E-12
++ M=.47906
++ VJ=1.7810
++ ISR=2.4231E-6
++ NR=4.9950
++ BV=1.0000E3
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBU6M
+*$
+.subckt GBU6K 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=26.424E-12
++ N=.66768
++ RS=731.46E-6
++ IKF=1.9322
++ CJO=495.17E-12
++ M=.47906
++ VJ=1.7810
++ ISR=2.6956E-6
++ NR=4.9950
++ BV=800
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBU6K
+*$
+.subckt GBU6J 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=26.424E-12
++ N=.66768
++ RS=731.46E-6
++ IKF=1.9322
++ CJO=495.17E-12
++ M=.47906
++ VJ=1.7810
++ ISR=3.0921E-6
++ NR=4.9950
++ BV=600
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBU6J
+*$
+.subckt GBU6G 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=26.424E-12
++ N=.66768
++ RS=731.46E-6
++ IKF=1.9322
++ CJO=495.17E-12
++ M=.47906
++ VJ=1.7810
++ ISR=3.7507E-6
++ NR=4.9950
++ BV=400
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBU6G
+*$
+.subckt GBU6D 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=26.425E-12
++ N=.66768
++ RS=731.46E-6
++ IKF=1.9322
++ CJO=495.17E-12
++ M=.47906
++ VJ=1.7810
++ ISR=5.2099E-6
++ NR=4.9950
++ BV=200
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBU6D
+*$
+.subckt GBU6B 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=26.424E-12
++ N=.66768
++ RS=731.46E-6
++ IKF=1.9322
++ CJO=495.17E-12
++ M=.47906
++ VJ=1.7810
++ ISR=7.2124E-6
++ NR=4.9950
++ BV=100
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBU6B
+*$
+.subckt GBU6A 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=26.425E-12
++ N=.66768
++ RS=731.46E-6
++ IKF=1.9322
++ CJO=495.17E-12
++ M=.47906
++ VJ=1.7810
++ ISR=9.9192E-6
++ NR=3.0665
++ BV=50
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends GBU6A
+*$
+.subckt 2KBP10M_3N259 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=4.1118E-12
++ N=.62179
++ RS=30.673E-3
++ IKF=193
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=196.11E-6
++ NR=4.9950
++ BV=1.0000E3
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends 2KBP10M_3N259
+*$
+.subckt 2KBP08M_3N258 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=4.1126E-12
++ N=.6218
++ RS=30.669E-3
++ IKF=175.762
++ CJO=1.0000E2-12
++ M=.333322
++ VJ=.75
++ ISR=211.23E-6
++ NR=4.9950
++ BV=800
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends 2KBP08M_3N258
+*$
+.subckt 2KBP06M_3N257 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=4.1125E-12
++ N=.6218
++ RS=30.671E-3
++ IKF=183.47
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=232.44E-6
++ NR=4.9950
++ BV=600
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends 2KBP06M_3N257
+*$
+.subckt 2KBP04M_3N256 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=4.1118E-12
++ N=.62179
++ RS=30.673E-3
++ IKF=193
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=265.96E-6
++ NR=4.9950
++ BV=400
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends 2KBP04M_3N256
+*$
+.subckt 2KBP02M_3N255 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=4.1130E-12
++ N=.6218
++ RS=30.678E-3
++ IKF=217.81
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=334.68E-6
++ NR=4.9950
++ BV=200
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends 2KBP02M_3N255
+*$
+.subckt 2KBP01M_3N254 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=4.1126E-12
++ N=.6218
++ RS=30.669E-3
++ IKF=175.76
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=420.63E-6
++ NR=4.9950
++ BV=100
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends 2KBP01M_3N254
+*$
+.subckt 2KBP005M_3N253 1 2 3 4
+d1 2 1 Dx
+d2 2 3 Dx
+d3 3 4 Dx
+d4 1 4 Dx
+.model Dx D
++ IS=4.1138E-12
++ N=.6218
++ RS=30.662E-3
++ IKF=151.15
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=530.58E-6
++ NR=4.9950
++ BV=50
++ IBV=100.00E-6
++ TT=5.0000E-9
+.ends 2KBP005M_3N253
+*$
+.subckt KBL005 1 2 3 4
+d1 2 1 DKBL005
+d2 2 3 DKBL005
+d3 3 4 DKBL005
+d4 1 4 DKBL005
+.model DKBL005 D
++ IS=1.3231E-6
++ N=1.2911
++ RS=3.6623E-3
++ IKF=1.9588
++ EG=.72
++ CJO=48.500E-12
++ M=.32
++ VJ=.48
++ ISR=10.010E-21
++ NR=4.9950
++ BV=50
++ IBV=10.000E-6
++ TT=27.200E-9 
+.ends KBL005
+*$
+.subckt MB8S 1 2 3 4
+d1 3 1 DMB8S
+d2 3 2 DMB8S
+d3 2 4 DMB8S
+d4 1 4 DMB8S
+.model DMB8S D
++ IS=21.961E-6
++ N=1.8577
++ RS=1.0000E-6
++ IKF=8.4584
++ EG=.72
++ CJO=48.500E-12
++ M=.32
++ VJ=.48
++ ISR=1.2274E-6
++ NR=4.9950
++ BV=800
++ IBV=10.000E-6
++ TT=27.200E-9
+.ends MB8S
+*$
+.subckt MB6S 1 2 3 4
+d1 3 1 DMB6S
+d2 3 2 DMB6S
+d3 2 4 DMB6S
+d4 1 4 DMB6S
+.model DMB6S D
++ IS=21.961E-6
++ N=1.8577
++ RS=1.0000E-6
++ IKF=8.4584
++ EG=.72
++ CJO=48.500E-12
++ M=.32
++ VJ=.48
++ ISR=1.3455E-6
++ NR=4.9950
++ BV=600
++ IBV=10.000E-6
++ TT=27.200E-9
+.ends MB6S
+*$
+.subckt MB4S 1 2 3 4
+d1 3 1 DMB4S
+d2 3 2 DMB4S
+d3 2 4 DMB4S
+d4 1 4 DMB4S
+.model DMB4S D
++ IS=21.961E-6
++ N=1.8577
++ RS=1.0000E-6
++ IKF=8.4584
++ EG=.72
++ CJO=48.500E-12
++ M=.32
++ VJ=.48
++ ISR=1.5314E-6
++ NR=4.9950
++ BV=400
++ IBV=10.000E-6
++ TT=27.200E-9
+.ends MB4S
+*$
+.subckt MB2S 1 2 3 4
+d1 3 1 DMB2S
+d2 3 2 DMB2S
+d3 2 4 DMB2S
+d4 1 4 DMB2S
+.model DMB2S D
++ IS=21.961E-6
++ N=1.8577
++ RS=1.0000E-6
++ IKF=8.4584
++ EG=.72
++ CJO=48.500E-12
++ M=.32
++ VJ=.48
++ ISR=1.9097E-6
++ NR=4.9950
++ BV=200
++ IBV=10.000E-6
++ TT=27.200E-9
+.ends MB2S
+*$
+.subckt MB1S 1 2 3 4
+d1 3 1 DMB1S
+d2 3 2 DMB1S
+d3 2 4 DMB1S
+d4 1 4 DMB1S
+.model DMB1S D
++ IS=21.961E-6
++ N=1.8577
++ RS=1.0000E-6
++ IKF=8.4584
++ EG=.72
++ CJO=48.500E-12
++ M=.32
++ VJ=.48
++ ISR=2.3789E-6
++ NR=4.9950
++ BV=100
++ IBV=10.000E-6
++ TT=27.200E-9
+.ends MB1S
+*$
+.subckt KBL10 1 2 3 4
+d1 2 1 DKBL10
+d2 2 3 DKBL10
+d3 3 4 DKBL10
+d4 1 4 DKBL10
+.model DKBL10 D
++ IS=1.3231E-6
++ N=1.2911
++ RS=3.6623E-3
++ IKF=1.9588
++ EG=.72
++ CJO=48.500E-12
++ M=.32
++ VJ=.48
++ ISR=10.010E-21
++ NR=4.9950
++ BV=1.0000E3
++ IBV=10.000E-6
++ TT=27.200E-9 
+.ends KBL10
+*$
+.subckt KBL08 1 2 3 4
+d1 2 1 DKBL08
+d2 2 3 DKBL08
+d3 3 4 DKBL08
+d4 1 4 DKBL08
+.model DKBL08 D
++ IS=1.3231E-6
++ N=1.2911
++ RS=3.6623E-3
++ IKF=1.9588
++ EG=.72
++ CJO=48.500E-12
++ M=.32
++ VJ=.48
++ ISR=10.010E-21
++ NR=4.9950
++ BV=800
++ IBV=10.000E-6
++ TT=27.200E-9 
+.ends KBL08
+*$
+.subckt KBL06 1 2 3 4
+d1 2 1 DKBL06
+d2 2 3 DKBL06
+d3 3 4 DKBL06
+d4 1 4 DKBL06
+.model DKBL06 D
++ IS=1.3231E-6
++ N=1.2911
++ RS=3.6623E-3
++ IKF=1.9588
++ EG=.72
++ CJO=48.500E-12
++ M=.32
++ VJ=.48
++ ISR=10.010E-21
++ NR=4.9950
++ BV=600
++ IBV=10.000E-6
++ TT=27.200E-9  
+.ends KBL06
+*$
+.subckt KBL04 1 2 3 4
+d1 2 1 DKBL04
+d2 2 3 DKBL04
+d3 3 4 DKBL04
+d4 1 4 DKBL04
+.model DKBL04 D
++ IS=1.3231E-6
++ N=1.2911
++ RS=3.6623E-3
++ IKF=1.9588
++ EG=.72
++ CJO=48.500E-12
++ M=.32
++ VJ=.48
++ ISR=10.010E-21
++ NR=4.9950
++ BV=400
++ IBV=10.000E-6
++ TT=27.200E-9  
+.ends KBL04
+*$
+.subckt KBL02 1 2 3 4
+d1 2 1 DKBL02
+d2 2 3 DKBL02
+d3 3 4 DKBL02
+d4 1 4 DKBL02
+.model DKBL02 D
++ IS=1.3231E-6
++ N=1.2911
++ RS=3.6623E-3
++ IKF=1.9588
++ EG=.72
++ CJO=48.500E-12
++ M=.32
++ VJ=.48
++ ISR=10.010E-21
++ NR=4.9950
++ BV=200
++ IBV=10.000E-6
++ TT=27.200E-9  
+.ends KBL02
+*$
+.subckt KBL01 1 2 3 4
+d1 2 1 DKBL01
+d2 2 3 DKBL01
+d3 3 4 DKBL01
+d4 1 4 DKBL01
+.model DKBL01 D
++ IS=1.3231E-6
++ N=1.2911
++ RS=3.6623E-3
++ IKF=1.9588
++ EG=.72
++ CJO=48.500E-12
++ M=.32
++ VJ=.48
++ ISR=10.010E-21
++ NR=4.9950
++ BV=100
++ IBV=10.000E-6
++ TT=27.200E-9
+.ends KBL01
+*$
+.subckt 684_6 1 2 3 4
+d1 2 1 D684-6
+d2 2 3 D684-6
+d3 3 4 D684-6
+d4 1 4 D684-6
+.model D684-6 D
++ IS=229.23E-9
++ N=1.1344
++ RS=18.014E-3
++ IKF=107.93
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=28.559E-6
++ NR=4.9950
++ BV=600
++ IBV=100.00E-6
++ TT=500.00E-9
+.ends 684_6
+*$
+.subckt 684_5 1 2 3 4
+d1 2 1 D684-5
+d2 2 3 D684-5
+d3 3 4 D684-5
+d4 1 4 D684-5
+.model D684-5 D
++ IS=229.25E-9
++ N=1.1344
++ RS=18.009E-3
++ IKF=104.29
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=30.343E-6
++ NR=4.9950
++ BV=500
++ IBV=100.00E-6
++ TT=500.00E-9
+.ends 684_5
+*$
+.subckt 684_4 1 2 3 4
+d1 2 1 D684-4
+d2 2 3 D684-4
+d3 3 4 D684-4
+d4 1 4 D684-4
+.model D684-4 D
++ IS=229.31E-9
++ N=1.1344
++ RS=17.968E-3
++ IKF=80.432
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=32.678E-6
++ NR=4.9950
++ BV=400
++ IBV=100.00E-6
++ TT=500.00E-9
+.ends 684_4
+*$
+.subckt 684_3 1 2 3 4
+d1 2 1 D684-3
+d2 2 3 D684-3
+d3 3 4 D684-3
+d4 1 4 D684-3
+.model D684-3 D
++ IS=229.20E-9
++ N=1.1344
++ RS=17.990E-3
++ IKF=91.513
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=35.950E-6
++ NR=4.9950
++ BV=300
++ IBV=100.00E-6
++ TT=500.00E-9
+.ends 684_3
+*$
+.subckt 684_2 1 2 3 4
+d1 2 1 D684-2
+d2 2 3 D684-2
+d3 3 4 D684-2
+d4 1 4 D684-2
+.model D684-2 D
++ IS=229.20E-9
++ N=1.1344
++ RS=17.838E-3
++ IKF=47.063
++ EG=.72
++ CJO=48.500E-12
++ M=.32
++ VJ=.48
++ ISR=3.4656E-6
++ NR=4.9950
++ BV=200
++ IBV=10.000E-6
++ TT=27.200E-9
+.ends 684_2
+*$
+.subckt 684_1 1 2 3 4
+d1 2 1 D684-1
+d2 2 3 D684-1
+d3 3 4 D684-1
+d4 1 4 D684-1
+.model D684-1 D
++ IS=229.34E-9
++ N=1.1344
++ RS=18.019E-3
++ IKF=112.14
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=51.666E-6
++ NR=4.9950
++ BV=100
++ IBV=100.00E-6
++ TT=500.00E-9
+.ends 684_1
+*$
+.subckt 683_6 1 2 3 4
+d1 2 1 D683-6
+d2 2 3 D683-6
+d3 3 4 D683-6
+d4 1 4 D683-6
+.model D683-6 D
++ IS=4.1537E-6
++ N=1.1739
++ RS=6.3946E-3
++ IKF=.26959
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=285.18E-6
++ NR=4.9950
++ BV=600
++ IBV=100.00E-6
++ TT=500.00E-9
+.ends 683_6
+*$
+.subckt 683_5 1 2 3 4
+d1 2 1 D683-5
+d2 2 3 D683-5
+d3 3 4 D683-5
+d4 1 4 D683-5
+.model D683-5 D
++ IS=4.1537E-6
++ N=1.1739
++ RS=6.3946E-3
++ IKF=.26959
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=303.00E-6
++ NR=4.9950
++ BV=500
++ IBV=100.00E-6
++ TT=500.00E-9
+.ends 683_5
+*$
+.subckt 683_4 1 2 3 4
+d1 2 1 D683-4
+d2 2 3 D683-4
+d3 3 4 D683-4
+d4 1 4 D683-4
+.model D683-4 D
++ IS=4.1537E-6
++ N=1.1739
++ RS=6.3946E-3
++ IKF=.26959
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=326.31E-6
++ NR=4.9950
++ BV=400
++ IBV=100.00E-6
++ TT=500.00E-9
+.ends 683_4
+*$
+.subckt 683_3 1 2 3 4
+d1 2 1 D683-3
+d2 2 3 D683-3
+d3 3 4 D683-3
+d4 1 4 D683-3
+.model D683-3 D
++ IS=4.1537E-6
++ N=1.1739
++ RS=6.3946E-3
++ IKF=.2696
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=358.98E-6
++ NR=4.9950
++ BV=300
++ IBV=100.00E-6
++ TT=500.00E-9
+.ends 683_3
+*$
+.subckt 683_2 1 2 3 4
+d1 2 1 D683-2
+d2 2 3 D683-2
+d3 3 4 D683-2
+d4 1 4 D683-2
+.model D683-2 D
++ IS=4.1537E-6
++ N=1.1739
++ RS=6.3946E-3
++ IKF=.26959
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=410.57E-6
++ NR=4.9950
++ BV=200
++ IBV=100.00E-6
++ TT=500.00E-9
+.ends 683_2
+*$
+.subckt 683_1 1 2 3 4
+d1 2 1 D683-1
+d2 2 3 D683-1
+d3 3 4 D683-1
+d4 1 4 D683-1
+.model D683-1 D
++ IS=4.1537E-6
++ N=1.1739
++ RS=6.3946E-3
++ IKF=.26959
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=515.92E-6
++ NR=4.9950
++ BV=100
++ IBV=100.00E-6
++ TT=500.00E-9
+.ends 683_1
+*$
+.subckt 680_6 1 2 3 4
+d1 2 1 D680-6
+d2 2 3 D680-6
+d3 3 4 D680-6
+d4 1 4 D680-6
+.model D680-6 D
++ IS=229.34E-9
++ N=1.1344
++ RS=18.020E-3
++ IKF=113.61
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=2.8504E-6
++ NR=4.9950
++ BV=600
++ IBV=100.00E-6
++ TT=1.0000E-6
+.ends 680_6
+*$
+.subckt 680_5 1 2 3 4
+d1 2 1 D680-5
+d2 2 3 D680-5
+d3 3 4 D680-5
+d4 1 4 D680-5
+.model D680-5 D
++ IS=229.34E-9
++ N=1.1344
++ RS=18.020E-3
++ IKF=113.61
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=3.0285E-6
++ NR=4.9950
++ BV=500
++ IBV=100.00E-6
++ TT=1.0000E-6
+.ends 680_5
+*$
+.subckt 680_4 1 2 3 4
+d1 2 1 D680-4
+d2 2 3 D680-4
+d3 3 4 D680-4
+d4 1 4 D680-4
+.model D680-4 D
++ IS=229.18E-9
++ N=1.1344
++ RS=17.989E-3
++ IKF=91.200
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=3.2614E-6
++ NR=4.9950
++ BV=400
++ IBV=100.00E-6
++ TT=1.0000E-6
+.ends 680_4
+*$
+.subckt 680_3 1 2 3 4
+d1 2 1 D680-3
+d2 2 3 D680-3
+d3 3 4 D680-3
+d4 1 4 D680-3
+.model D680-3 D
++ IS=229.27E-9
++ N=1.1344
++ RS=18.001E-3
++ IKF=98.587
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=3.5881E-6
++ NR=4.9950
++ BV=300
++ IBV=100.00E-6
++ TT=1.0000E-6
+.ends 680_3
+*$
+.subckt 680_2 1 2 3 4
+d1 2 1 D680-2
+d2 2 3 D680-2
+d3 3 4 D680-2
+d4 1 4 D680-2
+.model D680-2 D
++ IS=229.28E-9
++ N=1.1344
++ RS=17.986E-3
++ IKF=89.255
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=4.1036E-6
++ NR=4.9950
++ BV=200
++ IBV=100.00E-6
++ TT=1.0000E-6
+.ends 680_2
+*$
+.subckt 680_1 1 2 3 4
+d1 2 1 D680-1
+d2 2 3 D680-1
+d3 3 4 D680-1
+d4 1 4 D680-1
+.model D680-1 D
++ IS=229.33E-9
++ N=1.1344
++ RS=17.928E-3
++ IKF=66.207
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=5.1566E-6
++ NR=4.9950
++ BV=100
++ IBV=100.00E-6
++ TT=1.0000E-6
+.ends 680_1
+*$
+.subckt 679_6 1 2 3 4
+d1 2 1 D679-6
+d2 2 3 D679-6
+d3 3 4 D679-6
+d4 1 4 D679-6
+.model D679-6 D
++ IS=943.67E-9
++ N=1.0537
++ RS=2.6299E-3
++ IKF=.65056
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=285.57E-6
++ NR=4.9950
++ BV=600
++ IBV=100.00E-6
++ TT=1.0000E-6
+.ends 679_6
+*$
+.subckt 679_5 1 2 3 4
+d1 2 1 D679-5
+d2 2 3 D679-5
+d3 3 4 D679-5
+d4 1 4 D679-5
+.model D679-5 D
++ IS=943.67E-9
++ N=1.0537
++ RS=2.6299E-3
++ IKF=.65056
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=303.40E-6
++ NR=4.9950
++ BV=500
++ IBV=100.00E-6
++ TT=1.0000E-6
+.ends 679_5
+*$
+.subckt 679_4 1 2 3 4
+d1 2 1 D679-4
+d2 2 3 D679-4
+d3 3 4 D679-4
+d4 1 4 D679-4
+.model D679-4 D
++ IS=943.67E-9
++ N=1.0537
++ RS=2.6299E-3
++ IKF=.65056
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=326.74E-6
++ NR=4.9950
++ BV=400
++ IBV=100.00E-6
++ TT=1.0000E-6
+.ends 679_4
+*$
+.subckt 679_3 1 2 3 4
+d1 2 1 D679-3
+d2 2 3 D679-3
+d3 3 4 D679-3
+d4 1 4 D679-3
+.model D679-3 D
++ IS=943.66E-9
++ N=1.0537
++ RS=2.6299E-3
++ IKF=.65056
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=340.03E-6
++ NR=4.9950
++ BV=300
++ IBV=100.00E-6
++ TT=1.0000E-6
+.ends 679_3
+*$
+.subckt 679_2 1 2 3 4
+d1 2 1 D679-2
+d2 2 3 D679-2
+d3 3 4 D679-2
+d4 1 4 D679-2
+.model D679-2 D
++ IS=943.66E-9
++ N=1.0537
++ RS=2.6299E-3
++ IKF=.65056
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=411.12E-6
++ NR=4.9950
++ BV=200
++ IBV=100.00E-6
++ TT=1.0000E-6
+.ends 679_2
+*$
+.subckt 679_1 1 2 3 4
+d1 2 1 D679-1
+d2 2 3 D679-1
+d3 3 4 D679-1
+d4 1 4 D679-1
+.model D679-1 D
++ IS=943.66E-9
++ N=1.0537
++ RS=2.6299E-3
++ IKF=.65056
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=516.61E-6
++ NR=4.9950
++ BV=100
++ IBV=100.00E-6
++ TT=1.0000E-6
+.ends 679_1
+*$
+.subckt 469_03 1 2 3 4
+d1 2 1 D469-03
+d2 2 3 D469-03
+d3 3 4 D469-03
+d4 1 4 D469-03
+.model D469-03 D
++ IS=99.900E-3
++ N=4.9950
++ RS=1.0000E-6
++ IKF=999
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=10.010E-21
++ NR=4.9950
++ BV=600
++ IBV=100.00E-6
++ TT=2.5000E-6
+.ends 469_03
+*$
+.subckt 469_02 1 2 3 4
+d1 2 1 D469-02
+d2 2 3 D469-02
+d3 3 4 D469-02
+d4 1 4 D469-02
+.model D469-02 D
++ IS=148.02E-12
++ N=.64246
++ RS=7.3132E-3
++ IKF=63.337E-3
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=32.971E-6
++ NR=4.9950
++ BV=400
++ IBV=100.00E-6
++ TT=2.5000E-6
+.ends 469_02
+*$
+.subckt 469_01 1 2 3 4
+d1 2 1 D469-01
+d2 2 3 D469-01
+d3 3 4 D469-01
+d4 1 4 D469-01
+.model D469-01 D
++ IS=148.02E-12
++ N=.64246
++ RS=7.3132E-3
++ IKF=63.337E-3
++ CJO=1.0000E-12
++ M=.3333
++ VJ=.75
++ ISR=41.486E-6
++ NR=4.9950
++ BV=200
++ IBV=100.00E-6
++ TT=2.5000E-6
+.ends 469_01
+*$

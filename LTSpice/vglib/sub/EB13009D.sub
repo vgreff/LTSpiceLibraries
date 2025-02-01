@@ -1,0 +1,12 @@
+.subckt   EB13009D C B E
+Q c b e 13009
+D E C Do
+.model do d is=10p BV=500 NBV=10 ibv=100u Cjo=100p tt=50n rs=100m n=1.5 Vp=100m
+*
+.MODEL 13009 NPN IS=418.6f   BF=21.6 VAF=300 IKF=11.9 ISE=6p NE=1.43
++BR=.21 VAR=100 IKR=4.5 ISC=701p NC=1.27 NK=.6367 RB=83m
++ RC=25m CJE=3n VJE=1.5 MJE=.12 CJC=520p VJC=1.5
++ MJC=.4 TF=13n XTF=10 VTF=10 ITF=1 TR=1.8u
++ BVcbo=750 nBVcbo=5 BVbe=9.5 Ibvbe=1m
+.ends EB13009D
+

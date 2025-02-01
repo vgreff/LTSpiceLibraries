@@ -1,0 +1,5 @@
+.Subckt Diode_Pin A Ai C Ci params: L=5n C=50f
+L A Ai {L} Rser=0 Rpar={10.e9*L}
+V c ci 0
+C ai ci {C}
+.ends Diode_Pin

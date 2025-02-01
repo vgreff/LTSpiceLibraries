@@ -1,0 +1,166 @@
+*ISL55110 Spice Model
+* Revision F, Aug 2008"
+* Delays now simulated with Delay Lines instead of RC Time Constants
+* Models
+*$
+*ISL55110 model
+*
+*                   VDD PD IN_B     IN_A     OA VH GND OB ENABLEZ
+.subckt ISL55110    1   2  3          4       5  6  7   8  ;  9
+Vkz 7 9 0
+XPAD_INB  3  7 IN_PAD
+XPAD_INA  4  7 IN_PAD
+XPAD_PD   2  7 IN_PAD
+XPAD_ENZ 9  7 IN_PAD
+*Input Clamp Diodes for IBIS
+d5 7 3 den
+d6 3 1 den
+d7 7 4 den
+d8 4 1 den
+d9 7 2 den
+d10 2 1 den
+d11 7 9 den
+d12 9 1 den
+*
+*
+*
+R1 1 99 100e6
+R2 99 7 100e6
+R10 6 199 100e6
+R11 7 199 100e6
+XCOMP_A  4 10 1 7 COMP_HS
+XCOMP_B  3 11 1 7 COMP_HS
+XDELAY_LVA  10 12 7  Delay_LV
+XDELAY_LVB  11 13 7  Delay_LV
+XLEVEL_SHIFTERA  12 14 1 7 6  LS
+XLEVEL_SHIFTERB  13 15 1 7 6  LS
+XDELAY_HVA 14 16 7 Delay_HV
+XDELAY_HVB 15 17 7 Delay_HV
+*PD or ENABLEZ
+R3 18 7 100e6
+SW1 1 18 2 99  SWMOD
+*SW2 1 18 9 99 SWMOD
+SWA 16 19 99 18 SWMOD
+SWB 17 20 99 18 SWMOD
+V  210 7 -1
+R4 19 210 100e6
+R5 20 210 100e6
+* OUTPUT SWITCHES
+*OA Switch
+T1 9 7 230 7 Z0=100Meg TD=15n
+R6 230 7 100Meg
+SWTPA 6 220 230 99  SWHIZ
+*
+SWPA 220 5 19 199  SWOUTP
+SWNA 221 5 199 19    SWOUTN
+*
+SWTNA 7 221 230 99    SWHIZ
+*
+C1 5 7 100pF
+d1 7 5 den
+d2 5 6 den
+XPAD_OUTA 5 7 OUT_PAD
+*
+*
+* OB Switch
+*HIZ High Side
+SWTPB 6 222 230 99  SWHIZ
+*
+SWPB 222 8 20 199  SWOUTP
+SWNB 223 8 199 20  SWOUTN
+*HIX Low Side
+SWTNB 7 223 230 99    SWHIZ
+C2 8 7 100pF
+d3 7 8 den
+d4 8 6 den
+XPAD_OUTB 8 7 OUT_PAD
+
+
+
+.model SWOUTN VSWITCH ron=2.83 roff=100Meg von=+.2 voff=-.2
+*$
+.model SWOUTP VSWITCH ron=2.6 roff=100Meg von=.2 voff=-.2
+*$
+.model den D (n=1)
+*$
+.model SWMOD VSWITCH ron=10 roff=100Meg von=+.1 voff=-.1
+*$
+.model SWHIZ VSWITCH ron=100Meg roff=0.001 von=+.2 voff=-.2
+*$
+
+* Components Definitions
+*Input PAD
+.subckt IN_PAD 1 2
+RIN  1  2  100e6
+CIN  1  2  1e-12
+.ends
+*$
+* Output PAD (IN GND)
+.subckt OUT_PAD 1 2
+RIN 1  2  100e6
+* CIN should be adjusted  depending on the power down time.(PD time - 10 ns )
+CIN 1  2  14e-12
+.ends
+*$
+*Comparator with hysterisis
+*COMP_HS IN OUT VDD GND
+.subckt COMP_HS 1 2 3 4
+* Thresholds
+VTHR1 7 4 1.2
+VTHR2 8 4 1.4
+* VDD/2 Generation
+R1 3 9 100e6
+R2 4 9 100e6
+*Delayed output
+R3 2 21 3e3
+C1 21 4 0.43e-12
+SW1 7 10 21 9 SWMOD
+SW2 8 10 9  21 SWMOD
+*COMPARISON
+SW3 3 2 1 10  SWMOD
+SW4 4 2 10 1  SWMOD
+.ends
+*$
+* Buffer Models ( IN OUT VDD GND)
+.subckt BUF_X 1 2 3 4
+*Generating VDD/2
+R1 3 7 100e6
+R2 4 7 100e6
+SW1 3 2 1 7 SWMOD
+SW2 4 2 7 1 SWMOD
+.ends
+*$
+*Level shifter (IN OUT LV_SUPPLY GND HV_SUPPLY)
+.subckt LS 1 2 3 4 5
+*Gnerating VDD/2
+R1 3 7 100e6
+R2 4 7 100e6
+SW1 5 2 1 7 SWMOD
+SW2 4 2 7 1 SWMOD
+.ends
+
+* Delay_LV IN OUT GND
+.subckt Delay_LV 1 2 3
+*T1 1 3 2 3 Z0=100Meg TD=3n
+R1 2 1 10k
+C1 2 3 0.435p
+.ends
+*$
+* Delay from HV inverters in the signal path.
+* though this delay vary with supply(VH) , modeled delay as 6 ns ."
+* T=0.69*R*C Obsolete, use delay line model instead
+.subckt Delay_HV 1 2 3
+*T1 1 3 2 3 Z0=100Meg TD=6n
+R1 1 2 10k
+C1 2 3 0.87p
+.ends
+
+*$
+.subckt DelaY_HV-1 1 2 3
+*T1 1 3 2 3 Z0=100Meg TD=3n
+R1 2 1 10k
+C1 2 3 0.435p
+.ends
+.ends ISL55110
+
+

@@ -1,0 +1,6 @@
+.subckt BAV70 a1 k a2
+D1 a1 k DI_BAV70
+D2 a2 k DI_BAV70
+.MODEL DI_BAV70 D  ( IS=308p RS=0.329 BV=75 IBV=2.5u
++ CJO=2.65p  M=0.333 N=1.70 TT=5.76n )
+.ends BAV70

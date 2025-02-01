@@ -1,0 +1,351 @@
+.SUBCKT 3N247  AC1 AC2 + -
+ 
+D1 AC2  +   3N247
+D2 AC1  +   3N247
+D3 -    AC2 3N247
+D4 -    AC1 3N247
+.MODEL 3N247 D (
++   IS =  1.001e-20
++   RS =  0.03767
++   CJO =  1e-12
++   VJ =  0.75
++   TT =  5e-09
++   M =  0.3333
++   BV =  { 100 * 1.2 }
++   N =  0.9892
++   EG =  1.11
++   XTI =  3
++   KF =  0
++   AF =  1
++   FC =  0.5
++   IBV =  0.0001
++   TNOM =  27
++ )
+.ENDS
+
+.SUBCKT 3N248  AC1 AC2 + -
+ 
+D1 AC2  +   3N248
+D2 AC1  +   3N248
+D3 -    AC2 3N248
+D4 -    AC1 3N248
+.MODEL 3N248 D (
++   IS =  1.001e-20
++   RS =  0.03767
++   CJO =  1e-12
++   VJ =  0.75
++   TT =  5e-09
++   M =  0.3333
++   BV =  { 200 * 1.2 }
++   N =  0.9892
++   EG =  1.11
++   XTI =  3
++   KF =  0
++   AF =  1
++   FC =  0.5
++   IBV =  0.0001
++   TNOM =  27
++ )
+.ENDS
+
+.SUBCKT 3N249  AC1 AC2 + -
+ 
+D1 AC2  +   3N249
+D2 AC1  +   3N249
+D3 -    AC2 3N249
+D4 -    AC1 3N249
+.MODEL 3N249 D (
++   IS =  1.001e-20
++   RS =  0.03767
++   CJO =  1e-12
++   VJ =  0.75
++   TT =  5e-09
++   M =  0.3333
++   BV =  { 400 * 1.2 }
++   N =  0.9892
++   EG =  1.11
++   XTI =  3
++   KF =  0
++   AF =  1
++   FC =  0.5
++   IBV =  0.0001
++   TNOM =  27
++ )
+.ENDS
+
+.SUBCKT 3N250  AC1 AC2 + -
+ 
+D1 AC2  +   3N250
+D2 AC1  +   3N250
+D3 -    AC2 3N250
+D4 -    AC1 3N250
+.MODEL 3N250 D (
++   IS =  1.001e-20
++   RS =  0.03767
++   CJO =  1e-12
++   VJ =  0.75
++   TT =  5e-09
++   M =  0.3333
++   BV =  { 600 * 1.2 }
++   N =  0.9892
++   EG =  1.11
++   XTI =  3
++   KF =  0
++   AF =  1
++   FC =  0.5
++   IBV =  0.0001
++   TNOM =  27
++ )
+.ENDS
+
+.SUBCKT 3N251  AC1 AC2 + -
+ 
+D1 AC2  +   3N251
+D2 AC1  +   3N251
+D3 -    AC2 3N251
+D4 -    AC1 3N251
+.MODEL 3N251 D (
++   IS =  1.001e-20
++   RS =  0.03767
++   CJO =  1e-12
++   VJ =  0.75
++   TT =  5e-09
++   M =  0.3333
++   BV =  { 800 * 1.2 }
++   N =  0.9892
++   EG =  1.11
++   XTI =  3
++   KF =  0
++   AF =  1
++   FC =  0.5
++   IBV =  0.0001
++   TNOM =  27
++ )
+.ENDS
+
+.SUBCKT 3N252  AC1 AC2 + -
+ 
+D1 AC2  +   3N252
+D2 AC1  +   3N252
+D3 -    AC2 3N252
+D4 -    AC1 3N252
+.MODEL 3N252 D (
++   IS =  1.001e-20
++   RS =  0.03767
++   CJO =  1e-12
++   VJ =  0.75
++   TT =  5e-09
++   M =  0.3333
++   BV =  { 1000 * 1.2 }
++   N =  0.9892
++   EG =  1.11
++   XTI =  3
++   KF =  0
++   AF =  1
++   FC =  0.5
++   IBV =  0.0001
++   TNOM =  27
++ )
+.ENDS
+
+.SUBCKT 3N253  AC1 AC2 + -
+ 
+D1 AC2  +   3N253
+D2 AC1  +   3N253
+D3 -    AC2 3N253
+D4 -    AC1 3N253
+.MODEL 3N253 D (
++   IS =  3.271e-08
++   RS =  0.02135
++   CJO =  1e-12
++   VJ =  0.75
++   TT =  5e-09
++   M =  0.3333
++   BV =  { 50 * 1.2 }
++   N =  2.118
++   EG =  1.11
++   XTI =  3
++   KF =  0
++   AF =  1
++   FC =  0.5
++   IBV =  0.0001
++   TNOM =  27
++ )
+.ENDS
+
+.SUBCKT 3N254  AC1 AC2 + -
+ 
+D1 AC2  +   3N254
+D2 AC1  +   3N254
+D3 -    AC2 3N254
+D4 -    AC1 3N254
+.MODEL 3N254 D (
++   IS =  3.282e-08
++   RS =  0.02139
++   CJO =  1e-12
++   VJ =  0.75
++   TT =  5e-09
++   M =  0.3333
++   BV =  { 100 * 1.2 }
++   N =  2.117
++   EG =  1.11
++   XTI =  3
++   KF =  0
++   AF =  1
++   FC =  0.5
++   IBV =  0.0001
++   TNOM =  27
++ )
+.ENDS
+
+.SUBCKT 3N255  AC1 AC2 + -
+ 
+D1 AC2  +   3N255
+D2 AC1  +   3N255
+D3 -    AC2 3N255
+D4 -    AC1 3N255
+.MODEL 3N255 D (
++   IS =  3.282e-08
++   RS =  0.02139
++   CJO =  1e-12
++   VJ =  0.75
++   TT =  5e-09
++   M =  0.3333
++   BV =  { 200 * 1.2 }
++   N =  2.117
++   EG =  1.11
++   XTI =  3
++   KF =  0
++   AF =  1
++   FC =  0.5
++   IBV =  0.0001
++   TNOM =  27
++ )
+.ENDS
+
+.SUBCKT 3N256  AC1 AC2 + -
+ 
+D1 AC2  +   3N256
+D2 AC1  +   3N256
+D3 -    AC2 3N256
+D4 -    AC1 3N256
+.MODEL 3N256 D (
++   IS =  3.282e-08
++   RS =  0.02139
++   CJO =  1e-12
++   VJ =  0.75
++   TT =  5e-09
++   M =  0.3333
++   BV =  { 400 * 1.2 }
++   N =  2.117
++   EG =  1.11
++   XTI =  3
++   KF =  0
++   AF =  1
++   FC =  0.5
++   IBV =  0.0001
++   TNOM =  27
++ )
+.ENDS
+
+.SUBCKT 3N257  AC1 AC2 + -
+ 
+D1 AC2  +   3N257
+D2 AC1  +   3N257
+D3 -    AC2 3N257
+D4 -    AC1 3N257
+.MODEL 3N257 D (
++   IS =  3.282e-08
++   RS =  0.02139
++   CJO =  1e-12
++   VJ =  0.75
++   TT =  5e-09
++   M =  0.3333
++   BV =  { 600 * 1.2 }
++   N =  2.117
++   EG =  1.11
++   XTI =  3
++   KF =  0
++   AF =  1
++   FC =  0.5
++   IBV =  0.0001
++   TNOM =  27
++ )
+.ENDS
+
+.SUBCKT 3N258  AC1 AC2 + -
+ 
+D1 AC2  +   3N258
+D2 AC1  +   3N258
+D3 -    AC2 3N258
+D4 -    AC1 3N258
+.MODEL 3N258 D (
++   IS =  3.282e-08
++   RS =  0.02139
++   CJO =  1e-12
++   VJ =  0.75
++   TT =  5e-09
++   M =  0.3333
++   BV =  { 800 * 1.2 }
++   N =  2.117
++   EG =  1.11
++   XTI =  3
++   KF =  0
++   AF =  1
++   FC =  0.5
++   IBV =  0.0001
++   TNOM =  27
++ )
+.ENDS
+
+.SUBCKT 3N259  AC1 AC2 + -
+ 
+D1 AC2  +   3N259
+D2 AC1  +   3N259
+D3 -    AC2 3N259
+D4 -    AC1 3N259
+.MODEL 3N259 D (
++   IS =  3.282e-08
++   RS =  0.02139
++   CJO =  1e-12
++   VJ =  0.75
++   TT =  5e-09
++   M =  0.3333
++   BV =  { 1000 * 1.2 }
++   N =  2.117
++   EG =  1.11
++   XTI =  3
++   KF =  0
++   AF =  1
++   FC =  0.5
++   IBV =  0.0001
++   TNOM =  27
++ )
+.ENDS
+
+.SUBCKT 3N246  AC1 AC2 + -
+ 
+D1 AC2  +   3N246
+D2 AC1  +   3N246
+D3 -    AC2 3N246
+D4 -    AC1 3N246
+.MODEL 3N246 D (
++   IS =  1e-20
++   RS =  0.03767
++   CJO =  1e-12
++   VJ =  0.75
++   TT =  5e-09
++   M =  0.3333
++   BV =  { 50 * 1.2 }
++   N =  0.9892
++   EG =  1.11
++   XTI =  3
++   KF =  0
++   AF =  1
++   FC =  0.5
++   IBV =  0.0001
++   TNOM =  27
++ )
+.ENDS
+
+

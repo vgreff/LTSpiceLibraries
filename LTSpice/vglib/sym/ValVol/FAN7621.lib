@@ -1,0 +1,140 @@
+* 08.06.2015
+* FAN7621S
+* PFM Controller for Half-Bridge Resonant Converters
+.subckt FAN7621S HVcc CTR HO NC NC AR NC RT CS SG NC LVcc NC LO NC PG
+A4 cosc SG SG SG SG N011 N004 SG COUNTER Vhigh=1 Trise=10n cycles=4
+D1 SG N010 z2
+V1 N010 RT 0
+B2 N007 SG I=2*(I(V1)+0.15m*(2-V(vss)))*V(cosc)
+A1 N007 SG SG SG SG SG N008 SG BUF Vhigh=1 Trise=10n Ref=3
+A2 N007 SG SG SG SG N012 SG SG BUF Vhigh=1 Trise=10n Ref=1
+A3 N008 N012 SG SG SG SG cosc SG SRFLOP Vhigh=1 Trise=10n
+C1 N007 SG 234p ic=0
+B1 SG N007 I=I(V1)+0.15m*(2-V(vss))
+G1 SG N010 iars SG 1.2m
+A12 N011 SG SG SG SG SG N013 SG BUF Vhigh=1 Trise=10n Td=350n
+A16 N004 SG SG SG SG SG N005 SG BUF Vhigh=1 Trise=10n Td=350n
+A17 N004 SG N005 SG ars N009 SG SG OR Vhigh=1 Trise=10n
+A18 N011 SG N013 SG ars N015 SG SG OR Vhigh=1 Trise=10n
+S3 HO HVcc N002 SG HOUT
+S4 CTR HO N006 SG LOUT
+S5 LO LVcc N014 SG HOUT
+S6 PG LO N017 SG LOUT
+A19 N003 SG SG SG N009 N006 N002 SG AND Vhigh=1 Trise=10n
+A20 N015 SG SG SG SG N017 N014 SG BUF Vhigh=1 Trise=10n
+E2 N001 SG HVcc CTR 1
+A21 N001 SG SG SG SG SG N003 SG SCHMITT Vhigh=1 Trise=10n Vt=8.95 Vh=0.25
+R1 LVcc SG 250k
+R2 HVcc CTR 143k
+S7 SG N025 N016 SG AR
+R3 LVcc N025 6.3k
+R6 nc 0 100meg
+A22 LVCC SG SG SG SG SG N021 SG BUF Vhigh=1 Trise=10n Ref=23
+A23 N020 SG N021 SG N024 SG err SG OR Vhigh=1 Trise=10n
+E3 N019 SG CS SG -1
+A24 N019 SG SG SG SG SG N020 SG BUF Vhigh=1 Trise=10n Ref=0.58 Td=1.5u
+A25 N019 SG SG SG SG SG N024 SG BUF Vhigh=1 Trise=10n Ref=0.9
+S8 SG N023 ars SG AR
+C6 vss SG 1.8u ic=0
+D4 SG vss z2
+G4 SG vss iars SG 1.2m
+R10 AR N022 5k
+R11 vss N023 10
+S9 SG N022 ars SG AR
+A26 arn SG SG SG N018 SG nor SG OR Vhigh=1 Trise=10n
+R12 ars SG 1k
+R13 shd SG 1k
+R14 iars SG 1k
+A27 AR SG SG SG SG arn SG SG SCHMITT Vhigh=1 Trise=10n Vt=0.6 Vh=0.4
+A32 LVCC SG SG SG SG N018 N016 SG SCHMITT Vhigh=1 Trise=10n Vt=11.25 Vh=1.25
+D2 HO HVcc swd
+D3 CTR HO swd
+D5 LO LVcc swd
+D6 PG LO swd
+.model z2 D(Ron=1 Roff=1g Vfwd=0 Vrev=2)
+.model AR SW(Ron=10m Roff=1g Vt=0.5 Vh=-0.1)
+.model HOUT SW(Ron=47 Roff=500k Vt=0.5 Vh=-0.1)
+.model LOUT SW(Ron=27 Roff=500k Vt=0.5 Vh=-0.1)
+.model swd D(Ron=10 Roff=500k Vfwd=0.6)
+.machine tripdt=1n
+.state s0 0
+.state s1 1
+.state s2 1
+.state s3 2
+.rule s0 s1 V(nor)
+.rule s1 s2 !V(err) & !V(nor)
+.rule s1 s3 V(err)
+.rule s2 s0 V(err)
+.rule s3 s0 !V(nor)
+.output (ars) state == 0
+.output (iars) state > 0
+.output (shd) state != 1
+.endmachine
+.ends
+*
+* 22.03.2019
+* FAN7621
+* PFM Controller for Half-Bridge Resonant Converters
+.subckt FAN7621 HVcc CTR HO nc1 nc2 CON nc3 RT CS SG nc4 LVcc nc5 LO nc6 PG
+A4 cosc SG SG SG SG N012 N004 SG COUNTER Vhigh=1 Trise=10n cycles=4
+D1 SG N011 z2
+V1 N011 RT 0
+B2 N007 SG I=2*(I(V1)+0.15m*(2-V(vss)))*V(cosc)
+A1 N007 SG SG SG SG SG N008 SG BUF Vhigh=1 Trise=10n Ref=3
+A2 N007 SG SG SG SG N013 SG SG BUF Vhigh=1 Trise=10n Ref=1
+A3 N008 N013 SG SG SG SG cosc SG SRFLOP Vhigh=1 Trise=10n
+C1 N007 SG 234p ic=0
+B1 SG N007 I=I(V1)+0.15m*(2-V(vss))
+G1 SG N011 N016 SG 1.2m
+A12 N012 SG SG SG SG SG N014 SG BUF Vhigh=1 Trise=10n Td=350n
+A16 N004 SG SG SG SG SG N005 SG BUF Vhigh=1 Trise=10n Td=350n
+A17 N004 SG N005 SG N010 N009 SG SG OR Vhigh=1 Trise=10n
+A18 N012 SG N014 SG N010 N017 SG SG OR Vhigh=1 Trise=10n
+S3 HO HVcc N002 SG HOUT
+S4 CTR HO N006 SG LOUT
+S5 LO LVcc N015 SG HOUT
+S6 PG LO N018 SG LOUT
+A19 N003 SG SG SG N009 N006 N002 SG AND Vhigh=1 Trise=10n
+A20 N017 SG SG SG SG N018 N015 SG BUF Vhigh=1 Trise=10n
+E2 N001 SG HVcc CTR 1
+A21 N001 SG SG SG SG SG N003 SG SCHMITT Vhigh=1 Trise=10n Vt=8.95 Vh=0.25
+R1 LVcc SG 250k
+R2 HVcc CTR 143k
+S7 SG N028 N016 SG CON
+R3 LVcc N028 6.3k
+R6 nc1 0 100meg
+A22 LVCC SG SG SG SG SG N024 SG BUF Vhigh=1 Trise=10n Ref=23
+E3 N030 SG CS SG -1
+A24 N030 SG SG SG SG SG N023 SG BUF Vhigh=1 Trise=10n Ref=0.58 Td=1.5u
+A25 N030 SG SG SG SG SG N031 SG BUF Vhigh=1 Trise=10n Ref=0.9
+S8 SG N027 N025 SG CON
+C6 vss SG 1.8u ic=0
+D4 SG vss z2
+G4 SG vss N016 SG 1.2m
+R10 CON N026 20k
+R11 vss N027 10
+S9 SG N026 N025 SG CON
+A27 CON SG SG SG SG N019 SG SG SCHMITT Vhigh=1 Trise=10n Vt=0.5 Vh=0.1
+A32 LVCC SG SG SG SG N025 N016 SG SCHMITT Vhigh=1 Trise=10n Vt=11.25 Vh=1.25
+D2 HO HVcc swd
+D3 CTR HO swd
+D5 LO LVcc swd
+D6 PG LO swd
+I1 LVCC CON 5u load
+A5 CON SG SG SG SG SG N020 SG BUF Vhigh=1 Trise=10n Ref=5
+A6 N020 SG SG N023 N024 SG N021 SG OR Vhigh=1 Trise=10n
+A7 N025 N021 SG SG SG N022 SG SG SRFLOP Vhigh=1 Trise=10n
+A8 N029 N031 SG SG SG N032 SG SG SRFLOP Vhigh=1 Trise=10n
+A9 LVCC SG SG SG SG N029 SG SG BUF Vhigh=1 Trise=10n Ref=5
+A10 N022 N019 SG SG N032 SG N010 SG OR Vhigh=1 Trise=10n
+R4 nc2 0 100meg
+R5 nc3 0 100meg
+R7 nc4 0 100meg
+R8 nc5 0 100meg
+R9 nc6 0 100meg
+.model z2 D(Ron=1 Roff=1g Vfwd=0 Vrev=2)
+.model CON SW(Ron=10m Roff=1g Vt=0.5 Vh=-0.1)
+.model HOUT SW(Ron=51 Roff=500k Vt=0.5 Vh=-0.1)
+.model LOUT SW(Ron=30 Roff=500k Vt=0.5 Vh=-0.1)
+.model swd D(Ron=30 Roff=500k Vfwd=0.6)
+.ends

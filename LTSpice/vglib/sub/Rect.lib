@@ -1,0 +1,1551 @@
+.subckt 1B4B42 4 2 3 1
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d4 2 3 d1
+.MODEL D1 D  tt=8.87u cjo=47p
++ IS=6.543e-005 N=4.386e+000 RS=4.150e-002
++ BV=150
++ EG=1.11 XTI=3
++ FC=5.000e-001 
+.ends 1B4B42
+
+*
+.subckt 1G4B42 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d4 2 3 d1
+.MODEL D1 D  tt=8.87u cjo=47p
++ IS=6.543e-005 N=4.386e+000 RS=4.150e-002
++ BV=150
++ EG=1.11 XTI=3
++ FC=5.000e-001 
+.ends 1G4B42
+
+
+.subckt 1J4B42 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d4 2 3 d1
+.MODEL D1 D  tt=8.87u cjo=47p
++ IS=6.543e-005 N=4.386e+000 RS=4.150e-002
++ BV=150
++ EG=1.11
++ FC=5.000e-001
+.ends 1J4B42
+
+.SUBCKT BAT15_099R 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d4 2 3 d1
+.MODEL d1 D(Is=150n N=1.04 Rs=2.6 Xti=1.8 Eg=.68 Cjo=365f M=.061
++ Vj=.12 Fc=.5 Bv=4 Ibv=10u Tt=25p)
+.ENDS
+
+.SUBCKT D15XB60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d4 4 2 d1
+.MODEL D1 D
++ IS=2.0260E-9
++ N=1.6000
++ RS=5.5200E-3
++ IKF=3.4700
++ CJO=165.80E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=13.5E-6
+.ENDS
+
+
+.SUBCKT D2SB60 1 2 3 4
+Dd1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL D1 D
++ IS=939.00E-12
++ N=1.6000
++ RS=11.900E-3
++ IKF=1.7400
++ CJO=79.200E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=9.2E-6
+.ENDS
+
+.SUBCKT D2SBA60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL D1 D
++ IS=595.00E-12
++ N=1.6000
++ RS=18.700E-3
++ IKF=1.1600
++ CJO=51.10E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=7.1E-6
+.ENDS
+
+
+.SUBCKT GSIB1580-E3/45 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.model legd d is = 3.43009E-009 n = 1.58383 rs = 0.00845831
++ eg = 1.11 xti = 3 tnom = 27
++ cjo = 1.42286E-010 vj = 2.45434 m = 0.327271 fc = 0.5
++ tt = 2.88539E-006 bv = 880 ibv = 0.01 af = 1 kf = 0
+.ends
+
+.SUBCKT D3SB60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL D1 D
++ IS=1.3550E-9
++ N=1.6000
++ RS=8.2500E-3
++ IKF=2.4200
++ CJO=112.60E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=11.1E-6
+.ENDS
+
+.SUBCKT D3SBA60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL D1 D
++ IS=939.00E-12
++ N=1.6000
++ RS=11.900E-3
++ IKF=1.7400
++ CJO=79.200E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=9.2E-6
+.ENDS
+
+.SUBCKT D5SB60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL D1 D
++ IS=2.0260E-9
++ N=1.6000
++ RS=5.5200E-3
++ IKF=3.4700
++ CJO=165.80E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=13.5E-6
+.ENDS
+
+.SUBCKT D5SBA60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL D1 D
++ IS=1.3550E-9
++ N=1.6000
++ RS=8.2500E-3
++ IKF=2.4200
++ CJO=112.60E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=11.1E-6
+.ENDS
+
+.subckt DF06M 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.MODEL LEGD D (  AF=1 BV=660 CJO=4.78717E-011 EG=1.16369 FC=0.5 IBV=0.01
++ IBVL=0 IKF=0 IS=6.63434E-009 ISR=0 KF=0 M=0.466902 N=1.80776 NBV=1 NBVL=1
++ NR=2  RS=0.0620708 TBV1=0 TBV2=0 TIKF=0 TRS1=0 TRS2=0 TT=2.88539E-006
++ VJ=1.58152 XTI=0.5)
+.ends
+
+.subckt DF10SA 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.MODEL LEGD D (  AF=1 BV=1100 CJO=1.77328E-011 EG=1.11 FC=0.5 IBV=0.05
++ IBVL=0 IKF=0 IS=3.13961E-007 ISR=0 KF=0 M=0.24 N=2.2943 NBV=1 NBVL=1 NR=2
++  RS=0.0350918 TBV1=0 TBV2=0 TIKF=0 TRS1=0 TRS2=0 TT=2.88539E-006
++ VJ=0.464053 XTI=3)
+.ends
+
+.subckt DF1510S 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.MODEL LEGD D (  AF=1 BV=1100 CJO=8.20252E-011 EG=1.11 FC=0.5 IBV=0.05
++ IBVL=0 IKF=0 IS=3.25763E-007 ISR=0 KF=0 M=0.424464 N=2.3017 NBV=1 NBVL=1 NR=2
++  RS=0.0343186 TBV1=0 TBV2=0 TIKF=0 TRS1=0 TRS2=0 TT=2.88539E-006
++ VJ=0.300103 XTI=3)
+.ends
+
+*.SUBCKT DF5VD60 1 2 3
+*D1 2 1 DF5VD60A
+*D2 3 2 DF5VD60A
+*.MODEL DF5VD60A D
+*+ IS=2.0260E-9
+*+ N=1.6000
+*+ RS=5.5200E-3
+*+ IKF=3.4700
+*+ CJO=165.80E-12
+*+ M=.3231
+*+ VJ=.525
+*+ BV=600
+*+ IBV=10.000E-6
+*+ TT=13.5E-6
+*.ENDS
+
+.SUBCKT EDF1DS 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.MODEL LEGD D (  AF=1 BV=200 CJO=2.56888E-011 EG=1.11 FC=0.5 IBV=0.051
++ IBVL=0 IKF=0 IS=6.54402E-006 ISR=0 KF=0 M=0.318123 N=2.79694 NBV=1 NBVL=1
++ NR=2  RS=0.0181614 TBV1=0 TBV2=0 TIKF=0 TRS1=0 TRS2=0 TT=1.23315E-007
++ VJ=2.08839 XTI=3)
+.ENDS
+
+.subckt G2SB80 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.MODEL LEGD D (  AF=1 BV=880 CJO=6.80513E-011 EG=1.11 FC=0.5 IBV=0.01
++ IBVL=0 IKF=0 IS=4.4616E-009 ISR=0 KF=0 M=0.333526 N=1.75401 NBV=1 NBVL=1 NR=2
++  RS=0.0215588 T_MEASURED=27 TBV1=0 TBV2=0 TIKF=0 TRS1=0 TRS2=0
++ TT=2.88539E-006 VJ=0.25 XTI=3)
+.ends
+
+.SUBCKT G3SBA60 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.MODEL LEGD D ( AF=1 BV=600 CJO=1.07747E-010 EG=1.11 FC=0.5 IBV=0.0004
++ IBVL=0 IKF=0 IS=1.22106E-008 ISR=0 KF=0 M=0.304622 N=1.796 NBV=1 NBVL=1 NR=2
++  RS=0.0138402 TBV1=0 TBV2=0 TIKF=0 TRS1=0 TRS2=0 TT=2.88539E-006 VJ=0.21
++ XTI=3)
+.ends
+
+.subckt GBPC3506 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.MODEL LEGD D (  AF=1 BV=660 CJO=4.34889E-010 EG=1.11 FC=0.5 IBV=0.05
++ IBVL=0 IKF=0 IS=5.48021E-007 ISR=0 KF=0 M=0.553988 N=2.2 NBV=1 NBVL=1 NR=2
++  RS=0.00444765 TBV1=0 TBV2=0 TIKF=0 TRS1=0 TRS2=0 TT=2.88539E-006
++ VJ=3.48892 XTI=3)
+.ends
+
+.subckt GBU4G 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.MODEL LEGD D (  AF=1 BV=440 CJO=2.8562E-010 EG=1.11 FC=0.5 IBV=0.05
++ IBVL=0 IKF=0 IS=2.46092E-006 ISR=0 KF=0 M=0.332534 N=2.62593 NBV=1 NBVL=1
++ NR=2  RS=0.00370811 T_MEASURED=27 TBV1=0 TBV2=0 TIKF=0 TRS1=0 TRS2=0
++ TT=2.88539E-006 VJ=0.25 XTI=3)
+.ends
+
+.subckt GBU4M 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.MODEL LEGD D (  AF=1 BV=1100 CJO=1.0699E-010 EG=1.11 FC=0.5 IBV=0.02
++ IBVL=0 IKF=0 IS=2.95053E-007 ISR=0 KF=0 M=0.307724 N=2.19609 NBV=1 NBVL=1
++ NR=2  RS=0.00515037 T_MEASURED=27 TBV1=0 TBV2=0 TIKF=0 TRS1=0 TRS2=0
++ TT=2.88539E-006 VJ=0.694004 XTI=3)
+.ends
+
+.subckt GBU6G 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.MODEL LEGD D (  AF=1 BV=440 CJO=3.90022E-010 EG=1.11 FC=0.5 IBV=0.01
++ IBVL=0 IKF=0 IS=2.1436E-007 ISR=0 KF=0 M=0.3 N=2.00256 NBV=1 NBVL=1 NR=2 RL=0
++ RS=0.00511828 T_MEASURED=27 TBV1=0 TBV2=0 TIKF=0 TRS1=0 TRS2=0
++ TT=2.88539E-006 VJ=1.04449 XTI=3)
+.ends
+
+.subckt GBU6M 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.MODEL LEGD D (  AF=1 BV=1100 CJO=2.0401E-010 EG=1.11 FC=0.5 IBV=0.01
++ IBVL=0 IKF=0 IS=2.1436E-007 ISR=0 KF=0 M=0.3 N=2.00538 NBV=1 NBVL=1 NR=2 RL=0
++ RS=0.00509617 T_MEASURED=27 TBV1=0 TBV2=0 TIKF=0 TRS1=0 TRS2=0
++ TT=2.88539E-006 VJ=0.292184 XTI=3)
+.ends
+
+.subckt GSIB1580 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.MODEL LEGD D (  AF=1 BV=880 CJO=1.42286E-010 EG=1.11 FC=0.5 IBV=0.01
++ IBVL=0 IKF=0 IS=3.43009E-009 ISR=0 KF=0 M=0.327271 N=1.58383 NBV=1 NBVL=1
++ NR=2  RS=0.00845831 T_MEASURED=27 TBV1=0 TBV2=0 TIKF=0 TRS1=0 TRS2=0
++ TT=2.88539E-006 VJ=2.45434 XTI=3)
+.ends
+
+.SUBCKT MB6S 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.MODEL LEGD D (  AF=1 BV=600 CJO=2.36617E-011 EG=1.02043 FC=0.5
++ IBV=0.0022 IBVL=0 IKF=0 IS=8.70529E-008 ISR=0 KF=0 M=0.324665 N=2.15337 NBV=1
++ NBVL=1 NR=2  RS=0.0464093 TBV1=0 TBV2=0 TIKF=0 TRS1=0 TRS2=0
++ TT=2.88539E-006 VJ=0.866392 XTI=3.0254)
+.ENDS
+
+.SUBCKT MDA2500 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 4.395e-10
++ VJ = 0.5688
++ TT = 5e-09
++ M = 0.4287
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+*.SUBCKT MDA2501 1 2 3 4
+.SUBCKT MDA2501 1 2  3 4
+*
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d4 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 4.395e-10
++ VJ = 0.5688
++ TT = 5e-09
++ M = 0.4287
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA2502 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 4.395e-10
++ VJ = 0.5688
++ TT = 5e-09
++ M = 0.4287
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA2504 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 4.395e-10
++ VJ = 0.5688
++ TT = 5e-09
++ M = 0.4287
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA2506 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 4.395e-10
++ VJ = 0.5688
++ TT = 5e-09
++ M = 0.4287
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA3500 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 4.395e-10
++ VJ = 0.5688
++ TT = 5e-09
++ M = 0.4287
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA3501 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 4.395e-10
++ VJ = 0.5688
++ TT = 5e-09
++ M = 0.4287
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA3502 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 4.395e-10
++ VJ = 0.5688
++ TT = 5e-09
++ M = 0.4287
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA3504 1 2 3 4
+Dd1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 4.395e-10
++ VJ = 0.5688
++ TT = 5e-09
++ M = 0.4287
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA3506 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 4.395e-10
++ VJ = 0.5688
++ TT = 5e-09
++ M = 0.4287
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA3508 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 4.395e-10
++ VJ = 0.5688
++ TT = 5e-09
++ M = 0.4287
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA3510 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 4.395e-10
++ VJ = 0.5688
++ TT = 5e-09
++ M = 0.4287
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA3550 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 4.395e-10
++ VJ = 0.5688
++ TT = 5e-09
++ M = 0.4287
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA3551 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 4.395e-10
++ VJ = 0.5688
++ TT = 5e-09
++ M = 0.4287
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA920A1 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 5.89e-08
++ RS = 0.01669
++ CJO = 5.951e-11
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.4224
++ BV = 100
++ N = 2
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA920A2 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 5.865e-08
++ RS = 0.01669
++ CJO = 5.95e-11
++ VJ = 0.3909
++ TT = 5e-09
++ M = 0.4225
++ BV = 100
++ N = 2
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA920A3 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 5.89e-08
++ RS = 0.01669
++ CJO = 5.951e-11
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.4224
++ BV = 100
++ N = 2
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA920A4 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 5.89e-08
++ RS = 0.01669
++ CJO = 5.951e-11
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.4225
++ BV = 100
++ N = 2
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA920A5 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 5.89e-08
++ RS = 0.01669
++ CJO = 5.951e-11
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.4223
++ BV = 100
++ N = 2
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA920A6 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 5.89e-08
++ RS = 0.01669
++ CJO = 5.951e-11
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.4224
++ BV = 100
++ N = 2
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA920A7 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 5.89e-08
++ RS = 0.01669
++ CJO = 5.951e-11
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.4225
++ BV = 100
++ N = 2
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA920A8 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 5.89e-08
++ RS = 0.01669
++ CJO = 5.951e-11
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.4223
++ BV = 100
++ N = 2
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA920A9 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 5.89e-08
++ RS = 0.01669
++ CJO = 5.951e-11
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.4224
++ BV = 100
++ N = 2
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA970A1 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.921e-08
++ RS = 0.001885
++ CJO = 1.978e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.8182
++ BV = 100
++ N = 1.81
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA970A2 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.827e-08
++ RS = 0.001886
++ CJO = 1.98e-09
++ VJ = 0.3906
++ TT = 5e-09
++ M = 0.8191
++ BV = 100
++ N = 1.809
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA970A3 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.921e-08
++ RS = 0.001885
++ CJO = 1.978e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.8182
++ BV = 100
++ N = 1.81
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA970A5 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.827e-08
++ RS = 0.001886
++ CJO = 1.98e-09
++ VJ = 0.3906
++ TT = 5e-09
++ M = 0.8191
++ BV = 100
++ N = 1.809
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA970A6 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.957e-08
++ RS = 0.001885
++ CJO = 1.975e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.8174
++ BV = 100
++ N = 1.811
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA980-1 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 1.978e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.8182
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA980-2 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 1.98e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.819
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA980-3 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 1.978e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.8182
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA980-4 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 1.98e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.819
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA980-5 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 1.978e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.8182
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA980-6 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 1.98e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.819
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA990-1 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 1.978e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.8182
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA990-2 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 1.98e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.819
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA990-3 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 1.978e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.8182
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA990-4 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 1.98e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.819
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA990-5 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 1.978e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.8182
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT MDA990-6 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS = 9.206e-11
++ RS = 0.001927
++ CJO = 1.98e-09
++ VJ = 0.3905
++ TT = 5e-09
++ M = 0.819
++ BV = 100
++ N = 1.24
++ EG = 1.11
++ XTI = 3
++ KF = 0
++ AF = 1
++ FC = 0.5
++ IBV = 0.0001
++ TNOM = 27
++ )
+.ENDS
+
+.SUBCKT RMB4S 1 2 3 4
+d1 1 2 legd
+d2 4 3 legd
+d3 1 4 legd
+d4 2 3 legd
+.MODEL LEGD D (  AF=1 BV=400 CJO=2.36026E-011 EG=1.25942 FC=0.5 IBV=0.051
++ IBVL=0 IKF=0 IS=3.26666E-006 ISR=0 KF=0 M=0.325255 N=3.13486 NBV=1 NBVL=1
++ NR=2  RS=0.0671315 TBV1=0 TBV2=0 TIKF=0 TRS1=0 TRS2=0 TT=3.69946E-007
++ VJ=0.847059 XTI=3.09297)
+.ENDS
+
+.SUBCKT S10VB60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS=2.0260E-9
++ N=1.6000
++ RS=5.5200E-3
++ IKF=3.4700
++ CJO=165.80E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=13.5E-6
+.ENDS
+
+.SUBCKT S10WB60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS=2.0260E-9
++ N=1.6000
++ RS=5.5200E-3
++ IKF=3.4700
++ CJO=165.80E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=13.5E-6
+.ENDS
+
+.SUBCKT S15VB60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS=2.4120E-9
++ N=1.6000
++ RS=4.6300E-3
++ IKF=4.0500
++ CJO=196.00E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=14.8E-6
+.ENDS
+
+.SUBCKT S20WB60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS=7.3660E-9
++ N=1.6000
++ RS=1.5200E-3
++ IKF=10.980
++ CJO=573.10E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=27.4E-6
+.ENDS
+
+.SUBCKT S25VB60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS=7.3660E-9
++ N=1.6000
++ RS=1.5200E-3
++ IKF=10.980
++ CJO=573.10E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=27.4E-6
+.ENDS
+
+.SUBCKT S2VB60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS=333.00E-12
++ N=1.6000
++ RS=33.500E-3
++ IKF=.69
++ CJO=23.900E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=4.9E-6
+.ENDS
+
+.SUBCKT S3WB60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS=1.3550E-9
++ N=1.6000
++ RS=8.2500E-3
++ IKF=2.4200
++ CJO=112.60E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=11.1E-6
+.ENDS
+
+.SUBCKT S50VB60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS=7.3660E-9
++ N=1.6000
++ RS=1.5200E-3
++ IKF=10.980
++ CJO=573.10E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=27.4E-6
+.ENDS
+
+.SUBCKT S5VB60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS=2.0260E-9
++ N=1.6000
++ RS=5.5200E-3
++ IKF=3.4700
++ CJO=165.80E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=13.5E-6
+.ENDS
+
+.SUBCKT U4SB60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS=1.3550E-9
++ N=1.6000
++ RS=8.2500E-3
++ IKF=2.4200
++ CJO=112.60E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=11.1E-6
+.ENDS
+
+.SUBCKT U4SBA60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS=939.00E-12
++ N=1.6000
++ RS=11.900E-3
++ IKF=1.7400
++ CJO=79.200E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=9.2E-6
+.ENDS
+
+.SUBCKT U6SB60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS=2.0260E-9
++ N=1.6000
++ RS=5.5200E-3
++ IKF=3.4700
++ CJO=165.80E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=13.5E-6
+.ENDS
+
+.SUBCKT U6SBA60 1 2 3 4
+d1 1 2 d1
+d2 4 3 d1
+d3 1 4 d1
+d3 2 3 d1
+.MODEL d1 D (
++ IS=1.3550E-9
++ N=1.6000
++ RS=8.2500E-3
++ IKF=2.4200
++ CJO=112.60E-12
++ M=.3231
++ VJ=.525
++ BV=600
++ IBV=10.000E-6
++ TT=11.1E-6
+.ENDS

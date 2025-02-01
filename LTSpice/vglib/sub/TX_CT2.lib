@@ -1,0 +1,17 @@
+.subckt TX_CT 1 2 3 4 5 Params: 
++ L_pri = 540uH
++ L_s1 = 15uH
++ L_s2 = 15uH
++ COUPLING = 1
++ DCR_pri =0.2
++ DCR_s1 =0.2
++ DCR_s2 =0.2
++ Fe=10Meg
+Lpri   1 2  {L_pri}  Rpar={2*pi*L_pri*Fe} Cpar=1p Rser={DCR_pri}
+
+Ls1    3 4  {L_s1}  Cpar=1p Rser={DCR_s1}
+
+Ls2    3 4  {L_s2}  Cpar=1p Rser={DCR_s2}
+
+Kn_K1         Lpri Ls1  Ls2    {COUPLING} 
+.ends TX_CT

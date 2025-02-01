@@ -1,0 +1,127 @@
+***********************************************************
+****	Cree SiC MOSFET Spice Library - PRELIMINARY RELEASE
+***********************************************************
+****	Rev. 0 - Inital Release
+***********************************************************
+
+***********************************************************
+****	PLEASE READ THE FOLLOWING:
+****	This model is preliminary and subject to change without notice.
+****	The model is provided on an "as is" basis.
+****	There are no warranties, expressed or implied, on the fit of this model.
+****	This model is not intended to take the place of laboratory testing.
+***********************************************************
+****	NOTES:  Model Limitations
+****	1.  This model is valid for the temperature range of 25C to 125C.
+****	2.  The model was extracted from the CMF10120 SiC MOSFET and
+****	    scaled up for the CMF20120.
+****	3.  The model provides a reasonable approximation for the 
+****	    MOSFET in the third quadrant.  However, the body diode threshold
+****	    voltage was modeled with VGS = -5V and assumes this is fixed
+****	    for all values of VGS.  However, the body diode threshold voltage 
+****	    might change slightly over the range of -5V <= VGS <= 0V.  This is
+****	    not modeled.
+****	4.  No attempt has been made to model noise characteristics. 			
+*********************************************************** 
+
+*****************************************
+****	CMF10120 SiC MOSFET Model
+*****************************************
+.subckt CMF10120 d g s
+.param af1=1
+xgmos	d1 g1 s1 gmos params: af=af1
+Ls1 s   s1	7e-9
+Rs2 s	 s1    100	
+Rg1 g1	 g2	{14/af1}
+Lg1 g   g2	7e-9
+rdrain d d1 {0.08/af1} tc1=0.000835209 tc2=2.94329E-05
+XCGD d1 g1 cgdmos params: af=af1
+CGS g1 s1 {1000p*af1}
+CDS d1 s1 {30.4p*af1}
+D1 s1 d bodydiode
+.ends CMF10120
+*****************************************
+
+*****************************************
+****	CMF20120 SiC MOSFET Model
+*****************************************
+.subckt CMF20120 d g s
+.param af1=2
+xgmos	d1 g1 s1 gmos params: af=af1
+Ls1 s   s1	7e-9
+Rs2 s	 s1    100	
+Rg1 g1	 g2	{(14/af1)-2}
+Lg1 g   g2	7e-9			
+rdrain d d1 {(0.08+0.01)/af1} tc1=0.000835209 tc2=2.94329E-05
+XCGD d1 g1 cgdmos params: af=af1
+CGS g1 s1 {1000p*af1}
+CDS d1 s1 {30.4p*af1}
+D1 s1 d bodydiode
+D2 s1 d bodydiode	
+.ends CMF20120
+*****************************************
+
+*****************************************
+*****	Drain Current Generator Subcircuit
+*****************************************
+.subckt gmos d1 g2 s1
+.param p1 = {9.056*af}	; transconductance parameter
+.param p2 = {6.062-0.015*(temp-27)} ; Vthreshold
+.param p3 = 17	; subthreshold slope
+.param p4 = 0.026	; thermal voltage
+.param p5 = 2.105	; law exponent (2 = square law)
+.param p6 = 1.287	; triode-saturation transition parameter 2
+.param p7 = 0.6855	; triode effect 0.5
+.param p8 = 0.001	; channel length modulation parameter
+.param p9 = {2*p3*p4}
+.param p10 = {p9*p4*p1}
+.param p11 = -10	; Lower VGS limit
+.param p12 = 30	; Upper VGS limit 
+R100 g1 s1	1e9
+E100 g1 s1 	value = {limit(V(g2,s1),p11,p12)} 
+G1 d1 s1 value =	{
++	if(V(d1,s1)<0,
++		-p10*((ln(1+exp((v(g1,s1)-p2)/p9)))**p5)
++		*(1+p8*v(s1,d1))
++		,
++		p10*((ln(1+exp((v(g1,s1)-p2)/p9)))**p5)
++		*(1+p8*v(d1,s1))
++		)
++			}
+G2 d1 s1 value =	{
++	if(V(d1,s1)<0,
++		p10*((ln(1+exp((v(g1,s1)-p2-p6*(v(s1,d1))**p7)/p9)))**p5)
++		*(1+p8*v(s1,d1))
++		,
++		-p10*((ln(1+exp((v(g1,s1)-p2-p6*(v(d1,s1))**p7)/p9)))**p5)
++		*(1+p8*v(d1,s1))
++		)
++			}
+.ends gmos
+****************************************
+
+****************************************
+*****	Body Diode
+****************************************
+.model bodydiode d(is=1e-42 cjo=783.3p bv=1500 m=0.676 EG=3.26 vj=3.82 n=1.1
++	rs=0.12 tt=15n ibv=1e-25 level=1)
+****************************************
+
+****************************************
+*****	CGD Subcircuit
+****************************************
+.subckt cgdmos d2 g
+.param k1=585.9p	; Capacitance at zero volts
+.param k2=0.5		; m in depletion capacitance equation
+.param ka=18.096	; Capacitance discontinuity fit parameter
+.param kb=0.2678	; Capacitance discontinuity fit parameter
+.param kc=7.5277	; Capacitance discontinuity fit parameter
+G11 g d1 value = 	{
++		af*k1*(
++		(1+(limit(v(d1,g),0,500))*(1+ka*(1+TANH(kb*V(d1,g)-kc))/2))**-k2
++		)*ddt(v(g,d1))
++			}
+R1 d1 d2 1e-3
+C1 g d1 {1p*af}
+.end cgdmos
+***************************************                                  

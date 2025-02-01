@@ -1,0 +1,19 @@
+.subckt mje13009_BV C B E
+.param bvcbo=700  nbvcbo=3.4 N0=1.355
+q cV bv e bv
+B c bv i=uramp(i(va))*(1/limit(1f,(1-(V(c,bv)/(bvcbo*n0))**nbvcbo),1)-1)
+Dc bv c dc
+VA c cv 0
+Rb bv b 82.769m
+Dz e  bv Z
+
+.model z d Vfwd=9 Vrev=9 revepsilon=0.5 Roff=1T Ron=10m
+
+
+.model dc d is=1f n=50 cjo=516.27p vj=1.5 mj=.39769 rs=25.254e-3 bv={bvcbo} ibv=1u nbv=5
+
+.model bv npn is=418.55f bf=21.619 vaf=10k ikf=11.864 ise=5.9443p ne=1.4275
++ br=.2103 var=100 ikr=4.4990 isc=701.45p nc=1.270 nk=.6367  rc=25.254e-3 
++cje=3.1796n vje=1.5 mje=.11593 tf=12.894n xtf=10 vtf=10
+ + itf=1  tr=1.8u  
+.ends mje13009_BV

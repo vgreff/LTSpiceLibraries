@@ -1,0 +1,31 @@
+.subckt hv9921_2_3 Drain GND_ VDD R=20
+M1 Drain G1 S S MHV
+Bout G1 GND_  V=min(V(VDD,gnd_),V(G,GND_))
+D1 GND_ VDD DZ
+D2 Drain VDD ilim
+R1 S GND_ {R}
+CR1 s GND_  20p
+A2 B GND_ GND_ GND_ GND_ P001 GND_ GND_ SCHMITT Vt=0.43  Vh=0.02 Vhigh=1 Vlow=0 Td=220n Trise=10n Tfall=10n  tripdt=2n
+A1 A GND_ GND_ GND_ GND_ _G G GND_ SCHMITT Vt=0.5 Vh=0.2 Vhigh=7.5 Vlow=0 Td=2n Trise=200n Tfall=10n tripdt=2n
+ra vdd _G 40k
+C1 A GND_ 75p
+D3 A P001 Dd
+C2 B GND_ 20p
+R2 S B 10k
+.model MHV VDMOS VTO=4.5 LAMBDA=10m Rd=100 kp=0.2 BV=650  cgs=50p
+.model Dz d vfwd=0.5 Vrev=7.5 Ron=100
+.model ilim d vfwd=30 ilimit=270u Ron=1k Roff=1Meg
+.model Dd d vfwd=0  Ron=1 Roff=100k
+.ends hv9921_2_3
+
+.subckt hv9921 Drain GND_ VDD
+X Drain GND_ VDD hv9921_2_3 R=21
+.ends hv9921
+
+.subckt hv9922 Drain GND_ VDD
+X Drain GND_ VDD hv9921_2_3 R=7.57
+.ends hv9922
+
+.subckt hv9923 Drain GND_ VDD
+X Drain GND_ VDD hv9921_2_3 R=13.83
+.ends hv9923

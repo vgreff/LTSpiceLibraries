@@ -1,0 +1,123 @@
+*
+* pins: Adj FB CS Gnd Drv Vcc HV
+*_smn_developerinfo
+*ON Semiconductor
+*_smn_enddeveloperinfo
+*_smn_nodesinfo
+*shape rect
+*1 l   Adj
+*2 l   FB
+*3 l   CS
+*4 l   Gnd
+*5 l   Drv
+*6 l   Vcc
+*8 l   HV
+*_smn_endnodesinfo
+*_smn_componenttype
+*Pulse Width Modulator
+*_smn_endcomponenttype
+
+.SUBCKT NCP1200 1 2 3 4 5 6 8 PARAMS: Fs=60k
+**** ESD NETWORK ****
+D1 4 1 DCLAMP1
+D2 4 2 DCLAMP1
+D3 4 3 DCLAMP1
+D4 4 5 DCLAMP2
+D5 4 6 DCLAMP2
+**** SELF-SUPPLY ****
+GB2 8 6 VALUE = { IF ( V(11) > 3.5, 0, 4m ) }
+XCOMP1 6 10 UVLO COMP2_1200
+EB5 10 4 VALUE = { IF ( V(UVLO) < 3.5, 12, 10 ) }
+X2 UVLO OVERLATCH 11 OR2_1200
+XUVLO6 100 6 110 COMP2_1200
+X50 110 OVERLATCH UVLO6 AND2_1200
+VUVLO6 100 4 6.5
+**** OUTPUT PULSE VALIDATION ****
+XPULS UVLO OVER PULSOK NC4 TFFLOP_1200 ; turns the pulses on at UVLOh
+* S R Q Q\
+RDUM4 OVER 4 100k
+**** CURRENT CONSUMPTION ****
+ISUPP1 6 4 300u
+GBSUPP2 6 4 VALUE = { IF ( V(PULSOK) > 3.5, (300u + I(VFBM)), 0 ) }
+GBSUPPDRV 6 4 VALUE = { IF ( I(VPW) > 0, I(VPW), 0 ) }
+**** CLOCK SECTION ****
+VCLOCK clk1 4 PULSE 0 10 0 10n 10n 100n {1/Fs}
+VMDUTY MDUTY 4 PULSE 0 10 {0.8/Fs} 10n 10n 100n {1/Fs}
+XRESET clk1 200 clk2 AND2_1200
+EBINVRST 200 4 VALUE = { IF ( V(SKIP)<800mV, 3.5, 0 ) }
+XFFLOP clk2 RST Q NC1 TFFLOP_1200
+RNC1 NC1 4 100k
+XRST MDUTY IMAX SKIP RST OR3_1200
+**** CURRENT SENSE ****
+EBVREF REF1 4 VALUE = { IF ( V(6) > 4.8V, 4.8, V(6) ) }
+VFBM REF1 REF ; feedback current measure
+RFB REF 2 8k
+RDUPP 2 290 57k
+RDLOW 290 4 20k
+EBCLIP ISET 4 VALUE = {IF ( V(290) > 1, 1V, V(290) ) }
+XCOMP2 LEBO ISET OVERI COMP2_1200
+XPROPDEL OVERI IMAX UTD_1200 PARAMS: TD={200ns} ; propagation delay
+XDEL3 Q 30 UTD_1200 PARAMS: TD={250ns}
+EBLEB LEBO 4 VALUE = { IF ( V(30) > 3V, V(3), 0 ) }
+**** OVERLOAD SECTION ****
+EBOVER 50 4 VALUE = { IF ( (V(ISET)>990mV) & (V(PULSOK)>3.5), 10, 0 ) }
+XOVER UVLO 50 OVER AND2I_1200 ; UVLO low and OVL, latches off the pulses
+XLATCH OVER UVLO6 OVERLATCH NC5 TFFLOP_1200 ; latches off the current source
+RNC5 NC5 0 100k
+**** SKIP CYCLE SECTION ****
+RADJU REF 1 70k
+RADJL 1 4 23.3k
+XSKIP 150 2 SKIP COMP2_1200
+EBHYST 150 4 VALUE = { IF ( V(SKIP) < 3.5, V(1), V(1)+100m ) }
+**** DRIVER SECTION ****
+EBDRVU 90 4 VALUE = { IF ( (V(PULSOK)>3V) & (V(Q)>3V), V(6), 100mV ) }
+VPW 90 91
+RON 91 5 36
+ROFF 90 250 18
+DOFF 5 250 DSTD
+****
+.MODEL DSTD D RS=100M CJO=15pF TT=10N IBV=100u N=0.2
+.MODEL DCLAMP1 D BV=10 cjo=100f RS=100M
+.MODEL DCLAMP2 D BV=20 cjo=100f RS=100M
+
+**** SUBCIRCUIT MODELS ****
+.SUBCKT UTD_1200 1 2 PARAMS: TD=200n
+*
+*Parameters K=GAIN TD=DELAY
+RIN 1 0 1T
+B 2 0 v=delay(v(1),TD)
+.ENDS
+
+**** 2 INPUT COMPARATOR ****
+.SUBCKT COMP2_1200 1 2 3
+* + - S
+bEB1 0 3  i=IF ( V(1) > V(2), 50m, 0 ) Rpar=100 Cpar=10p
+.ENDS
+
+**** 4 INPUT OR GATE ****
+.SUBCKT OR3_1200 1 2 3 6
+bEB1 0 6  i=IF ( (V(1)>800M) | (V(2)>800M) | (V(3)>800M), 50m, 0 )  Rpar=100 Cpar=10p
+.ENDS
+
+**** 2 INPUT OR GATE ****
+.SUBCKT OR2_1200 1 2 3
+bEB1 0 3 i= IF ( (V(1)>800M) | (V(2)>800M), 50m, 0 ) Rpar=100 Cpar=10p
+.ENDS
+
+**** 2 INPUT AND CIRCUIT ****
+.SUBCKT AND2_1200 1 2 3
+bEB1 0 3  i=IF ( (V(1)>800M) & (V(2)>800M), 50m, 0 )  Rpar=100 Cpar=10p
+.ENDS
+
+**** 2 INPUT AND CIRCUIT ****
+.SUBCKT AND2I_1200 1 2 3
+bEB1 0  3 i=IF ( (V(1)<800M) & (V(2)>800M), 50m, 0 )  Rpar=100 Cpar=10p
+.ENDS
+
+****
+.SUBCKT TFFLOP_1200 6 8 2 1
+* S R Q Q\
+BQB 0 1  i=IF((V(8)<800M) & (V(2)>800M), 0, 100m ) Rpar=100 Cpar=10p ic=5
+BQ   0 2   i=IF((V(6)<800M) & (V(1)>800M), 0, 100m ) Rpar=100 Cpar=10p ic=0
+.ENDS
+.ENDS

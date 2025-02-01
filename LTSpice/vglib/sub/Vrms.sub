@@ -1,0 +1,4 @@
+* Created by Alexander Bordodynov on 1 feb 2023
+.subckt Vrms 1 2 params: Vrms=220V Fre=50Hz Phi=0 Rser=0
+V1 1 2 SINE(0 {Vrms*1.4142} {fre}
+.ends Vrms

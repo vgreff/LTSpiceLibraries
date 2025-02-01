@@ -1,0 +1,492 @@
+********************************************************************************
+* Software License Agreement                                                   *
+*                                                                              *
+* The software supplied herewith by Microchip Technology Incorporated (the     *
+* 'Company') is intended and supplied to you, the Company's customer, for use  *
+* soley and exclusively on Microchip products.                                 *
+*                                                                              *
+* The software is owned by the Company and/or its supplier, and is protected   *
+* under applicable copyright laws. All rights are reserved. Any use in         *
+* violation of the foregoing restrictions may subject the user to criminal     *
+* sanctions under applicable laws, as well as to civil liability for the       *
+* breach of the terms and conditions of this license.                          *
+*                                                                              *
+* THIS SOFTWARE IS PROVIDED IN AN 'AS IS' CONDITION. NO WARRANTIES, WHETHER    *
+* EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED        *
+* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO  *
+* THIS SOFTWARE. THE COMPANY SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR    *
+* SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.     *
+********************************************************************************
+*
+* The following op-amps are covered by this model:
+*      MCP6N11, BASE MODEL
+*
+* Date of model creation: 10-12-2015
+* Level of Model Creator: 1.12 / 09-05-12
+*
+* Revision History:
+*      REV A: 12-OCT-15, Initial Input from Model Creator V 1.12
+*      REV B: 06-JAN-16, Updated Test schematics using RF/RG feedback network,
+*      REV C: 28-JAN-16, IB/IOS, CMRR, PSRR, SLEW, NOISE, GAIN/PHASE, VOS, IQ
+*      REV D: 17-MAY-16, VOS and VOS Drift adjustments for GAINS = 1,2,5,10, and 100      
+*       
+*
+* Recommendations:
+*      Use PSPICE (or SPICE 2G6; other simulators may require translation)
+*      For a quick, effective design, use a combination of: data sheet
+*            specs, bench testing, and simulations with this macromodel
+*      For high impedance circuits, set GMIN=100F in the .OPTIONS statement
+*
+* Supported:
+*      Typical performance for temperature range (-40 to 125) degrees Celsius
+*      DC, AC, Transient, and Noise analyses.
+*      Most specs, including: offsets, DC PSRR, DC CMRR, input impedance,
+*            open loop gain, voltage ranges, supply current, ... , etc.
+*      Temperature effects for Ibias, Iquiescent, Iout short circuit 
+*            current, Vsat on both rails, Slew Rate vs. Temp and P.S.
+*
+* Not Supported:
+*      Some Variation in specs vs. Power Supply Voltage
+*      Vos distribution, Ib distribution for Monte Carlo
+*      Distortion (detailed non-linear behavior)
+*      Some Temperature analysis
+*      Process variation
+*      Behavior outside normal operating region
+*
+* Known Discrepancies in Model vs. Datasheet:
+*       
+*
+*
+.SUBCKT MCP6N11 EN/CAL VDD VFG VIM VIP VOUT VREF VSS 
++ PARAMS:  GM=1 
+G_G3         0 9 TABLE { V(7, 0) } 
++ ( (0,0)(1.00,8.00U)(2.00,780U)(3.00,780U)(4.00,790U)(5.00,800U)(6.00,820U) )
+R_R1         1 2  1k  
+X_U8          4 1 INVERTER
+C_C1         0 2  1n  
+V_U4_V1V         1V 0 1
+X_U4_D2          U4_10 1V DC_1mV_1A_1V_1nA
+X_U4_U28          U4_15 POR INVERTER
+X_U4_D4          0 U4_17 DC_1mV_1A_1V_1nA
+R_U4_R2         U4_13 U4_16  1k  
+C_U4_C2         0 U4_10  2u  
+X_U4_U38          VDD_VSS U4_12 ANALOG_BUFFER PARAMS:  GAIN=0.5 
+X_U4_U36          U4_10 VDDLY COMPARATOR2 PARAMS:  TH=0.5  
+C_U4_C5         0 U4_16  1n  
+X_U4_D1          0 U4_10 DC_1mV_1A_1V_1nA
+X_U4_D5          U4_17 1V DC_1mV_1A_1V_1nA
+G_U4_G5         0 U4_10 U4_15 0 {1E-6/250m}
+*G_U4_G5         0 U4_10 U4_15 0 {1E-6/100u}
+G_U4_G6         0 U4_17 U4_16 0 {1E-6/20m}
+*G_U4_G6         0 U4_17 U4_16 0 {1E-6/50u}
+X_U4_U27          U4_15 U4_11 INVERTER
+X_U4_U6          EN/CAL_VSS U4_12 U4_9 U4_13 COMP_HYS  PARAMS:  T=100 
+R_U4_R1         U4_14 U4_15  1k  
+*V_U4_VENHYS1         U4_9 0 0.20
+V_U4_VENHYS1         U4_9 0 0.16
+G_U4_G7         U4_17 0 U4_18 0 {1E-6/3u}
+*G_U4_G7         U4_17 0 U4_18 0 {1E-6/0.1u}
+X_U4_U1          VDD_VSS U4_19 U4_14 COMPARATOR
+C_U4_C1         0 U4_15  1n  
+C_U4_C4         0 U4_17  2u  
+X_U4_U37          U4_17 ENDLY COMPARATOR2 PARAMS:  TH=0.5  
+X_U4_U32          U4_16 U4_18 INVERTER
+*G_U4_G4         U4_10 0 U4_11 0 {1E-6/10u}
+G_U4_G4         U4_10 0 U4_11 0 {1E-6/10u}
+*V_U4_VINTH         U4_19 0 1.30
+V_U4_VINTH         U4_19 0 1.50
+X_U1         VIP VIM VDDBUFF VSS VINP GMX PARAMS:  GMIN={GM}
+G_G2         VDD VSS 9 0 1
+
+*IQ ENABLE ON TEMP COEFF 
+R_R9         0 9  1 TC=2.31M,1.11U  
+X_U3         VINP VINM VDDBUFF VSS 10 OUTX PARAMS: GMIN={GM}
+G_G4         0 8 TABLE { V(6, 0) } 
+*+ ( (0,0)(1.4,0.1N)(1.5,2.5U)(2.5,2.5U)(3.5,2.5U)(4.5,2.5U)(5.5,2.5U) )
++ ( (0,0)(0.50,0.05U)(1.5,0.30U)(2.5,0.625U)(3.5,1.0U)(4.5,1.35U)(6.5,2.10U) )
+G_G5         VDD VSS 8 0 1
+X_U2         VREF VFG VDDBUFF VSS VINP GMX PARAMS:  GMIN={GM}
+E_E2         VDD_VSS 0 VDD VSS 1
+X_U7          VDD_VSS 5 7 ANALOG_MULTI 
+R_R2         4 5  1k
+R_R3	4 20 1K
+C_C3	20 0 1N  
+X_S1    20 0 10 VOUT MCP6N11_S1 
+X_U5          VDDLY ENDLY 4 AND
+C_C2         0 5  1n  
+R_R10         0 VINM  1m  
+E_E1         VDDBUFF VSS VDD VSS 1
+E_E3         EN/CAL_VSS 0 EN/CAL VSS 1
+R_R5         VINM VINP  1
+
+************* Begin of Injecting PSRR on Output
+*
+* PSRR PLUS Zero
+*
+E5700A 5700 0 VALUE = {GM}
+E5701A 5701 0 TABLE { V(5700,0) } ((1,850.15U)(2,300.15U)(5,33.15U)(10,20.15U)(100,1.84U))
+E5701B 5702 0 TABLE { V(5700,0) } ((1,850.15U)(2,300.15U)(5,33.15U)(10,20.15U)(100,1.84U))
+G57A  0 VINP VALUE {1 * 625U + V(110D) + V(120D) + 0 }
+
+*
+* PSRR Plus Zero 1
+* G110 THE DC GAIN FOR +PSRR AND L110 THE ROLL OFF WITH R110 AND THE NOISELESS ZERO WITH GR112
+G110 0 110 VALUE {(1400N * V(5701)) * V(VDD)} 
+L110 110 111 19.9M
+R110 111 0 1G
+GR110 111 0 111 0 {1/1}
+* 
+* PSRR Plus Pole 1
+G110B 0 110B 110 111 1
+GR110B 110B 0 110B 0 {1/1K}
+R110B 110B 0 1G
+C110B 110B 0 79.6N
+*
+* PSRR Plus Zero 2
+G110C 0 110C 110B 0 1
+L110C 110C 111C 359.9U
+R110C 111C 0 1G
+GR110C 111C 0 111C 0 {1/1K} 
+*
+* PSRR Plus Buffer
+E110D 110D 0 111C 110C 1
+
+
+*
+* PSRR MINUS Zero 1
+*
+* G120 THE DC GAIN FOR -PSRR AND L120 THE ROLL OFF WITH R120 AND THE NOISELESS ZERO WITH GR122
+G120 0 120 VALUE {(1400N * V(5702)) * V(VSS)} 
+L120 120 121 19.9M
+R120 121 0 1G 
+GR120 121 0 121 0 {1/1}
+* 
+* PSRR Minus Pole 1
+G120B 0 120B 120 121 1
+GR120B 120B 0 120B 0 {1/1K}
+R120B 120B 0 1G
+C120B 120B 0 79.6N
+*
+* PSRR Minus Zero 2
+G120C 0 120C 120B 0 1
+L120C 120C 121C 359.9U
+R120C 121C 0 1G
+GR120C 121C 0 121C 0 {1/1K} 
+*
+* PSRR Minus Buffer
+E120D 120D 0 121C 120C 1
+
+************** End of Injecting PSRR on Output
+  
+X_U6          VDD_VSS 2 6 ANALOG_MULTI 
+*IQ ENABLE 0FF TEMP COEFF
+R_R11         0 8  1 TC=1.29M,8.73U
+.ENDS
+** Floating/unmodeled pin fixups **
+R__UC0001   VIP  0   {1/GMIN}
+R__UC0002   VIM  0   {1/GMIN}
+R__UC0003   VREF  0   {1/GMIN}
+R__UC0004   VFG  0   {1/GMIN}
+*.PARAM  GM={GAIN}
+
+.subckt MCP6N11_S1 1 2 3 4  
+S_S1         3 4 1 2 _S1
+RS_S1         1 2 1G
+.MODEL         _S1 VSWITCH Roff=100e6 Ron=1 Voff=0.25V Von=0.75V
+.ends MCP6N11_S1
+
+
+.SUBCKT INVERTER IN OUT  
+EOUT OUT 0 VALUE { IF( V(IN)<0.5,1,0) }
+.ends INVERTER
+
+.subckt DC_1mV_1A_1V_1nA A C
+G1 A C TABLE { V(A, C) } ( (-1,-1n)(0,0)(1m,1) (2m,10) (3m,1000) )
+.ends DC_1mV_1A_1V_1nA 
+
+.SUBCKT ANALOG_BUFFER IN OUT  
++ PARAMs:  GAIN=1
+EOUT OUT 0 VALUE { GAIN * V(IN)}
+.ends ANALOG_BUFFER
+
+.SUBCKT COMPARATOR2 INP OUT  
++ PARAMs:  TH=1
+EOUT OUT 0 VALUE { IF( V(INP)>TH,1,0) }
+.ends COMPARATOR2
+
+.SUBCKT COMP_HYS INP INM HYS OUT PARAMs: T=10
+EIN INP1 INM1 INP INM 1 
+EHYS INP1 INP2 VALUE { IF( V(1)>0.5,-V(HYS)/2,V(HYS)/2) }
+EOUT OUT 0 VALUE { IF( V(INP2)>V(INM1),1,0) }
+R1 OUT 1 1
+C1 1 0 {T*1e-9}
+RINP1 INP1 0 1K
+.ends COMP_HYS
+
+.SUBCKT COMPARATOR INP INM OUT  
+EOUT OUT 0 VALUE { IF( V(INP)>V(INM),1,0) }
+.ends COMPARATOR
+
+.SUBCKT ANALOG_MULTI IN1 IN2 OUT  
+EOUT OUT 0 VALUE { V(IN1)*V(IN2)}
+.ends ANALOG_MULTI
+
+.SUBCKT AND A B OUT  
+EOUT OUT 0 VALUE { IF( V(A)>0.5 & V(B)>0.5,1,0) }
+.ends AND
+
+
+
+.SUBCKT GMX 1 2 3 4 30 PARAMs:  GMIN=1
+*           | | | | |
+*           | | | | Output
+*           | | | Negative Supply
+*           | | Positive Supply
+*           | Inverting Input
+*           Non-inverting Input
+*
+*
+*
+* Input Stage
+C12  1  0 6.00P
+
+* Tweaked E12 to dial in Offset Voltage on GMX
+* Handle VOS Based on GAIN = GMIN 11-10-15 (E2200)
+* Variable Noise based on GMIN (E2201)
+E1200 1200 0 VALUE = {GMIN}
+*E2200 1201 0 TABLE { V(1200,0) } ((1,-190.3922U)(2,473.7885U)(5,208.739U)(10,137.4548U)(100,71.525U))
+E2200 1201 0 TABLE { V(1200,0) } ((1,-216.0324U)(2,460.9683U)(5,203.6108U)(10,134.8905U)(100,70.7483U))
+E2201 2201 0 TABLE { V(1200,0) } ((1,1.0)(2,0.469)(5,0.179)(10,0.096)(100,0.0322))
+E2202 2202 0 TABLE { V(1200,0) } ((1,22.0M)(2,29.0M)(5,30.0M)(10,24.0M)(100,29.0M))
+
+E12 71 14 VALUE { (V(1201)) + V(20) * 124E0 * V(2201) + V(21) * 124E0 * V(2201) + V(22) * 124E0 * V(2201) + 
++ V(23) * 124E0 * V(2201) + 0 * 1 + V(2700) * 1}
+
+
+* Generate Input Bias 1 and 2 and  Input Offset
+EG12 VIB1 0 62 0 1
+EG13 VIBOS 0 63 0 1m
+EG14 VIB2 0 62 0 1
+
+* Calculate IB1 and IB2 based on IOS
+EABM1 VABM1 0 VALUE { ((V(VIB1)+V(VIB2))+(V(VIBOS))) /2 }
+EABM2 VABM2 0 VALUE { ((V(VIB1)+V(VIB2))-(V(VIBOS))) /2 }
+
+* Convert Voltage to Current on Pins 1 and 2
+GP1 1 0 VABM1 0 1m
+GP2 2 0 VABM2 0 1m
+C14  2  0 6.00P
+
+V16 16 4 10.0M
+GD16 16 1 TABLE {V(16,1)} ((-100,-100E-15)(0,0)(1m,1u)(2m,1m)) 
+V13 3 13 -10.0M
+GD13 2 13 TABLE {V(2,13)} ((-100,-100E-15)(0,0)(1m,1u)(2m,1m)) 
+R71  1  0 10.0E12
+R72  2  0 10.0E12
+R73  1  2 20.0E12
+
+*
+* Noise, PSRR, and CMRR
+*
+
+GI20 21 20 VALUE { V(2202)}
+D20 20  0 DN1
+D21  0 21 DN1
+I22 22 23 1U
+R22 22 0  1k
+R23  0 23 1k
+
+*CMRR Based on GAIN
+E5000 5000 0 VALUE = {GMIN}
+E5002 5001 0 TABLE { V(5000,0) } ((1,29.511)(2,2.411)(5,1.611)(10,0.691)(100,0.044))
+G27  0 27 VALUE { -55.0U + V(1) * {7.16U * V(5001)} + V(2) * {7.16U * V(5001)} }
+
+*************
+* Add Zeroes for GMIN=1, 2, 5, 10, 100
+*
+E6000 6001 0 TABLE { V(5000,0) } ((1,17.0)(2,96.0)(5,51.0)(10,16.0)(100,2.6))
+X6001 27A 27 6001 0 VC_INDUCTOR PARAMS: L_1V=1U
+
+R27 27 0 1G
+R27A  27A 0 1G
+GR27 27A 0 27A 0 {1/1}
+E2700 2700 0 27 0 1
+
+*
+* Open Loop Gain, Slew Rate
+G30 0 30 VALUE {GMIN/3 * V(1001) * (V(14) - V(2))} 
+E1000 1000 0 VALUE = {GMIN}
+E200 1001 0 TABLE { V(1000,0) } ((1,0.98)(2,0.92)(5,0.89)(10,0.86)(100,0.60))
+
+*
+* Temperature Sensitive offset voltage
+
+I73 0 70 DC 1
+*R74 0 70 1 TC={-32.18U * 1/Limit(GMIN,33,1)}
+R74 0 70 1 TC={-45.00U * 1/Limit(GMIN,33,1)}
+E75 1 71 VALUE {V(70)-1}
+
+
+*
+* Temp Sensistive IBias
+* Manual Modify Input Bias Current Total
+I62 0 62 DC 1000u
+R62 0 62 REXP  5.51784U
+*
+* Temp Sensistive Offset IBias
+* Manual Modify Input Offset Current
+I63 0 63 DC 1000u
+R63 0 63 REXP2  348.37036U
+
+*
+* Models
+.MODEL NMI NMOS(L=2.00U W=42.0U KP=200U LEVEL=1 )
+.MODEL DESD  D   N=1 IS=1.00E-15
+.MODEL DN1 D   IS=1P KF=45.0E-15 AF=.001
+.MODEL REXP  RES TCE= 5.32477
+.MODEL REXP2  RES TCE= 4.86433
+
+.ENDS GMX
+
+
+.SUBCKT OUTX 1 2 3 4 5  PARAMs:  GMIN=1
+*            | | | | |
+*            | | | | Output
+*            | | | Negative Supply
+*            | | Positive Supply
+*            | Inverting Input
+*            Non-inverting Input
+*
+*
+
+* Open Loop Gain, Slew Rate
+G30  0 30 1 2 1
+R30 30  0 1.00K
+
+* Components changed/affected by GBWP
+
+* SLEW RATE (GAINS 1-10, 100) AND VDD(1.8 AND 5.5)
+
+E3100 3100 0 VALUE = {GMIN}
+E3101 3101 0 TABLE { V(3100,0) } ((1,1.00K)(2,1.00K)(5,1.00K)(10,1.00K)(100,650))
+E3102 3102 0 TABLE { V(3,4) } ((1.8,0.38)(5.5,1.00)) 
+
+G31 0 31 3 4 0.00
+GI31 0 31 VALUE { V(3101) * V(3102)}
+R31 31  0 1 TC=1.39M,-18.0U
+GD31 30 0 TABLE {V(30,31)} ((-100,-1n)(0,0)(1m,0.1)(2m,2))
+
+G32 32 0 3 4 0.00
+GI32 32 0 VALUE { V(3101) * V(3102)}
+R32 32  0 1 TC=1.39M,-18.0U
+GD32 0 30 TABLE {V(30,32)} ((-2m,2)(-1m,0.1)(0,0)(100,-1n))
+
+G33  0 33 30 0 1m
+R33  33 0 1K
+G34  0 34 33 0 {0.165}
+R34  34 0 1K
+
+C34  34 0 15.400U
+
+* End Components changed/affected by GBWP
+
+G37  0 37 34 0 1m
+R37  37 0 1k
+C37  37 0 0.001P
+
+E2000 2000 0 VALUE = {GMIN}
+E20001 2001 0 TABLE { V(2000,0) } ((1,0.059)(2,0.159)(5,0.259)(10,0.00019)(100,0.459))
+X20001 37A 0 2001 0 VC_CAPACITOR PARAMS: C_1V=100P
+
+G37A  0 37A 37 0 1m
+R37A  37A 0 1K
+
+*************
+* Add Poles for GMIN=10, 100
+*
+E20002 2002 0 TABLE { V(2000,0) } ((1,0.59001)(2,0.54001)(5,0.460001)(10,0.7500001)(100,0.8401))
+X20002 37A2 0 2002 0 VC_CAPACITOR PARAMS: C_1V=100P
+G37A2  0 37A2 37A 0 1m
+R37A2  37A2 0 1K
+
+E20003 2003 0 TABLE { V(2000,0) } ((1,0.00001)(2,0.00001)(5,0.00001)(10,0.00001)(100,0.000001))
+X20003 37A3 0 2003 0 VC_CAPACITOR PARAMS: C_1V=100P
+G37A3  0 37A3 37A2 0 1m
+R37A3  37A3 0 1K
+
+*************
+
+
+G38  0 38 37A3 0 1m
+R38  39 0 1K
+L38  38 39 159N
+E38  35 0 38 0 1
+
+G35 33 0 TABLE {V(35,3)} ((-1,-1n)(0,0)(50.0,1n))50.2,10))
+G36 33 0 TABLE {V(35,4)} ((-50.2,-10)((-50.0,-1n)(0,0)(1,1n))
+
+*
+* Output Stage
+R80 50 0 100MEG
+G50 0 50 57 96 2
+R58 57  96 0.50
+
+* Impedance 0.9KOhms
+R57 57  0 0.9K
+C58  5  0 2.00P
+
+* For 0.9K Ohms
+* For R57 Output in Ohms
+G57  0 57 POLY(3) 3 0 4 0 35    0 0 {0*0.00075/(900/500)} {0*0.001/(900/500)} {0.002/(900/500)}
+
+
+GD55 55 57 TABLE {V(55,57)} ((-2m,-1)(-1m,-1m)(0,0)(10,1n))
+GD56 57 56 TABLE {V(57,56)} ((-2m,-1)(-1m,-1m)(0,0)(10,1n))
+
+E55 55  0 VALUE { -11.5M + V(3) * 1 + V(51) * -34.7M }
+E56 56  0 VALUE { 12.5M + V(4) * 1 + V(52) * -32.6M }
+
+R51 51 0 1k
+R52 52 0 1k
+GD51 50 51 TABLE {V(50,51)} ((-10,-1n)(0,0)(1m,1m)(2m,1))
+GD52 50 52 TABLE {V(50,52)}  ((-2m,-1)(-1m,-1m)(0,0)(10,1n))
+G53  3  0 VALUE { -50.0U + V(51) * 1M }
+G54  0  4 VALUE { -50.0U + V(52) * -1M }
+
+*
+* Current Limit
+G99 96 5 99 0 1
+
+R98 0 98 1 TC=3.67M,-4.5U
+G97 0 98 TABLE { V(96,5) } ((-13.2,-8.00M)(-1.00M,-7.42M)(0,0)(1.00M,6.51M)(13.2,14.00M))
+E97 99 0 VALUE { V(98) * LIMIT((( V(3) - V(4) ) * 716M + -432M), 0.00, 1E6 ) * LIMIT((( V(3) - V(4) ) * 1.42 + -1.85), 0, 1) }
+
+D98 4 5 DESD
+D99 5 3 DESD
+
+* Models
+.MODEL NMI NMOS(L=2.00U W=42.0U KP=200U LEVEL=1 )
+.MODEL DESD  D   N=1 IS=1.00E-15
+.MODEL DN1 D   IS=1P KF=55.0E-15 AF=1
+.MODEL REXP  RES TCE= 5.32477
+.ENDS OUTX
+
+.SUBCKT VC_CAPACITOR 1 2 3 4 PARAMs:  C_1V=1E-6
+R1 1 5 1E-6
+VC 5 6 0
+EC 6 2 Value = {V(7) / ( V(3,4)*C_1V) }
+G1 0 7 Value = {I(VC)}
+C1 7 0 1
+R2 7 0 1E9
+.ends VC_CAPACITOR
+
+.SUBCKT VC_INDUCTOR 1 2 3 4 PARAMs:  L_1V=1E-6
+GC 1 2 Value = {V(5) / ( V(3,4)*L_1V) }
+G1 0 5 Value = {V(1,2)}
+C1 5 0 1
+R1 5 0 1E9
+.ends VC_INDUCTOR
+
+
+
+

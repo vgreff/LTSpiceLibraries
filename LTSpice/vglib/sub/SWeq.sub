@@ -1,0 +1,6 @@
+.subckt SWeq 1 2 x=1 y=1 Rmin=10u Rmax=1g
+R 1 2 R=if((x==y),Rmin,Rmax)
+.ends SWeq
+.subckt SWneq 1 2 x=1 y=1 Rmin=10u Rmax=1g
+R 1 2 R=if((x==y),Rmax,Rmin)
+.ends SWneq

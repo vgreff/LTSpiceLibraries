@@ -1,0 +1,59 @@
+* LM3914 Bar/dot display driver
+* Model by Geoff Western (aka Alec_t).
+* V2.0
+
+* Pin 9 (Mode) bias arrangement, Ref source resistance Rs, and Ref plateau are speculative.
+* Clamp diodes D1-D10 are a kludge to prevent B1-B10 producing fatal run-time errors in the sim
+* for unconnected output pins, so introduce a spurious -0.6V at unconnected pins.
+* Temperature effects, operating limits and comparator offsets are not modelled.
+
+.subckt lm3914 Bar/_dot Rhi Sig V+ V- Adj L1 L10 L2 L3 L4 L5 L6 L7 L8 L9 Ref Rlo
+B1 L1 V- I=1u-10*i(rs)*(V(sig)>V(d1))*((V(sig)<V(d2)+1m)|(V(Bar/_dot)+0.1>=V(v+)))
+B2 L2 V- I=1u-10*i(rs)*(V(sig)>V(d2))*((V(sig)<V(d3)+1m)|(V(Bar/_dot)+0.1>=V(v+)))
+B3 L3 V- I=1u-10*i(rs)*(V(sig)>V(d3))*((V(sig)<V(d4)+1m)|(V(Bar/_dot)+0.1>=V(v+)))
+B4 L4 V- I=1u-10*i(rs)*(V(sig)>V(d4))*((V(sig)<V(d5)+1m)|(V(Bar/_dot)+0.1>=V(v+)))
+B5 L5 V- I=1u-10*i(rs)*(V(sig)>V(d5))*((V(sig)<V(d6)+1m)|(V(Bar/_dot)+0.1>=V(v+)))
+B6 L6 V- I=1u-10*i(rs)*(V(sig)>V(d6))*((V(sig)<V(d7)+1m)|(V(Bar/_dot)+0.1>=V(v+)))
+B7 L7 V- I=1u-10*i(rs)*(V(sig)>V(d7))*((V(sig)<V(d8)+1m)|(V(Bar/_dot)+0.1>=V(v+)))
+B8 L8 V- I=1u-10*i(rs)*(V(sig)>V(d8))*((V(sig)<V(d9)+1m)|(V(Bar/_dot)+0.1>=V(v+)))
+B9 L9 V- I=1u-10*i(rs)*(V(sig)>V(d9))*((V(sig)<V(rhi)+1m)|(V(Bar/_dot)+0.1>=V(v+)))
+B10 L10 V- I=1u-10*i(rs)*(V(sig)>V(rhi))*((V(Bar/_dot)+0.1>=V(v+))|(V(Bar/_dot)>=V(L9)-0.9))
+Ric V+ V- 4k
+D1 V- L1 D
+D2 V- L2 D
+D3 V- L3 D
+D4 V- L4 D
+D5 V- L5 D
+D6 V- L6 D
+D7 V- L7 D
+D8 V- L8 D
+D9 V- L9 D
+D10 V- L10 D
+Rm2 Bar/_dot V- 10meg
+I1 V+ Adj 75µ
+Rs N001 V- 50
+B11 Ref N001 V=min(v(v+)-v(v-)-.3,1.28+v(adj)-v(v-))
+B1a L1 V- I=150u*(V(Bar/_dot)<(V(v+)-0.1))*(V(sig)>V(d1))
+B15 V+ V- I=1m1-4*i(B11)
+Rm1 V+ Bar/_dot 350k
+R1 Rlo d1 1k2
+R2 d1 d2 1k2
+R3 d2 d3 1k2
+R4 d3 d4 1k2
+R5 d4 d5 1k2
+R6 d5 d6 1k2
+R7 d6 d7 1k2
+R8 d7 d8 1k2
+R9 d8 d9 1k2
+R10 d9 Rhi 1k2
+R11 Sig N002 20k
+I2 N002 V- 25n
+D11 V- N002 D
+.ends lm3914
+
+
+
+
+
+
+

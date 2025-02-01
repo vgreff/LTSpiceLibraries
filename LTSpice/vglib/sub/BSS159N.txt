@@ -1,0 +1,36 @@
+** Infineon depletion mode mosfet, sot23
+** Simplified model.
+.SUBCKT BSS159N drain gate source
+
+Lg gate g1 3n Rser=0 Rpar=15
+Ld drain d1 1n Rser=0 Rpar=5
+Ls source s1 3n Rser=0 Rpar=15
+Rs s1 s2 0.074
+
+Rg g1 g2 25
+M1 d2 g2 s2 s2 DMOS L=1u W=1u
+.MODEL DMOS NMOS ( KP= 0.241 VTO=-2.05 THETA=0 VMAX=1.5e5 ETA=0.005 LEVEL=3)
+Rd d2 d1a 1.08 TC=9m
+.MODEL MVDR NMOS (KP=1.5 VTO=-1.4 LAMBDA=0.1)
+Mr d1 d2a d1a d1a MVDR W=1u L=1u
+Rx d2a d1a 1m
+
+Dbd s2 d2 Dbt
+.MODEL Dbt D(BV=72 M=0.38 CJO=15.99p VJ=0.5V)
+Dbody s2 21 DBODY
+.MODEL DBODY D(IS=20p N=1.3 RS=1023u EG=1.12 TT=50n)
+Rdiode d1 21 300m TC=0
+
+.MODEL sw NMOS(VTO=0 KP=10 LEVEL=1)
+Maux g2 c a a sw
+Maux2 b d g2 g2 sw
+Eaux c a d2 g2 1
+Eaux2 d g2 d2 g2 -1
+Cox b d2 55.9p
+.MODEL DGD D(M=0.72 CJO=55.9p VJ=0.5)
+Rpar b d2 1Meg
+Dgd a d2 DGD
+Rpar2 d2 a 10Meg
+Cgs g2 s2 29.25p
+
+.ENDS BSS159N

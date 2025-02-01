@@ -1,0 +1,61 @@
+* 01.01.2021
+* UC3846
+* Current Mode PWM Controller
+.subckt UC3846 Clad Vref CS- CS+ NI INV Comp Ct Rt Sync Aout GRD Vc Bout Vin Shdn
+F1 iref Ct Vdt 1
+Vdt iref N003 0
+D1 N003 Rt drt
+R1 Vin N012 3.2k
+D2 GRD N012 dref
+E1 iref GRD N012 GRD 1
+I1 GRD Vref 45m
+D3 Vref iref drout
+D4 GRD Vref drout
+A2 N004 GRD N005 GRD GRD N004 N007 GRD DFLOP Trise=20n Vhigh=5
+A3 N005 GRD N001 GRD N007 N006 N002 GRD OR Trise=20n Vhigh=5
+A4 N004 N001 GRD GRD N005 N010 N009 GRD OR Trise=20n Vhigh=5
+S1 Aout Vc N002 GRD HOUT
+S2 GRD Aout N006 GRD LOUT
+S3 Bout Vc N009 GRD HOUT
+S4 GRD Bout N010 GRD LOUT
+A5 N008 GRD GRD GRD N016 GRD N005 GRD OR Trise=20n Vhigh=5
+A6 N008 N015 GRD GRD GRD N016 GRD GRD SRFLOP Trise=20n Vhigh=5
+E2 N018 GRD CS+ CS- table=(0 0,1.3 3.6)
+A8 N018 N019 GRD GRD GRD GRD N013 GRD SCHMITT Trise=20n Vhigh=5 Vt=0 Vh=0
+A9 N013 GRD GRD GRD N021 GRD N015 GRD OR Trise=20n Vhigh=5
+G1 N022 GRD INV NI table=(0 0,3m 9m)
+C1 Comp GRD 0.47u Rpar=100k
+D5 GRD N022 deaz
+I2 GRD Comp 0.5m
+V4 Comp N019 1.2
+D6 Comp N023 dcla
+E3 N023 GRD N020 GRD 1
+S5 GRD N020 N001 GRD scla
+S6 GRD N020 N024 GRD scla
+A7 Vin GRD GRD GRD GRD N001 GRD GRD SCHMITT Trise=20n Vhigh=5 Vt=7.325 Vh=0.375
+Vdt2 Clad N020 0
+A10 Shdn GRD GRD GRD GRD GRD N021 GRD BUF Trise=20n Vhigh=5 Ref=0.35
+R3 Shdn GRD 6k
+A11 N021 GRD GRD GRD N025 GRD N024 GRD OR Trise=20n Vhigh=5
+H1 N026 GRD Vdt2 1666
+R4 N025 N026 1k
+D7 Comp N022 dead
+I3 0 N020 30u
+G3 Ct GRD N008 GRD 2.4m
+S7 sync iref N008 GRD sosc
+R2 sync GRD 2240
+A13 N014 N017 GRD GRD GRD GRD N008 GRD SRFLOP Trise=20n Vhigh=5 Ref=3.3
+A14 Ct GRD GRD GRD GRD GRD N011 GRD BUF Trise=20n Vhigh=5 Ref=2.8
+A15 N011 GRD sync GRD GRD GRD N014 GRD OR Trise=20n Vhigh=5 Ref=3.3
+A16 Ct GRD GRD GRD GRD N017 GRD GRD SCHMITT Trise=20n Vhigh=5 Vt=1.3 Vh=0.1
+.model drt D(Ron=10 Roff=100Meg Vfwd=1.5)
+.model dref D(Ron=0.5 Roff=100Meg Vfwd=0.7 Vrev=5.085)
+.model drout D(Ron=0.33 Roff=100Meg Vfwd=0)
+.model HOUT SW(Ron=200k Roff=3.75 Vser=1.5 Vt=2.5 Vh=-0.5)
+.model LOUT SW(Ron=200k Roff=3.75 Vser=0.025 Vt=2.5 Vh=-0.5)
+.model deaz D(Ron=0 Roff=200meg Vfwd=0 Vrev=3.9)
+.model dcla D(Ron=82 Roff=200meg Vfwd=0.7)
+.model scla SW(Ron=10 Roff=340k Vt=2.5 Vh=-0.5)
+.model dead D(Ron=82 Roff=200meg Vfwd=0.7)
+.model sosc SW(Ron=386 Roff=2727 Vt=2.5 Vh=0)
+.ends

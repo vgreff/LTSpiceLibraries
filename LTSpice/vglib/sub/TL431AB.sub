@@ -1,0 +1,39 @@
+; Bordodynov
+.subckt TL431AB K A ADJ
+.param tc1=0.29m tc2=10u
+    Q1 K ADJ N005 0 QN_ab
+    Q7 N003 N003 N001 0 QP_AB0
+    D1 A N004 D_ab
+    Q8 N004 N003 N002 0 QP_AB0
+    R4 N005 N009 3.28k tc={tc1},{tc2}
+    R2 N009 N012 2.4k tc={tc1},{tc2}
+    R3 N009 N010 7.2k tc={tc1},{tc2}
+    R1 N014 A 800 tc={tc1},{tc2}
+    R5 N006 N011 4k tc={tc1},{tc2}
+    R7 K N001 800 tc={tc1},{tc2}
+    R8 K N002 800 tc={tc1},{tc2}
+    R6 N013 N012 1k tc={tc1},{tc2}
+    R9 N008 N007 150 tc={tc1},{tc2}
+    R10 N008 A 10k tc={tc1},{tc2}
+    D2 A K D_AB0
+    C1 K N004 15p
+    C2 N010 N011 10p
+    Q2 N012 N012 A 0 QN_AB0 area=1.2
+    Q3 N010 N012 N014 0 QN_AB0 area=2.2
+    Q5 N011 N010 A 0 QN_AB0
+    Q9 K N004 N007 0 QN_AB0
+    Q10 K N008 A 0 QN_AB0 area=5 
+    Q4 N003 N005 N006 0 QN_AB0
+    Q6 N004 N013 A 0 QN_AB0 area=0.5  off
+    Q11 N004 N004 ADJ 0 QN_AB 
+    .model QN_AB0 NPN(BF=300 Cje=1p Cjc=1.5p Rb=80  VAF=100 VAR=50 KF=3.2e-16 AF=1 
+    +  tr=10n  tf=0.01n   Xti=3. Eg=1.191 is=0.176f   re=10 Tnom=26.5 
+    
+    .model QN_AB NPN(BF=105 Cje=1p  Cjc=1.5p KF=3.2e-16 AF=1 
+    + BVbe=2. Ibvbe=1p tf=0.01n   Xti=3. Eg=1.191 is=0.176f  Tnom=26.5 
+
+    .model QP_AB0 LPNP (BF=60 Cje=1p Cjc=3p Rb=80 is=1f VAF=40 VAR=40   ) 
+    .MODEL D_AB0 D(isr=10n nr=4 Rs=9 CJ0=4.0p mj=1 bv=38 nbv=10 ibv=100u)
+    .MODEL D_ab D(isr=.1n nr=4 Rs=40 CJ0=1.0p mj=0.33 )
+    * 
+    .end TL431AB

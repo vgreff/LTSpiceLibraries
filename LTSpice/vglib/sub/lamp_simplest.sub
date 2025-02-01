@@ -1,0 +1,3 @@
+.subckt lamp_simplest 1 2 Unom=220V Pnom=100W
+R1 1 2 {Unom**2/Pnom}
+.ends lamp_simplest

@@ -1,0 +1,12 @@
+*SRC=DMMT3904W;DI_DMMT3904W;BJTs NPN; Si;  40.0V  0.200A  347MHz   Diodes
+*Inc. Matched Transistor
+.subckt DMMT3904W b2 b1 c1 e1 e2 c2
+*                                  1  2   3   4   5   6
+Q1 c1 b1 e1 DI_DMMT3904W
+Q2 c2 b2 e2 DI_DMMT3904W
+.MODEL DI_DMMT3904W  NPN (IS=20.3f  BF=274 VAF=114
++ IKF=36.4m ISE=6.99p NE=2 BR=4
++ VAR=24.0 IKR=90.0m RE=0.657 RB=2.63 RC=0.263
++ XTB=1.5 CJE=8.29p VJE=1.1 MJE=0.5 CJC=7.1p VJC=0.3
++ MJC=0.300 TF=426p TR=71.3n EG=1.12 )
+.ends DMMT3904W

@@ -1,0 +1,22 @@
+*SIMULATOR=LTspice 
+.SUBCKT ZXGD3006_AB  VCC IN VEE SINK SOURCE
+R 7 0 1t
+LIN IN 7 2n Rpar=10 Rser=1 
+D1 7 8 DMOD
+D2 9 7 DMOD
+CI1 7 8 5.5p Rpar=1Meg
+CI2 9 7 5.5p Rpar=1Meg
+RsourceI 10 12 1.5
+RsinkI 11 13 1.5
+D3 12 8 DMOD
+D4 9 13 DMOD
+LCC VCC 8 2n Rpar=10 
+LEE VEE 9 2n Rpar=10
+Lsource 12 SOURCE 1n Rpar=5 
+Lsink 13 SINK 1n Rpar=5 
+Qn 8 7 12 n
+Qp 9 7 13 p
+.model n npn is=14p BF=20000 tf=1.5n ikf=4 nf=1.24 nk=0.84
+.model p pnp is=14p BF=22000 tf=1.5n ikf=4 nf=1.24   nk=0.82
+.MODEL DMOD D(IS=8p BV=44 cjo=200f)
+.ENDS ZXGD3006_AB

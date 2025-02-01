@@ -1,0 +1,131 @@
+**************************************************
+* Manufacturer:       Wurth Elektronik
+* Kinds:    Visible THT LED 
+* Matchcode:          WL-TMRC THT Mono-color Round Color
+* Library Type:       Pspice
+* Version:        rev18a       
+* Date and Time   :       2018-8-4
+* Team:           eiSos EDA Service  
+* Contact:        libraries@we-online.com
+**************************************************
+.subckt  3mm_151031VS04000  1  2
+D1 1 2 led
+.MODEL led D
++ IS=10.000E-21
++ N=1.8395
++ RS=.70538
++ IKF=5.2223
++ CJO=0.000000000042598
++ M=0.96987
++ VJ=10
+.ends
+******
+
+.subckt  3mm_151031SS04000  1  2
+D1 1 2 led
+.MODEL led D
++ IS=4.5646E-9
++ N=4.9950
++ RS=1.0000E-6
++ IKF=999
++ CJO=6.5159E-9
++ M=.1001
++ VJ=9.9900
+.ends
+******
+.subckt  3mm_151031VS06000  1  2
+D1 1 2 led
+.MODEL led D
++ IS=2.0094E-9
++ N=4.9950
++ RS=8.7975
++ IKF=999
++ CJO=2.1026E-9
++ M=.1001
++ VJ=9.9900
+.ends
+******
+.subckt  3mm_151031YS05900  1  2
+D1 1 2 led
+.MODEL led D
++ IS=4.5520E-9
++ N=4.9950
++ RS=10.746
++ IKF=999
++ CJO=4.3230E-9
++ M=.1001
++ VJ=9.9900
+.ends
+******
+.subckt  3mm_151031YS06000  1  2
+D1 1 2 led
+.MODEL led D
++ IS=2.7995E-9
++ N=4.9950
++ RS=1.0000E-6
++ IKF=999
++ CJO=7.4260E-9
++ M=.1001
++ VJ=9.9900
+.ends
+******
+.subckt  3mm_151039SS04000  1  2
+D1 1 2 led
+.MODEL led D
++ IS=4.5085E-9
++ N=4.9950
++ RS=1.0000E-6
++ IKF=999
++ CJO=6.7762E-9
++ M=.1001
++ VJ=9.9900
+.ends
+******
+.subckt  5mm_151051BS04000  1  2
+D1 1 2 led
+.MODEL led D
++ IS=10.021E-12
++ N=4.9950
++ RS=9.1877
++ IKF=999
++ CJO=3.6893E-9
++ M=.1001
++ VJ=9.9900
+.ends
+******
+.subckt  5mm_151051RS11000  1  2
+D1 1 2 led
+.MODEL led D
++ IS=8.4111E-9
++ N=4.9950
++ RS=1.0000E-6
++ IKF=999
++ CJO=6.5860E-9
++ M=.1001
++ VJ=9.9900
+.ends
+******
+.subckt  5mm_151051VS04000  1  2
+D1 1 2 led
+.MODEL led D
++ IS=2.2857E-9
++ N=4.9950
++ RS=1.0000E-6
++ IKF=999
++ CJO=5.1101E-9
++ M=.1001
++ VJ=9.9900
+.ends
+******
+.subckt  5mm_151051YS04000  1  2
+D1 1 2 led
+.MODEL led D
++ IS=1E-20
++ N=1.8233
++ RS=1.502
++ IKF=10.307
++ CJO=0.0000000000083552
++ M=0.2839
++ VJ=1.229
+.ends
+******

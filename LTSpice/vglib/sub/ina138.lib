@@ -1,0 +1,55 @@
+* INA138 Current Shunt Monitor Macromodel Subcircuit
+* connections:  Vin+
+*               | Vin-
+*               | | Vs
+*               | | |   gnd
+*               | | |   |   output
+*               | | |   |   |
+.subckt INA138  + - Vs GND OUT
+*
+*
+C01      1N1030 1N1653  CAP 5PF
+D1       + VESD  EDD
+D2       GND +  EDD
+D3       - VESD  EDD
+D4       GND -  EDD
+D5       Vs VESD  EDD
+D6       GND Vs  EDD
+D7       OUT VESD  EDD
+D8       GND OUT  EDD
+I1       1N1819 GND  2UA  ;NOT4ECAD
+I2       1N940 GND  2UA  ;NOT4ECAD
+I3       1N1033 GND  2UA  ;NOT4ECAD
+I4       1N1833 GND  8UA  ;NOT4ECAD
+Q01      1N1107 1N1819 INP   PNP
+Q22      VO  1N1833 Vs   PNP
+Q23      1N1833 1N1833 Vs   PNP
+Q02      1N1030 1N1819 INN   PNP
+Q03      1N1819 1N1819 INP   PNP
+Q04      1N1819 1N1819 INN   PNP
+Q07      1N1107 1N940 GND   NPN
+Q08      1N1030 1N940 GND   NPN
+Q09      Vs 1N1107 1N940   NPN
+Q10      Vs 1N1030 1N1033   NPN
+Q11      VO  1N1033 GND   NPN
+Q20      INP VO  1N1673   NPN
+Q21      1N1673 1N1673 VO    NPN
+R11      1N1653 VO   FILM 3K
+R20      1N1673 OUT  FILM 5K
+RG1      + INP  FILM 5K
+RG2      - INN  FILM 5K
+*
+.MODEL NPN NPN
++IS=1FA      BF=250      VAF=1000
++CJE=.5PF    CJC=.2PF    TF=300PS  
+*
+.MODEL PNP LPNP
++IS=1.25FA     BF=250     VAF=1000
++CJE=.13PF     CJC=.6PF   TF=50NS
+*
+.model EDD D(Is=3.0E-14 BV=90 Rs=10)
+.MODEL FILM RES (R=1 TC1=.000050)
+.MODEL CAP CAP (C=1 TC1=0)
+.ENDS INA138
+*
+* 

@@ -1,0 +1,58 @@
+**************************************************
+* Manufacturer:       Wurth Elektronik
+* Kinds:     Visible High power LED
+* Matchcode:          WL-SMDC SMT Mono-color Ceramic LED Waterclear
+* Library Type:       Pspice
+* Version:        rev18a       
+* Date and Time   :       2018-8-4
+* Team:           eiSos EDA Service  
+* Contact:        libraries@we-online.com
+**************************************************
+.subckt  3535_150353BS74500  1  2
+D1 1 2 led
+.MODEL led D
++ IS=10.000E-21
++ N=2.3894
++ RS=6.0176
++ IKF=11.518
++ CJO=0.000000000000051414
++ M=0.1001
++ VJ=9.99
+.ends
+******
+.subckt  3535_150353GS74500  1  2
+D1 1 2 led
+.MODEL led D
++ IS=1.2303E-19
++ N=2.2496
++ RS=9.1188
++ IKF=0
++ CJO=0.000000000000048776
++ M=0.1001
++ VJ=9.99
+.ends
+******
+.subckt  3535_150353RS74500  1  2
+D1 1 2 led
+.MODEL led D
++ IS=1E-20
++ N=1.6247
++ RS=6.2175
++ IKF=9.5483
++ CJO=0.000000000000047731
++ M=0.1001
++ VJ=9.99
+.ends
+******
+.subckt  3535_150353YS74500  1  2
+D1 1 2 led
+.MODEL led D
++ IS=9.0141E-9
++ N=4.9950
++ RS=4.3003
++ IKF=999
++ CJO=49.240E-15
++ M=.1001
++ VJ=9.9900
+.ends
+******

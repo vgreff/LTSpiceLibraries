@@ -1,0 +1,180 @@
+** FAN7081 
+*******************************************************************************
+** Created by W. R. Newberry
+** May 1, 2008
+**
+** Fairchild Semiconductor, South Portland, Maine
+*******************************************************************************
+*$
+.subckt FAN7081 COM HO IN VB VCC VS
+.PARAM  uv_dif={uv_h - uv_ave} uv_ave={(uv_h + uv_l)/2} in_delay=80n vth=3.3
++  rh=1.25k uv_h=8.6 rl=1.1k uv_delay=750n uv_l=8.3
+C_C6         N988590 0  500f  
+C_C1         N989462 0  10p  
+M_M1         HO HG VB VB PMOSout  
++ L=3.8u  
++ W=50u  
++ AD=555p  
++ AS=0  
++ PD=26u  
++ PS=0  
++ NRD=0.123  
++ NRS=0.033    
++ M=40
+R_R7         N989486 N989894  100  
+E_ABM8         N989252 0 VALUE { IF (V(VCC) > V(N989486), 5, -5)    }
+R_R18         VS VB  652k  
+T_T1         N9888640 0 N988630 0 Z0=1000 TD={IN_Delay}  
+C_C3         N989486 0  10p  
+R_R17         N988360 N988542  100  
+E_LIMIT1         UV 0 VALUE {LIMIT(V(N989398),0,5)}
+R_R3         0 IN_A  100MEG  
+R_R9         N988630 0  1k  
+V_V5         N989602 0 {UV_DIF}
+E_ABM1         N989036 0 VALUE { IF (V(N988180) >{VTH},V(N988630), 0)    }
+V_V6         N989630 0 {UV_AVE}
+M_M2         HO LG VS VS NMOSout  
++ L=3.8u  
++ W=50u  
++ AD=555p  
++ AS=0  
++ PD=26u   
++ NRD=0.123  
++ NRS=0.033    
++ M=46
+C_C5         N988360 0  10p  
+E_E3         VIN_L 0 VCC COM 0.4
+X_S4    N988590 0 N988658 VS FAN7081_S4 
+E_ABM10         VIN_DIF 0 VALUE { ( V(VIN_H) - V(VIN_AVE))    }
+V_V7         N988416 0 {UV_DIF}
+E_E1         N9888640 0 IN_A 0 1
+T_T3         N9882140 0 N988180 0 Z0=1000 TD={UV_Delay}  
+R_R12         0 N988180  1k  
+X_S3    N988590 0 VB N988658 FAN7081_S3 
+E_ABM11         N988542 0 VALUE { IF( V(N988368)>{VTH}, V(N988456) -
++  V(N988416), V(N988456)+V(N988416))    }
+R_R16         LG N988658  {RL}  
+E_E5         N9882140 0 UV 0 1
+E_ABM7         N989894 0 VALUE { IF( V(N989252)>{VTH}, V(N989630) - V(N989602),
++  V(N989630)+V(N989602))    }
+E_SUM1         N989398 0 VALUE {V(N989252)+V(N988368)}
+E_ABM2         N990340 0 VALUE { IF( V(IN_A)>{VTH}, V(VIN_AVE) - V(VIN_DIF),
++  V(VIN_DIF)+V(VIN_AVE))    }
+E_ABM12         N988368 0 VALUE { IF (V(VB) > V(N988360), 5, -5)    }
+X_S2    N988590 0 N988834 VS FAN7081_S2 
+R_R19         N988590 N989036  11k  
+R_R10         COM VCC  600k  
+E_ABM9         VIN_AVE 0 VALUE { ( V(VIN_H)  
++ +V(VIN_L) ) / 2.0   }
+R_R15         HG N988834  {RH}  
+R_R4         0 UV  100MEG  
+R_R8         IN VCC  882k  
+V_V8         N988456 0 {UV_AVE}
+R_R2         N989462 N990340  100  
+X_S1    N988590 0 VB N988834 FAN7081_S1 
+E_ABM3         IN_A 0 VALUE { IF (V(IN) > V(N989462), 5, 0)    }
+E_E2         VIN_H 0 VCC COM 0.6
+
+*$
+**********************************************************************
+
+.subckt FAN7081_S4 1 2 3 4  
+S_S4         3 4 1 2 _S4
+RS_S4         1 2 1G
+.MODEL         _S4 VSWITCH Roff=1e8 Ron=1m Voff=0.5V Von=1.5V
+.ends FAN7081_S4
+
+.subckt FAN7081_S3 1 2 3 4  
+S_S3         3 4 1 2 _S3
+RS_S3         1 2 1G
+.MODEL         _S3 VSWITCH Roff=1000 Ron=1e8 Voff=0.5V Von=1.5V
+.ends FAN7081_S3
+
+.subckt FAN7081_S2 1 2 3 4  
+S_S2         3 4 1 2 _S2
+RS_S2         1 2 1G
+.MODEL         _S2 VSWITCH Roff=1e8 Ron=1m Voff=2.5V Von=3.5V
+.ends FAN7081_S2
+
+.subckt FAN7081_S1 1 2 3 4  
+S_S1         3 4 1 2 _S1
+RS_S1         1 2 1G
+.MODEL         _S1 VSWITCH Roff=1m Ron=1e8 Voff=2.5V Von=3.5V
+.ends FAN7081_S1
+*$
+*$
+.model NMOSout nmos level=7
++ tnom=25                   tox=5e-8                  rsh=1
++ xj=1.07662e-6             nch=9.28825e16            vth0=1.13622
++ k1=0.0281109              k2=0                      k3=44.6684
++ k3b=2.2                   w0=9.96841e-6             nlx=1.59499e-7
++ dvt0w=0.095               dvt1w=0                   dvt2w=-0.0451571
++ dvt0=0                    dvt1=0.34                 dvt2=-0.0464202
++ vbm=-5                    u0=585.08                 ua=6.39555e-10
++ ub=5e-18                  uc=2.23417e-11            vsat=3.36e4
++ a0=2.16                   ags=46.4                  b0=-0.0202835
++ b1=2.56065e-3             keta=-0.0208347           a1=0
++ a2=1                      rdsw=8.24014e3            prwg=-6.20328e-3
++ prwb=0.0157543            wr=1                      wint=6.79435e-7
++ lint=5.44213e-7           xl=0                      xw=0
++ dwg=3.09663e-8            dwb=8.04177e-8            voff=-1.04093e-4
++ nfactor=0.67914           cit=0                     cdsc=0
++ cdscd=0                   cdscb=0                   eta0=1.5e-4
++ etab=0                    dsub=0.1                  pclm=1e-5
++ pdiblc1=8.4e-4            pdiblc2=1e-5              pdiblcb=-1e-4
++ drout=0.118444            pscbe1=3.4621e8           pscbe2=1.76742e-6
++ pvag=0                    delta=0.0290512           n=1
++ js=4.932049e-07           mobmod=1                  prt=4.66709e3
++ ute=-1.86447              kt1=-0.641312             kt1l=-1e-7
++ kt2=0                     ua1=5.52586e-10           ub1=8.57759e-18
++ uc1=-7.05855e-11          at=3.1282e4               wl=0
++ wln=1                     ww=0                      wwn=1
++ wwl=0                     ll=0                      lln=1
++ lw=0                      lwn=1                     lwl=0
++ capmod=2                  cgdo=1.13431e-9           cgso=5.5037e-10
++ cgbo=0                    fc=0.5                    cj=2.09117e-4
++ pb=0.605272               mj=0.344054               cjsw=4.10568e-10
++ pbsw=0.52917              mjsw=0.345765   
++ noff=1
++ acde=1                    moin=15   
++ tcjswg=0                  prdsw=-9.09372e3          la0=-4.99366
++ lags=0.0869499            pvsat=6e4                 wbeta0=39
++ lbeta0=194                lat=-1.26066e5            wprt=-6.86456e4
++ pprt=1.67501e5
+*****************************
+*$
+.model PMOSout pmos level=7
++ tnom=25                   tox=5e-8                  rsh=1
++ xj=1.21226e-7             nch=1.1002e16             vth0=-1.13783
++ k1=0.96157                k2=-3.98041e-5            k3=28.6035271
++ k3b=0                     w0=1e-6                   nlx=1.36759e-7
++ dvt0w=0.2                 dvt1w=0                   dvt2w=-0.032
++ dvt0=9.15173e-3           dvt1=0                    dvt2=0
++ u0=213.897                ua=1.1129e-8              ub=1e-21
++ uc=1e-8                   vsat=1.94904e4            a0=0.0431384
++ ags=12.9613976            b0=3.692352e-6            b1=-4.04893e-10
++ keta=-0.0241713           a1=0                      a2=1
++ rdsw=8.34748e3            prwg=6.98895e-6           prwb=0
++ wr=1                      wint=2.91831e-6           lint=1.14797e-6
++ xl=0                      xw=0                      dwg=-2.07302e-7
++ dwb=0                     voff=-0.014092            nfactor=1.16072
++ cit=0                     cdsc=0                    cdscd=0
++ cdscb=0                   eta0=0                    etab=-1.984348e-4
++ dsub=1                    pclm=3.0616299            pdiblc1=0.0115106
++ pdiblc2=2.33234e-3        pdiblcb=-9.725991e-7      drout=0.2304991
++ pscbe1=1.996e9            pscbe2=8.3085e-5          pvag=0
++ delta=1e-3                n=1                       js=2.95216e-6
++ mobmod=1                  prt=-0.0948683            ute=-1.9455528
++ kt1=-0.6141856            kt1l=-1e-7                kt2=0
++ ua1=3.128356e-12          ub1=-5.60828e-17          uc1=-3.04095e-11
++ at=1.690647e4             nqsmod=0                  wl=0
++ wln=1                     ww=0                      wwn=1
++ wwl=0                     ll=0                      lln=1
++ lw=0                      lwn=1                     lwl=0
++ capmod=2                  cgdo=7.62994e-10          cgso=3.86699e-10
++ cgbo=0                    fc=0.5                    cj=1.67819e-4
++ pb=0.590742               mj=0.354919               cjsw=3.8335e-10
++ pbsw=0.428283             mjsw=0.297076 
++ noff=1                    acde=1                    moin=15                  
+.ends FAN7081
+

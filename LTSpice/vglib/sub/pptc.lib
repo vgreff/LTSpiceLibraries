@@ -1,0 +1,80 @@
+*PPTC lib
+*Switch model 
+.model S_model SW(RON=1m ROFF=1G Vt=0.5 Vh=-0.5 level=1)
+* Current Judgement
+ .subckt JCur Vcur out PARAMs: ithb=1 ithk=0  
+Ejudge in 0 VALUE {IF((V(Vcur,0) >= ithk*temp+ithb),1.581977, 0)}
+ Rd in out 1
+ Cd out 0 10n
+ .ends
+* Time to trip Judgement
+ .subckt JTtT set vTtT out
+ * Time Counting
+ Vin in 0 1.581977
+ Sset tmp in set 0 S_model
+ G1 tmp JPoint VALUE {1u*V(tmp, JPoint)/V(vTtT,0)}
+ C1 0 JPoint 1u
+* Time reset (discharge C1)
+ Sreset JPoint 0 reset 0 S_model
+ * inverter
+ Einv reset 0 VALUE {IF((V(set) >= 0.5),0, 1)}
+* judgement
+Ejudge out 0 VALUE {IF((V(JPoint,0) >=1),1, 0)}
+ .ends
+
+* TtT Generation
+.subckt TG Isen TtT PARAMs: p00=0 p10=0 p01=0 p20=0 p11=0 p02=0 p30=0 p21=0 p12=0 p03=0 p40=0 p31=0 p22=0 p13=0 p04=0
+bGtg 0 TtT i= 
++ pwr(10,min(max(p00+(p10+(p20+(p30+p40*temp)*temp)*temp)*temp+(p01+(p11+(p21+p31*temp)*temp)*temp)*V(Isen)+(p02+(p12+p22*temp)*temp)*V(Isen)*V(Isen)+(p03+p13*temp)*V(Isen)*V(Isen)*V(Isen)+p04*V(Isen)*V(Isen)*V(Isen)*V(Isen),-8),3))
+Rtg TtT 0 1
+.ends
+* Switch State Control
+.subckt SSC resC resT Q_
+* Reset Signal
+VR R 0 PWL 0 1 0.9n 1 1n 0
+* SR Latch
+Bsr1 0 Q i= IF(((V(R) < 0.5) & (V(Q_) < 0.5)), 0.03163954, 0) Rpar=50 Cpar=10p
+ Bsr2 0 Q_ i= IF(((V(S) < 0.5) & (V(Q) < 0.5)), 0.03163954, 0) Rpar=50 Cpar=10p
+* And Gate
+Band S 0 V= IF(((V(resC) >= 0.5) & (V(resT) >= 0.5) & (temp <= 126)),1, 0)
+ .ends
+
+* Main Part
+.subckt MP I O LC Isen PARAMs: brl=0 krl=0 crl=0 arl=0 tmid=0 pdk=0 pdb=1
+ Vsen I 1 0
+ SL 1 2 LC 0 S_model
+ GH 1 2 VALUE {V(1,2)/(V(I,O)*V(I,O)/max((pdk*temp+pdb),1e-9))}
+ GL 2 O VALUE {V(2,O)/pwr(10,(krl*temp+brl+crl*atan(arl*(temp-tmid))))}
+ * Current Sensing
+ Rsen Isen 0 1
+ Csen Isen 0 10n
+ Gsen 0 Isen Value {abs(I(Vsen))}
+ .ends
+
+*miniSMDC014F PPTC library
+.subckt miniSMDC014F I O
+* Main Framework
+ Xmp I O LC Isen MP PARAMs: brl=3.1407 krl=7.0713e-3 crl=1.8143 arl=0.532 tmid=120.186 pdk=-0.008497 pdb=1.105
+ XTG Isen TtT TG PARAMs: p00=3.041 p10=-0.02291 p01=-4.108 p20=-0.0001655 p11=0.006464 p02=0.8491 p30=4.918e-06 p21=0.0001054 p12=-0.000808 p03=-0.04981 p40=-3.623e-08 p31=-8.776e-07 p22=-7.133e-06 p13=4.238e-05 p04=0
+ XJC Isen resC JCur PARAMs: ithb=0.1679 ithk=-0.00129
+ XJT resC TtT resT JTtT
+ XSSC resC resT LC SSC
+.ends
+
+.subckt miniSMDC050F I O
+* Main Framework
+ Xmp I O LC Isen MP PARAMs: brl=2.8898 krl=4.7e-3 crl=2.04114 arl=0.597 tmid=122.889 pdk=-0.00795 pdb=1.063
+ XTG Isen TtT TG PARAMs: p00=3.041 p10=-0.02291 p01=-1.538 p20=9.813e-5 p11=0.002681 p02=0.1375 p30=2.057e-05 p21=2.532e-5 p12=-0.000128 p03=-0.003784 p40=-2.101e-07 p31=-1.442e-07 p22=-1.08e-06 p13=2.18e-06 p04=0
+ XJC Isen resC JCur PARAMs: ithb=0.557 ithk=-0.00339
+ XJT resC TtT resT JTtT
+ XSSC resC resT LC SSC
+.ends
+
+.subckt miniSMDC150F I O
+* Main Framework
+ Xmp I O LC Isen MP PARAMs: brl=0.82754 krl=3.842e-3 crl=1.3223 arl=0.524 tmid=126.081 pdk=-0.01177 pdb=1.461
+ XTG Isen TtT TG PARAMs: p00=2.688 p10=0.01381 p01=-0.5366 p20=-0.0002564 p11=-0.004829 p02=0.02766 p30=-3.709e-06 p21=2.138e-5 p12=-0.0004454 p03=-0.0005195 p40=4.594e-08 p31=1.157e-08 p22=-9.133e-07 p13=-1.168e-05 p04=0
+ XJC Isen resC JCur PARAMs: ithb=1.721 ithk=-0.01197
+ XJT resC TtT resT JTtT
+ XSSC resC resT LC SSC
+.ends

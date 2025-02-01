@@ -1,0 +1,289 @@
+.SUBCKT LM5118  VIN UVLO RT EN RAMP SS FB COMP VOUT GND CSG  CS LO HB HO HS VCC VCCX AGND SYNC
+CR Agnd GND 1 Rpar=1m ic=0
+Rf sync  gnd 1G
+E_LDO LDOctl GND VALUE = {50 - V(REGctl)}
+RL_ECS CSo GND 10K
+DB VCC HB _D1_mod
+.MODEL _D1_mod D IS=100nA N=1 cjo=10f
+Abuf_D2AA3 enable 0 0 0 0 0 tst 0 BUF Vhigh=5 Vlow=0 Ref=2.5  tau=0.2n
+Abuf_A2DA4 Vstart 0 0 0 0 0 enable 0 BUF Vhigh=3.5 Vlow=0.3 Ref=1.75  tau=0.2n
+S_VccOK VccTST VIN VCC GND _S3_mod
+.MODEL _S3_mod sw von=3.7 voff=3.5 RON=10m
+V_FBoffs SSclmp FB 150mV
+XA15 bstCLKinv Lorst2 bstminTon rstloQ AND3_BASIC_GEN
+BG_Isaw GND sawtooth i=IF(V(tst)< 3,0,IF(V(sawCTL)<2.5,
++ I(Vrt_sense)/(V(RT) + 3020*I(Vrt_sense)),(-V(sawtooth)/100))) Cpar=1p
+XA_loqset setloQ loQ loQN NOR2_BASIC_GEN
+E_PWM_COMP endTonA GND EmulatedIL COMP 100
+bE_curlimTH GND curlim i=IF(V(Vout)<0.75*V(Vin),1.45, IF(V(Vout)>0.866*V(Vin),2.70,10.776*V(Vout)/V(Vin)-6.625)) Rpar=1 Cpar=1n
+V_Iscs CSout EmulatedIL 0
+RVccxPulldn VCCX GND 70K
+Abuf_DriveBuck DriveBuck 0 0 0 0 0 DriveBuckA 0 BUF Vhigh=1 Vlow=-1 Ref=1.75  tau=80n
+E_bkdrv gateHI HO VALUE = {IF(V(DriveBuckA)<-1,-3,
++ IF(V(DriveBuckA)<-0.2,(2*V(DriveBuckA))-1,
++ IF(V(DriveBuckA)<0.2,7*V(DriveBuckA),
++ IF(V(DriveBuckA)<1,(2*V(DriveBuckA))+1,3))))}
+S_LDO VIN regout LDOctl GND _S1_mod
+.MODEL _S1_mod sw VT=49 RON=1m
+S_UVLO Vstart VccTST UVLO GND _S4_mod
+.MODEL _S4_mod sw VT=1.18 VH=0.05 RON=10m
+G_35maLIMIT Vccval Vccgen VALUE = {IF(I(V_ccsense2)>35mA,
++ I(V_ccsense2)-35mA,0)}
+S_EN_REG regout V7 REGctl GND _S2_mod
+.MODEL _S2_mod sw VT=1 RON=10m
+V_reg V7 GND 7
+V_ccsense2 Vccval VCC 0
+XA_loqrst loQN rstloQ loQ NOR2_BASIC_GEN
+E_Srampctl SRampctl GND GND DriveBuckA 1
+.param gmi=1n
+Ren2gnd EN GND {1/gmi}
+M1L VCC gateLO LO LO _M3_mod
+.MODEL _M3_mod NMOS KP=1 RD=3.05 VTO=2
+M2L GND gateLO LO LO _M5_mod
+.MODEL _M5_mod PMOS KP=1 RD=1.65 VTO=-2
+
+E_CURrst CURrst GND VALUE = {IF(V(EmulatedIL)>V(curlim),5,0)}
+
+XA7 genPWMrst minTon rstPWM AND2_BASIC_GEN
+*BEconv2 0 CS2CSGmagnified i=v(CSG,CS) Rpar=1k cpar=10p
+XA18 DriveBuck DriveBoost DRV NOR2_BASIC_GEN
+S_ssCLMP SS SSmax SS SSclmp _S5_mod
+.MODEL _S5_mod sw VT=-1mV VH=1mV RON=1
+E_unity SSmax GND SSclmp GND 1
+S_ssLO SS SSmin GND tst _S6_mod
+.MODEL _S6_mod sw VT=-3 RON=10m
+VssLO SSmin GND 7mV
+C_saw sawtooth GND 156.25pF IC=0
+Rsawtooth sawtooth GND  1G
+bEboostmode gnd boostmode i=IF(V(Vout)>V(Vin)*0.75,5,0) Rpar=1 Cpar=1n
+XA33 boostmode clk bstCLKinv NAND2_BASIC_GEN
+*Rconv2 CS2CSGmagnified 0 10K
+XA19 DRV DRVdly narrowctl AND2_BASIC_GEN
+D_pkrmp rmpplusdiode pkrmp _D2_mod
+.MODEL _D2_mod D IS=1u RS=5 cjo=10f
+XA20 clk buckCLKinv INV_BASIC_GEN
+Abuf_D2AA25 narrowctl 0 0 0 0 0 SCSctl 0 BUF Vhigh=1 Vlow=-1 Ref=1.75  tau=8n
+Cout Vout GND 0.001uF
+H_stabilizeCS conv3 0 V_Iscs 10K
+XA21 buckCLKinv setPWM INV_BASIC_GEN
+Rconv3 conv3 0 10K
+M1H HB gateHI HO HO _M1_mod
+.MODEL _M1_mod NMOS KP=1 RD=5.05 VTO=2
+M2H HS gateHI HO HO _M2_mod
+.MODEL _M2_mod PMOS KP=1 RD=3.05 VTO=-2
+Rconv1 HSmagnified 0 10K
+bE_erramp1 GND unsat i= 100*IF(V(SS)>1.23,(1.23 - v(FB)),(v(SS) - v(FB))) Rpar=1 Cpar=1n
+BEsat GND erramp1  i=IF(V(unsat)>V(maxerr),V(maxerr),IF(V(unsat)<-0.3,-0.3,V(unsat)))/10k Rpar=10k Cpar=53p
+Errout COMP GND erramp1 GND 1
+XA250n DRV DRVdly BUF250n_BASIC_GEN
+bG_Iss GND SS i=IF(V(tst)<3,0,10uA)+100n Rpar=1G Cpar=10p
+XA30 triggen CLK enable oscQN trigon AND4_BASIC_GEN
+
+XA_DFF clk oscQN trigger oscQN logic1 enable DFFSBRB_SHPBASIC_GEN
+Rpullup logic1 VCC 10MEG
+bG_I_uvlo EN UVLO i=IF(V(Vin)<3.7V,0, IF(V(UVLO)<V(Vin),5uA,0)) cpar=10p
+XA37 CLK triggen INV1_BASIC_GEN
+XA_Toggle trigon trigoff trigger OR2_BASIC_GEN
+XA_400ns_dlyx trigon trigoff BUF472n_BASIC_GEN
+Rstart_pldn Vstart GND 100MEG
+Vrt_sense GND ground DC=0
+E_bstdrv gateLO LO VALUE = {IF(V(DriveBoostA)<-1,-3,
++ IF(V(DriveBoostA)<-0.2,(2*V(DriveBoostA))-1,
++ IF(V(DriveBoostA)<0.2,7*V(DriveBoostA),
++ IF(V(DriveBoostA)<1,(2*V(DriveBoostA))+1,3))))}
+
+*Ra2g unsat GND 10MEG
+Abuf_D2AA24 DriveBoost 0 0 0 0 0 DriveBoostA 0 BUF Vhigh=1 Vlow=-1 Ref=1.75  tau=8n Rout=2
+XA26 clk clkdly sawCTL AND2_BASIC_GEN
+XA200n clk clkdly BUF200n_BASIC_GEN
+XVCOA1 RT CLK1 CLK_GEN
+R4 CLK1 0 1
+E1 CLK 0 CLK1 0 1
+E_EN_REG REGctl GND VALUE={IF(V(VIN)<10,0,50)}
+S_Vccx_on Vccgen VCCX VCCX GND _S24_mod
+.MODEL _S24_mod sw VT=3.75 VH=0.1 RON=5 ROFF=24MEG
+S_Vccx_off regout Vccgen GND VCCX _S25_mod
+.MODEL _S25_mod sw VT=-3.75 VH=0.1 RON=1m
+V_ccsense1 Vccgen Vccval DC=0
+XA_pwmset setPWM PWMQ PWMQN NOR2_BASIC_GEN
+E_endBOOST endBOOST GND VALUE = {IF(V(tst)<3,-1, 100*(V(sawtooth) - 4*(V(Vout)/V(Vin) - 0.75)))}
+C_pkrmp pkrmp GND 100pF IC=1V
+R_pkrmp pkrmp GND 1MEG
+Econv1 HSmagnified 0 0 HS 100
+E_pkrmp rmpplusdiode GND VALUE = {100*V(RAMP) + 1.0}
+XA14 HIrst CURrst genPWMrst OR2_BASIC_GEN
+E_maxerr maxerr GND VALUE={0.01*V(pkrmp)+0.5+V(EmulatedIL)-V(Ramp)}
+R_maxerr2g maxerr GND 100K
+RCSG1 CSG CSGi 1K
+RCS1 CS CSi 1K
+ECS CSo GND CSGi CSi 1000
+RCSfb CSi CSo 10K
+RCSoffs CSGi CSoffs 10K
+VCSoffset CSoffs GND 0.2
+S_CS CSout CSo SCSctl GND _S15_mod
+.MODEL _S15_mod sw VT=0  RON=30
+Ccs EmulatedIL RAMP 2nF
+SRamp RAMP GND SRampctl GND _S16_mod
+.MODEL _S16_mod sw VT=0 RON=100
+G_Iramp GND RAMP VALUE = {IF(V(tst)<3,0,IF(V(DriveBuckA)<0,0, IF(V(DriveBoostA)<0,5uA*(V(Vin)-V(Vout))+50uA,5uA*V(Vin)+50uA)))}
+XA28 enable initrst INV_BASIC_GEN
+XA29 initrst endTonA clk HIrst OR3_BASIC_GEN
+XA16 HIrst CURrst Lorst Lorst2 OR3_BASIC_GEN
+XA13 DriveBoost bstminTon BUF70n_BASIC_GEN
+E_lo_rst Lorst GND VALUE = {IF(V(endBOOST)>0,5,0)}
+XA_pwmrst PWMQN rstPWM PWMQ NOR2_BASIC_GEN
+XA_minTon DriveBuck minTon BUF70n_BASIC_GEN
+XA22 buckCLKinv enable PWMQ DriveBuck AND3_BASIC_GEN
+XA32 bstCLKinv setloQ INV_BASIC_GEN
+XA6 bstCLKinv enable loQ DriveBoost AND3_BASIC_GEN
+
+*$
+.SUBCKT DFFSBRB_SHPBASIC_GEN Q QB CLK D RB SB
++ PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75
+X1 CLK CLKdel INV_DELAY_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS}
++  VTHRESH={VTHRESH} DELAY = 1n
+X2 CLK CLKdel CLKint AND2_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS}
++ VTHRESH={VTHRESH}
+bgQ 0 Qint i= IF(V(SB) < VTHRESH,5,IF(V(RB)<VTHRESH,-5,
++ IF(V(CLKint)> VTHRESH,
++ IF(V(D)> VTHRESH,5,-5),0)))
+CQint Qint 0 1n
+RQint Qint 0 1000MEG
+D_D10 Qint MY5 D_D1
+V1 MY5 0 {VDD}
+D_D11 MYVSS Qint D_D1
+.MODEL D_D1 D( IS=1e-15 TT=10p Rs=0.05 N=.1  )
+V2 MYVSS 0 {VSS}
+EQ Qqq 0 Qint 0 1
+X3 Qqq Qqqd1 BUF_DELAY_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS}
++ VTHRESH={VTHRESH} DELAY = 1n
+RQq Qqqd1 Q 1
+bEQb Qbr 0 V= IF( V(Q) > VTHRESH, VSS,VDD)
+RQb Qbr Qb 1
+Cdummy1 Q 0 1nF
+Cdummy2 QB 0 1nF
+.IC V(Qint) {VSS}
+.ENDS
+*$
+.SUBCKT INV_DELAY_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75 DELAY = 1n
+Ainv a 0 0 0 0 y 0 0 BUF Vhigh={VDD} Vlow={VSS} Ref={VTHRESH} Td={delay} tau=1n
+.ends
+*$
+.SUBCKT BUF_DELAY_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0  VTHRESH=1.75 DELAY = 1n
+Abuf a 0 0 0 0 0 y 0 BUF Vhigh={VDD} Vlow={VSS} Ref={VTHRESH} Td={delay} tau=1n
+.ENDS
+*$
+.SUBCKT BUF472n_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75 DELAY = 640n
+Abuf a 0 0 0 0 0 y 0 BUF Vhigh={VDD} Vlow={VSS} Ref={VTHRESH} Td={delay/1.3} tau=1n
+.ENDS
+*$
+.SUBCKT BUF250n_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75 DELAY = 400n
+Abuf a 0 0 0 0 0 y 0 BUF Vhigh={VDD} Vlow={VSS} Ref={VTHRESH} Td={delay/1.3} tau=1n
+.ENDS
+*$
+.SUBCKT BUF200n_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0.3 VTHRESH=1.75
+Abuf a 0 0 0 0 0 y 0 BUF Vhigh={VDD} Vlow={VSS} Ref={VTHRESH}   Rout=10 Cout=4n
+.ENDS
+*$
+.SUBCKT BUF70n_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0
++ VTHRESH=1.75
+Abuf a 0 0 0 0 0 y 0 BUF Vhigh={VDD} Vlow={VSS} Ref={VTHRESH}   Rout=2 Cout=7n
+.ENDS
+*$
+.SUBCKT AND4_BASIC_GEN A B C D Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75
+bE_ABMGATE 0 Y  i=IF(V(A) > VTHRESH & V(B) > VTHRESH &
++ V(C) > VTHRESH & V(D) > VTHRESH, VDD,
++ IF(V(A) < VTHRESH | V(B) < VTHRESH | V(C) < VTHRESH |
++ V(D) < VTHRESH, VSS, V(Y)))/5.05 Rpar=5.05 Cpar=2n  tripdv=10m tripdt=5n
+.ENDS
+*$
+.SUBCKT AND3_BASIC_GEN A B C Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75
+bE_ABMGATE 0 Y  i=IF(V(A) > VTHRESH & V(B) > VTHRESH &
++ V(C) > VTHRESH,VDD,
++ IF(V(A) < VTHRESH | V(B) < VTHRESH | V(C) < VTHRESH,
++ VSS, V(Y))) Rpar=1 Cpar=0.2n  tripdv=10m tripdt=1n
+.ENDS
+*$
+.SUBCKT OR3_BASIC_GEN A B C Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75
+bE_ABMGATE 0 Y  i= IF(V(A) > VTHRESH | V(B) > VTHRESH |
++ V(C) > VTHRESH, VDD,
++ IF(V(A) < VTHRESH & V(B) < VTHRESH & V(C) < VTHRESH, VSS,
++ V(Y))) Rpar=1 Cpar=0.2n tripdv=10m tripdt=1n
+.ENDS
+*$
+.SUBCKT INV_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0.3 VTHRESH=1.75
+bE_ABMGATE1 0 Y i= IF(V(A) > VTHRESH , VSS,
++ IF(V(A) < VTHRESH, VDD, V(Y))) Rpar=1 Cpar=0.2n  tripdv=10m tripdt=1n
+.ENDS
+*$
+.SUBCKT INV1_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0.3 VTHRESH=1.75
+bE_ABMGATE 0 Y i=IF(V(A) > VTHRESH , VSS,
++ IF(V(A) < VTHRESH , VDD, V(Y)))/5 Rpar=5 Cpar=4n  tripdv=10m tripdt=10n
+.ENDS
+*$
+.SUBCKT OR2_BASIC_GEN A B Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75
+bE_ABMGATE 0 Y i= IF(V(A) > VTHRESH | V(B) > VTHRESH, VDD,
++ IF(V(A) < VTHRESH & V(B) < VTHRESH, VSS, V(Y))) Rpar=1 Cpar=0.2n tripdv=10m tripdt=1n
+.ENDS
+*$
+.SUBCKT AND2_BASIC_GEN A B Y PARAMS: VDD=3.5 VSS=0 VTHRESH= 1.75
+bE_ABMGATE 0 Y i= IF(V(A) > VTHRESH & V(B) > VTHRESH,VDD,
++ IF(V(A) < VTHRESH | V(B) < VTHRESH,VSS, V(Y))) Rpar=1 Cpar=1n  tripdv=10m tripdt=10n
+.ENDS
+*$
+.SUBCKT NOR2_BASIC_GEN A B Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75
+bE_ABMGATE 0 Y i= IF(V(A) > VTHRESH | V(B) > VTHRESH,VSS,
++ IF(V(A) < VTHRESH & V(B) < VTHRESH,VDD, V(Y))) Rpar=1 Cpar=0.2n  tripdv=10m tripdt=1n
+.ENDS
+*$
+.SUBCKT NAND2_BASIC_GEN A B Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75
+bE_ABMGATE 0 Y  i=IF(V(A) > VTHRESH & V(B) > VTHRESH, VSS,
++ IF(V(A) < VTHRESH | V(B) < VTHRESH, VDD, V(Y))) Rpar=1 Cpar=0.2n tripdv=10m tripdt=1n
+.ENDS
+*$
+.SUBCKT CLK_GEN RT CLK
+IS1         0 RT 1U
+cp 0 rt 1p ic=0
+XU6         4 3 RT VCR_0
+XU5         4 3 D_D1_0
+C2          3 0 1U
+XU2         5 4 INV_0
+R5          6 0 1G
+*R5          6 0 1MEG
+XU4         6 5 RT VCR_1
+XU3         5 3 CLK AND_0
+XU1         7 6 5 COMPARATOR_0
+C1          6 0 1U
+R2          0 7 1K
+R1          7 5 1K
+.ENDS
+*$
+.SUBCKT VCR_0 1 2 RT
+BG1 1 2 i=(V(1,2)/(20*V(RT)+0.121)) cpar=1p
+.ENDS
+*$
+.SUBCKT D_D1_0  1 2
+D1 1 2 DD1
+.MODEL DD1 D
++ IS=1E-011
++ TT=1E-09
++ RS=0
++ N=1.1 cjo=1f vp=0.5
+.ENDS
+*$
+.SUBCKT INV_0 IN OUT
+Ainv in 0 0 0 0 y 0 0 BUF Vhigh=4 Vlow=-4 Ref=0  trise=.1n
+.ENDS
+*$
+.SUBCKT VCR_1 1 2 RT
+bG1 1 2 i=((V(1,2)*2.196E-6)/(V(RT)*0.156E-03+4.7112E-7)) cpar=1p
+.ENDS
+*$
+.SUBCKT AND_0  1 2 OUT
+A1 1 2 0 0 0 0 out 0 AND Vhigh=3.5 Vlow=0.3 Ref=0  trise=.1n
+.ENDS
+*$
+.SUBCKT COMPARATOR_0 P N Y
+A1 p n 0 0 0 0 Y 0 SCHMITT Vt=0 Vhigh=4 Vlow=-4 vh=1.m  trise=.1n
+.ENDS
+.ENDS LM5118

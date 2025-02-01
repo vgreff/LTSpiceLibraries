@@ -1,0 +1,10 @@
+.subckt ss1p3l 1 2
+ddio 1 2 legd
+dgr 1 2 grd
+.model legd d is = 9.99967E-005 n = 1.55247 rs = 0.0299696
++ eg = 0.518171 xti = 3.99992 t_measured = 27
++ cjo = 2.79412E-010 vj = 0.7 m = 0.481413 fc = 0.5
++ tt = 1.4427E-009 bv = 33 ibv = 50 af = 1 kf = 0
+.model grd d is = 1.00013E-015 n = 1.17777 rs = 0.0149656
++ eg = 1.51115 xti = 0.699844 t_measured = 27
+.ends

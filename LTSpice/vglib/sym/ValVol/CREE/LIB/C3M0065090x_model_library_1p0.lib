@@ -1,0 +1,229 @@
+*******************************************************************************
+**	Next generation MOSFET model INITIAL release
+**	Version 1.0 Date: 11-4-2015
+*******************************************************************************
+**	This is a behavioral model file for the Wolfspeed C3M0065090 family
+**	of 65 milliohm 900V SiC MOSFETs.
+**	This library contains the following device subcircuits:
+**		C3M0065090D TO-247 package
+**		C3M0065090J 7 lead D2PAK package
+**		CMP3-0900-0065B die
+*******************************************************************************
+
+*******************************************************************************
+**	DISCLAIMER
+*******************************************************************************
+**	This model is provided as is, where is, and with no warranty of any kind
+**	either expressed or implied, including but not limited to any implied 
+**	warranties of merchantability and fitness for a particular purpose.
+*******************************************************************************
+
+*******************************************************************************
+**	Model Caveats:
+*******************************************************************************
+**	1.  The model forward IV fit range is VDS<=25V,ID<=125A VDS*ID<=1kW 
+**			whichever is less.
+**	2.	The model reverse IV fit range is VDS>=-6V and ID>=-50A
+**	3.	This model is accurate over the 25C to 150C temperature range only.
+**	4.  Body diode reverse recovery does not include diffusion capacitance effects
+**			at this point.
+**	5.  The model is intended for use in strong inversion only.
+**			Accuracy is limited in weak and moderate inversion at this point.				 
+*******************************************************************************
+
+*******************************************************************************
+**	C3M0065090D	Model
+*******************************************************************************
+.subckt C3M0065090D d g s
+LD		d			d_die	3.77n
+RD		d			d_die	100
+RG		g			ga		6m
+LG		ga 		g_die	15.7n
+RGP		ga		g_die	500
+RS		s			sa		3m
+LS		sa		s_die	8.96n
+RS10	sa		s_die	100
+X1		d_die	g_die	s_die	CMP3-0900-0065B
+.ends
+*******************************************************************************
+**	C3M0065090J Model
+*******************************************************************************
+.subckt C3M0065090J d g s1 s2 s3 s4 s5 s6
+* Pin inductances and resistances
+RS1		g			g1		2m
+RS2		s1		s1a		2m
+RS3		s2		s2a		2m
+RS4		s3		s3a		2m
+RS5		s4		s4a		2m
+RS6		s5		s5a		2m
+RS7		s6		s6a		2m
+L1		g1		g2		7n
+L2		s1a		s1b		7n
+L3		s2a		s_c		7n
+L4		s3a		s_c		7n
+L5		s4a		s_c		7n
+L6		s5a		s_c		7n
+L7		s6a		s_c		7n
+RP1   g1		g2		100
+RP2   s1a		s1b		100
+RP3   s2a		s_c		100
+RP4   s3a		s_c		100
+RP5   s4a		s_c		100
+RP6   s5a		s_c		100
+RP7   s6a		s_c		100
+*	Bond wire resistances and inductances
+RS10	g2		g3		3m
+RS20	s1b		s1c		3m
+RS30	s_c		s_c1	1m	
+L10		g3		g_die	4.165n
+L20		s1c		s_die	4.008n
+L30		s_c1	s_die	0.884n
+RP10	g3		g_die	100 
+RP20	s1c		s_die	100 
+RP30	s_c1	s_die	100
+X1		d			g_die	s_die	CMP3-0900-0065B
+.ends
+*******************************************************************************
+**	Die model
+*******************************************************************************
+.subckt CMP3-0900-0065B d g s
+RG		g		g1	4.7
+R1 		g1 	s		1e9
+R2		d1	0		1e9
+G1 		d 	s 	value={f_id(f_hyp(v(d,s),1e-6),v(g1,s))} 
+G2	 	s 	d1 	value={f_q3IV(f_hyp(v(s,d1),1e-6),v(g1,s),temp)}
+G3		d		d1 	value={f_q3Rs(f_hyp(v(g1,s),1e-6),temp)*v(d,d1)}	
+XCGD 	d 	g1 	cgd
+CGS		g1	s		800p
+XCDS 	d 	s 	cds
+.ends 
+*******************************************************************************
+
+*******************************************************************************
+**	This is a list of parameters and functions for the mosfet model
+*******************************************************************************
+.param ka_a = 	0.1
+.param ka_b = 	8.9
+.param ka_c = 	1.2
+.param ka_d = 	0.9
+.param ka_e0 = 	3.534611773
+.param ka_e1 = 	-0.018431359
+.param ka_e2 = 	4.16935E-05
+.param ka_f0 = 	2.17302163
+.param ka_f1 = 	0.003560165
+.param ka_f2 = 	0.000180377
+.param ka_g =	2.4
+.param ka_h0 = 	105.8476465
+.param ka_h1 = 	-0.576822332
+.param ka_h2 = 	0.001620323
+	
+.param kb_a0 = 	3.467946597
+.param kb_a1 = 	0.000325911
+.param kb_a2 = 	0.000334505
+.param kb_b0 = 	0.171793387
+.param kb_b1 = 	0.000245974
+.param kb_b2 = 	4.32387E-06
+.param kb_c = 	0.22
+	
+.param kc_0 = 	0.279605263
+.param kc_1 = 	0.001921053
+	
+.param kd = 	0.03 ; originally 0.03
+
+.func f_ka_e(x) {f_hyp(ka_e0+ka_e1*(x-25)+ka_e2*(x-25)**2,1e-3)}
+.func f_ka_f(x) {f_hyp(ka_f0+ka_f1*(x-25)+ka_f2*(x-25)**2,1e-3)}  
+.func f_ka_h(x) {f_hyp(ka_h0+ka_h1*(x-25)+ka_h2*(x-25)**2,1e-3)}
+
+.func f_kb_a(x) {f_hyp(kb_a0+kb_a1*(x-25)+kb_a2*(x-25)**2,1e-3)}
+.func f_kb_b(x) {f_hyp(kb_b0+kb_b1*(x-25)+kb_b2*(x-25)**2,1e-3)}
+
+.func f_kc(x) {f_hyp(kc_0+kc_1*(x-25),1e-3)}
+
+.func f_ka(vgs) {(f_ka_h(temp)*vgs**(f_ka_e(temp)+ka_b+ka_a))/((vgs**(2*ka_c)+EXP(2*ka_c*ka_d))**(ka_b/(2*ka_c))*(vgs**(2*f_ka_f(temp))+EXP(2*f_ka_f(temp)*ka_g))**(f_ka_e(temp)/(2*f_ka_f(temp))))}  
+.func f_kb(vgs) {f_kb_a(temp)*(1-TANH(f_kb_b(temp)*(vgs)))/2+kb_c}
+.func f_id(vds,vgs) {f_ka(vgs)*(tanh(vds*f_kb(vgs))+tanh(vds*f_kb(vgs)*f_kc(temp)))/2*(1+kd*f_sabs(vds))}
+.func f_hyp(x,a) {(x+sqrt(x**2+4*a**2))/2}
+.func f_sabs(x) {x*tanh(x*1e3)}
+.func f_id2(vds,vgs,k_a,k_b,k_c) {f_limit(f_id(vds,vgs),p_a,p_b,p_c)}
+
+
+******************************************************************************
+**	3rd Quadrant I-V
+******************************************************************************
+.param kaa_a0 =	-20.79725886
+.param kaa_a1 =	-0.007083977
+.param kaa_b0 =	0.155922699 
+.param kaa_b1 =	-3.18916E-06
+.param kaa_c0 =	-1.918492783
+.param kaa_c1 =	-0.019611243
+.param kaa_d0 =	4.383748921 
+.param kaa_d1 =	-0.00762168 
+	                          
+.param kbb_a0 =	934.7415858 
+.param kbb_a1 =	26.4990032  
+.param kbb_b0 =	0.046110915 
+.param kbb_b1 =	0.000380387 
+.param kbb_c0 =	-55.36528096
+.param kbb_c1 =	0.122126965 
+.param kbb_d0 =	0.3561459   
+.param kbb_d1 =	0.002633729 
+	                          
+.param kcc_a0 =	-0.00013385 
+.param kcc_a1 =	3.79226E-07 
+.param kcc_b0 =	0.000907603 
+.param kcc_b1 =	5.10484E-06 
+.param kcc_c0 =	0.051757139 
+.param kcc_c1 =	-9.75188E-05
+
+**	Temperature dependent functions
+.func f_kaa_a(T)	{kaa_a0+kaa_a1*T}
+.func f_kaa_b(T)	{kaa_b0+kaa_b1*T}
+.func f_kaa_c(T)	{kaa_c0+kaa_c1*T}
+.func f_kaa_d(T)	{kaa_d0+kaa_d1*T}
+
+.func f_kbb_a(T)	{kbb_a0+kbb_a1*T}
+.func f_kbb_b(T)	{kbb_b0+kbb_b1*T}
+.func f_kbb_c(T)	{kbb_c0+kbb_c1*T}
+.func f_kbb_d(T)	{kbb_d0+kbb_d1*T}
+
+.func f_kcc_a(T)	{kcc_a0+kcc_a1*T}
+.func f_kcc_b(T)	{kcc_b0+kcc_b1*T}
+.func f_kcc_c(T)	{kcc_c0+kcc_c1*T}
+
+**	Voltage dependent functions
+.func f_kaa(x,T)	{f_kaa_a(T)*(1-tanh(f_kaa_b(T)*(x-f_kaa_c(T))))/2+f_kaa_d(T)}  
+.func f_kbb(x,T)	{f_kbb_a(T)*(1-tanh(f_kbb_b(T)*(x-f_kbb_c(T))))/2+f_kbb_d(T)}
+.func f_kcc(x,T)	{f_kcc_a(T)*x**2+f_kcc_b(T)*x+f_kcc_c(T)}
+
+**	Final I-V
+.func f_q3IV(x,y,T) {x**f_kbb(y,T)*exp(f_kaa(y,T))}
+.func f_q3Rs(x,T)		{1/f_kcc(x,T)}
+
+*******************************************************************************
+**	MOSFET Capacitors
+*******************************************************************************
+********************************************************************************
+*****	Voltage controlled capacitors
+********************************************************************************
+.subckt cgd high low
+.func f_hyp1(x,a,b) {((x-a)+sqrt((x-a)**2+4*b**2))/2+a}
+.param ka_gd = {207.0376962*1}
+.param kb_gd = 2.499945875
+.param kc_gd = {0.765412072*1}
+.param kd_gd = 0.002322968
+.param k_lim = -1.6
+F1 high low value={-i(e1)*(ka_gd/(1+f_hyp1(v(high,low),k_lim,0.1)/kb_gd)**kc_gd+kd_gd*f_hyp1(v(high,low),k_lim,0.1))}
+C1 nx 0 1e-12
+E1 nx 0 high low 1
+.ends
+
+.subckt cds high low
+.param Cjo = 1017.240153
+.param Vt  = 11.29984365
+.param M   = 0.942636575
+.param Co  = 40         
+F1 high low value={-i(e1)*(Cjo/(1+v(high,low)/Vt)**M+Co)}
+C1 nx 0 1e-12
+E1 nx 0 high low 1
+C2 high low 40p
+.ends

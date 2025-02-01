@@ -1,0 +1,24 @@
+.subckt TDA2030 1 2 3 4 5 
+r11 5 4 700
+s1 3 4 x1:u1:x 3 x1:u1:q 
+s2 5 3 3 x1:u1:x x1:u1:q 
+a1 20 1 0 0 0 0 x1:u1:x 0 ota g=0.0002 ref=0 iout=3.18309886183791e-005 cout=4.54728408833987e-012 en=2e-008 enk=0 in=1e-011 ink=0 incm=0 incmk=0 vhigh=1e308 vlow=-1e308
+.param a=12
+b 20 1 v=tanh(a*v(2,1))/a
+c3 3 5 1p
+c4 4 3 1p
+r2 x1:u1:x 5 200000000 noiseless
+r1 4 x1:u1:x 200000000 noiseless
+r3 4 1 10000000 noiseless
+r4 4 2 10000000 noiseless
+r5 2 5 10000000 noiseless
+r6 1 5 10000000 noiseless
+b1 x1:u1:x 0 i=if(v(x1:u1:x,4)<0,0,(6.36619772367581e-005 *v(x1:u1:x,4))**2)
+b2 0 x1:u1:x i=if(v(x1:u1:x,5)>0,0,(6.36619772367581e-005 *v(5,x1:u1:x))**2)
+d1 3 4 x1:u1:x 
+d2 5 3 x1:u1:x 
+d:x1:1 5 3 d1
+.model d1 d cjo=100p rs=0.1
+.model x1:u1:x d(ron=10m epsilon=10 noiseless)
+.model x1:u1:q sw(ron=100m roff=10meg vt=0 vh=-.1 vser=1.4 ilimit=4 noiseless level=2 epsilon=0.1)
+.ends

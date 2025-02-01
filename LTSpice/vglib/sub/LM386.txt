@@ -1,0 +1,51 @@
+* Source File: LM386Blk.asc
+* Developer: ETech (eetech00@yahoo.com)
+* Created: Feb 28 2016
+* Revision: NA
+*
+* This TI LM386 spice model has
+* been tested with LTSpice. Temperature is not modeled.
+*
+* block symbol definitions
+.subckt LM386_ETech G1 INN INP DGND OUT VS BYPASS G8
+Q3 N011 N011 DGND 0 NP .2
+Q2 N011 N009 N004 0 PN .2
+Q1 DGND INN N009 0 PN .2
+R1 INN DGND 50k
+Q4 N007 N011 DGND 0 NP .2
+R2 G1 G8 1.35k
+Q5 N007 N010 G1 0 PN .2
+Q6 DGND INP N010 0 PN .2
+R3 INP DGND 50k
+Q7 N008 N007 DGND 0 NP .2
+Q8 N006 N012 DGND 0 NP 20
+C1 N008 N007 10p
+Q9 N012 N008 N006 0 PN .2
+R4 OUT N006 0.5
+R5 N003 OUT 0.5
+R6 OUT G1 15k
+Q10 VS N002 N003 0 NP 20
+Q11 N002 N001 VS 0 PN .2
+R7 BYPASS N004 15k
+R8 N001 BYPASS 15k
+Q§D2 N002 N002 N005 0 NP 20
+R9 N001 DGND 3400
+R10 G8 N004 150
+Q12 N001 N001 VS 0 PN .2
+Q§D1 N005 N005 N008 0 NP 20
+*
+* generic transistor models generated
+* with MicroSim's PARTs utility, using
+* default parameters except Bf.
+* (but default parameters do not match LTspice defaults): 
+.model NP NPN(Is=10f Xti=3 Eg=1.11 Vaf=100
++ Bf=400 Ise=0 Ne=1.5 Ikf=0 Nk=.5 Xtb=1.5 Var=100
++ Br=1 Isc=0 Nc=2 Ikr=0 Rc=0 Cjc=2p Mjc=.3333
++ Vjc=.75 Fc=.5 Cje=5p Mje=.3333 Vje=.75 Tr=10n
++ Tf=1n Itf=1 Xtf=0 Vtf=10)
+.model PN PNP(Is=10f Xti=3 Eg=1.11 Vaf=100
++ Bf=200 Ise=0 Ne=1.5 Ikf=0 Nk=.5 Xtb=1.5 Var=100
++ Br=1 Isc=0 Nc=2 Ikr=0 Rc=0 Cjc=2p Mjc=.3333
++ Vjc=.75 Fc=.5 Cje=5p Mje=.3333 Vje=.75 Tr=10n
++ Tf=1n Itf=1 Xtf=0 Vtf=10)
+.ends LM386

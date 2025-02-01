@@ -1,0 +1,3 @@
+﻿.subckt GND1 1
+vkz 1 0 0
+.ends GND1

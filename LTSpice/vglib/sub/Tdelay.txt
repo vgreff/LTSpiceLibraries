@@ -1,0 +1,11 @@
+.subckt tdelay in OUT params: Td=10u
+B1 N002 0 V=v(in)
+R1 N001 N002 1k
+cr1 n0010 0 10p
+T1 N001 0 X 0 Td={Td} Z0=1k
+*L n001 x 1
+R2 0 X 1k
+B2 OUT 0 V=2*v(X)
+R3 0 OUT 1k
+R4 in 0 1Meg
+.ends tdelay

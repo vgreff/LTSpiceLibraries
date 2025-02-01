@@ -1,0 +1,152 @@
+* Source File: 74HC132.txt
+* Developed: ETech (eetech00@yahoo.com)
+* Created: Apr 06 2023
+* Revision: NA
+*
+* This spice model was tested with LTSpice.
+* Temperature is not modeled.
+********************************************
+*** NXP/Philips 74HC132 Quad Schmitt NAND Gate
+.SUBCKT 74HC132  A  B  Y VCC VEE
+XINPA  A  Ai  VCC  VEE    SMT1N
+XINPB  B  Bi  VCC  VEE    SMT1N
+XNOR2 Ai  Bi  Y1  VCC  VEE   NOR2
+XOUTP Y1  Y  VCC  VEE  OUTPN
+.ENDS 74HC132
+ 
+*** 2-input NOR Gate ***
+.SUBCKT NOR2 A B Y VCC VEE PARAMS: LP=3.2u WP=28.16u LN=3.2u WN=3.2u M=1
+MP1 NET20 A VCC VCC MHCPEN L=LP W=WP M=M AD=85P AS=85P PD=29U PS=29U
+MP2 Y B NET20 VCC MHCPEN L=LP W=WP M=M AD=85P AS=85P PD=29U PS=29U
+MN1 Y A VEE VEE MHCNEN L=LN W=WN M=M AD=13P AS=13P PD=6.4U PS=3.2U
+MN2 Y B VEE VEE MHCNEN L=LN W=WN M=M AD=13P AS=13P PD=6.4U PS=3.2U
+.ENDS NOR2
+
+*** Schmitt-Trigger input
+.SUBCKT SMT1N  A  Y  VCC  VEE
+R1  A  4  100
+MP1 4 VCC VCC VCC  MHCPEN W=20U L=2.4U AD=100P AS=100P PD=40U PS=20U
+MN1 4 VEE VEE VEE  MHCNEN W=35U L=2.4U AD=140P AS=140P PD=50U PS=35U
+MP2 5  4 VCC VCC  MHCPEN W=36U L=2.4U AD=140P AS=140P PD=50U PS=35U
+MN2 6  4 VEE VEE  MHCNEN W=16U L=2.4U AD= 70P AS= 70P PD=15U PS=17U
+MP3 Y  4  5 VCC  MHCPEN W=44U L=2.4U AD=220P AS=220P PD=60U PS=44U
+MN3 Y  4  6  6  MHCNEN W=17U L=2.4U AD= 70P AS= 70P PD=15U PS=16U
+MP4 5  Y VEE VCC  MHCPEN W=36U L=2.4U AD=150P AS=150P PD=60U PS=36U
+MN4 6  Y VCC  6  MHCNEN W= 6U L=  4U AD= 25P AS= 25P PD=10U PS= 6U
+.ENDS SMT1N
+
+*** Output driver
+.SUBCKT OUTPN A  Y  VCC  VEE
+R1  A 4 100
+MP1 Y 4 VCC VCC  MHCPEN W=360U L=2.4U AD=400P AS=400P PD=10U PS=180U
+MN1 Y 4 VEE VEE  MHCNEN W=140U L=2.4U AD=200P AS=300P PD=10U PS=130U
+R2  4 5 50
+MP2 Y 5 VCC VCC  MHCPEN W=360U L=2.4U AD=400P AS=400P PD=10U PS=180U
+MN2 Y 5 VEE VEE  MHCNEN W=140U L=2.4U AD=200P AS=200P PD=10U PS=130U
+R3  5 6 50
+MP3 Y 6 VCC VCC  MHCPEN W=360U L=2.4U AD=400P AS=400P PD=10U PS=180U
+MN3 Y 6 VEE VEE  MHCNEN W=140U L=2.4U AD=200P AS=200P PD=10U PS=130U
+.ENDS OUTPN
+
+************************************************
+*         NOMINAL N-Channel Transistor         *
+*            UCB-3 Parameter Set               *
+*         HIGH-SPEED CMOS Logic Family         *
+*                10-Jan.-1995                  *
+************************************************
+.Model MHCNEN NMOS
++LEVEL = 3
++KP    = 45.3E-6
++VTO   = 0.72
++TOX   = 51.5E-9
++NSUB  = 2.8E15
++GAMMA = 0.94
++PHI   = 0.65
++VMAX  = 150E3
++RS    = 40
++RD    = 40
++XJ    = 0.11E-6
++LD    = 0.52E-6
++DELTA = 0.315
++THETA = 0.054
++ETA   = 0.025
++KAPPA = 0.0
++WD    = 0.0
+
+***********************************************
+*        NOMINAL P-Channel transistor         *
+*           UCB-3 Parameter Set               *
+*         HIGH-SPEED CMOS Logic Family        *
+*               10-Jan.-1995                  *
+***********************************************
+.Model MHCPEN PMOS
++LEVEL = 3
++KP    = 22.1E-6
++VTO   = -0.71
++TOX   = 51.5E-9
++NSUB  = 3.3E16
++GAMMA = 0.92
++PHI   = 0.65
++VMAX  = 970E3
++RS    = 80
++RD    = 80
++XJ    = 0.63E-6
++LD    = 0.23E-6
++DELTA = 2.24
++THETA = 0.108
++ETA   = 0.322
++KAPPA = 0.0
++WD    = 0.0
+
+
+* ************************************************
+* *           FAST N-Channel Transistor          *
+* *            UCB-3 Parameter Set               *
+* *         HIGH-SPEED CMOS Logic Family         *
+* *                10-Jan.-1995                  *
+* ************************************************
+* *.Model MHCNEF NMOS
+* .Model MHCNEN NMOS
+* +LEVEL = 3
+* +KP    = 49.6E-6
+* +VTO   = 0.52
+* +TOX   = 49.0E-9
+* +NSUB  = 4.0E15
+* +GAMMA = 0.74
+* +PHI   = 0.65
+* +VMAX  = 135E3
+* +RS    = 30
+* +RD    = 30
+* +XJ    = 0.10E-6
+* +LD    = 0.69E-6
+* +DELTA = 0.38
+* +THETA = 0.048
+* +ETA   = 0.020
+* +KAPPA = 0.0
+* +WD    = 0.5E-6
+
+* ***********************************************
+* *          FAST P-Channel transistor          *
+* *           UCB-3 Parameter Set               *
+* *         HIGH-SPEED CMOS Logic Family        *
+* *                10-Jan.-1995                 *
+* ***********************************************
+* *.Model MHCPEF PMOS
+* .Model MHCPEN PMOS
+* +LEVEL = 3
+* +KP    = 24.6E-6
+* +VTO   = -0.51
+* +TOX   = 49.0E-9
+* +NSUB  = 3.6E16
+* +GAMMA = 0.82
+* +PHI   = 0.65
+* +VMAX  = 600E3
+* +RS    = 60
+* +RD    = 60
+* +XJ    = 0.61E-6
+* +LD    = 0.35E-6
+* +DELTA = 2.12
+* +THETA = 0.100
+* +ETA   = 0.260
+* +KAPPA = 0.0
+* +WD    = 0.5E-6

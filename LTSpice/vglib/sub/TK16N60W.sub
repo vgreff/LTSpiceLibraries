@@ -1,0 +1,161 @@
+*  TNOM                 : 25 degree
+
+.SUBCKT NMOS_TK16N60W 1 2 3
+M0 1 22 3 3
++ smsmosfet
++ L = 5E-006
++ W = 0.085
++ AD = 2E-009
++ AS = 2E-007
++ PD = 0.2
++ PS = 0.2
+D0 3 1
++ DDS1
+D1 3 1
++ DDS2
+D2 2 10
++ DGS1
+D3 3 10
++ DGS2
+R1 10 3 1E+009
+R2 10 2 1E+009
+RG 2 22 6
+.MODEL smsmosfet NMOS
++ LEVEL = 7
++ VERSION = 3.3
++ MOBMOD = 1
++ CAPMOD = 3
++ NOIMOD = 1
++ TOX = 1.5E-008
++ XJ = 1.5E-007
++ NCH = 1.7E+017
++ NGATE = 0
++ RSH = 0
++ TNOM = 25
++ VTH0 = 3.5147
++ VOFF = -0.08
++ NFACTOR = 10.0166
++ U0 = 4585.2469
++ K1 = 0.53
++ K2 = -0.0186
++ K3 = 80
++ K3B = 0
++ W0 = 2.5E-006
++ NLX = 1.74E-007
++ DVT0 = 2.2
++ DVT1 = 0.53
++ DVT2 = -0.032
++ DVT0W = 0
++ DVT1W = 5.3E+006
++ DVT2W = -0.032
++ DWG = 0
++ DWB = 0
++ UA = 8.1764e-16
++ UB = 5.87E-019
++ UC = -4.65E-011
++ VSAT = 44276.9294
++ A0 = 0.82569
++ AGS = 1.4699
++ B0 = 0
++ B1 = 0
++ KETA = -0.047
++ A1 = 0
++ A2 = 1
++ DELTA = 0.060483
++ RDSW = 12039.69
++ PRWG = 0
++ PRWB = 0
++ WR = 1
++ CDSC = 2.4E-004
++ CDSCD = 0
++ CDSCB = 0
++ CIT = 0
++ ETA0 = 0.08
++ ETAB = -0.07
++ DSUB = 0.56
++ PCLM = 0.014909
++ PDIBLC1 = 0.39
++ PDIBLC2 = 1.7417e-06
++ PDIBLCB = 0
++ DROUT = 0.56
++ PSCBE1 = 4.24E+008
++ PSCBE2 = 1E-009
++ PVAG = 0
++ ALPHA0 = 0
++ ALPHA1 = 0
++ BETA0 = 30
++ NJ = 1
++ JS = 1E-004
++ XPART = 0
++ CGSO = 9.7148e-13
++ CGDO = 1.7639e-12
++ CGBO = 0
++ CGDL = 1.8342e-08
++ CGSL = 5.1366e-12
++ CKAPPA = 0.015086
++ CF = 0
++ CLC = 1E-007
++ CLE = 0.6
++ VOFFCV = 0
++ NOFF = 1
++ DLC = 0
++ ACDE = 1
++ MOIN = 15
++ CJ = 6
++ CJSW = 5E-010
++ CJSWG = 5E-010
++ PB = 50
++ PBSW = 1
++ PBSWG = 1
++ MJ = 7
++ MJSW = 0.33
++ MJSWG = 0.33
++ AF = 1
++ EF = 1
++ KF = 0
++ UTE = -1.1187
++ KT1 = -2.1487
++ KT1L = 0
++ KT2 = 0.022
++ UA1 = 4.31E-009
++ UB1 = -7.61E-018
++ UC1 = -5.6E-011
++ AT = 33000
++ PRT = 24000
++ XTI = 3
++ TCJ = 0
++ TPB = 0
++ TCJSW = 0
++ TPBSW = 0
++ TCJSWG = 0
++ TPBSWG = 0
++ DWC = -0.030209
+.MODEL DDS1 D
++ TNOM = 25
++ IS = 5.2738e-10
++ RS = 0.035305
++ N = 1.3034
++ CJO = 4.3709e-14
++ VJ = 1.4981
++ M = 0.20164
++ XTI = 3
++ BV = 600
++ IBV = 0.01
+.MODEL DDS2 D
++ TNOM = 25
++ IS = 5.2738e-10
++ RS = 0.035305
++ N = 1.3034
++ CJO = 9.7278e-17
++ VJ = 0.70039
++ M = 0.20352
++ XTI = 3
+.MODEL DGS1 D
++ TNOM = 25
++ IS = 1E-014
++cjo=1f
+.MODEL DGS2 D
++ TNOM = 25
++ IS = 1E-014
++cjo=1f
+.ENDS

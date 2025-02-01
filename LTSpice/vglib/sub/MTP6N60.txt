@@ -1,0 +1,96 @@
+.subckt MTP6N60 10 20 30
+* 10 = Drain 20 = Gate 30 = Source
+* PACKAGE INDUCTANCE
+*
+LDRAIN  10  11  4.5e-09 Rpar=9
+LGATE   20  21  7.5e-09 Rpar=15
+LSOURCE 30  31  7.5e-09 Rpar=15
+*
+* RESISTANCES
+*
+RDRAIN1    4  11 RDRAIN 0.8036
+RDRAIN2    4   5 RDRAIN 0.0084
+RSOURCE   31   6 RSOURCE 0.02018
+RDBODY     8  30 RDBODY  0.0135
+*
+RGATE      21   2   5
+*
+DBODY       8  11 DBODY
+DGD         3  11 DGD
+CGDMAX      2   3 2.7e-09
+RGDMAX      2   3 1e+08
+CGS         2   6 1.31e-09
+*
+M1       5  2  6  6  MAIN
+.MODEL RDRAIN R(
++TC1    = 0.008891
++TC2    = 3.056e-05)
+*
+.MODEL RSOURCE R(
++TC1    = -0.003198
++TC2    = 2.60004e-05)
+*
+.MODEL RDBODY R(
++TC1    = 0.003945
++TC2    = 9.54752e-06)
+.MODEL MAIN NMOS  (
++LEVEL   = 3
++VTO     = 3.8
++KP      = 13
++GAMMA   = 2.6
++PHI     = 0.6
+*+LAMBDA  = 0.0019
++RD      = 0
++RS      = 0
++CBD     = 0
++CBS     = 0
++IS      = 1e-14
++PB      = 0.8
++RSH     = 0
++CJ      = 0
++MJ      = 0.5
++CJSW    = 0
++MJSW    = 0.33
++JS      = 1e-14
++TOX     = 1e-07
++NSUB    = 1e+15
++NSS     = 0
++NFS     = 6.59e+11
++TPG     = 1
++XJ      = 0
++LD      = 0
+UO      = 600
++VMAX    = 0
++KF      = 0
++AF      = 1
++FC      = 0.5
++KAPPA   = 0.2)
+.MODEL DGD D  (
++IS      = 1e-15
++RS      = 0
++N       = 1000
++TT      = 0
++CJO     = 1.129e-09
++VJ      = 1.943
++M       = 1.476
++EG      = 1.11
++XTI     = 3
++KF      = 0
++AF      = 1
++FC      = 0.5
++BV      = 10000
++IBV     = 0.001)
+.MODEL DBODY D  (
++IS      = 1.532e-11
++RS      = 0
++N       = 1.062
++TT      = 2.5e-07
++CJO     = 9.725e-10
++VJ      = 1.127
++M       = 0.6627
++EG      = 1.11
++XTI     = 5
++FC      = 0.5
++BV      = 671
++IBV     = 0.00025)
+.ends

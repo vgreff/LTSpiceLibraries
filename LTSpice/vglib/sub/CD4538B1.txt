@@ -1,0 +1,128 @@
+* Source File: 4538blk-5.asc
+* Developed: ETech (eetech00@yahoo.com)
+* Created: Nov 25 2017
+* Revision: Nov 29 2021
+*
+* This CD4538B spice behavioral model was tested
+* with LTSpice. Temperature is not modeled. Requires CD4000_v.lib
+*
+* Texas Instruments
+* CD4538B CMOS Dual Precision Monostable Multivibrator
+* Pulse Width Tw = R * C
+* tpd A,B->Q     300n
+* tpd R->Q       250n
+* tr 100n
+* Tpulse 75n, C=0, Rext=5k
+.SUBCKT CD4538B1 PTR NTR RSTi CX CRX Qn Qi VDD VGND vdd1={vdd} speed1={speed} tripdt1={tripdt}
+.param td=1n
+.param td1=1e-9*(140)*5.0/{vdd1}*{speed1}
+.param td2=1e-9*(100)*5.0/{vdd1}*{speed1}
+.param td3=1e-9*(50)*5.0/{vdd1}*{speed1}
+* inputs
+* Tr/Tf=100n@5v, td=35n@5v
+.param Cval = 5.0e-12*5/{vdd1}*{speed1}
+XU1 RSTi RSTib VDD VGND CD40_IN_1 vdd2={vdd1} speed2={speed1} tripdt2={tripdt1} Cval={Cval}
+XU2 PTR PTRb VDD VGND CD40_IN_1 vdd2={vdd1} speed2={speed1} tripdt2={tripdt1} Cval={Cval}
+XU3 NTR NTRb VDD VGND CD40_IN_1 vdd2={vdd1} speed2={speed1} tripdt2={tripdt1} Cval={Cval}
+* input delay buffers
+A20 NTRb 0 0 0 0 NTRi 0 0 BUF tripdt={tripdt1} td=td1
+A21 PTRb 0 0 0 0 PTRi 0 0 BUF tripdt={tripdt1} td=td1
+A22 RSTib 0 0 0 0 RSTii 0 0 BUF tripdt={tripdt1} td=td2
+* logic
+A6 0 Q1n 0 QSn 0 QRn 0 0 OR IC=1 tripdt={tripdt1} td=td
+A7 0 CMP2 POR+Rn QRn 0 QSn 0 0 OR IC=0 tripdt={tripdt1} td=td
+XX1 1 CLi CLn POR+Ri CMP1 Q1n Q1i 4538ff params: tdt={tripdt1} td=td
+A4 QRn 0 0 0 0 QRi 0 0 BUF tripdt={tripdt1} td=td
+A10 QRini 0 0 0 0 QRinn 0 0 BUF tripdt={tripdt1} td=td
+A11 QRin 0 0 0 0 QRini 0 0 BUF tripdt={tripdt1} td=td
+A13 0 PTRin 0 NTRii 0 CLn 0 0 AND tripdt={tripdt1} td=td
+A15 0 RSTiin 0 POR 0 POR+Ri 0 0 OR tripdt={tripdt1} td=td
+A17 QRi 0 0 0 0 QRin 0 0 BUF tripdt={tripdt1} td=td
+A1 CMP RLO 0 0 0 0 C1 0 SCHMITT vt=0.0 vh=1u tripdt={tripdt1} td=td
+A3 Q1i 0 0 0 0 Q1in 0 0 BUF tripdt={tripdt1} td=td
+V1 1 0 1
+A5 CMP RHI 0 0 0 0 C2 0 SCHMITT vt=0.0 vh=1u tripdt={tripdt1} td=td
+A19 POR+Ri 0 0 0 0 POR+Rn 0 0 BUF tripdt={tripdt1} td=td
+R1 REF2/3v RN 754.5k
+R2 VDD REF2/3v 245.5k
+AM4 QRi 0 0 0 0 4N 4P 0 BUF tripdt={tripdt1} td=td
+R3 REF1/3v VGND 333.3k
+R4 RP REF1/3v 666.6k
+AM3 Q1i 0 0 0 0 3P 3N 0 BUF tripdt={tripdt1} td=td
+R6 CMP CRX 100
+R9 VDD VGND R=Limit(200k,QRes(),1e6)
+D1 CRX VDD DIO1
+D2 VGND CRX DIO1
+V5 CX VGND 0
+A8 NTRi 0 0 0 0 NTRii 0 0 BUF tripdt={tripdt1} td=td
+XX12 C1 Q1i CMP1 Q1n 4538tg params: tdt={tripdt1} td={td}
+M2 2D_1D 2G VGND VGND NMOS1
+M1 2D_1D 1G VDD VDD PMOS1
+R5 CRX 2D_1D 100
+A2 CLn 0 0 0 0 CLi 0 0 BUF tripdt={tripdt1} td=td
+SM3 RP VDD 3P 3N SW
+SM4 VGND RN 4P 4N SW
+ELO RLO 0 REF1/3v VGND 1
+EHI RHI 0 REF2/3v VGND 1
+XX8 C2 QRinni C2A QRin 4538tg params: tdt={tripdt1} td=td
+A9 0 C2A 0 QRi 0 0 CMP2 0 AND tripdt={tripdt1} td=td
+V2 POR 0 PWL(0 1 5u 1 7u 0)
+SM1 VGND 1G 1P 1N SW
+R7 VDD 1G 10k
+AM1 QRi 0 0 0 0 1P 1N 0 BUF tripdt={tripdt1} td=td
+SM2 2G VDD 2P 2N SW
+AM2 Q1in 0 0 0 0 2N 2P 0 BUF tripdt={tripdt1} td=td
+R8 2G VGND 10k
+XX2 QRinn QRinni QRin 4538inv params: tdt={tripdt1} td=td
+A12 PTRi 0 0 0 0 0 PTRin 0 BUF tripdt={tripdt1} td=td
+A14 RSTii 0 0 0 0 0 RSTiin 0 BUF tripdt={tripdt1} td=td
+* output delay buffers
+A16 QRi 0 0 0 0 QRii 0 0 BUF IC=1 tripdt={tripdt1} td=td3
+A18 QRn 0 0 0 0 QRni 0 0 BUF IC=1 tripdt={tripdt1} td=td3
+* outputs
+XU4 QRii Qi VDD VGND CD40_OUT_1X vdd2={vdd1} speed2={speed1} tripdt2={tripdt1}
+XU5 QRni Qn VDD VGND CD40_OUT_1X vdd2={vdd1} speed2={speed1} tripdt2={tripdt1}
+*
+.func QRes () {V(VDD)/If(V(VDD)<=5,5uA,If(V(VDD)<=10,10uA,if(V(VDD)<=15,20uA,100uA)))}
+.MODEL NMOS1 NMOS ( LEVEL=3  W=500e-6  L=4E-6  VTO=1
++ VMAX=1E6  RS=10  RD=10  CJ=0.002  MJ=0.4
++THETA=1E-6 ETA=0.01  KAPPA=2.2)
+.MODEL PMOS1 PMOS ( LEVEL=3  W=500e-6  L=4E-6  VTO=-1
++ VMAX=1E6  RS=10  RD=10  CJ=0.002  MJ=0.4
++THETA=1E-6 ETA=0.01  KAPPA=2.2)
+.MODEL DIO1 D (IS=10p RS=10 N=1.75 M=0.4 Cjo=6p TT=20n)
+.MODEL SW SW(Ron=100 Roff=1e9 Vt=0.0 Vh=0.5)
+.ENDS CD4538B1
+*
+.SUBCKT 4538ff Dn Ci Cn R1i R2i Qn Qi tdt=5e-9 td=1e-9
+XXTG2 Di cn Dio ci 4538tg params: tripdt=tdt td=td
+XXTG3 Dio ci Qi cn 4538tg params: tripdt=tdt td=td
+XXTG1 Da cn Dii ci 4538tg params: tripdt=tdt td=td
+A3 Di 0 0 0 0 Dii 0 0 BUF tripdt=tdt td=td
+A4 Dio 0 0 0 0 Qn 0 0 BUF tripdt=tdt td=td
+A2 0 R1ia R2ia Da 0 Di 0 0 AND tripdt=tdt td=td
+A5 0 Qn R2ia R1ia 0 Qi 0 0 AND tripdt=tdt td=td
+R1 R1ia R1i 1
+R2 R2ia R2i 1
+SWP Da Dn Pp Pn SW OFF
+A1 Pa 0 0 0 0 Pp Pn 0 BUF tripdt=tdt td=td
+R4 Pa cn 1
+.ic V(ci)=1 V(cn)=0
+.MODEL SW SW(Ron=100 Roff=1e9 Vt=0.0 Vh=0.5)
+.ENDS 4538ff
+*
+.SUBCKT 4538tg IN N OUT P tdt=5e-9 td=1e-9
+SWN OUT IN Np Nn SW OFF
+SWP OUT IN Pp Pn SW OFF
+A1 Na 0 0 0 0 Nn Np 0 BUF tripdt=tdt td=td
+A2 Pa 0 0 0 0 Pp Pn 0 BUF tripdt=tdt td=td
+R1 Na N 1
+R2 Pa P 1
+.MODEL SW SW(Ron=100 Roff=1e9 Vt=0.0 Vh=0.5)
+.ENDS 4538tg
+*
+.SUBCKT 4538inv A Yi E tdt=5e-9 td=1e-9
+A1 A 0 0 0 0 Yi 0 0 BUF tripdt=tdt td=td
+S1 Yi 0 E 0 SW OFF
+.MODEL SW SW(Ron=100 Roff=1e9 Vt=0.0 Vh=0.5)
+.ENDS 4538inv

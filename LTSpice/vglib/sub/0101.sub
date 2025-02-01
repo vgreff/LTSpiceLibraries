@@ -1,0 +1,332 @@
+********************************************************************************
+* - Some models from the digital world.
+*
+*							Vlad, ©2008 - 2014
+*
+********************************************************************************
+*
+* [CONTENTS]
+*
+* - The list of symbols in [0101], in alphabetical order:
+*
+* ADC16		= 16bit analog to digital convertor
+* Bin2Dec	= binary to digital convertor (same as DAC but fixed levels)
+* CNT16asy	= 16bit, asynchronous counter
+* CNT16UDsync	= up/down synchronous counter
+* DAC16		= 16bit digital to analog convertor
+* Dec2Bin	= decimal to binary convertor (same as ADC but fixed levels)
+* JKFLOP	= J-K flip-flop
+*
+********************************************************************************
+*
+*				ADC16 - 16bit ADC
+*
+********************************************************************************
+*
+* [SYMBOL]
+*
+* in		= analog input, floating;
+* Q[0:15]	= binary outputs, starting with MSB, 1 Ohm.
+*
+* [PARAMETERS]
+*
+* N=<1:16>	= number of bits for the conversion;
+*
+* - Hidden:
+*
+* tripdv,tripdt	= LTspice's specific for B-sources, default 1V/1us;
+*
+* [NOTES]
+*
+* - Input should be between 0V and 1V, it will work otherwise, but wrong.
+* - It only outputs logic levels <0,1> because testing showed that, the way it
+* is now, even Vlow=-1 and Vhigh=1 are enough to double the simulation time.
+*
+********************************************************************************
+.subckt ADC16 in
++ Q[0] Q[1] Q[2] Q[3] Q[4] Q[5] Q[6] Q[7] Q[8] Q[9] Q[10] Q[11] Q[12] Q[13] Q[14] Q[15]
+.param N=16 tripdv=1 tripdt=1u
+.func adc(x) {if(x<N,round(v(in)*2**x-int(v(in)*2**x)),0)}
+B0 0 Q[0] i=adc(00) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B1 0 Q[1] i=adc(1) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B2 0 Q[2] i=adc(2) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B3 0 Q[3] i=adc(3) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B4 0 Q[4] i=adc(4) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B5 0 Q[5] i=adc(5) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B6 0 Q[6] i=adc(6) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B7 0 Q[7] i=adc(7) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B8 0 Q[8] i=adc(8) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B9 0 Q[9] i=adc(9) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B10 0 Q[10] i=adc(10) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B11 0 Q[11] i=adc(11) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B12 0 Q[12] i=adc(12) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B13 0 Q[13] i=adc(13) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B14 0 Q[14] i=adc(14) rpar=1 tripdv={tripdv} tripdt={tripdt}
+B15 0 Q[15] i=adc(15) rpar=1 tripdv={tripdv} tripdt={tripdt}
+.ends ADC16
+********************************************************************************
+*
+*			Bin2Dec - Binary to decimal convertor
+*
+********************************************************************************
+*
+* [SYMBOL]
+*
+* D[0:15]	= binary inputs, floating;
+* out		= output, 1 Ohm.
+*
+********************************************************************************
+.subckt Bin2Dec D[0] D[1] D[2] D[3] D[4] D[5] D[6] D[7] D[8] D[9] D[10] D[11] D[12] D[13] D[14] D[15] out
+.param N=16
+G0 0 Out D[0] 0 {if(0<N,2**(N-1),0)}
+G1 0 Out D[1] 0 {if(1<N,2**(N-2),0)}
+G2 0 Out D[2] 0 {if(2<N,2**(N-3),0)}
+G3 0 Out D[3] 0 {if(3<N,2**(N-4),0)}
+G4 0 Out D[4] 0 {if(4<N,2**(N-5),0)}
+G5 0 Out D[5] 0 {if(5<N,2**(N-6),0)}
+G6 0 Out D[6] 0 {if(6<N,2**(N-7),0)}
+G7 0 Out D[7] 0 {if(7<N,2**(N-8),0)}
+G8 0 Out D[8] 0 {if(8<N,2**(N-9),0)}
+G9 0 Out D[9] 0 {if(9<N,2**(N-10),0)}
+G10 0 Out D[10] 0 {if(10<N,2**(N-11),0)}
+G11 0 Out D[11] 0 {if(11<N,2**(N-12),0)}
+G12 0 Out D[12] 0 {if(12<N,2**(N-13),0)}
+G13 0 Out D[13] 0 {if(13<N,2**(N-14),0)}
+G14 0 Out D[14] 0 {if(14<N,2**(N-15),0)}
+G15 0 Out D[15] 0 {if(15<N,2**(N-16),0)}
+Rout 0 Out 1
+.ends Bin2Dec
+********************************************************************************
+*
+*		CNT16asy - 16bit asynchronous counter
+*
+********************************************************************************
+*
+* [SYMBOL]
+*
+* CLK		= clock (data) input;
+* S,R		= set/reset pins, internally grounded with a 1GOhm;
+* Q[0:15]	= true output bus, starting with MSB, 1 Ohm;
+* _Q[0:15]	= complementary output bus, starting with MSB, 1 Ohm.
+*
+* - Both outputs need bus-named connections(!), else they're considered shorted.
+* For example, if Q output is named Y[0:15] and the other ignored, both outputs
+* will be internally shorted.
+*
+* [PARAMETERS]
+*
+* Vhigh,Vlow[V]	= logic levels;
+*
+* - Hidden:
+*
+* td	[s]	= LTspice's specific for A-devices, default 10ns (should not be
+*		set to zero);
+* ic	[V]	= initial state for the true outputs, default 0V.
+*
+********************************************************************************
+*
+*		  clock input
+*		  |  set
+*		  |  | reset
+*		  |  | |	|---> Q[0:15], _Q[0:15] = complementary outputs
+*		  |  | |	|
+.subckt CNT16asy CLK S R
++ Q[0] Q[1] Q[2] Q[3] Q[4] Q[5] Q[6] Q[7] Q[8] Q[9] Q[10] Q[11] Q[12] Q[13] Q[14] Q[15]
++ _Q[0] _Q[1] _Q[2] _Q[3] _Q[4] _Q[5] _Q[6] _Q[7] _Q[8] _Q[9] _Q[10] _Q[11] _Q[12] _Q[13] _Q[14] _Q[15]
+.param Vhigh=1 vlow=0 td=10n ic=0
+Rs 0 S 1G
+Rr 0 R 1G
+A[15] _Q[15] 0 CLK S R _Q[15] Q[15] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[14] _Q[14] 0 Q[15] S R _Q[14] Q[14] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[13] _Q[13] 0 Q[14] S R _Q[13] Q[13] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[12] _Q[12] 0 Q[13] S R _Q[12] Q[12] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[11] _Q[11] 0 Q[12] S R _Q[11] Q[11] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[10] _Q[10] 0 Q[11] S R _Q[10] Q[10] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[9] _Q[9] 0 Q[10] S R _Q[9] Q[9] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[8] _Q[8] 0 Q[9] S R _Q[8] Q[8] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[7] _Q[7] 0 Q[8] S R _Q[7] Q[7] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[6] _Q[6] 0 Q[7] S R _Q[6] Q[6] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[5] _Q[5] 0 Q[6] S R _Q[5] Q[5] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[4] _Q[4] 0 Q[5] S R _Q[4] Q[4] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[3] _Q[3] 0 Q[4] S R _Q[3] Q[3] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[2] _Q[2] 0 Q[3] S R _Q[2] Q[2] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[1] _Q[1] 0 Q[2] S R _Q[1] Q[1] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+A[0] _Q[0] 0 Q[1] S R _Q[0] Q[0] 0 DFLOP vhigh={vhigh} vlow={vlow} td={td} ic={ic}
+.ends CNT16asy
+********************************************************************************
+*
+*				DAC16 - 16bit DAC
+*
+********************************************************************************
+*
+* [PARAMETERS]
+*
+* Vhigh,Vlow[V]	= logic levels;
+* Vt	[V]	= input threshold voltage;
+*
+* - Hidden:
+*
+* td	[s]	= LTspice's specific for A-devices, default 10ns;
+*
+* [CHARACTERISTICS]
+*
+* - There is no reference voltage but the output ranges from <Vlow:Vhigh>, which
+* can have any value. Compatibility with any logic levels at the input is done
+* by {Vt}. E.g.: Vhigh=12, Vlow=-12 => Vt=(Vhigh+Vlow)/2=0V, but if the input is
+* <0:5>[V], then {Vt} needs to be set to anything whithin input's range, usually
+* half (Vt=2.5).
+*
+********************************************************************************
+.subckt DAC16 D[0] D[1] D[2] D[3] D[4] D[5] D[6] D[7] D[8] D[9] D[10] D[11] D[12] D[13] D[14] D[15] out
+.param vlow=0 vhigh=1 vt=0.5 td=10n
+A15 D[15] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**16}
+A14 D[14] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**15}
+A13 D[13] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**14}
+A12 D[12] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**13}
+A11 D[11] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**12}
+A10 D[10] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**11}
+A9 D[9] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**10}
+A8 D[8] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**9}
+A7 D[7] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**8}
+A6 D[6] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**7}
+A5 D[5] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**6}
+A4 D[4] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**5}
+A3 D[3] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**4}
+A2 D[2] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**3}
+A1 D[1] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**2}
+A0 D[0] 0 0 0 0 0 out 0 SCHMITT vt={vt} vh=0 td={td} vlow={vlow} vhigh={vhigh} rout={2**1}
+;Gout 0 out Data 0 1
+;Rout out 0 1
+.ends DAC16
+********************************************************************************
+*
+*			Dec2Bin - Decimal to binary
+*
+********************************************************************************
+*
+* [PARAMETERS]
+*
+* N=<1:16>	= number of bits for the conversion;
+* Vhigh,Vlow[V]	= logic levels;
+* ref	[V]	= input threshold voltage;
+*
+* - Hidden:
+*
+* td	[s]	= LTspice's specific for A-devices, default 10ns;
+*
+* [CHARACTERISTICS]
+*
+* - There is no reference voltage but the output ranges from <Vlow:Vhigh>, which
+* can have any value. Compatibility with any logic levels at the input is done
+* by {Vt}. E.g.: Vhigh=12, Vlow=-12 => Vt=(Vhigh+Vlow)/2=0V, but if the input is
+* <0:5>[V], then {Vt} needs to be set to anything whithin input's range, usually
+* half (Vt=2.5).
+*
+* [NOTES]
+*
+* - {ref} shouldn't be touched(!).
+*
+********************************************************************************
+.subckt Dec2Bin in
++ Q[0] Q[1] Q[2] Q[3] Q[4] Q[5] Q[6] Q[7] Q[8] Q[9] Q[10] Q[11] Q[12] Q[13] Q[14] Q[15]
+.param N=16 vhigh=1 vlow=0 td=1u
+B1 0 ref[1] I=int(V(in)/2**(N-1))*2**(N-1)*(2<=N) Rpar=1
+B2 0 ref[2] I=int(V(in)/2**(N-2))*2**(N-2)*(3<=N) Rpar=1
+B3 0 ref[3] I=int(V(in)/2**(N-3))*2**(N-3)*(4<=N) Rpar=1
+B4 0 ref[4] I=int(V(in)/2**(N-4))*2**(N-4)*(5<=N) Rpar=1
+B5 0 ref[5] I=int(V(in)/2**(N-5))*2**(N-5)*(6<=N) Rpar=1
+B6 0 ref[6] I=int(V(in)/2**(N-6))*2**(N-6)*(7<=N) Rpar=1
+B7 0 ref[7] I=int(V(in)/2**(N-7))*2**(N-7)*(8<=N) Rpar=1
+B8 0 ref[8] I=int(V(in)/2**(N-8))*2**(N-8)*(9<=N) Rpar=1
+B9 0 ref[9] I=int(V(in)/2**(N-9))*2**(N-9)*(10<=N) Rpar=1
+B10 0 ref[10] I=int(V(in)/2**(N-10))*2**(N-10)*(11<=N) Rpar=1
+B11 0 ref[11] I=int(V(in)/2**(N-11))*2**(N-11)*(12<=N) Rpar=1
+B12 0 ref[12] I=int(V(in)/2**(N-12))*2**(N-12)*(13<=N) Rpar=1
+B13 0 ref[13] I=int(V(in)/2**(N-13))*2**(N-13)*(14<=N) Rpar=1
+B14 0 ref[14] I=int(V(in)/2**(N-14))*2**(N-14)*(15<=N) Rpar=1
+B15 0 ref[15] I=int(V(in)/2**(N-15))*2**(N-15)*(16<=N) Rpar=1
+A0 in 0 0 0 0 0 q[0] 0 SCHMITT vt={2**(N-1)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A1 in ref[1] 0 0 0 0 q[1] 0 SCHMITT vt={2**(N-2)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A2 in ref[2] 0 0 0 0 q[2] 0 SCHMITT vt={2**(N-3)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A3 in ref[3] 0 0 0 0 q[3] 0 SCHMITT vt={2**(N-4)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A4 in ref[4] 0 0 0 0 q[4] 0 SCHMITT vt={2**(N-5)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A5 in ref[5] 0 0 0 0 q[5] 0 SCHMITT vt={2**(N-6)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A6 in ref[6] 0 0 0 0 q[6] 0 SCHMITT vt={2**(N-7)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A7 in ref[7] 0 0 0 0 q[7] 0 SCHMITT vt={2**(N-8)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A8 in ref[8] 0 0 0 0 q[8] 0 SCHMITT vt={2**(N-9)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A9 in ref[9] 0 0 0 0 q[9] 0 SCHMITT vt={2**(N-10)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A10 in ref[10] 0 0 0 0 q[10] 0 SCHMITT vt={2**(N-11)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A11 in ref[11] 0 0 0 0 q[11] 0 SCHMITT vt={2**(N-12)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A12 in ref[12] 0 0 0 0 q[12] 0 SCHMITT vt={2**(N-13)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A13 in ref[13] 0 0 0 0 q[13] 0 SCHMITT vt={2**(N-14)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A14 in ref[14] 0 0 0 0 q[14] 0 SCHMITT vt={2**(N-15)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+A15 in ref[15] 0 0 0 0 q[15] 0 SCHMITT vt={2**(N-16)} vh=0 td={td} vhigh={vhigh} vlow={vlow}
+.ends Dec2Bin
+********************************************************************************
+*
+*			JKFLOP - J-K flip flop
+*
+********************************************************************************
+*
+* [SYMBOL]
+*
+* J,K		= J and K inputs, floating;
+* CLK		= clock input, floating;
+* Q,_Q		= complementary outputs;
+* PRE		= SET pin, internally grounded with 1GOhm;
+* CLR		= RESET pin, internally grounded with 1GOhm;
+* RTN		= internal ground node.
+*
+* - 'J', 'K' and 'CLK' inputs are floating to avoid confusion during usage.
+* - 'PRE' and 'CLR' can be left floating if not used.
+* - 'RTN' is internally connected to the 8th pin of the A-devices, it needs to
+* be grounded.
+*
+* [PARAMETERS]
+*
+* Vhigh,Vlow[V]	= logic levels;
+*
+* - Hidden:
+*
+* td	[s]	= LTspice's specific for A-devices, default 10ns;
+*
+********************************************************************************
+*
+*		J input
+*		|  clock input
+*		|  |  K input
+*		|  |  |	output
+*		|  |  |	|  complementary output
+*		|  |  |	|  | (pre)set
+*		|  |  |	|  |  |	  reset (clear)
+*		|  |  |	|  |  |	  |   ground
+*		|  |  |	|  |  |	  |   |
+.subckt JKFLOP  J CLK K Q _Q PRE CLR RTN
+.param vhigh=1 vlow=0 td=10n
+ADFF 3 RTN CLK PRE CLR _Q Q RTN DFLOP vhigh={vhigh} vlow={vlow} td={td}
+AJ RTN _Q RTN J RTN RTN 1 RTN AND vhigh={vhigh} vlow={vlow}
+AJK RTN 1 RTN 2 RTN RTN 3 RTN OR vhigh={vhigh} vlow={vlow}
+AK RTN K RTN _Q RTN 2 RTN RTN OR vhigh={vhigh} vlow={vlow}
+RPRE PRE RTN 1G
+RCLR CLR RTN 1G
+.ends JKFLOP
+********************************************************************************
+*
+* [UPDATES]
+*
+* 2013.01.19	- Modified all the symbols so they now have buses instead of an
+*		array of pins.
+*		- Added 1GOhm resistors in key places so that grounding isn't a
+*		must anymore.
+*		- Overall modifications and improvements.
+* 2013.02.02	- Replaced Bin2Dec with a G-source variant, ~20% faster.
+* 2013.02.03	- Added Dec2Bin.
+*		- Added parameter {ic} to CNT16asy.
+*		- Added parameter {N} to Bin2Dec.
+* 2013.06.14	- Replaced all .funcs to be by the book.
+* 2013.07.26	- Added SampledSource.
+* 2014.04.05	- Remade Bin2Dec.
+* 2014.04.07	- Removed SampledSource (now in [Filt]).
+* 2014.04.08	- Remade Bin2Dec and Dec2Bin.
+*
+********************************************************************************

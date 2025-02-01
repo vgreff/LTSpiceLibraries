@@ -1,0 +1,84 @@
+*  LP2951 Model
+*****************************************************************************
+*  (C) Copyright 2012 Texas Instruments Incorporated. All rights reserved.
+*****************************************************************************
+** This model is designed as an aid for customers of Texas Instruments.
+** TI and its licensors and suppliers make no warrenties, either expressed
+** or implied, with respect to this model, including the warranties of 
+** merchantability or fitness for a particular purpose.  The model is
+** provided solely on an "as is" basis.  The entire risk as to its quality
+** and performance is with the customer
+*****************************************************************************
+*
+** Released by: WEBENCH Design Center, Texas Instruments Inc.
+* Part: LP2951
+* Date: 05/30/2012
+* EVM Order Number: 
+* EVM Users Guide: 
+* Datasheet: SLVS582H - APRIL 2006 - REVISED MARCH 2012
+*
+* Model Version: Final 1.00
+*
+*****************************************************************************
+*
+* Updates:
+*
+* Final 1.00
+* Release to Web.
+*
+*****************************************************************************
+* source LP2951
+.SUBCKT LP2951 OUTPUT SENSE SHUTDOWN GND ERROR VTAP FEEDBACK INPUT
+C_LP2951_C3         LP2951_PGY 0  100p  
+E_LP2951_ABM2         LP2951_N258528 0 VALUE { IF (V(FEEDBACK) +
++  0.015*1.235*(1-V(LP2951_PGY)) > 0.95*1.235, 0, 1)    }
+R_LP2951_U1_R_ref         LP2951_U1_N256227 LP2951_U1_N05348  1k  
+E_LP2951_U1_ABM4         LP2951_U1_N256793 0 VALUE { V(LP2951_U1_N05348) * V(OUTPUT) / (V(FEEDBACK) + 1e-6)  }
+R_LP2951_U1_R_ref2         LP2951_U1_N257274 LP2951_N222524  1k  
+R_LP2951_U1_R1         GND LP2951_U1_N05348  1G  
+R_LP2951_U1_R_ref1         LP2951_U1_N256793 LP2951_U1_N256746  1k  
+C_LP2951_U1_C_ref2         LP2951_N222524 0  1p  
+C_LP2951_U1_C_ref1         LP2951_U1_N256746 0  1p  
+V_LP2951_U1_Vshutdown         LP2951_U1_N280613 0 2
+V_LP2951_U1_Vuvlo         LP2951_U1_N280503 0 1.8
+X_LP2951_U1_U2         LP2951_U1_N279637  SHUTDOWN  LP2951_U1_N280613  COMP_HYS_BASIC  PARAMS:  VHYS=0.05 TD=0.00 TT=2E-9
+C_LP2951_U1_C_ref         LP2951_U1_N05348 0  100p  
+R_LP2951_U1_R2         GND LP2951_U1_N256746  1G  
+E_LP2951_U1_ABM6         LP2951_U1_N256227 0 VALUE { IF (V(LP2951_U1_N277312) >
++  0.51 & V(LP2951_U1_N279637) < 0.51, 1.235, 0)    }
+X_LP2951_U1_U3         LP2951_U1_N277312 INPUT LP2951_U1_N280503 COMP_HYS_BASIC
++  PARAMS:  VHYS=0.05 TD=0.00 TT=2E-9
+E_LP2951_U1_ABM5         LP2951_U1_N257274 0 VALUE { MIN(V(LP2951_U1_N256746), 
++  MAX(V(INPUT) - 0.380, 0))   }
+X_LP2951_S1    LP2951_PGY 0 ERROR GND LP2951_LP2951_S1 
+R_LP2951_R_10R         VTAP GND  1235k  
+R_LP2951_R5         LP2951_VZZ LP2951_VYY  20m  
+E_LP2951_ABM1         LP2951_VYY 0 VALUE { MIN(V(LP2951_VXX), (V(LP2951_VZZ)+0.0032))    }
+R_LP2951_R_BIG8         ERROR 0  1G  
+R_LP2951_R1         LP2951_VXX INPUT  10MEG  
+X_LP2951_F1    LP2951_VZZ OUTPUT INPUT LP2951_VYY LP2951_LP2951_F1 
+R_LP2951_R_BIG7         SENSE 0  1G  
+R_LP2951_R2         LP2951_N222524 LP2951_VXX  1.8k  
+R_LP2951_R_32R         SENSE VTAP  2065k  
+C_LP2951_C1         LP2951_VXX INPUT  159p  
+C_LP2951_C2         LP2951_VXX LP2951_N222524  44.2n  
+R_LP2951_R3         LP2951_N258528 LP2951_PGY  1k
+
+*$
+.subckt LP2951_LP2951_S1 1 2 3 4  
+S_LP2951_S1         3 4 1 2 _LP2951_S1
+RS_LP2951_S1         1 2 1G
+.MODEL         _LP2951_S1 VSWITCH Roff=10e6 Ron=100 Voff=0.0V Von=0.9V
+.ends LP2951_LP2951_S1
+*$
+.subckt LP2951_LP2951_F1 1 2 3 4  
+F_LP2951_F1         3 4 VF_LP2951_F1 1
+VF_LP2951_F1         1 2 0V
+.ends LP2951_LP2951_F1
+*$
+.SUBCKT comp_hys_basic out inp inn   PARAMS:  vhys = 0.05  td   = 0.00 tt   = 2e-9
+E1 n1   0 VALUE {IF((V(inp) + V(out)*vhys) > V(inn), 1, 0)}
+R1 n1 out 10
+C1 out  0 { (td + 0.5*tt) / 6.93 }
+.ENDS comp_hys_basic
+.ENDS LP2951

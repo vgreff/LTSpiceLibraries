@@ -1,0 +1,46 @@
+* Model using LTspice Version 4 or later
+* GaNPower Int'l Inc. EHEMT
+* Level 10  Version 1.0                                          *
+*                                                               *
+* Model constructed based on published sesearch papers. 
+* GaNPower Int'l does not assume liability for its use.
+* For tech questions, please contact www.iganpower.com
+*                                                               *
+* Key reference:
+* H. Li, X. Zhao, W. Su, K. Sun, X. You and T. Q. Zheng, 
+* "Nonsegmented PSpice Circuit Model of GaN HEMT With Simulation 
+* Convergence Consideration," in IEEE Transactions on Industrial 
+* Electronics," vol. 64, no. 11, pp. 8992-9000, Nov. 2017.
+* 
+*  Model name GPIHV30DFN
+*****************************************************************
+*
+.subckt GPIHV30DFN gatein drainin sourcein
+
+.param r_fac=0.59
+.param c_fac=1.0
+.param k_fac=1.7
+*
+rd drainin drain {0.059901*r_fac} tc=0.0135
+rs sourcein source {0.023960*r_fac} tc=0.0135
+rg gatein gate {0.455248*r_fac}
+*
+*
+bswitch drain source I = (if (v(drain,source)>0,
++	(k_fac*1.651194*log(1.0+exp(26*(v(gate,source)-1.7)/2.0))*
++	0.834711*v(drain,source)/(1 + max(0.5+0.2*(v(gate,source)+4.1),0.2)*0.834711*v(drain,source))),
++	(k_fac*(-1.651194)*log(1.0+exp(21*(v(gate,drain)-1.7)/2.0))*
++	0.834711*v(source,drain)/(1 + max(0.5+0.2*(v(gate,drain)+6.1),0.2)*0.834711*v(source,drain)))) )
+*
+*
+* at Vds=500V
+C_GS	 gate source  	{194.0e-12*c_fac}
+C_GD    gate drain    	{6.3e-12*c_fac}
+C_SD	 source drain  	{47.0e-12*c_fac}
+*C_SG   source  gate  Q=1e-12*x*135.720721*c_fac
+*C_GD   gate drain    Q=1e-12*x*(4.720721+41.0/(1+x*x/1600.))*c_fac
+*C_SD   source drain  Q=1e-12*x*(23.603604+190.0/(1+x*x/4900.))*c_fac
+
+
+.ends
+*$

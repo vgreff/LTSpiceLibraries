@@ -1,0 +1,137 @@
+.SUBCKT TC1410 1 2 3 4
+*                    | | | | 
+*                    | | | Negative Supply
+*                    | | Positive Supply
+*                    | Output
+*                    Input
+********************************************************************************
+* Software License Agreement                                                   *
+*                                                                              *
+* The software supplied herewith by Microchip Technology Incorporated (the     *
+* 'Company') is intended and supplied to you, the Company's customer, for use  *
+* soley and exclusively on Microchip products.                                 *
+*                                                                              *
+* The software is owned by the Company and/or its supplier, and is protected   *
+* under applicable copyright laws. All rights are reserved. Any use in         *
+* violation of the foregoing restrictions may subject the user to criminal     *
+* sanctions under applicable laws, as well as to civil liability for the       *
+* breach of the terms and conditions of this license.                          *
+*                                                                              *
+* THIS SOFTWARE IS PROVIDED IN AN 'AS IS' CONDITION. NO WARRANTIES, WHETHER    *
+* EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED        *
+* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO  *
+* THIS SOFTWARE. THE COMPANY SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR    *
+* SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.     *
+********************************************************************************
+*
+* The following MOSFET drivers are covered by this model:
+*      TC1410 0.5A
+*
+* Polarity: Inverting
+*
+* Date of model creation: 5/23/2008
+* Level of Model Creator: E
+*
+* Revision History:
+*      5/23/2008 - Initial Release
+*      6/11/2008 - RAW Adjusted Rise and Fall times
+*       
+*       
+*       
+*       
+*
+* Recommendations:
+*      Use PSPICE (or SPICE 2G6; other simulators may require translation)
+*      For a quick, effective design, use a combination of: data sheet
+*            specs, bench testing, and simulations with this macromodel
+*      For high impedance circuits, set GMIN=100F in the .OPTIONS statement
+*
+* Supported:
+*      Typical performance for temperature range (-40 to 85) degrees Celsius
+*      DC, AC, Transient, and Noise analyses.
+*      Most specs, including: propgation delays, rise times, fall times, max sink/source current,
+*            input thresholds, voltage ranges, supply current, ... , etc.
+*      Temperature effects for Ibias, Iquiescent, output current, output 
+*            resistance,....,etc.
+*
+* Not Supported:
+*      Some Variation in specs vs. Power Supply Voltage
+*      Vos distribution, Ib distribution for Monte Carlo
+*      Some Temperature analysis
+*      Process variation
+*      Behavior outside normal operating region
+*
+* Known Discrepancies in Model vs. Datasheet:
+*       
+*       
+*
+* Input Impedance/Clamp
+R1  4    1    100MEG
+C1  4    1    10.0P
+G3  3    1    TABLE { V(3, 1) } ((-770M,-1.00)(-700M,-10.0M)(-630M,-1.00N)(0,0)(20.0,1.00N))
+G4  1    4    TABLE { V(1, 4) } ((-5.94,-1.00)(-5.4,-10.0M)(-4.86,-1.00N)(0,0)(20.0,1.00N))
+* Threshold
+G11 0    30   TABLE { V(1, 11) } ( (-1m,10n)(0,0)(0.78,-.1)(1.25,-1)(2,-1) )
+G12 0    30   TABLE {V(1,12)} ( (-2,1)(-1.2,1)(-0.6,.1)(0,0)(1,-10n))
+G21 0    11   TABLE { V(3, 4) } ((0,1.35)(4.00,1.35)(6.00,1.5)(10.0,1.48)(13.0,1.49)(16.0,1.5))
+G22 0    12   TABLE { V(3, 4) } ((0,1.35)(4.00,1.16)(6.00,1.25)(10.0,1.24)(13.0,1.24)(16.0,1.25))
+R21 0    11   1 TC 504U  2.33U
+R22 0    12   1 TC 231U  -103N
+C30 30   0    1n  
+* HL Circuit
+G31 0    31   TABLE { V(3, 4) } ((0,130)(4.00,47.0)(6.00,28.8)(10.0,19.1)(13.0,17.3)(16.0,18.5))
+R31 31   0    1 TC 3.72M  18.4U
+G33 0    30   TABLE { V(31, 30) } ( (-1M,-10)(0,0)(1,10N) )
+S31 31   30 31 30 SS31
+* LH Circuit
+G32 32   0    TABLE { V(3, 4) } ((0,150)(4.00,45.0)(6.00,27.6)(10.0,16.6)(13.0,15.9)(16.0,15.0))
+R32 0    32   1 TC 4.95M  42.0U
+G34 30   0    TABLE { V(30, 32) } ( (-1M,-10)(0,0)(1,10N) )
+R30 32   30   1MEG  
+* DRIVE
+G51 0    50   TABLE { V(30, 0) } ( (-5,-1U)(-3,-1U)(0,0)(6,697M)(16,702M) )
+G52 50   0    TABLE { V(0, 30) } ( (-5,-1U)(-3,-1U)(0,0)(6,997M)(16,1002M) )
+R53 0    50   1  
+G50 51   60   VALUE {V(50,0)*200M/((200M-1)+16.0/(V(3,4) + 1M))}
+R51 51    0   1  
+G53  3    0   TABLE {V(51,0)} ((-100,100)(0,0)(1,1n))  
+G54  0    4   TABLE {V(0,51)} ((-100,100)(0,0)(1,1n))  
+R60 0    60   100MEG  
+H67 0    69   V67 1
+c69 69 0 10p
+V67 60   59   0V
+C60 561  60   100P
+R59 59   2    4.39
+L59 59   2    10.0N
+* Shoot-through adjustment
+VC60 56 0 0V
+RC60 56 561 1m
+H60 58 0 VC60 56
+G60P 0 3 TABLE { V(58, 0) } ((-1,-1u)(0,0)(25,0.01)(40,0))
+G60N 4 0 TABLE { V(0, 58) } ((-1,-1u)(0,0)(25,0.01)(40,0))
+* Source Output
+E67 67   0    TABLE { V(69, 0) } ( (-500M,-500M)(0,0)(1,2.00) )
+G63 0    63   POLY(1) 3 4 60.7 -5.97 194M
+R63 0    63   1 TC 3.75M 321n
+E61 61   65   VALUE {V(67,0)*V(63,0)}
+V63 65   3    100U
+G61 61   60   TABLE { V(61, 60) } (-20.0M,-50.0)(-15.0M,-25.0)(-10.0M,-5.00)(0,0)(10,1N))
+* Sink Output
+E68 68   0    TABLE { V(69, 0) }  ( (-1,-2.00)(0,0)(500M,500M) )
+G64 0    64   POLY(1) 3 4 16.1 -1.19 38.8M
+R64 0    64   1 TC 5.19M 21.8U
+E62 62   66   VALUE {V(68,0)*V(64,0)}
+V64 66   4    100U
+G62 60   62   TABLE { V(60, 62) } (-20.0M,-50.0)(-15.0M,-25.0)(-10.0M,-5.00)(0,0)(10,1N))
+* Bias Current
+G55 0    55   TABLE { V(3, 4) } ((0,0)(4.00,270U)(6.00,350U)(10.0,330U)(16.0,350U))
+G56 3    4    55 0 1
+R55 55   0    1 TC  462U 6.89U
+G57 0    57   TABLE { V(3, 4) } ((0,0)(4.00,30.0U)(6.00,50.0U)(10.0,50.0U)(16.0,50.0U))
+G58 3    4    57 0 1
+R57 57   0    1 TC  -692U 11.9U
+S59 55   0    1 0 SS59
+* Models
+.MODEL SS59 VSWITCH Roff=1m Ron=100Meg Voff=1.2V Von=1.5V
+.MODEL SS31 VSWITCH Roff=100MEG Ron=800 Voff=0.2V Von=0.1V
+.ENDS TC1410_I2D_B

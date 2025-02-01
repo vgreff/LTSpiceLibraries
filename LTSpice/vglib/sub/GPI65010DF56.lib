@@ -1,0 +1,58 @@
+* Model using LTspice Version 4 or later
+* GaNPower Int'l Inc. EHEMT
+* Level 10  Version 2.0                                          *
+*                                                               *
+* Model constructed based on published sesearch papers. 
+* GaNPower Int'l does not assume liability for its use.
+* For tech questions, please contact www.iganpower.com
+*                                                               *
+* Key reference:
+* H. Li, X. Zhao, W. Su, K. Sun, X. You and T. Q. Zheng, 
+* "Nonsegmented PSpice Circuit Model of GaN HEMT With Simulation 
+* Convergence Consideration," in IEEE Transactions on Industrial 
+* Electronics," vol. 64, no. 11, pp. 8992-9000, Nov. 2017.
+* 
+*  Model calibrated using data EHEMT 650V 10A 
+*  Model name GPI65015
+*****************************************************************
+*
+.subckt GPI65010DF56 gatein drainin sourcein
+*
+*
+*****************************************************************
+
+
+
+*****************************************************************
+* DO NOT ALTER THE FOLOWING INTERNAL PARAMETERS
+*****************************************************************
+
+  .param ai_fac=0.665  cap_fac=1.  res_fac=1.474
+
+*
+*
+rd drainin drain {0.05*res_fac} tc=0.0135
+rs sourcein source {0.02*res_fac} tc=0.0135
+rg gatein gate {0.38*res_fac}
+*
+*
+bswitch drain source I = (if (v(drain,source)>0,
+           +	(1.03*ai_fac*1.6*(0.8*PWR((Temp-25+273)/300,-2.7))*log(1.0+exp(13*(v(gate,source)-1.7-0.001*(Temp-25))))*
++	v(drain,source)/(1 + max(0.5+0.2*(v(gate,source)+4.1),0.2)*v(drain,source))),
+           +	(-ai_fac*1.6*(0.8*PWR((Temp-25+273)/300,-2.7))*log(1.0+exp(10.5*(v(gate,drain)-1.7-0.001*(Temp-25))))*
++	v(source,drain)/(1 + max(0.5+0.2*(v(gate,drain)+6.1),0.2)*v(source,drain)))) )
+*
+*
+
+           C_SG   source  gate  Q=1e-12*x*cap_fac*88.0
+
+           C_GD   gate drain    Q=1e-12*x*cap_fac*
+           +      (1.0+20.0/(1+PWR(x/30.,2)))
+* in case of convergence difficulty, try to use a constant of 4pF at 100V
+
+           C_SD   source drain  Q=1e-12*x*cap_fac*
+           +      (24.0+175./(1+PWR(x/50.,2))-20/(1+PWR(x/30.,2)))
+* in case of convergence difficulty, try a constant of 50pF at 100V
+
+.ends
+*$

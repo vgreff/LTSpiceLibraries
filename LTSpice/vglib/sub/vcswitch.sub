@@ -1,0 +1,9 @@
+*
+* vcswitch
+* Split from Control Components Library
+*
+.subckt vcswitch ctrl t1 t2
+S1 t2 t1 ctrl 0 SW1
+Rdum ctrl 0 10Meg
+.model SW1 SW (Ron={Ron} Roff={Roff} Vt={Vt} Vh={Vh})
+.ends vcswitch

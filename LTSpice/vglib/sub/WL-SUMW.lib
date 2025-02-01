@@ -1,0 +1,46 @@
+**************************************************
+* Manufacturer:       Wurth Elektronik
+* Kinds:    Ultraviolet High power LED
+* Matchcode:          WL-SUMW SMT UltraViolet  Ceramic  Waterclear
+* Library Type:       Pspice
+* Version:        rev18a       
+* Date and Time   :       2018-8-4
+* Team:           eiSos EDA Service  
+* Contact:        libraries@we-online.com
+**************************************************
+.subckt  3535_15335338AA350  1  2
+D1 1 2 led
+.MODEL led D
++ IS=10.000E-21
++ N=2.8130
++ RS=.8647
++ IKF=7.6250
++ CJO=0.000000000000050332
++ M=0.1001
++ VJ=9.99
+.ends
+******
+.subckt  3535_15335339AA350  1  2
+D1 1 2 led
+.MODEL led D
++ IS=10.000E-21
++ N=2.8130
++ RS=.8647
++ IKF=7.6250
++ CJO=0.000000000000050332
++ M=0.1001
++ VJ=9.99
+.ends
+******
+.subckt  3535_15335340AA350  1  2
+D1 1 2 led
+.MODEL led D
++ IS=10.000E-21
++ N=2.8130
++ RS=.8647
++ IKF=7.6250
++ CJO=0.000000000000050332
++ M=0.1001
++ VJ=9.99
+.ends
+******

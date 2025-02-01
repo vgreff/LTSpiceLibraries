@@ -1,0 +1,50 @@
+.subckt 3-phasemotor A B C N rpm rs rt w
+Rsx X Xs {Rs}
+Lsx Xs Xm {Lls} Rser=0
+Lmx Xm 0 Bs={Bs} Br={Br} Hc={Hc} A={A} Lm={Lm} Lg={Lg} N={N} Rpar=9k
+Lrx Xm Xr {Llr} Rser=0
+Rrx Xr Xemf {Rr}
+Bx Xemf 0 V=-Np*V(w)*sdt(V(Yr))
+Rsy Y Ys {Rs}
+Lsy Ys Ym {Lls} Rser=0
+Lmy Ym 0 Bs={Bs} Br={Br} Hc={Hc} A={A} Lm={Lm} Lg={Lg} N={N} Rpar=9k
+Lry Ym Yr {Llr} Rser=0
+Rry Yr Yemf {Rr}
+By Yemf 0 V=Np*V(w)*sdt(V(Xr))
+Brt rt w I=Np*(sdt(V(Xm))*I(Lry)-sdt(V(Ym))*I(Lrx))
+Cw w 0 {J}
+Crt rt 0 -1µ Rpar=-1
+Rf w 0 R=limit(1,1G,100k/V(w))
+Erpm rpm 0 w 0 {60/2/Pi}
+Brs rs 0 V=100*(1-Ks*V(w))
+XX1 A B C N X Y 3to2xfmr
+.param ; Motor Characteristics
++ Np=2 ; Stator Pole Number
++ J=0.03 ; Moment of Inertia
++ Ls=262m ; Stator Mutual Inductance
++ Lls=12m; Stator Leakage Inductance
++ Llr=20m ; Rotor Leakage Inductance
++ Rs=4.9 ; Stator Resistance
++ Rr=3.8 ; Rotor Resistance
+.param N=475
++ Bs=1.8 Br=0.5 Hc=40
++ A=1m5 Lm=0.2 Lg=1m5
+.param ; Slip Constant
++ Ks=Np/(f*2*Pi)
+.ends 3-phasemotor
+
+.subckt 3to2xfmr A B C N X Y
+Fax N A Ex {a}
+Fbx B N Ex {x}
+Fby N B Ey {y}
+Fcx C N Ex {x}
+Fcy C N Ey {y}
+Ex X 1 A B {x}
+E1 1 0 A C {x}
+Ey Y 0 B C {y}
+Cn 0 N 1µ Rpar={1/Gmin}
+.param
++ a=sqrt(2/3)
++ x=sqrt(1/6)
++ y=sqrt(1/2)
+.ends 3to2xfmr

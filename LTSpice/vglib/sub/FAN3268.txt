@@ -1,0 +1,77 @@
+* Source File: FAN3268_Blk.asc
+* Developed: ETech (eetech00@yahoo.com)
+* Created: Nov 16 2022
+* Revision: NA
+*
+* This FAN3268 spice model was tested with LTSpice. Temperature is not modeled.
+*
+* OnSemi - FAN3268 2A Low Voltage, PMOS-NMOS Bridge Driver
+*
+* block symbol definitions
+.SUBCKT FAN3268 INA ENA INB ENB OUTA OUTB VDD VSS
+A4 0 Vdd_ok INBn ENBn 0 53 0 0 AND tau=tau tripdt=tdt td=td
+A2 51 0 0 0 0 0 INBn 0 SCHMITT tau=tau tripdt=tdt td=tdin Vt=1.4 Vh=200m
+A3 52 0 0 0 0 0 ENBn 0 SCHMITT tau=tau tripdt=tdt td=tdin Vt=1.4 Vh=200m
+R2 VDD ENB 100k
+R1 INB VSS 100k
+E2 51 0 INB VSS 1
+E3 52 0 ENB VSS 1
+R3 VDD OUTB 100k
+SMP OUTB VDD 55 56 SWMP OFF
+SMN VSS OUTB 57 58 SWMN OFF
+SMN1 67 VDD 59 60 SWPB OFF
+A10 54 0 0 0 0 62 61 0 BUF tau=tau tripdt=tdt td=td
+SMN2 68 VDD 63 64 SWPB OFF
+A12 69 0 0 0 0 66 65 0 BUF tau=tau tripdt=tdt td=td
+A9 69 0 0 0 0 60 59 0 BUF tau=tau tripdt=tdt td=td
+SMN3 VSS 67 61 62 SWNB OFF
+A11 54 0 0 0 0 64 63 0 BUF tau=tau tripdt=tdt td=td
+SMN4 VSS 68 65 66 SWNB OFF
+A6 54 0 0 0 0 69 0 0 SCHMITT tau=tau tripdt=tdt td=td Vt=0.5 Vh=50m
+Q1 VDD 67 OUTB [VSS] NP 
+Q2 OUTB 68 VSS [VSS] NP 
+A13 0 Vdd_ok INAn ENAn 0 13 0 0 AND tau=tau tripdt=tdt td=td
+A14 11 0 0 0 0 0 INAn 0 SCHMITT tau=tau tripdt=tdt td=tdin Vt=1.4 Vh=200m
+A15 12 0 0 0 0 0 ENAn 0 SCHMITT tau=tau tripdt=tdt td=tdin Vt=1.4 Vh=200m
+R4 VDD ENA 100k
+R5 INA VSS 100k
+E4 11 0 INA VSS 1
+E5 12 0 ENA VSS 1
+E6 10 0 VDD VSS 1
+R6 OUTA VSS 100k
+A16 10 0 0 0 0 0 Vdd_ok 0 SCHMITT tau=tau tripdt=tdt td=td Vt=3.8 Vh=100m
+SMP1 OUTA VDD 15 16 SWMP OFF
+SMN5 VSS OUTA 17 18 SWMN OFF
+SMN6 27 VDD 19 20 SWPB OFF
+A17 29 0 0 0 0 20 19 0 BUF tau=tau tripdt=tdt td=td
+SMN7 28 VDD 23 24 SWPB OFF
+A18 14 0 0 0 0 24 23 0 BUF tau=tau tripdt=tdt td=td
+A19 14 0 0 0 0 22 21 0 BUF tau=tau tripdt=tdt td=td
+SMN8 VSS 27 21 22 SWNB OFF
+A20 29 0 0 0 0 26 25 0 BUF tau=tau tripdt=tdt td=td
+SMN9 VSS 28 25 26 SWNB OFF
+A21 14 0 0 0 0 29 0 0 SCHMITT tau=tau tripdt=tdt td=td Vt=0.5 Vh=50m
+Q3 VDD 27 OUTA [VSS] NP 
+Q4 OUTA 28 VSS [VSS] NP 
+A22 14 0 0 0 0 15 16 0 BUF tau=tau tripdt=tdt td=td
+A23 14 0 0 0 0 18 17 0 BUF tau=tau tripdt=tdt td=td
+A24 13 0 0 0 0 0 14 0 BUF tau=tau tripdt=tdt td=td
+A1 53 0 0 0 0 54 0 0 BUF tau=tau tripdt=tdt td=td
+G_IVM1 VDD VSS IQ 0 1
+B_IQ 0 IQ I=V(VDD_OK)*V(ENAn)*V(ENBn)*0.75m Rpar=1 Cpar=1n
+A5 54 0 0 0 0 56 55 0 BUF tau=tau tripdt=tdt td=td
+A7 54 0 0 0 0 58 57 0 BUF tau=tau tripdt=tdt td=td
+.param tau=3n tdt=tau*0.33 td=1n tdin=1n
+.model NP NPN (
++ is=3.12e-15 bf=103 br=0.7 ise=0 ikf=0.67 ikr=1.788 ne=1.5
++ nc=1.5 tf=794.5e-12 tr=7.945e-9 cje=2.212e-11 cjc=5.248e-12
++ vje=0.88 vjc=0.74 mje=0.42 mjc=0.41 cjs=1.397e-12 vjs=0.67
++ mjs=0.44 vaf=29 var=7.25 rc=0.568 rb=4.854 re=0.0064 xtb=1.59
++ eg=1.17 fc=0.5 xti=3.5 xcjc=0.3
++ )
+.model SWMP SW (Ron=200 Roff=10e6 Vt=0.0 Vh=-0.5)
+.model SWMN SW (Ron=200 Roff=10e6 Vt=0.0 Vh=-0.5)
+.model SWPB SW (Ron=100 Roff=10e6 Vt=0.0 Vh=-0.5)
+.model SWNB SW (Ron=200 Roff=10e6 Vt=0.0 Vh=-0.5)
+.ENDS FAN3268
+

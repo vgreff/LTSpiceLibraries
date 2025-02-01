@@ -1,0 +1,325 @@
+*  LME49710
+*****************************************************************************
+* (C) Copyright 2011 Texas Instruments Incorporated. All rights reserved.    
+*****************************************************************************
+** This model is designed as an aid for customers of Texas Instruments.
+** TI and its licensors and suppliers make no warranties, either expressed
+** or implied, with respect to this model, including the warranties of 
+** merchantability or fitness for a particular purpose.  The model is
+** provided solely on an "as is" basis.  The entire risk as to its quality
+** and performance is with the customer.
+*****************************************************************************
+*
+** Released by: Analog eLab Design Center, Texas Instruments Inc.
+* Date:             2011-11-18
+* Model Type:       ALL IN ONE
+* Simulator:        PSPICE
+* Simulator Version: 16.2.0.p001
+* Datasheet:        March 2007
+* EVM Order Number: N/A 
+* EVM Users Guide:  N/A
+* Model Version:    1.0
+*
+*****************************************************************************
+*
+* Updates:
+*
+* Version 1.0 : 
+* Release to Web
+*
+*****************************************************************************
+* The LME49710 Macro Model represents the following parameters for
+* Vcc=+/-15V:
+* GBWP, input-referred voltage noise, the quiescent current,
+* output swing, input offset voltage, input bias current,  
+* PSRR and CMRR, and the slew rate.
+*
+* For any convergence problems, it is suggested to set the following simulation
+* options:
+* VNTOL:   10u
+* ABSTOL:  10n
+* ITL1:   1000
+* ITL2:    400
+* ITL4:    400
+*****************************************************************************
+* 
+*****************************************************************************
+*
+*$
+.SUBCKT LME49710 INP INN VCC  VEE OUT
+*X_Ugnd       VCC   0    VEE   0    GND_FLOAT 0  EPOLY2 PARAMS: COEFF1=0.5 COEFF2=0.5
+Rgn1          0          GND_FLOAT  100MEG 
+EVCVSgn1      GND_FLOAT  0    32    0  1
+EVCVSgn2      33         0    VCC   0  1
+EVCVSgn3      31         0    VEE   0  1
+Cgn1          32         0    1   
+XRgn2         32         33   RNOISELESS  PARAMS: ROHMS=1E6
+XRgnd3        31         32   RNOISELESS  PARAMS: ROHMS=1E6
+X_U9          VCC VEE PD  VIMON GND_FLOAT INP2 INN1 HPA_PD_I PARAMS: VTH=1.4
++  IMAX=4.8e-3 IMIN=3N IIBP=7n IIBN=7.1n
+
+V_Vos         INP2       INP_CMRR   33.2uVdc
+C_Cinp        GND_FLOAT  INP1       200f  TC=0,0 
+C_Cinn        GND_FLOAT  INN1       200f  TC=0,0 
+R_Rinp        INP        INP1       1     TC=0,0 
+R_Rinn        INN        INN1       1     TC=0,0 
+X_U12         INP1       INP2       VNSE 
+X_UCN         INP1       INN1       FEMT
+
+X_Ug0         INP_CMRR   INN3 GND_FLOAT    AV1     VCCS_LIMIT PARAMS: GAIN=10e-6
++  IPOS=0.5 INEG=-0.5
+X_Ug4         AV1   GND_FLOAT GND_FLOAT OVER_CLAMP VCCS_LIMIT PARAMS: GAIN=172.8u
++  IPOS=98u INEG=-98u
+X_U1          GND_FLOAT  AV1        RNOISELESS PARAMS: R=1e6
+X_U2          GND_FLOAT  OVER_CLAMP RNOISELESS PARAMS: R=5.8e9
+
+C_Ucl_Ccl2    GND_FLOAT  Ucl_N01226 1p  TC=0,0 
+C_Ucl_Ccl1    Ucl_N01131 GND_FLOAT  1p  TC=0,0 
+V_Ucl_Vclp    Ucl_N00774 GND_FLOAT  53Vdc
+V_Ucl_Vcln    Ucl_N00760 GND_FLOAT -42Vdc
+X_Ucl_Ucl1    Ucl_N50037 Ucl_N01131 D_ideal
+X_Ucl_Ucl2    Ucl_N01226 Ucl_N50037 D_ideal
+E_Ucl_E1      Ucl_N01131 GND_FLOAT  Ucl_N00774 VIMON 100
+E_Ucl_E2      Ucl_N01226 GND_FLOAT  Ucl_N00760 VIMON 100
+R_Ucl_Rcl1    Ucl_N01131 N3310462   1 TC=0,0 
+R_Ucl_Rcl2    N3310462   Ucl_N01226 1 TC=0,0 
+R_Ucl_Rcl3    Ucl_N50037 CL_CLAMP   0.01 TC=0,0 
+
+E_E1          VCC_BUF    GND_FLOAT  VCC GND_FLOAT 1
+E_E2          VEE_BUF    GND_FLOAT  VEE GND_FLOAT 1
+
+C_Cc1         GND_FLOAT  OVER_CLAMP 5p        TC=0,0 
+C_Cc2         P0ZP1      GND_FLOAT  723.4e-18 TC=0,0 
+C_Cc3         CLAW_CLAMP GND_FLOAT  144.7f    TC=0,0 
+C_Cc4         GND_FLOAT  GND_FLOAT  4.11f     TC=0,0 
+
+V_V1          VCC        N3310020   1.89Vdc
+V_V4          N3310060   VEE        1.99Vdc
+X_Ud1         INP_CMRR   N3310020   D_ideal
+X_Ud2         INN3       N3310020   D_ideal
+X_Ud3         N3310060   INP_CMRR   D_ideal
+X_Ud4         N3310060   INN3       D_ideal
+
+R_R2          GND_FLOAT  N3309562   1G   TC=0,0 
+R_R3          GND_FLOAT  N3310462   1G   TC=0,0 
+R_R4          VCC        PD         1e-3 TC=0,0 
+G_G3          GND_FLOAT  VSENSE     OVER_CLAMP GND_FLOAT 1u
+G_G4          GND_FLOAT  P0Z        VSENSE     GND_FLOAT 1u
+G_G5          GND_FLOAT  P0ZP1      P0Z        GND_FLOAT 1u
+G_G6          GND_FLOAT  CLAW_CLAMP P0ZP1      GND_FLOAT 1m
+G_G7          GND_FLOAT  CL_CLAMP   CLAW_CLAMP GND_FLOAT 1m
+X_U3          VSENSE     GND_FLOAT  RNOISELESS PARAMS: R=1e6
+X_U5          GND_FLOAT  P0Z        RNOISELESS PARAMS: R=1e6
+X_U6          P0ZP1      GND_FLOAT  RNOISELESS PARAMS: R=1e6
+X_U7          CLAW_CLAMP GND_FLOAT  RNOISELESS PARAMS: R=1e3
+X_U8          CL_CLAMP   GND_FLOAT  RNOISELESS PARAMS: R=1e3
+
+G_G1          GND_FLOAT  N3309274   INP_CMRR   GND_FLOAT 1u
+E_Ecmrr       INN2 INN3  N3309274   GND_FLOAT 1
+R_Rcmr        N3309274   N33089240  1 TC=0,0 
+L_Lcmr        N33089240  GND_FLOAT  560nH  
+
+G_G2          GND_FLOAT  N3309420   VCC        VEE       562.3n
+X_Upsrr       N3309420   GND_FLOAT  INN1 INN2 VCVS_LIMIT PARAMS: GAIN=-1
++  VPOS=20M VNEG=-20M
+R_Rpsr        N3309420   N33093920  1 TC=0,0 
+L_Lpsr        N33093920  GND_FLOAT  2uH 
+
+V_Uvcl_Vclo1  VCC_BUF     Uvcl_N498931 3.95Vdc
+V_Uvcl_Vclo2  Uvcl_N50894 VEE_BUF      3.95Vdc
+X_Uvcl_Uvcl1  OVER_CLAMP  Uvcl_N498931 D_ideal
+X_Uvcl_Uvcl2  Uvcl_N50894 OVER_CLAMP   D_ideal
+
+X_Uz_S1       N3309562   GND_FLOAT  Uz_N45387 Uz_VZO_3 Zout_Uz_S1 
+X_Uz_S2       N3309562   GND_FLOAT  Uz_N45507 Uz_VZO_3 Zout_Uz_S2 
+R_Uz_Ra       Uz_N45387  Uz_VZO_4   10 TC=0,0 
+R_Uz_Rb       Uz_N45507  Uz_VZO_4   10 TC=0,0 
+R_Uz_Rm       Uz_VZO_3   Uz_VZO_4   10 TC=0,0 
+X_Uz_Uamp1    VCLP       Uz_N36964  Uz_VZO_1 GND_FLOAT VCVS_LIMIT PARAMS:
++  GAIN=1e6 VPOS=6e4 VNEG=-6e4
+X_Uz_Uamp2    GND_FLOAT  Uz_N37614  Uz_VZO_3 GND_FLOAT VCVS_LIMIT PARAMS:
++  GAIN=1e6 VPOS=6e4 VNEG=-6e4
+E_Uz_E1       Uz_VZO_2   GND_FLOAT  Uz_VZO_1 Uz_VZO_4 -1
+X_Uz_Rg1      GND_FLOAT  Uz_N36964  RNOISELESS PARAMS: R=10e6
+X_Uz_Rf1      Uz_N36964  Uz_VZO_1   RNOISELESS PARAMS: R=10e6
+X_Uz_Rg2      Uz_VZO_2   Uz_N37614  RNOISELESS PARAMS: R=1e6
+X_Uz_Rf2      Uz_N37614  Uz_VZO_3   RNOISELESS PARAMS: R=1e6
+X_Uz_H1       Uz_VZO_4   OUT VIMON  GND_FLOAT Zout_Uz_H1 
+
+X_Uthd        N3309236   GND_FLOAT  VCLP GND_FLOAT EPOLY1 
+*+PARAMS: COEFF1=0.0   COEFF2=0.0
+
+X_U10         CL_CLAMP   GND_FLOAT  PD N3309236 GND_FLOAT VCC VEE HPA_PD_SGNL
++  PARAMS: GAIN=1
+X_U11         VCC VEE VIMON GND_FLOAT Tran_Iout 
+.ENDS LME49710
+*$ 
+
+.subckt Zout_Uz_S2 1 2 3 4  
+S_Uz_S2         3 4 1 2 _Uz_S2
+RS_Uz_S2        1 2 1G
+.MODEL         _Uz_S2 VSWITCH Roff=10e6 Ron=1.0 Voff=0.1V Von=-0.1V
+.ends Zout_Uz_S2
+
+.subckt Zout_Uz_S1 1 2 3 4  
+S_Uz_S1         3 4 1 2 _Uz_S1
+RS_Uz_S1        1 2 1G
+.MODEL         _Uz_S1 VSWITCH Roff=10e6 Ron=1.0 Voff=-0.1V Von=0.1V
+.ends Zout_Uz_S1
+*$
+.subckt Zout_Uz_H1 1 2 3 4  
+H_Uz_H1         3 4 VH_Uz_H1 1e3
+VH_Uz_H1        1 2 0V
+.ends Zout_Uz_H1
+*$
+*
+.subckt D_ideal A C
+D1 A C DNOM
+.MODEL DNOM D (TT=10p CJO=1e-18 IS=1e-16 RS=1e-4)
+*.MODEL DNOM D (TT=10p CJO=1e-18 IS=1e-16 RS=1e-4 N=1e-3)
+.ENDS D_ideal
+*
+*$
+.SUBCKT VNSE 1 2 
+**************************
+* BEGIN SETUP OF NOISE GEN - NANOVOLT/RT-HZ
+* INPUT THREE VARIABLES
+* NLF - NV/RHZ AT (1/F) FREQ
+* FLW - FREQ FOR (1/F) VAL
+* NVR - NV/RHZ FLATBAND
+**************************
+* START CALC VALS
+.PARAM NLF=6.4
+.PARAM FLW=8.5 
+.PARAM NVR=2.5
+.PARAM GLF={PWR(FLW,0.25)*NLF/1164}
+.PARAM RNV={1.184*PWR(NVR,2)}
+.MODEL DVN D KF={PWR(FLW,0.5)/1E11} IS=1.0E-16
+* END CALC VALS
+I1 0 7 10E-3
+I2 0 8 10E-3
+D1 7 0 DVN
+D2 8 0 DVN
+E1 3 6 7 8 {GLF}
+R1 3 0 1E9
+R2 3 0 1E9
+R3 3 6 1E9
+E2 6 4 5 0 10
+R4 5 0 {RNV}
+R5 5 0 {RNV}
+R6 3 4 1E9
+R7 4 0 1E9
+E3 1 2 3 4 1
+C1 1 0 1E-15
+C2 2 0 1E-15
+C3 1 2 1E-15
+.ENDS VNSE
+*$
+
+.SUBCKT FEMT 1 2 
+**************************
+* BEGIN SETUP OF NOISE GEN - FEMPTOAMPS/RT-HZ
+* INPUT THREE VARIABLES
+* NLFF - SET UP INSE 1/F
+* FLWF - FA/RHZ AT 1/F FREQ
+* NVRF - FA/RHZ FLATBAND
+**************************
+* START CALC VALS
+.PARAM NLFF=3.1e3
+.PARAM FLWF=7.5 
+.PARAM NVRF=1.6e3
+.PARAM GLFF={PWR(FLWF,0.25)*NLFF/1164}
+.PARAM RNVF={1.184*PWR(NVRF,2)}
+.MODEL DVNF D KF={PWR(FLWF,0.5)/1E11} IS=1.0E-16
+* END CALC VALS
+I1 0 7 10E-3
+I2 0 8 10E-3
+D1 7 0 DVNF
+D2 8 0 DVNF
+E1 3 6 7 8 {GLFF}
+R1 3 0 1E9
+R2 3 0 1E9
+R3 3 6 1E9
+E2 6 4 5 0 10
+R4 5 0 {RNVF}
+R5 5 0 {RNVF}
+R6 3 4 1E9
+R7 4 0 1E9
+G1 1 2 3 4 1E-6
+C1 1 0 1E-15
+C2 2 0 1E-15
+C3 1 2 1E-15
+.ENDS FEMT
+*
+*$
+.SUBCKT Tran_Iout VCC VEE VIMON AGND 
+X_Siq1         N1 GND_FLOAT VIMON N2 Amp_Dyn_Iout_Siq1 
+X_Siq2         N1 GND_FLOAT VIMON N3 Amp_Dyn_Iout_Siq2 
+C_Ciq1         N1 GND_FLOAT  10e-12  TC=0,0 
+R_Riq1         N1 VIMON      10      TC=0,0 
+R_Riq2         N2 GND_FLOAT  10e3    TC=0,0 
+R_Riq3         GND_FLOAT N3  10e3    TC=0,0 
+G_Gsourcing    VCC GND_FLOAT N3 GND_FLOAT 0.001
+G_Gsinking     VEE GND_FLOAT N2 GND_FLOAT 0.001
+.ENDS Tran_Iout
+*$
+.subckt Amp_Dyn_Iout_Siq1 1 2 3 4  
+S_Siq1         3 4 1 2 _Siq1
+RS_Siq1        1 2 1G
+.MODEL        _Siq1 VSWITCH Roff=1e6 Ron=1.0 Voff=0.0V Von=-0.10V
+.ends Amp_Dyn_Iout_Siq1
+*$
+
+.subckt Amp_Dyn_Iout_Siq2 1 2 3 4  
+S_Siq2         3 4 1 2 _Siq2
+RS_Siq2        1 2 1G
+.MODEL        _Siq2 VSWITCH Roff=1e6 Ron=1.0 Voff=0.0V Von=0.10V
+.ends Amp_Dyn_Iout_Siq2
+*$
+*
+.subckt VCCS_Limit VCP VCN IOUTP IOUTN PARAMS: Gain = 1.7e-3
++ Ipos = 0.100 Ineg = -0.165
+G1 IOUTP IOUTN VALUE={LIMIT(Gain*V(VCP,VCN),Ipos,Ineg)}
+.ends VCCS_Limit
+*$
+*
+.subckt VCVS_Limit VCP VCN VOUTP VOUTN PARAMS: Gain = -1
++ Vpos = 20m Vneg = -20m
+E1 VOUTP VOUTN VALUE={LIMIT(Gain*V(VCP,VCN),Vpos,Vneg)}
+.ends VCVS_Limit
+*$
+*
+.SUBCKT HPA_PD_I VCC VEE PD Vimon AGND Ninp Ninn PARAMS: Vth = 1.4 Imax = 1e-3  Imin = 3n 
++       IIBP= 0.55u  IIBN= 0.56u
+*GBIAS    VCC  VEE    VALUE = {IF(V(PD)   >= (V(VEE)+Vth),Imax,Imin)}
+GBIAS     VCC  VEE    VALUE = {IF(V(PD)   >= V(VCC),Imax,Imin)}
+Ebuf      VDD  0      VCC  0   1
+Ginp      VDD  Ninp   VALUE = {IF(V(PD)   >= V(VCC),IIBP,0)}
+Ginn      VDD  Ninn   VALUE = {IF(V(PD)   >= V(VCC),IIBN,0)}
+.ENDS
+*$
+.SUBCKT HPA_PD_Sgnl  CP  CN  DIS  VP  VN  VCC VEE PARAMS:  GAIN = 1
+EVCVS  VP  VN  VALUE = {IF(V(DIS,VEE) >= 1.4,V(CP,CN)*GAIN,0)}
+.ENDS HPA_PD_Sgnl
+*$
+*$
+*
+.SUBCKT EPOLY2 1 2 3 4 7 8 PARAMS: Coeff1=0.5  Coeff2=0.5
+*EINT 7 8 POLY(2) (1,2) (3,4) (0 Coeff1 Coeff2)
+EINT 7 8 POLY(2) (1,2) (3,4) (0 0.5 0.5)
+.ENDS EPOLY2 
+*$
+*
+.SUBCKT EPOLY1 1 2 3 4  PARAMS: Coeff1=0.0  Coeff2=0.0
+*For distortion purpose
+EINT 3 4 POLY(1) (1,2) (0 1 8.5e-5 14.26e-4)
+*EINT 3 4 POLY(1) (1,2) (0 1 0 0)
+*EINT 3 4 1 2   1
+.ENDS EPOLY1 
+*$
+*
+.subckt Rnoiseless a b PARAMS: R=1k
+R a b {R} Noiseless
+.ends Rnoiseless
+*$
+

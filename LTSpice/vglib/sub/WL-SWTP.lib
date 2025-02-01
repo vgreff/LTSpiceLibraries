@@ -1,0 +1,130 @@
+**************************************************
+* Manufacturer:       Wurth Elektronik
+* Kinds:     White PLCC LED
+* Matchcode:         WL-SWTP SMD White Top view PLCC
+* Library Type:       Pspice
+* Version:        rev18a       
+* Date and Time   :       2018-8-4
+* Team:           eiSos EDA Service  
+* Contact:        libraries@we-online.com
+**************************************************
+.subckt  3014_158301230  1  2
+D1 1 2 led
+.MODEL led D
++ IS=1E-20
++ N=2.568
++ RS=4.8012
++ IKF=3.1385
++ CJO=0.000000000034907
++ M=0.85334
++ VJ=9.99
+.ends
+******
+.subckt  3014_158301227  1  2
+D1 1 2 led
+.MODEL led D
++ IS=1E-20
++ N=2.568
++ RS=4.8012
++ IKF=3.1385
++ CJO=0.000000000034907
++ M=0.85334
++ VJ=9.99
+.ends
+******
+.subckt  3014_158301240  1  2
+D1 1 2 led
+.MODEL led D
++ IS=1E-20
++ N=2.568
++ RS=4.8012
++ IKF=3.1385
++ CJO=0.000000000034907
++ M=0.85334
++ VJ=9.99
+.ends
+******
+.subckt  3014_158301250  1  2
+D1 1 2 led
+.MODEL led D
++ IS=1E-20
++ N=2.568
++ RS=4.8012
++ IKF=3.1385
++ CJO=0.000000000034907
++ M=0.85334
++ VJ=9.99
+.ends
+******
+.subckt  3014_158301260  1  2
+D1 1 2 led
+.MODEL led D
++ IS=1E-20
++ N=2.568
++ RS=4.8012
++ IKF=3.1385
++ CJO=0.000000000034907
++ M=0.85334
++ VJ=9.99
+.ends
+******
+.subckt  5630_158563427  1  2
+D1 1 2 led
+.MODEL led D
++ IS=12.036E-12
++ N=4.9950
++ RS=.27831
++ IKF=999
++ CJO=999.00E-6
++ M=.1
++ VJ=9.9900
+.ends
+******
+.subckt  5630_158563430  1  2
+D1 1 2 led
+.MODEL led D
++ IS=12.036E-12
++ N=4.9950
++ RS=.27831
++ IKF=999
++ CJO=999.00E-6
++ M=.1
++ VJ=9.9900
+.ends
+******
+.subckt  5630_158563440  1  2
+D1 1 2 led
+.MODEL led D
++ IS=12.036E-12
++ N=4.9950
++ RS=.27831
++ IKF=999
++ CJO=999.00E-6
++ M=.1
++ VJ=9.9900
+.ends
+******
+.subckt  5630_158563450  1  2
+D1 1 2 led
+.MODEL led D
++ IS=12.036E-12
++ N=4.9950
++ RS=.27831
++ IKF=999
++ CJO=999.00E-6
++ M=.1
++ VJ=9.9900
+.ends
+******
+.subckt  5630_158563460  1  2
+D1 1 2 led
+.MODEL led D
++ IS=12.036E-12
++ N=4.9950
++ RS=.27831
++ IKF=999
++ CJO=999.00E-6
++ M=.1
++ VJ=9.9900
+.ends
+******

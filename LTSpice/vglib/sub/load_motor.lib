@@ -1,0 +1,23 @@
+** LoadMotor **
+
+.subckt LOAD_constant_power speed  params: M=1m W=5
+BGload speed 0 i=if(abs(v(speed))>W,W*M/v(speed), if(v(speed)>=0, M, -1*M)) Rpar=1G Cpar=1p
+.ends
+
+.subckt LOAD_constant_torque  speed Params: M=1m
+* [M]=Nm
+Iload speed 0 {M}
+.ends
+
+.subckt LOAD_constant_speed speed  Params: W=1m
+* [W]=rad/sec
+Vload speed 0 {W}
+.ends
+
+.subckt LOAD_R  speed Params: M=1m N=2000 Tau=10s
+* [M]=Nm
+C speed 0 {Tau/(N*pi/30/M)} Rpar={N*pi/30/M} Rser={N*pi/30000/M} 
+.ends
+
+
+

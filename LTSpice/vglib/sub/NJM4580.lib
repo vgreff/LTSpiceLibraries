@@ -1,0 +1,43 @@
+* PART NUMBER: NJM4580
+* MANUFACTURER: NEW JAPAN RADIO
+* All Rights Reserved Copyright (c) Bee Technologies Inc. 2007
+.Subckt NJM4580_SUB OUT1 -IN1 +IN1 VEE +IN2 -IN2 OUT2 VCC
+X_U1 +IN1 -IN1 VCC VEE OUT1 NJM4580
+X_U2 +IN2 -IN2 VCC VEE OUT2 NJM4580
+.ends NJM4580_SUB
+.subckt NJM4580 1 2 3 4 5
+ c1 11 12 8.6603E-12
+ c2 6 7 30.000E-12
+ dc 5 53 dy
+ de 54 5 dy
+ dlp 90 91 dx
+ dln 92 90 dx
+ dp 4 3 dx
+ egnd 99 0 poly(2) (3,0) (4,0) 0 .5 .5
+ fb 7 99 poly(5) vb vc ve vlp vln 0 4.4738E6 -1E3 1E3 4E6 -4E6
+ ga 6 0 11 12 2.9274E-3
+ gcm 0 6 10 99 9.2572E-9
+ iee 3 10 dc 150.20E-6
+ hlim 90 0 vlim 1K
+ q1 11 2 13 qx1
+ q2 12 1 14 qx2
+ r2 6 9 100.00E3
+ rc1 4 11 353.68
+ rc2 4 12 353.68
+ re1 13 10 8.8102
+ re2 14 10 8.8102
+ ree 10 99 1.3316E6
+ ro1 8 5 50
+ ro2 7 99 25
+ rp 3 4 1.1314E3
+ vb 9 0 dc 0
+ vc 3 53 dc 2.2979
+ ve 54 4 dc 2.2979
+ vlim 7 8 dc 0
+ vlp 91 0 dc 5.4000
+ vln 0 92 dc 5.4000
+.model dx D(Is=800.00E-18)
+.model dy D(Is=800.00E-18 Rs=1m Cjo=10p)
+.model qx1 PNP(Is=800.00E-18 Bf=689.66)
+.model qx2 PNP(Is=898.3900E-18 Bf=821.92)
+.ends 

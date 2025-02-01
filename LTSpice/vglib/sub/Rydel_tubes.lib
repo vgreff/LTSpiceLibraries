@@ -1,0 +1,872 @@
+* Vacuum Tube Modeling Package Vol. 1
+*
+* Library file LAMPES.LIB, version 1.3
+*
+* Version 1.2 June 1995
+* Version 1.3 January 2000
+*
+*
+* AUTHOR: Charles RYDEL
+*
+*
+* Corrections for version 1.3 by Frédéric Broydé
+*
+* Edited and Published by: EXCEM S.A.
+*
+*
+* Copyright EXCEM, 1995, 2000
+*
+* EXCEM
+* 12, chemin des Hauts de Clairefontaine
+* 78580 MAULE
+* FRANCE
+* tel: 33 1 34 75 13 65 fax: 33 1 34 75 13 66
+* email at : fredbroyde@excem.fr
+*
+*
+
+.SUBCKT 5881 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 TETRO2 G=.924m MU=140 MU12=7.71 k1=200 k2=4 k3=0 k4=7.9 k5=64.8 k6=26.3 K7=20U K8=2.5 K=0.036m
+X2 3 4 Igrid ALPHA=.2m BETA=2U
+C1 1 4 9.5p
+C2 3 1 .9p
+C3 3 4 11.5p
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT 5881TR 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=.91m MU=7 B=84 Vc=2
+X2 2 3 Igrid ALPHA=.2m BETA=2U
+C1 1 2 15p
+C2 2 3 11p
+C3 1 3 9.5p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 6550 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 TETRO1 G=2.14m MU=219 MU12=7.8 k1=57.4 k4=7.8 k5=65.3 k6=28.8 K7=25U K8=2.5 K=0.107m
+X2 3 4 Igrid ALPHA=.3m BETA=2U
+C1 1 4 12p
+C2 3 1 1.2p
+C3 3 4 16p
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT 6550TR 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=1.57m MU=6.6 B=121 Vc=10.5
+X2 2 3 Igrid ALPHA=.3m BETA=2U
+C1 1 2 7.9p
+C2 2 3 9.3p
+C3 1 3 17p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 6913 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO1 G=.524m MU=15.2 B=49.7 Vc=9.93
+X2 2 3 Igrid ALPHA=.04m BETA=.1U
+C1 1 2 1.6p
+C2 2 3 2.5p
+C3 1 3 .45p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 6922 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO2 G=4.6m MU=29.3 B=34.9 Vc=11.8 k=6.3
+X2 2 3 Igrid ALPHA=.04m BETA=.1U
+C1 1 2 1.4p
+C2 2 3 3.1p
+C3 1 3 .18p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 7581 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 TETRO1 G=.878m MU=238 MU12=7.46 k1=93.2 k4=6.87
++k5=89.3 k6=34.9 K7=20U K8=2.5 K=0.022m
+X2 3 4 Igrid ALPHA=.1m BETA=2U
+C1 1 4 6.5p
+C2 3 1 .6p
+C3 3 4 10p
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT 7581TR 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=.897m MU=6.7 B=67.4 Vc=6.2
+X2 2 3 Igrid ALPHA=.1m BETA=2U
+C1 1 2 15p
+C2 2 3 10p
+C3 1 3 6.5p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 845 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO2 G=.315m MU=5.02 B=690 Vc=-2.1 k=10
+X2 2 3 Igrid ALPHA=.8m BETA=6U
+C1 1 2 14.5p
+C2 2 3 6.0p
+C3 1 3 4.5p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 2A3 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=.782m MU=3.95 B=324 Vc=8.7
+X2 2 3 Igrid ALPHA=.2m BETA=3U
+C1 1 2 16.5p
+C2 2 3 7.5p
+C3 1 3 5.5p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 5AR4 1 2 3
+* A1 A2 C
+X1 1 2 3 VALVE1 G=3.924m
+.ENDS
+
+******************
+.SUBCKT 5U4GB 1 2 3
+* A1 A2 C
+X1 1 2 3 VALVE1 G=.755m
+.ENDS
+
+******************
+.SUBCKT 5V3A 1 2 3
+* A1 A2 C
+X1 1 2 3 VALVE1 G=1.287m
+.ENDS
+
+******************
+.SUBCKT 5V4 1 2 3
+* A1 A2 C
+X1 1 2 3 VALVE1 G=1.76m
+.ENDS
+
+******************
+.SUBCKT 5Y3GT 1 2 3
+* A1 A2 C
+X1 1 2 3 VALVE1 G=.269m
+.ENDS
+
+******************
+.SUBCKT 6AL5 1 2 3
+* A1 A2 C
+X1 1 2 3 VALVE1 G=.18m
+.ENDS
+
+******************
+.SUBCKT 6BQ5 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 PENTH1 G=2.89m MU=245 MU12=17.8 k1=38.7 k2=1.46 k3=.38 k4=17.8 k5=22 k6=11.7 K=0.22m
+X2 3 4 Igrid ALPHA=.05m BETA=1U
+C3 3 1 0.5p
+C5 3 4 10.8p
+C6 1 4 6.5p
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT 6BQ5TR 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=2.78m MU=17.1 B=41.3 Vc=-2.6
+X2 2 3 Igrid ALPHA=.05m BETA=1U
+C1 1 2 15p
+C2 2 3 11p
+C3 1 3 6.5p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 6BX7GT 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO1 G=1.82m MU=9.42 B=48.8 Vc=-1.4
+X2 2 3 Igrid ALPHA=.4m BETA=3U
+C1 1 2 4.2p
+C2 2 3 5p
+C3 1 3 3.4p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 6C33C-B 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO3 G=5.126m MU=2 B=18.79 C=.944 Vc=.22
+X2 2 3 Igrid ALPHA=1m BETA=5U
+C1 1 2 10p
+C2 2 3 20p
+C3 1 3 7p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 6CA7 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 PENTH1 G=1.99m MU=135 MU12=9.2 k1=21 k2=.1 k3=.072 k4=10.8 k5=11.5 k6=6.8 K=0.471m
+X2 3 4 Igrid ALPHA=.2m BETA=2U
+C2 1 0 7.2p
+C3 3 1 1p
+C5 3 4 15.5p
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT 6CA7TR 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=2.36m MU=8.7 B=42.3 Vc=1.6
+X2 2 3 Igrid ALPHA=.2m BETA=2U
+C1 1 2 20p
+C2 2 3 15.5p
+C3 1 3 7.2p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 6CG7 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=.687m MU=16.8 B=34 Vc=7
+X2 2 3 Igrid ALPHA=1m BETA=5U
+C1 1 2 3.6p
+C2 2 3 2.4p
+C3 1 3 .34p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 6DJ8 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO2 G=4.6m MU=29.3 B=34.9 Vc=11.8 k=6.3
+X2 2 3 Igrid ALPHA=.04m BETA=.1U
+C1 1 2 1.4p
+C2 2 3 3.1p
+C3 1 3 .18p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 6L6WGT 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 TETRO2 G=.924m MU=140 MU12=7.71 k1=200 k2=4 k3=0 k4=7.9 k5=64.8 k6=26.3 K7=20U K8=2.5 K=0.036m
+X2 3 4 Igrid ALPHA=.2m BETA=2U
+C1 1 4 9.5p
+C2 3 1 .9p
+C3 3 4 11.5p
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT 6L6WGTR 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=.91m MU=7 B=84 Vc=2
+X2 2 3 Igrid ALPHA=.2m BETA=2U
+C1 1 2 15p
+C2 2 3 11p
+C3 1 3 9.5p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 6SJ7GT 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 PENTH1 G=.606m MU=1500 MU12=16.1 k1=100 k2=1.5 k3=0 k4=15.1 k5=10 k6=6.6 K=.137m
+X2 3 4 Igrid ALPHA=.01m BETA=.1U
+C2 1 4 7p
+C3 3 1 .005p
+C5 3 4 7p
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT 6SL7GT 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO1 G=.62m MU=62.7 B=7500 Vc=21.3
+X2 2 3 Igrid ALPHA=.04m BETA=.1U
+C1 1 2 3.8p
+C2 2 3 2.8p
+C3 1 3 3.2p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 6SN7GTB 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO1 G=.835m MU=19 B=44.7 Vc=9.3
+X2 2 3 Igrid ALPHA=.05m BETA=.1U
+C1 1 2 2.8p
+C2 2 3 3.4p
+C3 1 3 3.2p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 6V4 1 2 3
+* A1 A2 C
+X1 1 2 3 VALVE1 G=.88m
+.ENDS
+
+******************
+.SUBCKT 6V6GT 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 TETRO1 G=.747m MU=494 MU12=8.86 k1=43 k4=5.6 k5=97.8 k6=43.4 K7=50U K8=2 K=0.015m
+X2 3 4 Igrid ALPHA=.1m BETA=1U
+C1 1 4 7.5p
+C2 3 1 .7p
+C3 3 4 9p
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT 6V6GTR 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=.64m MU=7.0 B=71 Vc=11
+X2 2 3 Igrid ALPHA=.1m BETA=1U
+C1 1 2 13p
+C2 2 3 9p
+C3 1 3 7.5p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 12AT7 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO3 G=1.766m MU=45.3 B=3.92 C=.88 Vc=24.6
+X2 2 3 Igrid ALPHA=.04m BETA=.1U
+C1 1 2 1.6p
+C2 2 3 2.5p
+C3 1 3 .45p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 12AU7 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO1 G=.524m MU=15.2 B=49.7 Vc=9.93
+X2 2 3 Igrid ALPHA=.04m BETA=.1U
+C1 1 2 1.6p
+C2 2 3 2.5p
+C3 1 3 .45p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 12AX7 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO2 G=1.02m MU=90.6 B=18 Vc=50.7 k=5
+X2 2 3 Igrid ALPHA=.01m BETA=.1U
+C1 1 2 1.7p
+C2 2 3 1.6p
+C3 1 3 .46p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT 12BH7A 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO3 G=1.25m MU=16.6 B=19.6 C=1.38 Vc=21.27
+X2 2 3 Igrid ALPHA=.04m BETA=.1U
+C1 1 2 2.6p
+C2 2 3 3.2p
+C3 1 3 .5p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT ABC1 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO1 G=.639m MU=22.44 B=44.3 Vc=-1.14
+X2 2 3 Igrid ALPHA=.04m BETA=.1u
+C1 1 2 3p
+C2 2 3 3p
+C3 1 3 3p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT AD1 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO1 G=.975m MU=3.96 B=172.7 Vc=1.35
+X2 2 3 Igrid ALPHA=.3m BETA=3U
+C1 1 2 17p
+C2 2 3 9p
+C3 1 3 5p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT DA30 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=.591m MU=3.1 B=365 Vc=8.52
+X2 2 3 Igrid ALPHA=.3m BETA=3U
+C1 1 2 13p
+C2 2 3 10p
+C3 1 3 6.5p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT E80F 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 PENTH1 G=.913m MU=140000 MU12=22.38 k1=20.34 k2=20.7 k3=.6 k4=25.67 k5=26.4 k6=15 K=.206m
+X2 3 4 Igrid ALPHA=.02m BETA=.1U
+C2 1 4 5.5P
+C3 3 1 .05P
+C5 3 4 4P
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT ECC81 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO3 G=1.766m MU=45.3 B=3.92 C=.88 Vc=24.6
+X2 2 3 Igrid ALPHA=.04m BETA=.1U
+C1 1 2 1.6p
+C2 2 3 2.5p
+C3 1 3 .45p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT ECC82 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO1 G=.524m MU=15.2 B=49.7 Vc=9.93
+X2 2 3 Igrid ALPHA=.04m BETA=.1U
+C1 1 2 1.6p
+C2 2 3 2.5p
+C3 1 3 .45p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT ECC83 1 2 3
+*ANODE G CAT
+X1 1 2 3 TRIO2 G=1.02m MU=90.6 B=18 Vc=50.7 k=5
+X2 2 3 Igrid ALPHA=.01m BETA=.1U
+C1 1 2 1.7p
+C2 2 3 1.6p
+C3 1 3 .46p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT ECC88 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO2 G=4.6m MU=29.3 B=34.9 Vc=11.8 k=6.3
+X2 2 3 Igrid ALPHA=.04m BETA=.1U
+C1 1 2 1.4p
+C2 2 3 3.1p
+C3 1 3 .18p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT ED8000 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO3 G=2.88m MU=3.3 B=21.2 C=.523 Vc=-4.33
+X2 2 3 Igrid ALPHA=.4m BETA=3U
+C1 1 2 2.6p
+C2 2 3 4p
+C3 1 3 .7p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT EF86 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 PENTH1 G=.78m MU=1000 MU12=31.6 k1=55.2 k2=1.08 k3=.5 k4=32.6 k5=24.8 k6=12.8 K=0.125m
+X2 3 4 Igrid ALPHA=.02m BETA=.1U
+C2 1 4 5.5P
+C3 3 1 .05P
+C5 3 4 4P
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT EL34 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 PENTH1 G=1.99m MU=135 MU12=9.2 k1=21 k2=.1 k3=.072 k4=10.8 k5=11.5 k6=6.8 K=0.471m
+X2 3 4 Igrid ALPHA=.2m BETA=2U
+C2 1 0 7.2p
+C3 3 1 1p
+C5 3 4 15.5p
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT EL34TR 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=2.36m MU=8.7 B=42.3 Vc=1.6
+X2 2 3 Igrid ALPHA=.2m BETA=2U
+C1 1 2 20p
+C2 2 3 15.5p
+C3 1 3 7.2p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT EL84 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 PENTH1 G=2.89m MU=245 MU12=17.8 k1=38.7 k2=1.46 k3=.38 k4=17.8 k5=22 k6=11.7 K=0.22m
+X2 3 4 Igrid ALPHA=.05m BETA=1U
+C3 3 1 0.5p
+C5 3 4 10.8p
+C6 1 4 6.5p
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT EL84TR 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=2.78m MU=17.1 B=41.3 Vc=-2.6
+X2 2 3 Igrid ALPHA=.05m BETA=1U
+C1 1 2 15p
+C2 2 3 11p
+C3 1 3 6.5p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT EZ80 1 2 3
+* A1 A2 C
+X1 1 2 3 VALVE1 G=.88m
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+RF3 A G 100MEG
+.ENDS
+
+******************
+.SUBCKT GL211 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO2 G=.467m MU=11.79 B=1587 Vc=-48.4 k=7.3
+X2 2 3 Igrid ALPHA=.8m BETA=6u
+C1 1 2 14.5p
+C2 2 3 6.0p
+C3 1 3 5.5p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT GZ32 1 2 3
+* A1 A2 C
+X1 1 2 3 VALVE1 G=1.76m
+.ENDS
+
+******************
+.SUBCKT GZ34 1 2 3
+* A1 A2 C
+X1 1 2 3 VALVE1 G=3.924m
+.ENDS
+
+******************
+.SUBCKT KT66 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 TETRO1 G=.6m MU=488 MU12=6.39 k1=58.3 k4=7.46 k5=35.6 k6=16.3 K7=20U K8=2.5 K=0.059m
+X2 3 4 Igrid ALPHA=.2m BETA=2U
+C1 1 4 10p
+C2 3 1 1.1p
+C3 3 4 14.5P
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT KT66TR 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=.784m MU=7 B=171.6 Vc=30.42
+X2 2 3 Igrid ALPHA=.2m BETA=2U
+C1 1 2 12p
+C2 2 3 14.5p
+C3 1 3 10p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT KT88 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 TETRO1 G=2.14m MU=219 MU12=7.8 k1=57.4 k4=7.8 k5=65.3 k6=28.8 K7=25U K8=2.5 K=0.107m
+X2 3 4 Igrid ALPHA=.3m BETA=2U
+C1 1 4 12p
+C2 3 1 1.2p
+C3 3 4 16p
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT KT88TR 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=1.57m MU=6.6 B=121 Vc=10.5
+X2 2 3 Igrid ALPHA=.3m BETA=2U
+C1 1 2 7.9p
+C2 2 3 9.3p
+C3 1 3 17p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT KT90 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 TETRO2 G=3.28m MU=140 MU12=9.63 k1=80 k2=100 k3=.068 k4=7.46 k5=62 k6=28.6 K7=25U K8=2.5 K=0.11m
+X2 3 4 Igrid ALPHA=.4m BETA=3U
+C1 1 4 10p
+C2 3 1 1.8p
+C3 3 4 29P
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT KT90TR 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=2.13m MU=7.03 B=119 Vc=7.84
+X2 2 3 Igrid ALPHA=.4m BETA=3U
+C1 1 2 12p
+C2 2 3 18p
+C3 1 3 15p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT NF2 1 2 3 4
+* Anode G2 G1 Cathode
+X1 1 2 3 4 PENTH1 G=1.5m MU=3500 MU12=24.3 k1=30 k2=100 k3=0.02 k4=24.3 k5=30 k6=20 K=0.4m
+X2 3 4 Igrid ALPHA=.02m BETA=.5U
+C2 1 4 8p
+C3 3 1 .1p
+C5 3 4 6p
+RF1 1 4 200MEG
+RF2 3 4 50MEG
+RF3 2 4 100MEG
+.ENDS
+
+******************
+.SUBCKT PX4 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=.822m MU=4.7 B=174 Vc=-13.3
+X2 2 3 Igrid ALPHA=.2m BETA=3U
+C1 1 2 13.7p
+C2 2 3 7.7p
+C3 1 3 3.9p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT PX25 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=1.2m MU=7.9 B=205 Vc=-19.8
+X2 2 3 Igrid ALPHA=.2m BETA=3U
+C1 1 2 14.8p
+C2 2 3 11.4p
+C3 1 3 8.3p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT R120 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=1.5m MU=4.97 B=162 Vc=5.6
+X2 2 3 Igrid ALPHA=.2m BETA=3U
+C1 1 2 18.5p
+C2 2 3 10p
+C3 1 3 6p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT V45 1 2 3
+* 1 2 3
+X1 1 2 3 TRIO1 G=.34m MU=3.3 B=309 Vc=-3
+X2 2 3 Igrid ALPHA=.2m BETA=3U
+C1 1 2 7p
+C2 2 3 4p
+C3 1 3 3p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT VT4C 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO2 G=.467m MU=11.79 B=1587 Vc=-48.4 k=7.3
+X2 2 3 Igrid ALPHA=.8m BETA=6u
+C1 1 2 14.5p
+C2 2 3 6.0p
+C3 1 3 5.5p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+******************
+.SUBCKT WE300B 1 2 3
+* ANODE G CAT
+X1 1 2 3 TRIO1 G=.795m MU=3.64 B=284 Vc=-.76
+X2 2 3 Igrid ALPHA=.4m BETA=5U
+C1 1 2 15p
+C2 2 3 9p
+C3 1 3 4.3p
+RF1 1 3 200MEG
+RF2 2 3 50MEG
+.ENDS
+
+**********************
+**MODELLI MATEMATICI**
+**********************
+
+******************
+.SUBCKT TRIO1 A G C
+B1 A C I={G}*(1+V(G,C)/({B}-(V(G,C)/1000)))*(V(G,C)+((V(A,C)+{Vc})/{MU}))**1.5
+.ENDS
+
+******************
+.SUBCKT TRIO2 A G C
+B1 A C I={G}*((1+V(G,C)/{B})*(V(G,C)+((V(A,C)+{Vc})/{MU}))**1.5)*(V(A,C)/(V(A,C)+{k}))
+.ENDS
+
+******************
+.SUBCKT TRIO3 A G C
+B1 A C I={G}*(1+(V(G,C)/({B}-(V(G,C)/{C}))))*(V(G,C)+((V(A,C)+{Vc})/{MU}))**1.5
+.ENDS
+
+******************
+.SUBCKT TETRO1 A G2 G1 C
+
+* Terme d'ecran
+B1 10 0 V=IF(V(A,C)>0,(V(G2,C)/{MU12})*(V(A,C)/((V(G2,C)/{k1})+V(A,C))),0)
+
+* Total
+B2 11 0 V={G}*(V(G1,C)+V(10,0)+(V(A,C)/{MU}))**1.5
+
+* Rajout de la caracteristique de saturation a faible tension
+B3 A C I=IF(({K7}*(V(A,C)**{K8}))>V(11,0),V(11,0),IF(V(A,C)>0,({K7}*(V(A,C)**{K8})),0))
+
+* Calcul du courant d'ecran
+B6 12 0 V=IF(V(G2,C)>0,(V(G1,C)+(V(G2,C)/{k4})),0)
+B7 G2 C I={K}*(V(12,0)**1.5)*((V(A,C)+{k5})/(V(A,C)+{k6}))**3
+.ENDS
+
+******************
+.SUBCKT TETRO2 A G2 G1 C
+
+* Terme d'ecran
+B1 10 0 V=IF(V(A,C)>0,(V(G2,C)/{MU12})*(V(A,C)-({k3}*V(G1,C)))/((V(G2,C)/{k1})+V(A,C)),0)
+
+* Total
+B2 11 0 V={G}*((V(G1,C)+V(10,0))+(V(A,C)/({MU}*(1-(V(G1,C)/{k2})))))**1.5
+
+* Rajout de la caracteristique de saturation a faible tension
+B3 A C I=IF(({K7}*(V(A,C)**{K8}))>V(11,0),V(11,0),IF(V(A,C)>0,({K7}*(V(A,C)**{K8})),0))
+
+* Calcul du courant d'ecran
+B6 12 0 V=IF(V(G2,C)>0,(V(G1,C)+(V(G2,C)/{k4})),0)
+B7 G2 C I={K}*(V(12,0)**1.5)*((V(A,C)+{k5})/(V(A,C)+{k6}))**3
+.ENDS
+
+******************
+.SUBCKT PENTH1 A G2 G1 C
+
+* Terme d'ecran
+B1 10 0 V=IF(V(A,C)>0,(V(G2,C)/{MU12})*(V(A,C)-({k3}*V(G1,C)))/((V(G2,C)/{k1})+V(A,C)),0)
+
+* Total
+B2 A C I={G}*((V(G1,C)+V(10,0))+(V(A,C)/({MU}*(1-(V(G1,C)/{k2})))))**1.5
+
+* Calcul du courant d'ecran
+B6 12 0 V=IF(V(G2,C)>0,(V(G1,C)+(V(G2,C)/{k4})),0)
+B7 G2 C I={K}*(V(12,0)**1.5)*((V(A,C)+{k5})/(V(A,C)+{k6}))**3
+.ENDS
+
+******************
+.SUBCKT Igrid G1 C
+* Courant grille
+B4 6 0 V=IF(V(G1,C)>0,{ALPHA}*V(G1,C)**1.5,{BETA}/-(V(G1,C)-.1))
+B5 G1 C I=V(6,0)
+.ENDS
+
+******************
+.SUBCKT VALVE1 A1 A2 C
+B1 1 0 V=IF(V(A1,C)>0,{G}*(V(A1,C)),0)
+B2 2 0 V=IF(V(A2,C)>0,{G}*(V(A2,C)),0)
+B3 A1 C I=V(1,0)**1.5
+B4 A2 C I=V(2,0)**1.5
+R1 C 0 1MEG
+.ENDS

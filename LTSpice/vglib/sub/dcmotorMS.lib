@@ -1,0 +1,33 @@
+
+*xM1 1 0 omega Torque M1_OPEN_theta M1_OPEN_Ea DC_MACHINE_EXTM1 Params: La=0.0162 Ra=30.4 Ke=0.026 Kt=0.026 J=5.15e-007 B=4.83e-007 ic_omega=0 ic_theta=0
+
+.subckt DC_MACHINE  V+ V- omega torque theta_out Ea_out Params: La=5e-005 Ra=0.2 Ke=0.03 Kt=0.03 J=0.0001 B=1e-6 ic_omega=0 ic_theta=0
+
+**Rotor (or armature)**
+L1 V+  Ea {La} Rser={Ra}
+backemf Ea V- V=v(omega)*Ke
+
+**Mechanical side
+bGtorque 0 omega_  i=I(backemf)*Kt
+Vtorquesense omega_ omega 0
+CIntertia omega 0 {J}
+.ic v(omega)={ic_omega}
+Rfriction omega 0 {1/B}
+
+**Measurements
+bEtorqueSignal torque 0 v=I(Vtorquesense)
+Gtheta 0 theta omega 0 1
+Ctheta theta 0 1
+.ic v(theta)={ic_theta}
+
+bEtheta theta_out 0 v=v(theta)
+bEa_out Ea_out 0 v=V(Ea,V-)
+
+.ends
+
+
+.subckt RAD_S_RPM   in out
+b1 out 0 v=v(in)*30/PI
+.ends
+
+

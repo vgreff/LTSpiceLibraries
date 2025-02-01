@@ -1,0 +1,18 @@
+* Has Developed Bordodynov
+*
+.subckt CNY70  A k C E Gate params: d=0 rel_CTR0=0.05
+
+.func F(d) 1/(1+0.4*d)**2
+* tbl(d, 
+*+ 0, 1,
+*+ 10, 0.04)
+.param rel_CTR=rel_CTR0*F(d)
+* V(gate)=1V - 100% (open), V(gate)=0V (close)
+VA 3 K 0
+D1 A 3 LD
+B1 C b i=i(va)*{rel_CTR}*V(Gate)
+C1 A K 18p
+Q1 C b E [E] NP
+.model LD D(Ron=2 Roff=100Meg Vfwd=1.15)
+.model NP NPN(Bf=610 Vaf=140 Ikf=15m Rc=1 Cjc=19p Cje=7p Cjs=7p)
+.ends CNY70

@@ -1,0 +1,41 @@
+* (C) Copyright 2021 Texas Instruments Incorporated. All rights reserved.                                            
+*****************************************************************************
+** This model is designed as an aid for customers of Texas Instruments.
+** TI and its licensors and suppliers make no warranties, either expressed
+** or implied, with respect to this model, including the warranties of 
+** merchantability or fitness for a particular purpose.  The model is
+** provided solely on an "as is" basis.  The entire risk as to its quality
+** and performance is with the customer
+*****************************************************************************
+*
+* This model is subject to change without notice. Texas Instruments
+* Incorporated is not responsible for updating this model.
+* Created with Shichman and Hodges JFET SPICE modeling
+*
+* Model Version: Final 1.0
+*
+* Final 1.0
+* Release to Web.
+*****************************************************************************
+* Model Usage Notes:
+* The following parameters are modeled: 
+*      Static, large and small signals, and noise parameters
+*
+.SUBCKT JFE150_x D G S VCC VEE
+.model DJFE150 D Is=1e-12 Cjo=0.1pF Rs=180k BV=22
+.model NJFE150 NJF (BETA=31m BETATCE=.5 VTO=-975m VTOTC=2.5m LAMBDA=16.95m RD=3.5 RS=4.2 N=1 M=0.33 PB=0.705 IS=5.34f CGD=6.3p CGS=20.3p AF=1 KF=3.25e-18 FC=0.5)
+*
+J_J1         D G S NJFE150 
+D_D1         G D   DJFE150
+X_U1         D VCC VEE ESD_OUT_JFE150
+X_U2         G VCC VEE ESD_OUT_JFE150
+X_U3         S VCC VEE ESD_OUT_JFE150
+*$
+*
+.SUBCKT ESD_OUT_JFE150 OUT VCC VEE
+.MODEL ESD_SW VSWITCH(RON=50 ROFF=1E12 VON=700E-3 VOFF=100E-3)
+S1 VCC OUT OUT VCC ESD_SW
+S2 OUT VEE VEE OUT ESD_SW
+.ENDS  ESD_OUT_JFE150
+*$
+.ENDS JFE150_x

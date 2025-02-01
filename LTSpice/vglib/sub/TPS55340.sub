@@ -1,0 +1,516 @@
+
+* Updates:
+* Final 2.00
+* Model revised to address 
+*  - Frequency foldback during startup
+*  - Current limit
+*  - Steady State capability
+*
+* Final 1.00
+* Release to Web.
+*
+***************************************************************************
+.SUBCKT TPS55340  SW_0 SW_1 PWPD SW_2 VIN EN SS SYNC AGND 
++ NC_0 PGND_0 PGND_1 PGND_2 NC_1 FREQ FB COMP   PARAMS: SS =0
+C_erroramp_C8         0 erroramp_N7417324  4.5p  
+X_erroramp_U15         erroramp_N16916769 FB erroramp_N16916795 COMP_BASIC_GEN
++  PARAMS: VDD=1 VSS=0 VTHR=0.5
+C_erroramp_C14         0 erroramp_N16599751  1n  
+R_erroramp_R8         erroramp_N7417324 erroramp_ENVELOPE  250k  
+V_erroramp_V6         erroramp_N16916769 0 0.9V
+D_erroramp_D5a         erroramp_N16599751 erroramp_N7417324 D_D1 
+E_erroramp_ABM3         erroramp_N166144691 0 VALUE { V(erroramp_CLIMIT)  
++ +V(erroramp_ENVELOPE)   }
+X_erroramp_U16         SS_COMPLETE erroramp_N16916816 erroramp_N16916848
++  COMP_BASIC_GEN PARAMS: VDD=1 VSS=0 VTHR=0.5
+R_erroramp_R11         0 erroramp_N7417324  1MEG  
+V_erroramp_V7         erroramp_N16916816 0 0.8V
+C_erroramp_C10         0 erroramp_EA_CLAMP  1n  
+X_erroramp_U17         erroramp_N16916795 erroramp_N16916848 FREQFOLD
++  AND2_BASIC_GEN PARAMS: VDD=1 VSS=0 VTHR=500E-3
+E_erroramp_E1         erroramp_N16598605 0 erroramp_EA_CLAMP COMP_CLAMP 1e6
+V_erroramp_V2         erroramp_CLIMIT 0 1.2
+C_erroramp_C6         0 erroramp_N16806362  1n  
+C_erroramp_C9         0 erroramp_ENVELOPE  3p  
+E_erroramp_ABM180         erroramp_N16769397 0 VALUE { IF(V(SDWN) > 0.5,1,0)   
++  }
+E_erroramp_ABM1         erroramp_N16774706 0 VALUE { IF(V(SDWN) > 0.5,
++  65m,815m)    }
+E_erroramp_GAIN1         erroramp_N16600984 0 VALUE {V(VRAMPIN)}
+R_erroramp_R4         0 COMP  10MEG  
+D_erroramp_D2         erroramp_N16806362 COMP D_D1 
+C_erroramp_C5         0 COMP  20p  
+D_erroramp_D3         COMP erroramp_N16608201 D_D1 
+R_erroramp_R5         erroramp_N16774706 erroramp_N16806362  1  
+R_erroramp_R13         erroramp_N16599751 erroramp_N16599495  10n  
+C_erroramp_C15         0 erroramp_N16769403  1n  
+R_erroramp_R9         erroramp_N166144691 erroramp_EA_CLAMP  1  
+V_erroramp_V5         erroramp_N16939349 0 1.229
+R_erroramp_R15         erroramp_N16769397 erroramp_N16769403  1  
+R_erroramp_R12         erroramp_N16596104 erroramp_N16598605  10n  
+X_erroramp_U2         COMP_CLAMP erroramp_N16596104 D_D
+G_erroramp_ABM2I1         0 COMP VALUE { LIMIT((V(erroramp_N16939349)-V(FB))*
++  360u, -42u, 42u)}    
+R_erroramp_R7         COMP COMP_CLAMP  400  
+V_erroramp_V1         erroramp_N16608201 0 5.3
+X_erroramp_S68    erroramp_N16769403 0 COMP 0 ErrorAmp_erroramp_S68 
+C_erroramp_C13         0 erroramp_N16596104  1n  
+E_erroramp_E2         erroramp_N16599495 0 erroramp_N16600984 erroramp_N7417324
++  1e6
+R_R5         AGND NC_0  1m  
+R_U1_R1         U1_EN_NOFILT U1_N7335550  10k  
+X_U1_U605         U1_OUT U1_N16501198 INV_BASIC_GEN PARAMS: VDD=1 VSS=0
++  VTHR=500E-3
+E_U1_ABM173         U1_EN_NOFILT 0 VALUE { IF(V(EN) > 1.08,1,0)}    
+R_U1_R2         0 EN  950k  
+D_U1_D2         U1_EN_NOFILT U1_N7335550 D_D1 
+E_U1_ABM2         U1_N165403951 0 VALUE { (V(U1_N16499008) + 2.63)    }
+R_U1_R4         U1_N165403951 U1_N16498934  1  
+X_U1_U601         U1_N16543038 U1_N16501198 SDWN OR2_BASIC_GEN PARAMS: VDD=1
++  VSS=0 VTHR=500E-3
+X_U1_U604         EN_LOGIC U1_N16543038 INV_BASIC_GEN PARAMS: VDD=1 VSS=0
++  VTHR=500E-3
+R_U1_R3         U1_N16499002 U1_N16499008  1  
+C_U1_C3         0 U1_N16498934  1n  
+E_U1_ABM1         U1_N16499002 0 VALUE { (V(U1_OUT) * -130m)    }
+C_U1_C2         0 U1_N16499008  1n  
+X_U1_U606         U1_N7335550 EN_LOGIC BUF_BASIC_GEN PARAMS: VDD=1 VSS=0
++  VTHR=0.5
+C_U1_C1         0 U1_N7335550  70n  
+X_U1_U5         VIN U1_N16498934 U1_OUT COMP_BASIC_GEN PARAMS: VDD=1 VSS=0
++  VTHR=0.5
+D_Oscillator_D11         Oscillator_RAMP Oscillator_N16676357 D_D1 
+X_Oscillator_F1    FREQ Oscillator_N16676171 Oscillator_N16676357
++  Oscillator_N16675967 Oscillator_Oscillator_F1 
+X_Oscillator_S26    Oscillator_N16676387 0 Oscillator_RAMP 0
++  Oscillator_Oscillator_S26 
+V_Oscillator_V48         Oscillator_N16681582 0 1.86
+X_Oscillator_U135         SYSCLK Oscillator_N16676047 BUF_DELAY_BASIC_GEN
++  PARAMS: VDD=1 VSS=0 VTHR=0.5 DELAY=20n
+V_Oscillator_V46         Oscillator_N16676051 0 2
+X_Oscillator_S27    FREQFOLD 0 Oscillator_N16698011 Oscillator_N16699552
++  Oscillator_Oscillator_S27 
+X_Oscillator_U131         Oscillator_RAMP Oscillator_N16676051 SYSCLK
++  COMP_BASIC_GEN PARAMS: VDD=1 VSS=0 VTHR=0.5
+X_Oscillator_U697         SYSCLK Oscillator_N16685472 93PDUTY OR2_BASIC_GEN
++  PARAMS: VDD=1 VSS=0 VTHR=500E-3
+V_Oscillator_V44         Oscillator_N16676171 0 1.229
+X_Oscillator_F2    Oscillator_N16698011 0 0 Oscillator_RAMP
++  Oscillator_Oscillator_F2 
+X_Oscillator_H1    Oscillator_N16675967 0 I_RT 0 Oscillator_Oscillator_H1 
+R_Oscillator_R278         I_RT Oscillator_N16699552  1  
+X_Oscillator_U134         SDWN Oscillator_N16676047 Oscillator_N16676387
++  OR2_BASIC_GEN PARAMS: VDD=1 VSS=0 VTHR=500E-3
+V_Oscillator_V45         Oscillator_N16676357 0 5
+X_Oscillator_U119         Oscillator_N16681582 Oscillator_RAMP
++  Oscillator_N16685472 COMP_BASIC_GEN PARAMS: VDD=1 VSS=0 VTHR=0.5
+C_Oscillator_C79         Oscillator_RAMP 0  6p  
+X_U7_U823         U7_N16497188 PWM_CLK U7_N16489522 AND2_BASIC_GEN PARAMS:
++  VDD=1 VSS=0 VTHR=500E-3
+D_U7_D1T         U7_N16489522 U7_INDELAYED1 D_D1 
+R_U7_R272         U7_N16489522 U7_INDELAYED1  8.93k  
+X_U7_U822         PWM_CLK U7_N16497188 INV_DELAY_BASIC_GEN PARAMS: VDD=1 VSS=0
++  VTHR=0.5 DELAY=15n
+X_U7_U824         U7_N16489522 U7_INDELAYED1 PWM_CLK PWM_FINAL OR3_BASIC_GEN
++  PARAMS: VDD=1 VSS=0 VTHR=500E-3
+C_U7_C172         0 U7_INDELAYED1  10p  
+R_R4         SW_0 SW_1  1m  
+R_R6         SW_0 SW_2  1m  
+R_R1         PGND_0 NC_0  1m  
+D_U8_D1         U8_N7375243 SW_0 D_D1 
+X_U8_U613         SDWN U8_N7375083 INV_BASIC_GEN PARAMS: VDD=1 VSS=0
++  VTHR=500E-3
+X_U8_H1    U8_N7375243 0 ISW 0 Driver_U8_H1 
+X_U8_S30    U8_N16776274 0 U8_N16776535 U8_N7375243 Driver_U8_S30 
+X_U8_U604         U8_N7375083 PWM_FINAL U8_N16776274 AND2_BASIC_GEN PARAMS:
++  VDD=1 VSS=0 VTHR=500E-3
+R_U8_R3         U8_N16776535 SW_0 R_U8_R3 59m TC=2.59m,0 
+.model        R_U8_R3 RES R=1 
+C_U6_C146         0 U6_N16621608  1p  
+X_U6_S26    U6_N16543632 0 VRAMPIN 0 GmIphase_U6_S26 
+D_U6_D4         U6_N16621608 U6_N16621496 D_D1 
+R_U6_R255         U6_N16621496 U6_N16621608  28.8k  
+X_U6_U606         PWM_FINAL U6_N16543632 INV_BASIC_GEN PARAMS: VDD=1 VSS=0
++  VTHR=500E-3
+E_U6_ABM151         U6_N16621496 0 VALUE {IF(V(PWM_FINAL) > 0.5, 1,0)}    
+R_U6_R257         U6_N16571205 U6_N16573389  220k  
+X_U6_U605         PWM_FINAL U6_N16571205 INV_BASIC_GEN PARAMS: VDD=1 VSS=0
++  VTHR=500E-3
+X_U6_U604         U6_N16625550 93PDUTY U6_PWM AND2_BASIC_GEN PARAMS: VDD=1
++  VSS=0 VTHR=500E-3
+G_U6_ABMII1         VRAMPIN 0 VALUE { -V(U6_N16573109)-0.5u    }
+X_U6_U603         PWM_CLK N16528816 SYSCLK SET1 U6_PWM SET1
++  DFFSBRB_RHPBASIC_GEN PARAMS: VDD=1 VSS=0 VTHR=500E-3
+C_U6_C134         0 VRAMPIN  6p  
+X_U6_U600         U6_ICTRL U6_ISWF U6_N16625550 COMP_BASIC_GEN PARAMS: VDD=1
++  VSS=0 VTHR=0.5
+E_U6_ABM163         U6_ICTRL 0 VALUE { (V(COMP_CLAMP) - V(VRAMPIN)  
++ )   }
+C_U6_C135         0 U6_N16573389  15p  
+V_U6_V1         SET1 0 5V
+E_U6_ABM152         U6_ISWF 0 VALUE  {IF(V(U6_N16621608) > 0.5,  
++ V(ISW)+1.04,1.04)}   
+E_U6_ABM165         U6_N16573109 0 VALUE {
++  LIMIT((0.01627*V(I_RT))/(V(U6_N16573389)+0.1m),0,71.42u)    }
+R_U4_R16         U4_N16643634 COMP  1  
+E_U4_ABM181         SS_COMPLETE 0 VALUE { IF(V(SS) >1.8,1,0)    }
+R_U4_R15         U4_N16641529 U4_N16641535  1  
+E_U4_ABM180         U4_N16641529 0 VALUE { IF(V(SDWN) > 0.5,1,0)    }
+D_U4_D1         SS U4_N16500284 D_D1 
+V_U4_V64         U4_N16500284 0 2.5
+X_U4_S68    U4_N16641535 0 SS 0 SoftStart_U4_S68 
+C_U4_C15         0 U4_N16641535  1n  
+Q_U4_Q1         0 SS U4_N16643634 Q_Q1 
+D_U4_D63         0 SS D_D1 
+G_U4_ABMI6         U4_N16500284 SS VALUE {IF(V(SDWN) > 0,0, 6e-6)}    
+R_R2         NC_0 FB  6.145MEG  
+R_R3         PGND_1 NC_0  1m  
+R_R7         NC_1 NC_0  1m  
+.IC         V(Oscillator_RAMP )=0
+.IC         V(SS )={SS*1.8}
+*
+*$
+.subckt ErrorAmp_erroramp_S68 1 2 3 4  
+S_erroramp_S68         3 4 1 2 _erroramp_S68
+RS_erroramp_S68         1 2 1G
+.MODEL         _erroramp_S68 VSWITCH Roff=100e6 Ron=1 Voff=0.2 Von=0.8
+.ends ErrorAmp_erroramp_S68
+*$
+.subckt Oscillator_Oscillator_F1 1 2 3 4  
+F_Oscillator_F1         3 4 VF_Oscillator_F1 -1
+VF_Oscillator_F1         1 2 0V
+.ends Oscillator_Oscillator_F1
+*$
+.subckt Oscillator_Oscillator_S26 1 2 3 4  
+S_Oscillator_S26         3 4 1 2 _Oscillator_S26
+RS_Oscillator_S26         1 2 1G
+.MODEL         _Oscillator_S26 VSWITCH Roff=100e6 Ron=1.0 Voff=0.2 Von=0.8
+.ends Oscillator_Oscillator_S26
+*$
+.subckt Oscillator_Oscillator_S27 1 2 3 4  
+S_Oscillator_S27         3 4 1 2 _Oscillator_S27
+RS_Oscillator_S27         1 2 1G
+.MODEL         _Oscillator_S27 VSWITCH Roff=1m Ron=3 Voff=0.5 Von=0.8
+.ends Oscillator_Oscillator_S27
+*$
+.subckt Oscillator_Oscillator_F2 1 2 3 4  
+F_Oscillator_F2         3 4 VF_Oscillator_F2 1
+VF_Oscillator_F2         1 2 0V
+.ends Oscillator_Oscillator_F2
+*$
+.subckt Oscillator_Oscillator_H1 1 2 3 4  
+H_Oscillator_H1         3 4 VH_Oscillator_H1 0.5
+VH_Oscillator_H1         1 2 0V
+.ends Oscillator_Oscillator_H1
+*$
+.subckt Driver_U8_H1 1 2 3 4  
+H_U8_H1         3 4 VH_U8_H1 23.3m
+VH_U8_H1         1 2 0V
+.ends Driver_U8_H1
+*$
+.subckt Driver_U8_S30 1 2 3 4  
+S_U8_S30         3 4 1 2 _U8_S30
+RS_U8_S30         1 2 1G
+.MODEL         _U8_S30 VSWITCH Roff=35e6 Ron=0.1m Voff=0.2 Von=0.8
+.ends Driver_U8_S30
+*$
+.subckt GmIphase_U6_S26 1 2 3 4  
+S_U6_S26         3 4 1 2 _U6_S26
+RS_U6_S26         1 2 1G
+.MODEL         _U6_S26 VSWITCH Roff=100e6 Ron=10m Voff=0.2 Von=0.8
+.ends GmIphase_U6_S26
+*$
+.subckt SoftStart_U4_S68 1 2 3 4  
+S_U4_S68         3 4 1 2 _U4_S68
+RS_U4_S68         1 2 1G
+.MODEL         _U4_S68 VSWITCH Roff=1meg Ron=1 Voff=0.2 Von=0.8
+.ends SoftStart_U4_S68
+*$
+.MODEL Q_Q1 PNP( BF=100 IS=1e-14 VJE=0.75 )
+*$
+
+**Set has higher priority in this latch
+.SUBCKT SRLATCHSHP_BASIC_GEN S R Q QB PARAMS: VDD=1 VSS=0 VTHR=0.5 
+GQ 0 Qint VALUE = {IF(V(S) > {VTHR},5,IF(V(R)>{VTHR},-5, 0))}
+CQint Qint 0 1n
+RQint Qint 0 1000MEG
+D_D10 Qint MY5 D_D1
+V1 MY5 0 {VDD}
+D_D11 MYVSS Qint D_D1
+V2 MYVSS 0 {VSS} 
+EQ Qqq 0 Qint 0 1
+X3 Qqq Qqqd1 BUF_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR}
+RQq Qqqd1 Q 1
+EQb Qbr 0 VALUE = {IF( V(Q) > {VTHR}, {VSS},{VDD})}
+RQb Qbr QB 1 
+Cdummy1 Q 0 1n 
+Cdummy2 QB 0 1n 
+.IC V(Qint) {VSS}
+.ENDS SRLATCHSHP_BASIC_GEN
+*$
+**Reset has higher priority in this latch
+.SUBCKT SRLATCHRHP_BASIC_GEN S R Q QB PARAMS: VDD=1 VSS=0 VTHR=0.5 
+GQ 0 Qint VALUE = {IF(V(R) > {VTHR},-5,IF(V(S)>{VTHR},5, 0))}
+CQint Qint 0 1n
+RQint Qint 0 1000MEG
+D_D10 Qint MY5 D_D1
+V1 MY5 0 {VDD}
+D_D11 MYVSS Qint D_D1
+V2 MYVSS 0 {VSS} 
+EQ Qqq 0 Qint 0 1
+X3 Qqq Qqqd1 BUF_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR}
+RQq Qqqd1 Q 1
+EQb Qbr 0 VALUE = {IF( V(Q) > {VTHR}, {VSS},{VDD})}
+RQb Qbr QB 1 
+Cdummy1 Q 0 1n 
+Cdummy2 QB 0 1n
+.IC V(Qint) {VSS}
+.ENDS SRLATCHRHP_BASIC_GEN
+*$
+**Reset has higher priority in this latch and active low set and reset - basically NAND based SR latch
+.SUBCKT SBRBLATCHRHP_BASIC_GEN SB RB Q QB PARAMS: VDD=1 VSS=0 VTHR=0.5 
+GQ 0 Qint VALUE = {IF(V(RB) < {VTHR},-5,IF(V(SB) < {VTHR},5, 0))}
+CQint Qint 0 1n
+RQint Qint 0 1000MEG
+D_D10 Qint MY5 D_D1
+V1 MY5 0 {VDD}
+D_D11 MYVSS Qint D_D1
+V2 MYVSS 0 {VSS} 
+EQ Qqq 0 Qint 0 1
+X3 Qqq Qqqd1 BUF_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR}
+RQq Qqqd1 Q 1
+EQb Qbr 0 VALUE = {IF( V(Q) > {VTHR}, {VSS},{VDD})}
+RQb Qbr QB 1 
+.IC V(Qint) {VSS}
+.ENDS SBRBLATCHRHP_BASIC_GEN
+*$
+**Reset has higher priority in this latch and active low set and reset - basically NAND based SR latch
+.SUBCKT SBRBLATCHSHP_BASIC_GEN SB RB Q QB PARAMS: VDD=1 VSS=0 VTHR=0.5 
+GQ 0 Qint VALUE = {IF(V(SB) < {VTHR},5,IF(V(RB) < {VTHR},-5, 0))}
+CQint Qint 0 1n
+RQint Qint 0 1000MEG
+D_D10 Qint MY5 D_D1
+V1 MY5 0 {VDD}
+D_D11 MYVSS Qint D_D1
+V2 MYVSS 0 {VSS} 
+EQ Qqq 0 Qint 0 1
+X3 Qqq Qqqd1 BUF_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR}
+RQq Qqqd1 Q 1
+EQb Qbr 0 VALUE = {IF( V(Q) > {VTHR}, {VSS},{VDD})}
+RQb Qbr QB 1 
+.IC V(Qint) {VSS}
+.ENDS SBRBLATCHSHP_BASIC_GEN
+*$
+.SUBCKT DFFSBRB_SHPBASIC_GEN Q QB CLK D RB SB PARAMS: VDD=1 VSS=0 VTHR=0.5 
+***Set has higher priority in this
+** Changed the delay from 7n/10n to 15n/20n to help larger time step simulations
+**Faster flip-flops require a a smaller time step to simulate
+X1 CLK CLKdel INV_DELAY_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR} DELAY = 15n
+X2 CLK CLKdel CLKint AND2_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR}
+GQ 0 Qint VALUE = {IF(V(SB) < {VTHR},5,IF(V(RB)<{VTHR},-5, IF(V(CLKint)> {VTHR}, 
++ IF(V(D)> {VTHR},5,-5),0)))}
+CQint Qint 0 1n
+RQint Qint 0 1000MEG
+D_D10 Qint MY5 D_D1
+V1 MY5 0 {VDD}
+D_D11 MYVSS Qint D_D1
+V2 MYVSS 0 {VSS} 
+EQ Qqq 0 Qint 0 1
+X3 Qqq Qqqd1 BUF_DELAY_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR} DELAY = 20n
+RQq Qqqd1 Q 1
+EQb Qbr 0 VALUE = {IF( V(Q) > {VTHR}, {VSS},{VDD})}
+RQb Qbr Qb 1 
+Cdummy1 Q 0 1nF 
+Cdummy2 QB 0 1nF 
+.IC V(Qint) {VSS}
+.ENDS DFFSBRB_SHPBASIC_GEN
+*$
+.SUBCKT DFFSR_SHPBASIC_GEN Q QB CLK D R S PARAMS: VDD=1 VSS=0 VTHR=0.5 
+***Set has higher priority in this
+** Changed the delay from 7n/10n to 15n/20n to help larger time step simulations
+**Faster flip-flops require a a smaller time step to simulate
+X1 CLK CLKdel INV_DELAY_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR} DELAY = 15n
+X2 CLK CLKdel CLKint AND2_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR} 
+GQ 0 Qint VALUE = {IF(V(S) > {VTHR},5,IF(V(R) > {VTHR},-5, IF(V(CLKint)> {VTHR}, 
++ IF(V(D)> {VTHR},5,-5),0)))}
+CQint Qint 0 1n
+RQint Qint 0 1000MEG
+D_D10 Qint MY5 D_D1
+V1 MY5 0 {VDD}
+D_D11 MYVSS Qint D_D1
+V2 MYVSS 0 {VSS} 
+EQ Qqq 0 Qint 0 1
+X3 Qqq Qqqd1 BUF_DELAY_BASIC_GEN PARAMS: VDD=1 VSS=0 VTHR=0.5 DELAY = 20n
+RQq Qqqd1 Q 1
+EQb Qbr 0 VALUE = {IF( V(Q) > {VTHR}, {VSS},{VDD})}
+RQb Qbr Qb 1 
+Cdummy1 Q 0 1nF 
+Cdummy2 QB 0 1nF 
+.IC V(Qint) {VSS}
+.ENDS DFFSR_SHPBASIC_GEN
+*$
+.SUBCKT DFFSBRB_RHPBASIC_GEN Q QB CLK D RB SB PARAMS: VDD=1 VSS=0 VTHR=0.5 
+***Set has higher priority in this
+** Changed the delay from 7n/10n to 15n/20n to help larger time step simulations
+**Faster flip-flops require a a smaller time step to simulate
+X1 CLK CLKdel INV_DELAY_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR} DELAY = 15n
+X2 CLK CLKdel CLKint AND2_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR} 
+GQ 0 Qint VALUE = {IF(V(RB) < {VTHR},-5,IF(V(SB)< {VTHR},5, IF(V(CLKint)> {VTHR}, 
++ IF(V(D)> {VTHR},5,-5),0)))}
+CQint Qint 0 1n
+RQint Qint 0 1000MEG
+D_D10 Qint MY5 D_D1
+V1 MY5 0 5
+D_D11 0 Qint D_D1 
+EQ Qqq 0 Qint 0 1
+X3 Qqq Qqqd1 BUF_DELAY_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR} DELAY = 20n
+RQq Qqqd1 Q 1
+EQb Qbr 0 VALUE = {IF( V(Q) > {VTHR}, {VSS},{VDD})}
+RQb Qbr Qb 1 
+Cdummy1 Q 0 1nF 
+Cdummy2 QB 0 1nF 
+.IC V(Qint) {VSS}
+.ENDS DFFSBRB_RHPBASIC_GEN
+*$
+.SUBCKT DFFSR_RHPBASIC_GEN Q QB CLK D R S PARAMS: VDD=1 VSS=0 VTHR=0.5 
+***Set has higher priority in this
+** Changed the delay from 7n/10n to 15n/20n to help larger time step simulations
+**Faster flip-flops require a a smaller time step to simulate
+X1 CLK CLKdel INV_DELAY_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR} DELAY = 15n
+X2 CLK CLKdel CLKint AND2_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR}  
+GQ 0 Qint VALUE = {IF(V(R) > {VTHR},-5,IF(V(S) > {VTHR},5, IF(V(CLKint)> {VTHR}, 
++ IF(V(D)> {VTHR},5,-5),0)))}
+CQint Qint 0 1n
+RQint Qint 0 1000MEG
+D_D10 Qint MY5 D_D1
+V1 MY5 0 {VDD}
+D_D11 MYVSS Qint D_D1
+V2 MYVSS 0 {VSS} 
+EQ Qqq 0 Qint 0 1
+X3 Qqq Qqqd1 BUF_DELAY_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS} VTHR={VTHR} DELAY = 20n
+RQq Qqqd1 Q 1
+EQb Qbr 0 VALUE = {IF( V(Q) > {VTHR}, {VSS},{VDD})}
+RQb Qbr Qb 1 
+Cdummy1 Q 0 1nF 
+Cdummy2 QB 0 1nF 
+.IC V(Qint) {VSS}
+.ENDS DFFSR_RHPBASIC_GEN
+*$
+
+.SUBCKT MUX2_BASIC_GEN A B S Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE  0 Y i=IF(V(S) >VTHR,  V(B),V(A)) Rpar=1 Cpar=1n
+.ENDS MUX2_BASIC_GEN
+*$
+
+.SUBCKT INV_BASIC_GEN A  Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE    0 Y  i=IF(V(A) > VTHR ,  VSS,VDD) Rpar=1 Cpar=1n
+.ENDS INV_BASIC_GEN
+*$
+.SUBCKT INV_DELAY_BASIC_GEN A  Y PARAMS: VDD=1 VSS=0 VTHR=0.5 DELAY= 10n 
+bE_ABMGATE1  0  YINT2  i=IF(V(A) >VTHR , VDD,VSS) Rpar=1 Cpar={DELAY*1.3}
+bE_ABMGATE2   0  Y i= IF(V(YINT2) > VTHR , VSS ,VDD) Rpar=1 Cpar=1n
+.ENDS INV_DELAY_BASIC_GEN
+*$
+.SUBCKT AND2_BASIC_GEN A B Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE  0  Y i=IF(V(A) >VTHR  &   V(B) > VTHR ,VDD,VSS)  Rpar=1 Cpar=1n
+.ENDS AND2_BASIC_GEN
+*$
+.SUBCKT AND3_BASIC_GEN A B C Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE   0 Y i=IF(V(A) >VTHR  &   V(B) > VTHR & V(C) > VTHR ,VDD,VSS)  Rpar=1 Cpar=1n
+.ENDS AND3_BASIC_GEN
+*$
+.SUBCKT AND4_BASIC_GEN A B C D Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE   0  Y i=IF(V(A) >VTHR &  V(B) > VTHR & V(C) > VTHR & V(D) >VTHR ,VDD,VSS)  Rpar=1 Cpar=1n
+.ENDS AND4_BASIC_GEN
+*$
+.SUBCKT NAND2_BASIC_GEN A B Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE   0 Y i=IF(V(A) >VTHR  &  V(B) >VTHR ,VSS,VDD)  Rpar=1 Cpar=1n
+.ENDS NAND2_BASIC_GEN
+*$
+.SUBCKT NAND3_BASIC_GEN A B C Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE  0  Y i=IF(V(A) >VTHR  &  V(B) >VTHR & V(C) >VTHR ,VSS,VDD)  Rpar=1 Cpar=1n
+.ENDS NAND3_BASIC_GEN
+*$
+.SUBCKT NAND4_BASIC_GEN A B C D Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE    0 Y i=IF(V(A) >VTHR  &  V(B) >VTHR & V(C) >VTHR & V(D) > VTHR ,VSS,VDD)  Rpar=1 Cpar=1n
+.ENDS NAND4_BASIC_GEN
+*$
+.SUBCKT NOR2_BASIC_GEN A B Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+BE_ABMGATE 0   Y i=IF(V(A) >VTHR  |  V(B) >VTHR ,VSS,VDD)  Rpar=1 Cpar=1n
+.ENDS NOR2_BASIC_GEN
+*$
+.SUBCKT NOR3_BASIC_GEN A B C Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+BE_ABMGATE   0  Y i=IF(V(A) >VTHR  |  V(B) >VTHR | V(C) >VTHR ,VSS,VDD)  Rpar=1 Cpar=1n
+.ENDS NOR3_BASIC_GEN
+*$
+.SUBCKT NOR4_BASIC_GEN A B C D Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE 0   Y i=IF(V(A) >VTHR  |  V(B) >VTHR | V(C) > VTHR  | V(D) > VTHR ,VSS,VDD)  Rpar=1 Cpar=1n
+.ENDS NOR4_BASIC_GEN
+*$
+.SUBCKT NOR5_BASIC_GEN A B C D E Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+BE_ABMGATE 0 Y i=IF(V(A) > VTHR  |  V(B) >VTHR | V(C) > VTHR | V(D) > VTHR | V(E) > VTHR ,VSS,VDD)  Rpar=1 Cpar=1n
+.ENDS NOR5_BASIC_GEN
+*$
+.SUBCKT NOR6_BASIC_GEN A B C D E F Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE 0 Y i=IF(V(A) >VTHR  |  V(B) >VTHR | V(C) >VTHR | V(D) >VTHR | V(E) >VTHR | V(F) > VTHR ,VSS,VDD)  Rpar=1 Cpar=1n
+.ENDS NOR6_BASIC_GEN
+*$
+.SUBCKT OR2_BASIC_GEN A B Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE   0 Y i=IF(V(A) >VTHR  |  V(B) > VTHR ,VDD,VSS) Rpar=1 Cpar=1n
+.ENDS OR2_BASIC_GEN
+*$
+.SUBCKT OR3_BASIC_GEN A B C Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE   0  Y i=IF(V(A) >VTHR   |  V(B) > VTHR  |  V(C) > VTHR ,VDD,VSS)  Rpar=1 Cpar=1n
+.ENDS OR3_BASIC_GEN
+*$
+.SUBCKT OR4_BASIC_GEN A B C D Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE  0  Y i=IF(V(A) >VTHR  |   V(B) >VTHR | V(C) > VTHR | V(D) > VTHR,VDD,VSS) Rpar=1 Cpar=1n
+.ENDS OR4_BASIC_GEN
+*$
+.SUBCKT XNOR2_BASIC_GEN A B Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE 0  Y i=IF(V(A) >VTHR   ^  V(B) > VTHR,VSS,VDD) Rpar=1 Cpar=1n
+.ENDS XNOR2_BASIC_GEN
+*$
+.SUBCKT XOR2_BASIC_GEN A B Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE  0 Y i=IF(V(A) >VTHR  ^  V(B) > VTHR ,VDD,VSS) Rpar=1 Cpar=1n
+.ENDS XOR2_BASIC_GEN
+*$
+.SUBCKT BUF_BASIC_GEN A  Y PARAMS: VDD=1 VSS=0 VTHR=0.5 
+bE_ABMGATE   0 Y i=IF(V(A) >VTHR ,VDD,VSS) Rpar=1 Cpar=1n
+.ENDS BUF_BASIC_GEN
+*$
+.SUBCKT BUF_DELAY_BASIC_GEN A  Y PARAMS: VDD=1 VSS=0 VTHR=0.5 DELAY= 10n 
+bE_ABMGATE1  0  YINT2  i=IF(V(A) >VTHR , VDD,VSS) Rpar=1 Cpar={DELAY*1.3}
+bE_ABMGATE2   0  Y i= IF(V(YINT2) > VTHR ,VDD,VSS) Rpar=1 Cpar=1n
+.ENDS BUF_DELAY_BASIC_GEN
+*$
+.SUBCKT COMP_BASIC_GEN INP INM Y PARAMS: VDD=1 VSS=0 VTHR=0.5	
+bE_ABM 0 Y i=IF (V(INP) > V(INM),VDD,VSS) Rpar=1 Cpar=1n
+.ENDS COMP_BASIC_GEN
+*$
+
+**************************************************************
+*$
+.subckt d_d 1 2
+cd1 1 2 10f
+d1 1 2 dd
+.model dd d
++ is=1e-015
++ n=0.01
++ tt=1e-011
+.ends d_d
+*$
+.MODEL D_D1 D( IS=1e-15 TT=10p Rs=0.05 N=.1  Cj=10f)
+*$
+.SUBCKT CESR IN OUT
++ PARAMs:  C=100u ESR=0.01 X=2 IC=0
+C	IN OUT  {C*X} Rser={ESR/X}  IC={IC} 
+.ENDS CESR
+*$
+.SUBCKT LDCR IN OUT
++ PARAMs:  L=1u DCR=0.01 IC=0
+L	IN OUT   {L}  Rser={DCR} IC={IC}
+.ENDS LDCR
+.ends TPS55340
+*$
+

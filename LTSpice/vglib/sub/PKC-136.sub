@@ -1,0 +1,6 @@
+.subckt PKC-136 a b
+Dz a c zen
+D  b c d
+.model zen d is=100p bv=159 nbv=3 cjo=70p 
+.model d d is=1n cjo=100p rs=3.5 tt=65n bv=700 nbv=5
+.ends PKC-136

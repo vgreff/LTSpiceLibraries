@@ -1,0 +1,60 @@
+********************************************
+**  LM555 Timer Bipolar Model             **
+**  (c) 2007 DesignSoft, Inc.             **
+********************************************
+*National Semiconductor LM555
+.SUBCKT LM555_ GND TRIG OUT RESET CONT THRES DISC VCC
+*QT24        GND 9 OUT  QPNP_555_O 10
+D2          OUT 9  D_555 
+QT21        11 11 10  QNPN_555 
+QT16        13 12 GND  QNPN_555 
+QT15        12 12 GND  QNPN_555 
+QT17        11 13 14  QNPN_555 
+QT12        16 15 GND  QNPN_555 
+QT13        15 15 GND  QNPN_555 
+R8          17 18  100
+R9          18 GND  3.3K
+R10         18 19  120
+QT25        17 RESET 11  QPNP_555 
+QT26        OUT 19 GND  QNPN_555_O 10 
+R12         20 OUT  3.9K
+QT28        VCC 20 OUT  QNPN_555_O 10 
+R11         VCC 9  6.2K
+QT27        VCC 9 20  QNPN_555 
+QT23        9 21 18  QNPN_555 
+QT22        21 22 VCC  QPNP_555 
+QT22_       22 22 VCC  QPNP_555 
+R7          14 21  4.7K
+QT20        21 10 GND  QNPN_555 
+R6          22 11  7.5K
+QT19        10 14 GND  QNPN_555 
+QT18        14 16 GND  QNPN_555 
+QT14        DISC 17 GND  QNPN_555_O 10 
+R1          23 GND  5K
+R4          CONT 23  5K
+R3          VCC CONT  5K
+QT9         15 25 24  QPNP_555 
+QT10        GND 23 25  QPNP_555 
+QT8         16 26 24  QPNP_555 
+QT7         GND TRIG 26  QPNP_555 
+QT11        24 22 27  QPNP_555 
+R5          28 GND  10K
+QT6_        29 29 VCC  QPNP_555 
+QT6         12 29 VCC  QPNP_555 
+QT5         13 30 VCC  QPNP_555 
+R2          VCC 27  1K
+QT5_        30 30 VCC  QPNP_555 
+QT3         29 31 28  QNPN_555 
+QT4         29 CONT 31  QNPN_555 
+QT2         30 32 28  QNPN_555 
+QT1         30 THRES 32  QNPN_555 
+.MODEL QPNP_555   PNP( IS=10F NF=1.1 NR=1.1 BF=80 BR=5 CJC=2.0P CJE=2.0P
++       TF=100P TR=1000P VAF=20 )
+.MODEL QNPN_555   NPN( IS=10F NF=1.1 NR=1.1 BF=80 BR=5 CJC=2.0P CJE=2.0P
++       TF=100P TR=1000P VAF=20 )
+.MODEL QPNP_555_O   PNP( IS=10F NF=1.1 NR=1.1 BF=80 BR=5 IKF=40M CJC=2.0P CJE=2.0P
++       TF=100P TR=1000P VAF=20 RC=60 )
+.MODEL QNPN_555_O   NPN( IS=10F NF=1.1 NR=1.1 BF=80 BR=5 IKF=40M CJC=2.0P CJE=2.0P
++       TF=100P TR=1000P VAF=20 RC=60 )
+.MODEL D_555  D( IS=10F N=1.1 CJ0 = 2.0P TT = 1000p RS=6)
+.ENDS LM555_

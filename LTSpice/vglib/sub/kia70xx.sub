@@ -1,0 +1,10 @@
+.subckt kia70xx VCC GND_ OUT Vt=2.7
+A1 VCC 0 0 0 0 N001 0 0 SCHMITT Trise=20u Tfall=30u Vt={Vt} Vh=25m
+Q1 OUT N003 GND_ 0 my
+VAm1 N002 N003 0
+A2 N001 0 0 0 0 0 N002 0 SCHMITT Rout=700 Vt=0.5 Vh=5m
+I1 VCC GND_ 30µ Load
+B1 VCC GND_ I=i(VAm1)
+.model my npn BF=200 tf=1n Cje=5p Cjc=5p rc=10
+*.param Vt=1.9
+.ends kia70xx

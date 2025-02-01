@@ -1,0 +1,164 @@
+* Model Number 	  : LM5030 100V Push-Pull Current Mode PWM Controller
+* Last Revision Date : Mar 19, 2010
+* Revision Number    :1.1
+*This document contains the SPICE model, application example for National Semiconductor's LM5030 100V Push-Pull Current Mode PWM Controller
+*The LM5030 PWM controller contains all of the features needed to implement Push-Pull and Bridge topologies.
+*The LM5030 PSPICE Model contains all of the basic features including;
+*- Internal Start-up Bias Regulator
+*- Single Resistor Programmable Switching Frequency
+*- Internal Error Amplifier
+*- Programmable Soft Start
+*- Dual Mode Over-Currrent Protection
+*- Current Mode with Slope Compensation
+*- Direct Optocoupler Interface
+*Model & Example Assumptions;
+*- The temperature for this model is 25C
+*- ESR and ESL of capacitors are zero.
+*- Wire DCR and leakage inductances of transformer are zero.
+*- No parasitic elements of package.
+*Some functions/characteristics of LM5030 are not included in this model;
+*- Thermal shutdown
+*- Oscillator Synchronization
+*Some characteristics of LM5030 are included but not optimized
+*- Gate driver capability
+*- Power consumption of controller
+*- SS discharging time
+*- Deadtime
+*Also GND pin of LM5030 is internally tied to GND (node number 0)
+*-To run the simulation a simulation profile should be added first--> click 'New Simulation Profile'
+*-The simulation takes around 1~3min actual time per 1mSec simulation on a 1.7GHz machine.
+*-Vsupply should have a slope lower than 150V/Sec
+
+.SUBCKT LM5030 VIN VFB COMP VCC OUT1 OUT2 CS RT SS GND
+Ckz GND 0 10m Rpar=10u ic=0
+Rbw C4 0  1
+E11 GH2A 0 VALUE { if(V(select12)>2.5 & V(pulsedclkleb)<2.5 & V(err1)>2.5 & V(uv2)>2.5,5,0) }
+VRT RT1 RT 0
+Sleb1 CSRAMP1 0 PULSEDCLKLEB 0  Sleb
+Gss 0 SS VALUE { if(V(uv1)<2.5 | V(uv2)<2.5,0, V(vdd)*2E-6) }
+Rvcc3 VCC6 VCC  1
+Gramp2 0 RAMP VALUE { I(VRT)/40 }
+Cq2 GL1A 0  3p IC=0
+Evccuv10 DFF9 0 VALUE { if(V(PULSEDCLKLEB)>2.5,0,5) }
+Rq16 SELECT12 DFF2  50
+I1 0 SS DC 10u
+Ric6 VDD COMP  5k
+Cq3 GH1A 0  3p IC=0
+E13 C9 0 VALUE { if( ( V(MAXDUTY)>4.5 & V(PULSEDCLKLEB)<1 & V(vdd)>4.5 ),0,5) }
+Sdriverh VCC OUT1 GH1A 0 SWdriverH
+Ereference POS 0 TABLE { V(vdd) } ( (0,0) (1.245,1.245) )
+Cq1 UV2 0  3p IC=0
+Sramp1 ERR1 0 N2309181 0 S5K
+Cvcc3 VCC5 0  3p IC=0.77
+Cq10 PULSEDCLKLEB 0  3p IC=0
+Ric12 C8 0  1
+Dss SS VCLAMP D5K
+Evcc2 VCC2 0 VALUE { if(V(uv1)>1 & V(SS)>0.45, V(vcc1), 0.77) }
+Cq15 SELECT12 0  30p IC=0
+Rqz1 U3 U2  500
+Rq9 C7 C9  500
+Givcc VCC6 0 TABLE { V(vcc) } ( (0,0) (7.5,0.003)  )
+Sdriverl OUT1 0 GL1A 0 SWdriverL
+Gldo 0 VCC5 TABLE { V(vcc3, vcc4) } ( (0,0) (0.3,0.01)  )
+Cramp RAMP 0  7.9p IC=0
+Dic5 COMP C2 Dcomp
+Sssdis1 SELECT12 MEMORY DFF9 0 S5K
+Dea1 C4 VCLAMP D5K
+Ecomp4 N2310140 0 VALUE { if(V(csramp)>(V(comp2)-0.05) | V(csramp)>0.5 ,5,0) }
+Rqz2 DFF5 DFF6  50
+Cq9 C7 0  3p IC=0
+Rq11 C12 VFB  1
+Rq8 GH1B GH2B  500
+T1 C8 0 C10 0 Z0=1 TD=135n
+Evccuv1 U6 0 VALUE { if(V(VCC)<6,5,0) }
+E12 C13 0 VALUE { if(V(OSC)>-0.99,5,0) }
+Rvcc2 VCC2 VCC3  1
+Dvcc VCC4 VCC D5K
+Evcc1 VCC1 0 TABLE { V(VIN) } ( (0, 0.77) (4.0, 0.77) (4.5, 2.27) (11.7, 8.47) )
+Rq18 N2309181 N2310140  500
+Cq16 N2305005 0  3p IC=0
+VdefaultUV2 V5V 0 5
+Ess C3 0 SS 0 1
+Ric2 COMP2 0  5.8k
+Cic1 COMP2 0  5p IC=0
+Rq13 GL1B GL2B  500
+Ric3 COMP2 C1  10k
+Rq2 GH1A GH2A  500
+Rq6 U4 U6  500
+Cq5 ERR1 0  400p IC=0
+Ric11 CS 0  43k
+Sdriverl1 OUT2 0 GL1B 0 SWdriverL
+Evdd VDD1 0 TABLE { V(VCC) } ( (5.3,0.0) (7.5,5) )
+Cq17 MEMORY 0  3p IC=5
+Cq6 U4 0  3p IC=0
+Eclampgnd VCLAMPGND 0 TABLE { V(vdd) } ( (0,0) (0.77,0.77) )
+Rssdis1 SSDISCONT N1976297  10k
+Rq3 GL1A GL2A  500
+Cq18 N2309181 0  3p IC=0
+VVCC VCC5 VCC4 0
+Dss2 N1976297 SSDISCONT D5K
+Ecomp2 N1976297 0 VALUE { if(V(uv1)<1 | V(uv2)<1 | V(csramp)>0.625,5,0) }
+Cqz1 U3 0  3p IC=5
+Gramp1 0 CSRAMP VALUE { V(RAMP)*0.05E-3 }
+Evccuv5 DFF4 0 VALUE { if(V(MEMORY)>2.5 & V(PULSEDCLKLEB)>2.5,5,0) }
+Cq7 U5 0  3p IC=0
+Cq13 DFF3 0  3p IC=0
+Cvdd1 VDD 0  3p IC=0
+Sdriverh1 VCC OUT2 GH1B 0 SWdriverH
+Dea2 VCLAMPGND C4 D5K
+Rvdd1 VDD1 VDD  1
+Sramp RAMP 0 C7 0 S5K
+Ric10 CSRAMP1 CS  2k
+Evccuv2 U7 0 VALUE { if(V(VCC)>7.5,5,0) }
+E14 GL2A 0 V5V GH2A 1
+Cssdis2 SSDISCONT 0  1n IC=0
+Rq17 N2305005 N2307017  500
+Rq14 DFF3 DFF4  500
+Rssdis N1874071 SSDIS  200
+Dic7 VCLAMPGND COMP D5K
+Dss1 SS N1874071 D5K
+Cq14 DFF7 0  3p IC=0
+VdefaultUV1 UV1 0 5
+Rvindummy VIN 0  192k
+Sssdis SSDIS 0 SSDISCONT 0 S5K
+Cbw C4 0  0.0796u IC=0
+Rq7 U5 U7  500
+EMAX VCLAMP 0 VALUE { V(vdd) }
+Eosc1 C6 0 VALUE { if(V(C8)<2.5 & V(MAXDUTY)>2.5,5,0) }
+Cq12 MAXDUTY 0  3p IC=0
+Evccuv3 U1 0 VALUE { if(V(U4)>2.5 | V(U3)>2.5,0,5) }
+Cqz2 DFF5 0  30p IC=5
+Rfbd1 C12 0  10Meg
+Eosc OSC 0 VALUE { if(V(vdd)>4.5,sin(6.28*i(VRT)*TIME/(364E-12+172E-9*I(VRT))),0) }
+Cvcc2 VCC3 0  3p IC=0.77
+Rq12 MAXDUTY C13  500
+Eramp3 C10 0 MAXDUTY 0 1
+Ecomp5 N2307017 0 VALUE { if(V(PULSEDCLKLEB)>2.5,5,0) }
+Gea 0 C4 VALUE { if(V(Vdd)>4.5, (V(C12)-V(POS))*308,0) }
+Evccuv7 DFF2 0 VALUE { if(V(DFF3)>2.5 | V(DFF5)>2.5,0,5) }
+Ggateloss VIN 0 VALUE { I(VVCC) }
+Evccuv6 DFF8 0 VALUE { if(V(PULSEDCLKLEB)>2.5 & V(MEMORY)<2.5,5,0) }
+Rvddp 0 VDD  5k
+Evccuv4 U2 0 VALUE { if(V(UV2)>2.5 | V(U5)>2.5,0,5) }
+Dic4 C2 C1 Dcomp
+Cq8 GL1B 0  3p IC=0
+Radd CSRAMP CSRAMP1  200
+E10 GH2B 0 VALUE { if(V(select12)<2.5 & V(pulsedclkleb)<2.5 & V(err1)>2.5 & V(uv2)>2.5,5,0) }
+E15 GL2B 0 V5V GH2B 1
+Rq15 DFF7 DFF8  500
+Rq10 PULSEDCLKLEB C6  100
+Ert RT1 0 TABLE { V(vdd) } ( (0,0) (2,2) )
+Sramp2 V5V ERR1 N2305005 0 S5K
+Evccuv8 DFF6 0 VALUE { if(V(SELECT12)>2.5 | V(DFF7)>2.5,0,5) }
+Cq11 GH1B 0  3p IC=0
+Dic8 COMP C3 D5K
+Rq1 UV2 U1  500
+Ggnamp COMP 0 C4 0 {0.0026}
+.MODEL D5K D IS=1E-14 CJO=0 VJ=1
+.MODEL SWdriverH VSWITCH RON=5 ROFF=1MEG VON=1.5V VOFF=0.5V
+.MODEL SWdriverL VSWITCH RON=2.5 ROFF=1MEG VON=1.5V VOFF=0.5V
+.MODEL S5K VSWITCH RON=1m ROFF=10MEG VON=1V VOFF=0V
+.MODEL Dcomp D IS=1E-20 CJO=0 VJ=1.1
+.MODEL Sleb VSWITCH RON=50 ROFF=1MEG VON=1.5V VOFF=0.5V
+.MODEL SWCLAMP VSWITCH (RON=0.001 ROFF=10E6 VON=0.01 VOFF=0)
+.ENDS LM5030

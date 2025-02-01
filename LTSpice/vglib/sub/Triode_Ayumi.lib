@@ -1,0 +1,4175 @@
+*
+* Generic triode model: 10
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:25 2008
+*          Plate
+*          | Grid
+*          | | Cathode
+*          | | |
+.SUBCKT 10 A G K
+BGG   GG   0 V=V(G,K)+-0.99999237
+BM1   M1   0 V=(0.0096683582*(URAMP(V(A,K))+1e-10))**-0.12233483
+BM2   M2   0 V=(0.92459336*(URAMP(V(GG)+URAMP(V(A,K))/7.7993226)+1e-10))**1.6223348
+BP    P    0 V=0.00027480869*(URAMP(V(GG)+URAMP(V(A,K))/8.4354085)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00020223856*V(M1)*V(M2)
+BIG   IG   0 V=0.00013740434*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00018769219*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 7p
+CGK   G    K 4p
+CAK   A    K 3p
+.ENDS
+*
+* Generic triode model: 12A
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:27 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT 12A A G K
+BGG   GG   0 V=V(G,K)+-0.99999998
+BM1   M1   0 V=(0.02099402*(URAMP(V(A,K))+1e-10))**-0.30518364
+BM2   M2   0 V=(0.83094039*(URAMP(V(GG)+URAMP(V(A,K))/8.0527506)+1e-10))**1.8051836
+BP    P    0 V=0.00060950916*(URAMP(V(GG)+URAMP(V(A,K))/9.6911291)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00037491826*V(M1)*V(M2)
+BIG   IG   0 V=0.00030475458*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00040148822*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 8.5p
+CGK   G    K 4p
+CAK   A    K 2p
+.ENDS
+*
+* Generic triode model: 12AT7
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:07 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 12AT7 A G K
+BGG   GG   0 V=V(G,K)+0.67585931
+BM1   M1   0 V=(0.015420581*(URAMP(V(A,K))+1e-10))**-1.768756
+BM2   M2   0 V=(0.45889017*(URAMP(V(GG)+URAMP(V(A,K))/35.090106)+1e-10))**3.268756
+BP    P    0 V=0.0031809222*(URAMP(V(GG)+URAMP(V(A,K))/76.46733)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0042575005*V(M1)*V(M2)
+BIG   IG   0 V=0.0015904611*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0016530623*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.5p
+CGK   G    K 2.2p
+CAK   A    K 0.5p
+.ENDS
+*
+* Generic triode model: 12AU7
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:08 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 12AU7 A G K
+BGG   GG   0 V=V(G,K)+0.89005722
+BM1   M1   0 V=(0.028826571*(URAMP(V(A,K))+1e-10))**-0.90897681
+BM2   M2   0 V=(0.622671*(URAMP(V(GG)+URAMP(V(A,K))/13.089625)+1e-10))**2.4089768
+BP    P    0 V=0.00087237591*(URAMP(V(GG)+URAMP(V(A,K))/21.021735)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00055330711*V(M1)*V(M2)
+BIG   IG   0 V=0.00043618795*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00049917061*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.5p
+CGK   G    K 1.6p
+CAK   A    K 0.4p
+.ENDS
+*
+* Generic triode model: 12AX7
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:09 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 12AX7 A G K
+BGG   GG   0 V=V(G,K)+0.59836683
+BM1   M1   0 V=(0.0017172334*(URAMP(V(A,K))+1e-10))**-0.2685074
+BM2   M2   0 V=(0.84817287*(URAMP(V(GG)+URAMP(V(A,K))/88.413802)+1e-10))**1.7685074
+BP    P    0 V=0.001130216*(URAMP(V(GG)+URAMP(V(A,K))/104.24031)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00071211506*V(M1)*V(M2)
+BIG   IG   0 V=0.000565108*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00058141055*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.7p
+CGK   G    K 1.6p
+CAK   A    K 0.5p
+.ENDS
+*
+* Generic triode model: 12AY7
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:10 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 12AY7 A G K
+BGG   GG   0 V=V(G,K)+0.71171435
+BM1   M1   0 V=(0.0094119714*(URAMP(V(A,K))+1e-10))**-0.68363668
+BM2   M2   0 V=(0.68692746*(URAMP(V(GG)+URAMP(V(A,K))/33.263227)+1e-10))**2.1836367
+BP    P    0 V=0.00092634255*(URAMP(V(GG)+URAMP(V(A,K))/48.423202)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00054133951*V(M1)*V(M2)
+BIG   IG   0 V=0.00046317128*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00049201413*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.3p
+CGK   G    K 1.3p
+CAK   A    K 0.6p
+.ENDS
+*
+* Generic triode model: 12B4A
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:12 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 12B4A A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.087065329*(URAMP(V(A,K))+1e-10))**-1.2036947
+BM2   M2   0 V=(0.55479636*(URAMP(V(GG)+URAMP(V(A,K))/5.1134435)+1e-10))**2.7036947
+BP    P    0 V=0.0047680512*(URAMP(V(GG)+URAMP(V(A,K))/9.2167935)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0036584566*V(M1)*V(M2)
+BIG   IG   0 V=0.0023840256*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0031806909*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.8p
+CGK   G    K 5p
+CAK   A    K 1.5p
+.ENDS
+*
+* Generic triode model: 12BH7
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:14 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 12BH7 A G K
+BGG   GG   0 V=V(G,K)+0.99999999
+BM1   M1   0 V=(0.044635144*(URAMP(V(A,K))+1e-10))**-1.6555735
+BM2   M2   0 V=(0.47534942*(URAMP(V(GG)+URAMP(V(A,K))/11.754204)+1e-10))**3.1555735
+BP    P    0 V=0.0021126435*(URAMP(V(GG)+URAMP(V(A,K))/24.727503)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0024875937*V(M1)*V(M2)
+BIG   IG   0 V=0.00112*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00112*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.6p
+CGK   G    K 3.2p
+CAK   A    K 0.5p
+.ENDS
+*
+* Generic triode model: 12BY7AT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:15 2008
+*               Plate
+*               | Grid
+*               | | Cathode
+*               | | |
+.SUBCKT 12BY7AT A G K
+BGG   GG   0 V=V(G,K)+-0.02185341
+BM1   M1   0 V=(0.014593712*(URAMP(V(A,K))+1e-10))**-0.7027291
+BM2   M2   0 V=(0.68097344*(URAMP(V(GG)+URAMP(V(A,K))/21.860549)+1e-10))**2.2027291
+BP    P    0 V=0.0061475247*(URAMP(V(GG)+URAMP(V(A,K))/32.101912)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0036081888*V(M1)*V(M2)
+BIG   IG   0 V=0.0030737623*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0033632383*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.1p
+CGK   G    K 6.1p
+CAK   A    K 3.4p
+.ENDS
+*
+* Generic triode model: 12GN7AT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:16 2008
+*               Plate
+*               | Grid
+*               | | Cathode
+*               | | |
+.SUBCKT 12GN7AT A G K
+BGG   GG   0 V=V(G,K)+-0.52499611
+BM1   M1   0 V=(0.0070794303*(URAMP(V(A,K))+1e-10))**-0.51284817
+BM2   M2   0 V=(0.74521269*(URAMP(V(GG)+URAMP(V(A,K))/35.989804)+1e-10))**2.0128482
+BP    P    0 V=0.032317671*(URAMP(V(GG)+URAMP(V(A,K))/48.294674)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.018638041*V(M1)*V(M2)
+BIG   IG   0 V=0.016158835*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.017167779*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 7.1p
+CGK   G    K 10.4p
+CAK   A    K 3.9p
+.ENDS
+*
+* Generic triode model: 14AF7
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:46:24 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 14AF7 A G K
+BGG   GG   0 V=V(G,K)+0.77793251
+BM1   M1   0 V=(0.0061210583*(URAMP(V(A,K))+1e-10))**-0.15593519
+BM2   M2   0 V=(0.90583256*(URAMP(V(GG)+URAMP(V(A,K))/15.384177)+1e-10))**1.6559352
+BP    P    0 V=0.0006681181*(URAMP(V(GG)+URAMP(V(A,K))/16.983467)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00046940316*V(M1)*V(M2)
+BIG   IG   0 V=0.00033405905*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00039392832*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.3p
+CGK   G    K 2.2p
+CAK   A    K 1.6p
+.ENDS
+*
+* Generic triode model: 1619T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:00 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 1619T A G K
+BGG   GG   0 V=V(G,K)+-0.99999999
+BM1   M1   0 V=(0.021726327*(URAMP(V(A,K))+1e-10))**-0.34437983
+BM2   M2   0 V=(0.8132815*(URAMP(V(GG)+URAMP(V(A,K))/8.5941123)+1e-10))**1.8443798
+BP    P    0 V=0.00095297512*(URAMP(V(GG)+URAMP(V(A,K))/10.567205)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00057412229*V(M1)*V(M2)
+BIG   IG   0 V=0.00047648756*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0006149126*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.4p
+CGK   G    K 6.1p
+CAK   A    K 12.2p
+.ENDS
+*
+* Generic triode model: 20P1T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:18 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 20P1T A G K
+BGG   GG   0 V=V(G,K)+0.99999997
+BM1   M1   0 V=(0.15450603*(URAMP(V(A,K))+1e-10))**-1.2979847
+BM2   M2   0 V=(0.53610015*(URAMP(V(GG)+URAMP(V(A,K))/3.0024709)+1e-10))**2.7979847
+BP    P    0 V=0.002051274*(URAMP(V(GG)+URAMP(V(A,K))/5.6005784)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0017001298*V(M1)*V(M2)
+BIG   IG   0 V=0.001025637*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0015988677*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9.5p
+CGK   G    K 13.5p
+CAK   A    K 10.5p
+.ENDS
+*
+* Generic triode model: 211
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:51 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT 211 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.0021297199*(URAMP(V(A,K))+1e-10))**-0.038461562
+BM2   M2   0 V=(0.97499998*(URAMP(V(GG)+URAMP(V(A,K))/11.73864)+1e-10))**1.5384616
+BP    P    0 V=0.00045306372*(URAMP(V(GG)+URAMP(V(A,K))/12.039631)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00039351788*V(M1)*V(M2)
+BIG   IG   0 V=0.00011014965*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00041468102*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 14p
+CGK   G    K 5.4p
+CAK   A    K 4.8p
+.ENDS
+*
+* Generic triode model: 25E5T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:19 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 25E5T A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.081561717*(URAMP(V(A,K))+1e-10))**-0.79980677
+BM2   M2   0 V=(0.65222871*(URAMP(V(GG)+URAMP(V(A,K))/4.2639035)+1e-10))**2.2998068
+BP    P    0 V=0.0042185857*(URAMP(V(GG)+URAMP(V(A,K))/6.5374361)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0025511424*V(M1)*V(M2)
+BIG   IG   0 V=0.0021092928*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00311336*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 7.7p
+CGK   G    K 9.9p
+CAK   A    K 7p
+.ENDS
+*
+* Generic triode model: 27
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:29 2008
+*          Plate
+*          | Grid
+*          | | Cathode
+*          | | |
+.SUBCKT 27 A G K
+BGG   GG   0 V=V(G,K)+0.99999994
+BM1   M1   0 V=(0.041269212*(URAMP(V(A,K))+1e-10))**-0.69845105
+BM2   M2   0 V=(0.68229856*(URAMP(V(GG)+URAMP(V(A,K))/7.6982676)+1e-10))**2.1984511
+BP    P    0 V=0.00036339312*(URAMP(V(GG)+URAMP(V(A,K))/11.282843)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00021306994*V(M1)*V(M2)
+BIG   IG   0 V=0.00018169656*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00023106309*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 3.3p
+CGK   G    K 3.1p
+CAK   A    K 2.3p
+.ENDS
+*
+* Generic triode model: 2A3
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:38:56 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT 2A3 A G K
+BGG   GG   0 V=V(G,K)+-0.47258991
+BM1   M1   0 V=(0.056835059*(URAMP(V(A,K))+1e-10))**-0.4044593
+BM2   M2   0 V=(0.78762513*(URAMP(V(GG)+URAMP(V(A,K))/3.7366878)+1e-10))**1.9044593
+BP    P    0 V=0.0012053852*(URAMP(V(GG)+URAMP(V(A,K))/4.7442465)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.000709416*V(M1)*V(M2)
+BIG   IG   0 V=0.00060269261*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0010032299*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 16.5p
+CGK   G    K 7.5p
+CAK   A    K 5.5p
+.ENDS
+*
+* Generic triode model: 300B
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:52 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 300B A G K
+BGG   GG   0 V=V(G,K)+0.99996017
+BM1   M1   0 V=(0.038949013*(URAMP(V(A,K))+1e-10))**-0.25159159
+BM2   M2   0 V=(0.85636401*(URAMP(V(GG)+URAMP(V(A,K))/3.6877954)+1e-10))**1.7515916
+BP    P    0 V=0.0011156138*(URAMP(V(GG)+URAMP(V(A,K))/4.3063409)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00071191966*V(M1)*V(M2)
+BIG   IG   0 V=0.00055780691*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00096815606*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 15p
+CGK   G    K 8.5p
+CAK   A    K 4.1p
+.ENDS
+*
+* Generic triode model: 31LZ6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:20 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT 31LZ6T A G K
+BGG   GG   0 V=V(G,K)+-0.11976616
+BM1   M1   0 V=(0.21025804*(URAMP(V(A,K))+1e-10))**-1.445676
+BM2   M2   0 V=(0.50922098*(URAMP(V(GG)+URAMP(V(A,K))/2.3341748)+1e-10))**2.945676
+BP    P    0 V=0.0061264796*(URAMP(V(GG)+URAMP(V(A,K))/4.5838151)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0058083241*V(M1)*V(M2)
+BIG   IG   0 V=0.0030632398*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0051737191*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9.2p
+CGK   G    K 12.9p
+CAK   A    K 10.4p
+.ENDS
+*
+* Generic triode model: 350BT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:53 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 350BT A G K
+BGG   GG   0 V=V(G,K)+0.99999998
+BM1   M1   0 V=(0.060793226*(URAMP(V(A,K))+1e-10))**-0.90421858
+BM2   M2   0 V=(0.62390334*(URAMP(V(GG)+URAMP(V(A,K))/6.1864896)+1e-10))**2.4042186
+BP    P    0 V=0.0019265247*(URAMP(V(GG)+URAMP(V(A,K))/9.9157821)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0012190211*V(M1)*V(M2)
+BIG   IG   0 V=0.00096326237*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0012619241*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 6.7p
+CGK   G    K 9.3p
+CAK   A    K 7.5p
+.ENDS
+*
+* Generic triode model: 354V
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:54 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 354V A G K
+BGG   GG   0 V=V(G,K)+0.65601816
+BM1   M1   0 V=(0.006476558*(URAMP(V(A,K))+1e-10))**-0.39630014
+BM2   M2   0 V=(0.79101402*(URAMP(V(GG)+URAMP(V(A,K))/32.268063)+1e-10))**1.8963001
+BP    P    0 V=0.0016633526*(URAMP(V(GG)+URAMP(V(A,K))/40.793288)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00098151348*V(M1)*V(M2)
+BIG   IG   0 V=0.00083167629*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00089321233*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2p
+CGK   G    K 2p
+CAK   A    K 2p
+.ENDS
+*
+* Generic triode model: 35C5T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:22 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 35C5T A G K
+BGG   GG   0 V=V(G,K)+0.99999998
+BM1   M1   0 V=(0.12544688*(URAMP(V(A,K))+1e-10))**-1.6161868
+BM2   M2   0 V=(0.48135753*(URAMP(V(GG)+URAMP(V(A,K))/4.1343593)+1e-10))**3.1161868
+BP    P    0 V=0.0021455369*(URAMP(V(GG)+URAMP(V(A,K))/8.5889574)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0024204769*V(M1)*V(M2)
+BIG   IG   0 V=0.0010727685*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0014581748*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 5.2p
+CGK   G    K 6.9p
+CAK   A    K 8.4p
+.ENDS
+*
+* Generic triode model: 3A167M
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:38:57 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT 3A167M A G K
+BGG   GG   0 V=V(G,K)+0.41219892
+BM1   M1   0 V=(0.0067454169*(URAMP(V(A,K))+1e-10))**-0.5944305
+BM2   M2   0 V=(0.71618514*(URAMP(V(GG)+URAMP(V(A,K))/42.075214)+1e-10))**2.0944305
+BP    P    0 V=0.034181438*(URAMP(V(GG)+URAMP(V(A,K))/58.749074)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.01971674*V(M1)*V(M2)
+BIG   IG   0 V=0.017090719*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.017967154*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 11p
+CAK   A    K 2.5p
+.ENDS
+*
+* Generic triode model: 3C33
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:38:58 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 3C33 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.045418916*(URAMP(V(A,K))+1e-10))**-0.95262383
+BM2   M2   0 V=(0.61158991*(URAMP(V(GG)+URAMP(V(A,K))/8.5517252)+1e-10))**2.4526238
+BP    P    0 V=0.0048487914*(URAMP(V(GG)+URAMP(V(A,K))/13.982777)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0031463341*V(M1)*V(M2)
+BIG   IG   0 V=0.0024243957*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0029537409*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 5p
+CGK   G    K 8.5p
+CAK   A    K 4p
+.ENDS
+*
+* Generic triode model: 41MXP
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:30 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 41MXP A G K
+BGG   GG   0 V=V(G,K)+0.99999047
+BM1   M1   0 V=(0.24250237*(URAMP(V(A,K))+1e-10))**-4.0569457
+BM2   M2   0 V=(0.26993246*(URAMP(V(GG)+URAMP(V(A,K))/3.0105584)+1e-10))**5.5569457
+BP    P    0 V=0.0015885113*(URAMP(V(GG)+URAMP(V(A,K))/11.153006)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.089955716*V(M1)*V(M2)
+BIG   IG   0 V=0.00079425566*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0010126188*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 4p
+CAK   A    K 4p
+.ENDS
+*
+* Generic triode model: 45
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:31 2008
+*          Plate
+*          | Grid
+*          | | Cathode
+*          | | |
+.SUBCKT 45 A G K
+BGG   GG   0 V=V(G,K)+-0.36938318
+BM1   M1   0 V=(0.072484305*(URAMP(V(A,K))+1e-10))**-0.45086063
+BM2   M2   0 V=(0.76889142*(URAMP(V(GG)+URAMP(V(A,K))/3.1883948)+1e-10))**1.9508606
+BP    P    0 V=0.00046886056*(URAMP(V(GG)+URAMP(V(A,K))/4.1467426)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00027269199*V(M1)*V(M2)
+BIG   IG   0 V=0.00023443028*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00041387828*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 7p
+CGK   G    K 4p
+CAK   A    K 3p
+.ENDS
+*
+* Generic triode model: 46
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:32 2008
+*          Plate
+*          | Grid
+*          | | Cathode
+*          | | |
+.SUBCKT 46 A G K
+BGG   GG   0 V=V(G,K)+-0.6332578
+BM1   M1   0 V=(0.012087887*(URAMP(V(A,K))+1e-10))**-1.4892322
+BM2   M2   0 V=(0.50180111*(URAMP(V(GG)+URAMP(V(A,K))/41.214721)+1e-10))**2.9892322
+BP    P    0 V=0.00056616214*(URAMP(V(GG)+URAMP(V(A,K))/82.13358)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0005601202*V(M1)*V(M2)
+BIG   IG   0 V=0.00016122035*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00033941125*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 4p
+CAK   A    K 4p
+.ENDS
+*
+* Generic triode model: 50
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:33 2008
+*          Plate
+*          | Grid
+*          | | Cathode
+*          | | |
+.SUBCKT 50 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.053592842*(URAMP(V(A,K))+1e-10))**-0.32643301
+BM2   M2   0 V=(0.82127294*(URAMP(V(GG)+URAMP(V(A,K))/3.3349055)+1e-10))**1.826433
+BP    P    0 V=0.00024452775*(URAMP(V(GG)+URAMP(V(A,K))/4.0606543)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0001486389*V(M1)*V(M2)
+BIG   IG   0 V=0.00012226387*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00021794382*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 4p
+CAK   A    K 4p
+.ENDS
+*
+* Generic triode model: 50HB26T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:23 2008
+*               Plate
+*               | Grid
+*               | | Cathode
+*               | | |
+.SUBCKT 50HB26T A G K
+BGG   GG   0 V=V(G,K)+0.99999978
+BM1   M1   0 V=(0.092479665*(URAMP(V(A,K))+1e-10))**-0.92218999
+BM2   M2   0 V=(0.6192743*(URAMP(V(GG)+URAMP(V(A,K))/4.1168586)+1e-10))**2.42219
+BP    P    0 V=0.0043389918*(URAMP(V(GG)+URAMP(V(A,K))/6.6478758)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0027704924*V(M1)*V(M2)
+BIG   IG   0 V=0.0021694959*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0031844715*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 7.6p
+CGK   G    K 9.8p
+CAK   A    K 6.7p
+.ENDS
+*
+* Generic triode model: 53
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:36 2008
+*          Plate
+*          | Grid
+*          | | Cathode
+*          | | |
+.SUBCKT 53 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.00077005461*(URAMP(V(A,K))+1e-10))**-0.038461586
+BM2   M2   0 V=(0.97499997*(URAMP(V(GG)+URAMP(V(A,K))/32.465269)+1e-10))**1.5384616
+BP    P    0 V=0.00055508206*(URAMP(V(GG)+URAMP(V(A,K))/33.297713)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00048212799*V(M1)*V(M2)
+BIG   IG   0 V=0.00016903085*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00042499185*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 4p
+CAK   A    K 4p
+.ENDS
+*
+* Generic triode model: 5687
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:01 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 5687 A G K
+BGG   GG   0 V=V(G,K)+0.35624804
+BM1   M1   0 V=(0.022532918*(URAMP(V(A,K))+1e-10))**-0.73087992
+BM2   M2   0 V=(0.67238043*(URAMP(V(GG)+URAMP(V(A,K))/14.539598)+1e-10))**2.2308799
+BP    P    0 V=0.0048744976*(URAMP(V(GG)+URAMP(V(A,K))/21.624065)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0028821468*V(M1)*V(M2)
+BIG   IG   0 V=0.0024372488*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0027792585*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 4p
+CAK   A    K 0.6p
+.ENDS
+*
+* Generic triode model: 5751
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:03 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 5751 A G K
+BGG   GG   0 V=V(G,K)+0.5559861
+BM1   M1   0 V=(0.0052861104*(URAMP(V(A,K))+1e-10))**-0.6766372
+BM2   M2   0 V=(0.68913644*(URAMP(V(GG)+URAMP(V(A,K))/58.807619)+1e-10))**2.1766372
+BP    P    0 V=0.0013669039*(URAMP(V(GG)+URAMP(V(A,K))/85.335234)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00079762831*V(M1)*V(M2)
+BIG   IG   0 V=0.00068345195*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00070754928*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.4p
+CGK   G    K 1.4p
+CAK   A    K 0.5p
+.ENDS
+*
+* Generic triode model: 5842
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:05 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 5842 A G K
+BGG   GG   0 V=V(G,K)+-0.46951652
+BM1   M1   0 V=(0.0042897418*(URAMP(V(A,K))+1e-10))**-0.30633316
+BM2   M2   0 V=(0.8304116*(URAMP(V(GG)+URAMP(V(A,K))/39.533476)+1e-10))**1.8063332
+BP    P    0 V=0.017297881*(URAMP(V(GG)+URAMP(V(A,K))/47.607086)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.010632968*V(M1)*V(M2)
+BIG   IG   0 V=0.0086489406*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0091968129*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.8p
+CGK   G    K 9p
+CAK   A    K 0.5p
+.ENDS
+*
+* Generic triode model: 5965
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:06 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 5965 A G K
+BGG   GG   0 V=V(G,K)+0.61035688
+BM1   M1   0 V=(0.024336203*(URAMP(V(A,K))+1e-10))**-2.1648233
+BM2   M2   0 V=(0.40929668*(URAMP(V(GG)+URAMP(V(A,K))/24.272617)+1e-10))**3.6648233
+BP    P    0 V=0.0045273524*(URAMP(V(GG)+URAMP(V(A,K))/59.303235)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.010017704*V(M1)*V(M2)
+BIG   IG   0 V=0.0022636762*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0023786712*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 3p
+CGK   G    K 4p
+CAK   A    K 0.5p
+.ENDS
+*
+* Generic triode model: 5998
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:08 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 5998 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.1360498*(URAMP(V(A,K))+1e-10))**-1.7828871
+BM2   M2   0 V=(0.4569149*(URAMP(V(GG)+URAMP(V(A,K))/3.9918111)+1e-10))**3.2828871
+BP    P    0 V=0.0069534109*(URAMP(V(GG)+URAMP(V(A,K))/8.7364434)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0094617726*V(M1)*V(M2)
+BIG   IG   0 V=0.0034767055*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0047041065*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 8.6p
+CGK   G    K 6p
+CAK   A    K 2.2p
+.ENDS
+*
+* Generic triode model: 59Th
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:43 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 59Th A G K
+BGG   GG   0 V=V(G,K)+0.99979071
+BM1   M1   0 V=(0.073387615*(URAMP(V(A,K))+1e-10))**-5.8658889
+BM2   M2   0 V=(0.20364141*(URAMP(V(GG)+URAMP(V(A,K))/10.851403)+1e-10))**7.3658889
+BP    P    0 V=0.00056363412*(URAMP(V(GG)+URAMP(V(A,K))/53.286819)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*1.6789061*V(M1)*V(M2)
+BIG   IG   0 V=0.00021213204*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00038183766*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 4p
+CAK   A    K 4p
+.ENDS
+*
+* Generic triode model: 6072
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:09 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6072 A G K
+BGG   GG   0 V=V(G,K)+0.75743218
+BM1   M1   0 V=(0.0057774859*(URAMP(V(A,K))+1e-10))**-0.42611934
+BM2   M2   0 V=(0.77876794*(URAMP(V(GG)+URAMP(V(A,K))/38.292098)+1e-10))**1.9261193
+BP    P    0 V=0.00098547839*(URAMP(V(GG)+URAMP(V(A,K))/49.1701)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00057643098*V(M1)*V(M2)
+BIG   IG   0 V=0.0004927392*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00052295488*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.4p
+CGK   G    K 1.4p
+CAK   A    K 0.5p
+.ENDS
+*
+* Generic triode model: 6080
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:10 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6080 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.37781455*(URAMP(V(A,K))+1e-10))**-1.6383781
+BM2   M2   0 V=(0.47795388*(URAMP(V(GG)+URAMP(V(A,K))/1.3817523)+1e-10))**3.1383781
+BP    P    0 V=0.0026607218*(URAMP(V(GG)+URAMP(V(A,K))/2.8909741)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0030745874*V(M1)*V(M2)
+BIG   IG   0 V=0.0013303609*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0028241574*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 8.6p
+CGK   G    K 6p
+CAK   A    K 2.2p
+.ENDS
+*
+* Generic triode model: 6146BT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:12 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT 6146BT A G K
+BGG   GG   0 V=V(G,K)+0.99999998
+BM1   M1   0 V=(0.058258554*(URAMP(V(A,K))+1e-10))**-0.41427032
+BM2   M2   0 V=(0.78358839*(URAMP(V(GG)+URAMP(V(A,K))/3.7146753)+1e-10))**1.9142703
+BP    P    0 V=0.001563206*(URAMP(V(GG)+URAMP(V(A,K))/4.7405951)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0009173158*V(M1)*V(M2)
+BIG   IG   0 V=0.000781603*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0013014595*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 5.3p
+CGK   G    K 7.7p
+CAK   A    K 8.3p
+.ENDS
+*
+* Generic triode model: 6197T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:13 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6197T A G K
+BGG   GG   0 V=V(G,K)+0.45955375
+BM1   M1   0 V=(0.014421851*(URAMP(V(A,K))+1e-10))**-0.5339196
+BM2   M2   0 V=(0.73749228*(URAMP(V(GG)+URAMP(V(A,K))/18.202083)+1e-10))**2.0339196
+BP    P    0 V=0.0053217435*(URAMP(V(GG)+URAMP(V(A,K))/24.681049)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0030656981*V(M1)*V(M2)
+BIG   IG   0 V=0.0026608717*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.002987557*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.7p
+CGK   G    K 6.9p
+CAK   A    K 5p
+.ENDS
+*
+* Generic triode model: 6240G
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:15 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6240G A G K
+BGG   GG   0 V=V(G,K)+0.72455622
+BM1   M1   0 V=(0.00866647*(URAMP(V(A,K))+1e-10))**-0.48282918
+BM2   M2   0 V=(0.75649482*(URAMP(V(GG)+URAMP(V(A,K))/28.097389)+1e-10))**1.9828292
+BP    P    0 V=0.0013034573*(URAMP(V(GG)+URAMP(V(A,K))/37.141548)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00075405166*V(M1)*V(M2)
+BIG   IG   0 V=0.00065172867*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0007047229*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.6p
+CGK   G    K 3.2p
+CAK   A    K 1.2p
+.ENDS
+*
+* Generic triode model: 6267T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:16 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6267T A G K
+BGG   GG   0 V=V(G,K)+0.59868749
+BM1   M1   0 V=(0.010782364*(URAMP(V(A,K))+1e-10))**-0.70765893
+BM2   M2   0 V=(0.67945278*(URAMP(V(GG)+URAMP(V(A,K))/29.728844)+1e-10))**2.2076589
+BP    P    0 V=0.0013378994*(URAMP(V(GG)+URAMP(V(A,K))/43.754099)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00078620809*V(M1)*V(M2)
+BIG   IG   0 V=0.00066894969*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00071507731*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.6p
+CGK   G    K 2.3p
+CAK   A    K 5.3p
+.ENDS
+*
+* Generic triode model: 62BTT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:25 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 62BTT A G K
+BGG   GG   0 V=V(G,K)+0.99999993
+BM1   M1   0 V=(0.10647561*(URAMP(V(A,K))+1e-10))**-1.0560332
+BM2   M2   0 V=(0.58684685*(URAMP(V(GG)+URAMP(V(A,K))/3.8802609)+1e-10))**2.5560332
+BP    P    0 V=0.002839063*(URAMP(V(GG)+URAMP(V(A,K))/6.6120504)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0019598422*V(M1)*V(M2)
+BIG   IG   0 V=0.0014195315*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0020873677*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9.5p
+CGK   G    K 13.5p
+CAK   A    K 10.5p
+.ENDS
+*
+* Generic triode model: 6336
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:17 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6336 A G K
+BGG   GG   0 V=V(G,K)+0.80124916
+BM1   M1   0 V=(0.24089702*(URAMP(V(A,K))+1e-10))**-1.5151382
+BM2   M2   0 V=(0.49748964*(URAMP(V(GG)+URAMP(V(A,K))/2.0859966)+1e-10))**3.0151382
+BP    P    0 V=0.0055122338*(URAMP(V(GG)+URAMP(V(A,K))/4.1930453)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0055967398*V(M1)*V(M2)
+BIG   IG   0 V=0.0027561169*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0048413089*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 16p
+CGK   G    K 14p
+CAK   A    K 5p
+.ENDS
+*
+* Generic triode model: 6350
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:18 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6350 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.018707344*(URAMP(V(A,K))+1e-10))**-0.6749557
+BM2   M2   0 V=(0.68966922*(URAMP(V(GG)+URAMP(V(A,K))/16.588714)+1e-10))**2.1749557
+BP    P    0 V=0.0025107579*(URAMP(V(GG)+URAMP(V(A,K))/24.053145)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0014646013*V(M1)*V(M2)
+BIG   IG   0 V=0.001255379*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0014135709*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 3.2p
+CGK   G    K 3.6p
+CAK   A    K 0.6p
+.ENDS
+*
+* Generic triode model: 6414
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:20 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6414 A G K
+BGG   GG   0 V=V(G,K)+-0.25147459
+BM1   M1   0 V=(0.026968201*(URAMP(V(A,K))+1e-10))**-2.4186148
+BM2   M2   0 V=(0.38278833*(URAMP(V(GG)+URAMP(V(A,K))/22.886646)+1e-10))**3.9186148
+BP    P    0 V=0.0056897851*(URAMP(V(GG)+URAMP(V(A,K))/59.789299)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.01806754*V(M1)*V(M2)
+BIG   IG   0 V=0.0029092955*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0017392527*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 3.6p
+CGK   G    K 5p
+CAK   A    K 0.6p
+.ENDS
+*
+* Generic triode model: 6550AT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:21 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT 6550AT A G K
+BGG   GG   0 V=V(G,K)+0.1919366
+BM1   M1   0 V=(0.064698506*(URAMP(V(A,K))+1e-10))**-0.90961742
+BM2   M2   0 V=(0.62250546*(URAMP(V(GG)+URAMP(V(A,K))/5.8346717)+1e-10))**2.4096174
+BP    P    0 V=0.0027588474*(URAMP(V(GG)+URAMP(V(A,K))/9.3728844)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0017503674*V(M1)*V(M2)
+BIG   IG   0 V=0.0013794237*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0018325138*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 6.5p
+CGK   G    K 8.6p
+CAK   A    K 9.2p
+.ENDS
+*
+* Generic triode model: 6900
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:22 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6900 A G K
+BGG   GG   0 V=V(G,K)+0.77471006
+BM1   M1   0 V=(0.027887036*(URAMP(V(A,K))+1e-10))**-0.93085057
+BM2   M2   0 V=(0.61706796*(URAMP(V(GG)+URAMP(V(A,K))/13.731543)+1e-10))**2.4308506
+BP    P    0 V=0.0043178017*(URAMP(V(GG)+URAMP(V(A,K))/22.252886)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0027693634*V(M1)*V(M2)
+BIG   IG   0 V=0.0021589009*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0024531966*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 5.2p
+CGK   G    K 8p
+CAK   A    K 1p
+.ENDS
+*
+* Generic triode model: 6AC5
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:38:59 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6AC5 A G K
+BGG   GG   0 V=V(G,K)+0.64401885
+BM1   M1   0 V=(0.0088089263*(URAMP(V(A,K))+1e-10))**-1.3738592
+BM2   M2   0 V=(0.52194624*(URAMP(V(GG)+URAMP(V(A,K))/54.269243)+1e-10))**2.8738592
+BP    P    0 V=0.0005490772*(URAMP(V(GG)+URAMP(V(A,K))/103.97478)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00048665592*V(M1)*V(M2)
+BIG   IG   0 V=0.00015454249*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00037669733*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 4p
+CAK   A    K 4p
+.ENDS
+*
+* Generic triode model: 6AF4
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:00 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6AF4 A G K
+BGG   GG   0 V=V(G,K)+0.77962386
+BM1   M1   0 V=(0.090647641*(URAMP(V(A,K))+1e-10))**-2.2226779
+BM2   M2   0 V=(0.40293574*(URAMP(V(GG)+URAMP(V(A,K))/6.5866497)+1e-10))**3.7226779
+BP    P    0 V=0.0031145251*(URAMP(V(GG)+URAMP(V(A,K))/16.34665)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0074643586*V(M1)*V(M2)
+BIG   IG   0 V=0.00128701*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0012749818*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.9p
+CGK   G    K 2.2p
+CAK   A    K 1.4p
+.ENDS
+*
+* Generic triode model: 6AH4
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:01 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6AH4 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.045930854*(URAMP(V(A,K))+1e-10))**-0.72062066
+BM2   M2   0 V=(0.67548683*(URAMP(V(GG)+URAMP(V(A,K))/7.0652545)+1e-10))**2.2206207
+BP    P    0 V=0.0021845366*(URAMP(V(GG)+URAMP(V(A,K))/10.4595)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0012880266*V(M1)*V(M2)
+BIG   IG   0 V=0.0010922683*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0014129261*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.4p
+CGK   G    K 7p
+CAK   A    K 1.7p
+.ENDS
+*
+* Generic triode model: 6AK6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:03 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6AK6T A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.047037015*(URAMP(V(A,K))+1e-10))**-0.80231696
+BM2   M2   0 V=(0.65151759*(URAMP(V(GG)+URAMP(V(A,K))/7.4086847)+1e-10))**2.302317
+BP    P    0 V=0.00071109747*(URAMP(V(GG)+URAMP(V(A,K))/11.371427)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00043043074*V(M1)*V(M2)
+BIG   IG   0 V=0.00035554873*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00045138222*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.5p
+CGK   G    K 2.1p
+CAK   A    K 4.1p
+.ENDS
+*
+* Generic triode model: 6AN8PT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:07 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT 6AN8PT A G K
+BGG   GG   0 V=V(G,K)+-1
+BM1   M1   0 V=(0.024591513*(URAMP(V(A,K))+1e-10))**-1.3002423
+BM2   M2   0 V=(0.53566794*(URAMP(V(GG)+URAMP(V(A,K))/18.881801)+1e-10))**2.8002423
+BP    P    0 V=0.0063199577*(URAMP(V(GG)+URAMP(V(A,K))/35.249078)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0052482203*V(M1)*V(M2)
+BIG   IG   0 V=0.0031599788*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0034308188*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.8p
+CGK   G    K 4.2p
+CAK   A    K 2.4p
+.ENDS
+*
+* Generic triode model: 6AN8T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:05 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6AN8T A G K
+BGG   GG   0 V=V(G,K)+0.60043597
+BM1   M1   0 V=(0.041145821*(URAMP(V(A,K))+1e-10))**-1.4559246
+BM2   M2   0 V=(0.50745543*(URAMP(V(GG)+URAMP(V(A,K))/11.970707)+1e-10))**2.9559246
+BP    P    0 V=0.0016328391*(URAMP(V(GG)+URAMP(V(A,K))/23.589672)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0015634562*V(M1)*V(M2)
+BIG   IG   0 V=0.00081641955*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00092133983*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.5p
+CGK   G    K 2p
+CAK   A    K 0.3p
+.ENDS
+*
+* Generic triode model: 6AQ8
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:09 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6AQ8 A G K
+BGG   GG   0 V=V(G,K)+0.46274
+BM1   M1   0 V=(0.016397559*(URAMP(V(A,K))+1e-10))**-1.8244468
+BM2   M2   0 V=(0.4512029*(URAMP(V(GG)+URAMP(V(A,K))/33.468219)+1e-10))**3.3244468
+BP    P    0 V=0.0053412983*(URAMP(V(GG)+URAMP(V(A,K))/74.175541)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0076348*V(M1)*V(M2)
+BIG   IG   0 V=0.0026706491*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0027790257*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.5p
+CGK   G    K 3.1p
+CAK   A    K 1.2p
+.ENDS
+*
+* Generic triode model: 6AU6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:10 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6AU6T A G K
+BGG   GG   0 V=V(G,K)+0.24107953
+BM1   M1   0 V=(0.014176045*(URAMP(V(A,K))+1e-10))**-0.93570358
+BM2   M2   0 V=(0.61583848*(URAMP(V(GG)+URAMP(V(A,K))/27.099343)+1e-10))**2.4357036
+BP    P    0 V=0.0032162308*(URAMP(V(GG)+URAMP(V(A,K))/44.003978)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0020681021*V(M1)*V(M2)
+BIG   IG   0 V=0.0016081154*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0017183702*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.2p
+CGK   G    K 3.3p
+CAK   A    K 5p
+.ENDS
+*
+* Generic triode model: 6BL7
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:11 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6BL7 A G K
+BGG   GG   0 V=V(G,K)+0.46718638
+BM1   M1   0 V=(0.026376965*(URAMP(V(A,K))+1e-10))**-0.79394664
+BM2   M2   0 V=(0.6538949*(URAMP(V(GG)+URAMP(V(A,K))/13.121491)+1e-10))**2.2939466
+BP    P    0 V=0.0029779531*(URAMP(V(GG)+URAMP(V(A,K))/20.066667)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0017970098*V(M1)*V(M2)
+BIG   IG   0 V=0.00086962635*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0013321095*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 6p
+CGK   G    K 4.6p
+CAK   A    K 0.9p
+.ENDS
+*
+* Generic triode model: 6BL8PT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:14 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT 6BL8PT A G K
+BGG   GG   0 V=V(G,K)+0.57453871
+BM1   M1   0 V=(0.0091087169*(URAMP(V(A,K))+1e-10))**-0.67124576
+BM2   M2   0 V=(0.69084764*(URAMP(V(GG)+URAMP(V(A,K))/33.940276)+1e-10))**2.1712458
+BP    P    0 V=0.0040028722*(URAMP(V(GG)+URAMP(V(A,K))/49.128454)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0023332764*V(M1)*V(M2)
+BIG   IG   0 V=0.0020014361*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0021242724*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.1p
+CGK   G    K 3.1p
+CAK   A    K 3.4p
+.ENDS
+*
+* Generic triode model: 6BL8T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:13 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6BL8T A G K
+BGG   GG   0 V=V(G,K)+0.9999996
+BM1   M1   0 V=(0.034840251*(URAMP(V(A,K))+1e-10))**-1.1549542
+BM2   M2   0 V=(0.5649815*(URAMP(V(GG)+URAMP(V(A,K))/12.48609)+1e-10))**2.6549542
+BP    P    0 V=0.002049189*(URAMP(V(GG)+URAMP(V(A,K))/22.099998)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0015151796*V(M1)*V(M2)
+BIG   IG   0 V=0.0010245945*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0011652414*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.5p
+CGK   G    K 2.5p
+CAK   A    K 1.8p
+.ENDS
+*
+* Generic triode model: 6BM8PT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:18 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT 6BM8PT A G K
+BGG   GG   0 V=V(G,K)+0.90753334
+BM1   M1   0 V=(0.058205333*(URAMP(V(A,K))+1e-10))**-0.96337515
+BM2   M2   0 V=(0.60892065*(URAMP(V(GG)+URAMP(V(A,K))/6.7189608)+1e-10))**2.4633752
+BP    P    0 V=0.0032859022*(URAMP(V(GG)+URAMP(V(A,K))/11.034214)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0021448732*V(M1)*V(M2)
+BIG   IG   0 V=0.0016429511*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.002099612*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 3.9p
+CGK   G    K 5.4p
+CAK   A    K 7.7p
+.ENDS
+*
+* Generic triode model: 6BM8T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:16 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6BM8T A G K
+BGG   GG   0 V=V(G,K)+0.43636433
+BM1   M1   0 V=(0.0039399689*(URAMP(V(A,K))+1e-10))**-0.44800866
+BM2   M2   0 V=(0.77001711*(URAMP(V(GG)+URAMP(V(A,K))/58.371753)+1e-10))**1.9480087
+BP    P    0 V=0.0015179644*(URAMP(V(GG)+URAMP(V(A,K))/75.805787)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00088337368*V(M1)*V(M2)
+BIG   IG   0 V=0.00075898218*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0007891176*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 2.7p
+CAK   A    K 4p
+.ENDS
+*
+* Generic triode model: 6BQ5T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:19 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6BQ5T A G K
+BGG   GG   0 V=V(G,K)+0.03372597
+BM1   M1   0 V=(0.014266539*(URAMP(V(A,K))+1e-10))**-0.43210132
+BM2   M2   0 V=(0.7763568*(URAMP(V(GG)+URAMP(V(A,K))/15.676066)+1e-10))**1.9321013
+BP    P    0 V=0.0040800354*(URAMP(V(GG)+URAMP(V(A,K))/20.191832)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0023829269*V(M1)*V(M2)
+BIG   IG   0 V=0.0020400177*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0023468355*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.6p
+CGK   G    K 6.2p
+CAK   A    K 6p
+.ENDS
+*
+* Generic triode model: 6BQ6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:21 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6BQ6T A G K
+BGG   GG   0 V=V(G,K)+-0.12830687
+BM1   M1   0 V=(0.15009144*(URAMP(V(A,K))+1e-10))**-1.2848724
+BM2   M2   0 V=(0.53862432*(URAMP(V(GG)+URAMP(V(A,K))/3.0739639)+1e-10))**2.7848724
+BP    P    0 V=0.0022372419*(URAMP(V(GG)+URAMP(V(A,K))/5.7070648)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0018337045*V(M1)*V(M2)
+BIG   IG   0 V=0.0011186209*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0017316916*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 6.4p
+CGK   G    K 8.7p
+CAK   A    K 6.4p
+.ENDS
+*
+* Generic triode model: 6BQ7A
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:22 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6BQ7A A G K
+BGG   GG   0 V=V(G,K)+0.20509979
+BM1   M1   0 V=(0.018083864*(URAMP(V(A,K))+1e-10))**-1.3247636
+BM2   M2   0 V=(0.53101788*(URAMP(V(GG)+URAMP(V(A,K))/25.933734)+1e-10))**2.8247636
+BP    P    0 V=0.004700912*(URAMP(V(GG)+URAMP(V(A,K))/48.837779)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.003987561*V(M1)*V(M2)
+BIG   IG   0 V=0.0024349538*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00085381496*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.2p
+CGK   G    K 2.6p
+CAK   A    K 1.2p
+.ENDS
+*
+* Generic triode model: 6BR7T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:24 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6BR7T A G K
+BGG   GG   0 V=V(G,K)+0.48180983
+BM1   M1   0 V=(0.013959713*(URAMP(V(A,K))+1e-10))**-0.49250535
+BM2   M2   0 V=(0.75282106*(URAMP(V(GG)+URAMP(V(A,K))/17.706591)+1e-10))**1.9925054
+BP    P    0 V=0.00084041925*(URAMP(V(GG)+URAMP(V(A,K))/23.520318)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00048560243*V(M1)*V(M2)
+BIG   IG   0 V=0.00042020962*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00047437278*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.6p
+CGK   G    K 2.4p
+CAK   A    K 4p
+.ENDS
+*
+* Generic triode model: 6BX7
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:25 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6BX7 A G K
+BGG   GG   0 V=V(G,K)+0.99999999
+BM1   M1   0 V=(0.044756942*(URAMP(V(A,K))+1e-10))**-0.87869992
+BM2   M2   0 V=(0.63059657*(URAMP(V(GG)+URAMP(V(A,K))/8.253545)+1e-10))**2.3786999
+BP    P    0 V=0.0032697035*(URAMP(V(GG)+URAMP(V(A,K))/13.088471)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0020437592*V(M1)*V(M2)
+BIG   IG   0 V=0.0016348517*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0020166439*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.2p
+CGK   G    K 4.8p
+CAK   A    K 1.2p
+.ENDS
+*
+* Generic triode model: 6C19P
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:31 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6C19P A G K
+BGG   GG   0 V=V(G,K)+0.10684511
+BM1   M1   0 V=(0.32782347*(URAMP(V(A,K))+1e-10))**-1.8567866
+BM2   M2   0 V=(0.44685593*(URAMP(V(GG)+URAMP(V(A,K))/1.687323)+1e-10))**3.3567866
+BP    P    0 V=0.0032573245*(URAMP(V(GG)+URAMP(V(A,K))/3.7759889)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0048409525*V(M1)*V(M2)
+BIG   IG   0 V=0.0016286622*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0030048458*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 8p
+CGK   G    K 6.5p
+CAK   A    K 2.5p
+.ENDS
+*
+* Generic triode model: 6C33CB
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:32 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT 6C33CB A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.31995431*(URAMP(V(A,K))+1e-10))**-1.9846926
+BM2   M2   0 V=(0.43045404*(URAMP(V(GG)+URAMP(V(A,K))/1.7800853)+1e-10))**3.4846926
+BP    P    0 V=0.015432878*(URAMP(V(GG)+URAMP(V(A,K))/4.1353667)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.026902304*V(M1)*V(M2)
+BIG   IG   0 V=0.0077164388*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.013640208*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 31p
+CGK   G    K 30p
+CAK   A    K 10.5p
+.ENDS
+*
+* Generic triode model: 6C4
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:26 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT 6C4 A G K
+BGG   GG   0 V=V(G,K)+0.736372
+BM1   M1   0 V=(0.038076967*(URAMP(V(A,K))+1e-10))**-1.295136
+BM2   M2   0 V=(0.53664652*(URAMP(V(GG)+URAMP(V(A,K))/12.168865)+1e-10))**2.795136
+BP    P    0 V=0.0010502869*(URAMP(V(GG)+URAMP(V(A,K))/22.675755)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00086837935*V(M1)*V(M2)
+BIG   IG   0 V=0.00055989418*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00049903612*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.6p
+CGK   G    K 1.8p
+CAK   A    K 1.3p
+.ENDS
+*
+* Generic triode model: 6C5
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:28 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT 6C5 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.02848961*(URAMP(V(A,K))+1e-10))**-1.0152318
+BM2   M2   0 V=(0.5963665*(URAMP(V(GG)+URAMP(V(A,K))/14.167744)+1e-10))**2.5152318
+BP    P    0 V=0.00080299639*(URAMP(V(GG)+URAMP(V(A,K))/23.756774)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00054026317*V(M1)*V(M2)
+BIG   IG   0 V=0.0004014982*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00045272916*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.8p
+CGK   G    K 4p
+CAK   A    K 13p
+.ENDS
+*
+* Generic triode model: 6C8
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:29 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT 6C8 A G K
+BGG   GG   0 V=V(G,K)+0.83697566
+BM1   M1   0 V=(0.0025120128*(URAMP(V(A,K))+1e-10))**-0.14595588
+BM2   M2   0 V=(0.91132455*(URAMP(V(GG)+URAMP(V(A,K))/35.300556)+1e-10))**1.6459559
+BP    P    0 V=0.00061711142*(URAMP(V(GG)+URAMP(V(A,K))/38.735438)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00043921307*V(M1)*V(M2)
+BIG   IG   0 V=0.00030855571*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00033260645*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.6p
+CGK   G    K 2.6p
+CAK   A    K 2.2p
+.ENDS
+*
+* Generic triode model: 6CA10
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:34 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6CA10 A G K
+BGG   GG   0 V=V(G,K)+0.85922191
+BM1   M1   0 V=(0.052995899*(URAMP(V(A,K))+1e-10))**-0.89537568
+BM2   M2   0 V=(0.62620658*(URAMP(V(GG)+URAMP(V(A,K))/7.0532519)+1e-10))**2.3953757
+BP    P    0 V=0.0063159843*(URAMP(V(GG)+URAMP(V(A,K))/11.263459)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.003979238*V(M1)*V(M2)
+BIG   IG   0 V=0.0031579921*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.004017519*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 16p
+CGK   G    K 24p
+CAK   A    K 16p
+.ENDS
+*
+* Generic triode model: 6CB5T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:35 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6CB5T A G K
+BGG   GG   0 V=V(G,K)+0.12233722
+BM1   M1   0 V=(0.099225459*(URAMP(V(A,K))+1e-10))**-0.68051603
+BM2   M2   0 V=(0.68791056*(URAMP(V(GG)+URAMP(V(A,K))/3.1452557)+1e-10))**2.180516
+BP    P    0 V=0.0027158296*(URAMP(V(GG)+URAMP(V(A,K))/4.572187)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0015860374*V(M1)*V(M2)
+BIG   IG   0 V=0.0013579148*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0022959718*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9p
+CGK   G    K 13p
+CAK   A    K 9.6p
+.ENDS
+*
+* Generic triode model: 6CB6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:37 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6CB6T A G K
+BGG   GG   0 V=V(G,K)+0.7350712
+BM1   M1   0 V=(0.031445788*(URAMP(V(A,K))+1e-10))**-2.20504
+BM2   M2   0 V=(0.40485393*(URAMP(V(GG)+URAMP(V(A,K))/18.926098)+1e-10))**3.70504
+BP    P    0 V=0.0046867337*(URAMP(V(GG)+URAMP(V(A,K))/46.747967)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.010960467*V(M1)*V(M2)
+BIG   IG   0 V=0.0023433669*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0024945513*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.6p
+CGK   G    K 3.9p
+CAK   A    K 1.9p
+.ENDS
+*
+* Generic triode model: 6CD6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:38 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6CD6T A G K
+BGG   GG   0 V=V(G,K)+-0.11853336
+BM1   M1   0 V=(0.13222789*(URAMP(V(A,K))+1e-10))**-1.0472626
+BM2   M2   0 V=(0.58886744*(URAMP(V(GG)+URAMP(V(A,K))/3.1092727)+1e-10))**2.5472626
+BP    P    0 V=0.0032013575*(URAMP(V(GG)+URAMP(V(A,K))/5.2800894)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0021974746*V(M1)*V(M2)
+BIG   IG   0 V=0.0016006788*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0025519299*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9.5p
+CGK   G    K 12.6p
+CAK   A    K 7.5p
+.ENDS
+*
+* Generic triode model: 6CG7
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:40 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6CG7 A G K
+BGG   GG   0 V=V(G,K)+0.54900933
+BM1   M1   0 V=(0.020494606*(URAMP(V(A,K))+1e-10))**-0.76277031
+BM2   M2   0 V=(0.66290422*(URAMP(V(GG)+URAMP(V(A,K))/16.448024)+1e-10))**2.2627703
+BP    P    0 V=0.0012465111*(URAMP(V(GG)+URAMP(V(A,K))/24.812067)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00074417047*V(M1)*V(M2)
+BIG   IG   0 V=0.0003834058*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0006816103*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 2.3p
+CAK   A    K 2.2p
+.ENDS
+*
+* Generic triode model: 6CK4
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:42 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6CK4 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.065687609*(URAMP(V(A,K))+1e-10))**-0.93132007
+BM2   M2   0 V=(0.6169488*(URAMP(V(GG)+URAMP(V(A,K))/5.8314073)+1e-10))**2.4313201
+BP    P    0 V=0.0032983716*(URAMP(V(GG)+URAMP(V(A,K))/9.4520117)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0021160382*V(M1)*V(M2)
+BIG   IG   0 V=0.0014546477*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0020871033*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 6.5p
+CGK   G    K 8p
+CAK   A    K 1.8p
+.ENDS
+*
+* Generic triode model: 6CL6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:43 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6CL6T A G K
+BGG   GG   0 V=V(G,K)+0.23313833
+BM1   M1   0 V=(0.023688975*(URAMP(V(A,K))+1e-10))**-0.93652529
+BM2   M2   0 V=(0.6156308*(URAMP(V(GG)+URAMP(V(A,K))/16.225658)+1e-10))**2.4365253
+BP    P    0 V=0.0060982027*(URAMP(V(GG)+URAMP(V(A,K))/26.356151)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0039229723*V(M1)*V(M2)
+BIG   IG   0 V=0.0030491014*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0033994382*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.5p
+CGK   G    K 6.5p
+CAK   A    K 5.4p
+.ENDS
+*
+* Generic triode model: 6CW5T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:44 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6CW5T A G K
+BGG   GG   0 V=V(G,K)+0.38874904
+BM1   M1   0 V=(0.09419804*(URAMP(V(A,K))+1e-10))**-1.560546
+BM2   M2   0 V=(0.49010862*(URAMP(V(GG)+URAMP(V(A,K))/5.4129723)+1e-10))**3.060546
+BP    P    0 V=0.0055371733*(URAMP(V(GG)+URAMP(V(A,K))/11.044434)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0058898823*V(M1)*V(M2)
+BIG   IG   0 V=0.0027685867*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0035373923*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 5.2p
+CGK   G    K 6.9p
+CAK   A    K 5.4p
+.ENDS
+*
+* Generic triode model: 6DE71
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:46 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6DE71 A G K
+BGG   GG   0 V=V(G,K)+0.97660212
+BM1   M1   0 V=(0.012940444*(URAMP(V(A,K))+1e-10))**-0.39564264
+BM2   M2   0 V=(0.79128838*(URAMP(V(GG)+URAMP(V(A,K))/16.128628)+1e-10))**1.8956426
+BP    P    0 V=0.00091559181*(URAMP(V(GG)+URAMP(V(A,K))/20.382743)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00054039164*V(M1)*V(M2)
+BIG   IG   0 V=0.00045779591*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00052599563*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 2.2p
+CAK   A    K 0.5p
+.ENDS
+*
+* Generic triode model: 6DE72
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:47 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6DE72 A G K
+BGG   GG   0 V=V(G,K)+0.99984307
+BM1   M1   0 V=(0.13594315*(URAMP(V(A,K))+1e-10))**-2.0119972
+BM2   M2   0 V=(0.4271074*(URAMP(V(GG)+URAMP(V(A,K))/4.2142073)+1e-10))**3.5119972
+BP    P    0 V=0.0042161959*(URAMP(V(GG)+URAMP(V(A,K))/9.8668561)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0076124257*V(M1)*V(M2)
+BIG   IG   0 V=0.0021080979*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0027650373*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 8.5p
+CGK   G    K 5.5p
+CAK   A    K 1p
+.ENDS
+*
+* Generic triode model: 6DQ5T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:49 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6DQ5T A G K
+BGG   GG   0 V=V(G,K)+0.99999998
+BM1   M1   0 V=(0.097911417*(URAMP(V(A,K))+1e-10))**-0.59116807
+BM2   M2   0 V=(0.71730246*(URAMP(V(GG)+URAMP(V(A,K))/2.8872786)+1e-10))**2.0911681
+BP    P    0 V=0.0034387228*(URAMP(V(GG)+URAMP(V(A,K))/4.0251899)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.001983081*V(M1)*V(M2)
+BIG   IG   0 V=0.0017193614*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0030773802*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9.5p
+CGK   G    K 13.5p
+CAK   A    K 10.5p
+.ENDS
+*
+* Generic triode model: 6DQ6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:50 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6DQ6T A G K
+BGG   GG   0 V=V(G,K)+-1
+BM1   M1   0 V=(0.17812317*(URAMP(V(A,K))+1e-10))**-1.6443126
+BM2   M2   0 V=(0.47705181*(URAMP(V(GG)+URAMP(V(A,K))/2.9358797)+1e-10))**3.1443126
+BP    P    0 V=0.0034562529*(URAMP(V(GG)+URAMP(V(A,K))/6.1542156)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0040197798*V(M1)*V(M2)
+BIG   IG   0 V=0.0017281264*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0026038839*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 6.3p
+CGK   G    K 8.7p
+CAK   A    K 6.5p
+.ENDS
+*
+* Generic triode model: 6DT8
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:52 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6DT8 A G K
+BGG   GG   0 V=V(G,K)+0.65426696
+BM1   M1   0 V=(0.023769959*(URAMP(V(A,K))+1e-10))**-2.7472313
+BM2   M2   0 V=(0.35317125*(URAMP(V(GG)+URAMP(V(A,K))/27.212026)+1e-10))**4.2472313
+BP    P    0 V=0.0033862784*(URAMP(V(GG)+URAMP(V(A,K))/77.050513)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.017852785*V(M1)*V(M2)
+BIG   IG   0 V=0.0016931392*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0017592759*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.6p
+CGK   G    K 2.7p
+CAK   A    K 1.6p
+.ENDS
+*
+* Generic triode model: 6EJ7T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:53 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6EJ7T A G K
+BGG   GG   0 V=V(G,K)+0.40321166
+BM1   M1   0 V=(0.0054275937*(URAMP(V(A,K))+1e-10))**-0.61801526
+BM2   M2   0 V=(0.7082102*(URAMP(V(GG)+URAMP(V(A,K))/53.760436)+1e-10))**2.1180153
+BP    P    0 V=0.019963362*(URAMP(V(GG)+URAMP(V(A,K))/75.910283)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.011540933*V(M1)*V(M2)
+BIG   IG   0 V=0.0099816812*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.010377457*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 6p
+CAK   A    K 3p
+.ENDS
+*
+* Generic triode model: 6EM71
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:56 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6EM71 A G K
+BGG   GG   0 V=V(G,K)+0.75136004
+BM1   M1   0 V=(0.00038946438*(URAMP(V(A,K))+1e-10))**-0.038461538
+BM2   M2   0 V=(0.975*(URAMP(V(GG)+URAMP(V(A,K))/64.190723)+1e-10))**1.5384615
+BP    P    0 V=0.00085260112*(URAMP(V(GG)+URAMP(V(A,K))/65.836639)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00074054441*V(M1)*V(M2)
+BIG   IG   0 V=0.00042630056*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00044579952*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.8p
+CGK   G    K 2.2p
+CAK   A    K 0.6p
+.ENDS
+*
+* Generic triode model: 6EM72
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:39:58 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6EM72 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.14621502*(URAMP(V(A,K))+1e-10))**-1.6688267
+BM2   M2   0 V=(0.47336133*(URAMP(V(GG)+URAMP(V(A,K))/3.6018096)+1e-10))**3.1688267
+BP    P    0 V=0.0036325945*(URAMP(V(GG)+URAMP(V(A,K))/7.6090068)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0043402717*V(M1)*V(M2)
+BIG   IG   0 V=0.0018162972*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0025554449*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 10p
+CGK   G    K 7p
+CAK   A    K 1.8p
+.ENDS
+*
+* Generic triode model: 6EW72
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:00 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6EW72 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.13863586*(URAMP(V(A,K))+1e-10))**-1.9260987
+BM2   M2   0 V=(0.43781576*(URAMP(V(GG)+URAMP(V(A,K))/4.0551143)+1e-10))**3.4260987
+BP    P    0 V=0.0052367933*(URAMP(V(GG)+URAMP(V(A,K))/9.262148)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0084764746*V(M1)*V(M2)
+BIG   IG   0 V=0.0026183967*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.003488988*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9p
+CGK   G    K 7p
+CAK   A    K 1.2p
+.ENDS
+*
+* Generic triode model: 6F5
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:02 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT 6F5 A G K
+BGG   GG   0 V=V(G,K)+0.58201919
+BM1   M1   0 V=(0.0023425283*(URAMP(V(A,K))+1e-10))**-0.39892191
+BM2   M2   0 V=(0.7899219*(URAMP(V(GG)+URAMP(V(A,K))/89.68007)+1e-10))**1.8989219
+BP    P    0 V=0.00094722724*(URAMP(V(GG)+URAMP(V(A,K))/113.5303)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00055846113*V(M1)*V(M2)
+BIG   IG   0 V=0.00047361362*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00048615622*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2p
+CGK   G    K 6p
+CAK   A    K 12p
+.ENDS
+*
+* Generic triode model: 6F6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:04 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6F6T A G K
+BGG   GG   0 V=V(G,K)+0.99999999
+BM1   M1   0 V=(0.043621772*(URAMP(V(A,K))+1e-10))**-0.51782633
+BM2   M2   0 V=(0.74337419*(URAMP(V(GG)+URAMP(V(A,K))/5.8829755)+1e-10))**2.0178263
+BP    P    0 V=0.00053269576*(URAMP(V(GG)+URAMP(V(A,K))/7.9138819)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00030710831*V(M1)*V(M2)
+BIG   IG   0 V=0.00019764236*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00037552047*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 5p
+CAK   A    K 6.9p
+.ENDS
+*
+* Generic triode model: 6FQ7
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:05 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6FQ7 A G K
+BGG   GG   0 V=V(G,K)+0.78479196
+BM1   M1   0 V=(0.019086702*(URAMP(V(A,K))+1e-10))**-0.69767797
+BM2   M2   0 V=(0.68253858*(URAMP(V(GG)+URAMP(V(A,K))/16.632597)+1e-10))**2.197678
+BP    P    0 V=0.0010973242*(URAMP(V(GG)+URAMP(V(A,K))/24.368728)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00064328217*V(M1)*V(M2)
+BIG   IG   0 V=0.00054866211*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00061689541*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 3.8p
+CGK   G    K 2.4p
+CAK   A    K 0.3p
+.ENDS
+*
+* Generic triode model: 6GA4
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:06 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6GA4 A G K
+BGG   GG   0 V=V(G,K)+0.99999993
+BM1   M1   0 V=(0.049332301*(URAMP(V(A,K))+1e-10))**-1.0124121
+BM2   M2   0 V=(0.59703582*(URAMP(V(GG)+URAMP(V(A,K))/8.1683638)+1e-10))**2.5124121
+BP    P    0 V=0.0045336089*(URAMP(V(GG)+URAMP(V(A,K))/13.681531)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0030450256*V(M1)*V(M2)
+BIG   IG   0 V=0.0022668045*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0027728299*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 6.5p
+CGK   G    K 5p
+CAK   A    K 1.2p
+.ENDS
+*
+* Generic triode model: 6GB5T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:07 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6GB5T A G K
+BGG   GG   0 V=V(G,K)+0.84509256
+BM1   M1   0 V=(0.074600608*(URAMP(V(A,K))+1e-10))**-0.78902807
+BM2   M2   0 V=(0.65529996*(URAMP(V(GG)+URAMP(V(A,K))/4.6206063)+1e-10))**2.2890281
+BP    P    0 V=0.0051497371*(URAMP(V(GG)+URAMP(V(A,K))/7.0511317)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0031020384*V(M1)*V(M2)
+BIG   IG   0 V=0.0025748686*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0037083507*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 10.4p
+CGK   G    K 12.9p
+CAK   A    K 9.4p
+.ENDS
+*
+* Generic triode model: 6GB8T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:09 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6GB8T A G K
+BGG   GG   0 V=V(G,K)+0.18361766
+BM1   M1   0 V=(0.023367579*(URAMP(V(A,K))+1e-10))**-0.5778846
+BM2   M2   0 V=(0.72188802*(URAMP(V(GG)+URAMP(V(A,K))/11.901617)+1e-10))**2.0778846
+BP    P    0 V=0.0065222813*(URAMP(V(GG)+URAMP(V(A,K))/16.486791)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0037584671*V(M1)*V(M2)
+BIG   IG   0 V=0.0032611407*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0038634597*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 10.8p
+CGK   G    K 13.4p
+CAK   A    K 16.3p
+.ENDS
+*
+* Generic triode model: 6GW8PT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:12 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT 6GW8PT A G K
+BGG   GG   0 V=V(G,K)+0.84112562
+BM1   M1   0 V=(0.01029284*(URAMP(V(A,K))+1e-10))**-0.37211195
+BM2   M2   0 V=(0.80123414*(URAMP(V(GG)+URAMP(V(A,K))/19.311081)+1e-10))**1.872112
+BP    P    0 V=0.0043151181*(URAMP(V(GG)+URAMP(V(A,K))/24.10167)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0025686773*V(M1)*V(M2)
+BIG   IG   0 V=0.0021575591*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.002428883*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.2p
+CGK   G    K 5.8p
+CAK   A    K 7.6p
+.ENDS
+*
+* Generic triode model: 6GY5T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:13 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6GY5T A G K
+BGG   GG   0 V=V(G,K)+0.32801613
+BM1   M1   0 V=(0.13136914*(URAMP(V(A,K))+1e-10))**-1.2504039
+BM2   M2   0 V=(0.54537444*(URAMP(V(GG)+URAMP(V(A,K))/3.4606724)+1e-10))**2.7504039
+BP    P    0 V=0.0046747506*(URAMP(V(GG)+URAMP(V(A,K))/6.345498)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0037232771*V(M1)*V(M2)
+BIG   IG   0 V=0.0023373753*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0034848868*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9.1p
+CGK   G    K 12.9p
+CAK   A    K 8.5p
+.ENDS
+*
+* Generic triode model: 6J7T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:14 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6J7T A G K
+BGG   GG   0 V=V(G,K)+0.75953915
+BM1   M1   0 V=(0.0057490544*(URAMP(V(A,K))+1e-10))**-0.20145614
+BM2   M2   0 V=(0.8815978*(URAMP(V(GG)+URAMP(V(A,K))/20.595073)+1e-10))**1.7014561
+BP    P    0 V=0.00080605414*(URAMP(V(GG)+URAMP(V(A,K))/23.361076)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00053791349*V(M1)*V(M2)
+BIG   IG   0 V=0.00040302707*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00045533328*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.8p
+CGK   G    K 4.2p
+CAK   A    K 12p
+.ENDS
+*
+* Generic triode model: 6JB5T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:15 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6JB5T A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.16129088*(URAMP(V(A,K))+1e-10))**-2.7283665
+BM2   M2   0 V=(0.35474692*(URAMP(V(GG)+URAMP(V(A,K))/4.0005552)+1e-10))**4.2283665
+BP    P    0 V=0.0020818822*(URAMP(V(GG)+URAMP(V(A,K))/11.277209)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0106492*V(M1)*V(M2)
+BIG   IG   0 V=0.0010409411*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0013239066*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.1p
+CGK   G    K 5.4p
+CAK   A    K 6p
+.ENDS
+*
+* Generic triode model: 6JE6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:16 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6JE6T A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.15531724*(URAMP(V(A,K))+1e-10))**-0.92957636
+BM2   M2   0 V=(0.61739158*(URAMP(V(GG)+URAMP(V(A,K))/2.4633995)+1e-10))**2.4295764
+BP    P    0 V=0.0036485186*(URAMP(V(GG)+URAMP(V(A,K))/3.9900115)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0023385402*V(M1)*V(M2)
+BIG   IG   0 V=0.0018242593*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0032785303*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9.1p
+CGK   G    K 12.9p
+CAK   A    K 10.5p
+.ENDS
+*
+* Generic triode model: 6JG6AT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:17 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT 6JG6AT A G K
+BGG   GG   0 V=V(G,K)+0.99372841
+BM1   M1   0 V=(0.20443422*(URAMP(V(A,K))+1e-10))**-2.1006356
+BM2   M2   0 V=(0.41659311*(URAMP(V(GG)+URAMP(V(A,K))/2.8537634)+1e-10))**3.6006356
+BP    P    0 V=0.0069256204*(URAMP(V(GG)+URAMP(V(A,K))/6.8502415)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.014050654*V(M1)*V(M2)
+BIG   IG   0 V=0.0034628102*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0050333831*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9.2p
+CGK   G    K 12.8p
+CAK   A    K 8.3p
+.ENDS
+*
+* Generic triode model: 6JR6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:20 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6JR6T A G K
+BGG   GG   0 V=V(G,K)+0.99994363
+BM1   M1   0 V=(0.13323481*(URAMP(V(A,K))+1e-10))**-1.5275541
+BM2   M2   0 V=(0.49544944*(URAMP(V(GG)+URAMP(V(A,K))/3.7869273)+1e-10))**3.0275541
+BP    P    0 V=0.0072054321*(URAMP(V(GG)+URAMP(V(A,K))/7.6434182)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0074085952*V(M1)*V(M2)
+BIG   IG   0 V=0.003602716*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0050620509*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9.2p
+CGK   G    K 12.8p
+CAK   A    K 8.3p
+.ENDS
+*
+* Generic triode model: 6JS6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:19 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6JS6T A G K
+BGG   GG   0 V=V(G,K)+0.9999936
+BM1   M1   0 V=(0.21913245*(URAMP(V(A,K))+1e-10))**-1.3747601
+BM2   M2   0 V=(0.52178266*(URAMP(V(GG)+URAMP(V(A,K))/2.1823209)+1e-10))**2.8747601
+BP    P    0 V=0.0035536558*(URAMP(V(GG)+URAMP(V(A,K))/4.1824327)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0031522524*V(M1)*V(M2)
+BIG   IG   0 V=0.0017768279*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0031247106*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 10p
+CGK   G    K 14p
+CAK   A    K 9.3p
+.ENDS
+*
+* Generic triode model: 6K6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:22 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6K6T A G K
+BGG   GG   0 V=V(G,K)+0.99999995
+BM1   M1   0 V=(0.055289504*(URAMP(V(A,K))+1e-10))**-0.63369812
+BM2   M2   0 V=(0.70300479*(URAMP(V(GG)+URAMP(V(A,K))/5.3716382)+1e-10))**2.1336981
+BP    P    0 V=0.00053448807*(URAMP(V(GG)+URAMP(V(A,K))/7.6409696)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00030960116*V(M1)*V(M2)
+BIG   IG   0 V=0.00022926513*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00032413346*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.5p
+CGK   G    K 3p
+CAK   A    K 5.5p
+.ENDS
+*
+* Generic triode model: 6K7T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Wed Jun 30 20:54:56 2010
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6K7T A G K
+BGG   GG   0 V=V(G,K)+-1
+BM1   M1   0 V=(2.3738651*(URAMP(V(A,K))+1e-10))**-38.694622
+BM2   M2   0 V=(0.037318425*(URAMP(V(GG)+URAMP(V(A,K))/0.40553339)+1e-10))**40.194622
+BP    P    0 V=0.00060436625*(URAMP(V(GG)+URAMP(V(A,K))/10.866841)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*2.5180035e+51*V(M1)*V(M2)
+BIG   IG   0 V=0.00030218313*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00038749733*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.8p
+CGK   G    K 4.2p
+CAK   A    K 12p
+.ENDS
+*
+* Generic triode model: 6KD6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:31 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6KD6T A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.14076535*(URAMP(V(A,K))+1e-10))**-1.0380568
+BM2   M2   0 V=(0.59100333*(URAMP(V(GG)+URAMP(V(A,K))/2.905521)+1e-10))**2.5380568
+BP    P    0 V=0.0075955054*(URAMP(V(GG)+URAMP(V(A,K))/4.9162515)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0051832527*V(M1)*V(M2)
+BIG   IG   0 V=0.0037977527*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0062293504*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 16.5p
+CGK   G    K 23.5p
+CAK   A    K 15.2p
+.ENDS
+*
+* Generic triode model: 6KM6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:37 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6KM6T A G K
+BGG   GG   0 V=V(G,K)+0.57761874
+BM1   M1   0 V=(0.52339318*(URAMP(V(A,K))+1e-10))**-5.2554363
+BM2   M2   0 V=(0.22204339*(URAMP(V(GG)+URAMP(V(A,K))/1.4863713)+1e-10))**6.7554363
+BP    P    0 V=0.006536245*(URAMP(V(GG)+URAMP(V(A,K))/6.6940577)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*4.7534114*V(M1)*V(M2)
+BIG   IG   0 V=0.0032681225*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0047861683*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9.6p
+CGK   G    K 12.6p
+CAK   A    K 7.9p
+.ENDS
+*
+* Generic triode model: 6KV6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:43:25 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6KV6T A G K
+BGG   GG   0 V=V(G,K)+0.5805065
+BM1   M1   0 V=(0.16898169*(URAMP(V(A,K))+1e-10))**-1.508747
+BM2   M2   0 V=(0.4985464*(URAMP(V(GG)+URAMP(V(A,K))/2.9675026)+1e-10))**3.008747
+BP    P    0 V=0.0050541434*(URAMP(V(GG)+URAMP(V(A,K))/5.9523097)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0050986757*V(M1)*V(M2)
+BIG   IG   0 V=0.0025270717*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0038528147*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9.2p
+CGK   G    K 12.9p
+CAK   A    K 8.4p
+.ENDS
+*
+* Generic triode model: 6L6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:38 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6L6T A G K
+BGG   GG   0 V=V(G,K)+0.91804059
+BM1   M1   0 V=(0.10751078*(URAMP(V(A,K))+1e-10))**-1.743575
+BM2   M2   0 V=(0.4624527*(URAMP(V(GG)+URAMP(V(A,K))/4.9999386)+1e-10))**3.243575
+BP    P    0 V=0.0016883841*(URAMP(V(GG)+URAMP(V(A,K))/10.811784)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0021948901*V(M1)*V(M2)
+BIG   IG   0 V=0.0022135943*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00056920996*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.4p
+CGK   G    K 5.7p
+CAK   A    K 5.9p
+.ENDS
+*
+* Generic triode model: 6LB6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:40 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6LB6T A G K
+BGG   GG   0 V=V(G,K)+0.99700414
+BM1   M1   0 V=(0.23985722*(URAMP(V(A,K))+1e-10))**-1.8495045
+BM2   M2   0 V=(0.44782743*(URAMP(V(GG)+URAMP(V(A,K))/2.3020886)+1e-10))**3.3495045
+BP    P    0 V=0.0060056363*(URAMP(V(GG)+URAMP(V(A,K))/5.1405708)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0088470322*V(M1)*V(M2)
+BIG   IG   0 V=0.0030028181*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.004837887*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 13.5p
+CGK   G    K 19.5p
+CAK   A    K 17.6p
+.ENDS
+*
+* Generic triode model: 6LF6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:41 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6LF6T A G K
+BGG   GG   0 V=V(G,K)+0.95447628
+BM1   M1   0 V=(0.32637983*(URAMP(V(A,K))+1e-10))**-2.7688412
+BM2   M2   0 V=(0.35138341*(URAMP(V(GG)+URAMP(V(A,K))/1.987306)+1e-10))**4.2688412
+BP    P    0 V=0.0091876684*(URAMP(V(GG)+URAMP(V(A,K))/5.6556625)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.05015216*V(M1)*V(M2)
+BIG   IG   0 V=0.0045938342*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0071353288*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 16.4p
+CGK   G    K 20.9p
+CAK   A    K 16.2p
+.ENDS
+*
+* Generic triode model: 6LG6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:42 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6LG6T A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.11768156*(URAMP(V(A,K))+1e-10))**-0.95241752
+BM2   M2   0 V=(0.61164136*(URAMP(V(GG)+URAMP(V(A,K))/3.3000807)+1e-10))**2.4524175
+BP    P    0 V=0.0055353672*(URAMP(V(GG)+URAMP(V(A,K))/5.3954505)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.003591442*V(M1)*V(M2)
+BIG   IG   0 V=0.0027676836*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0043758251*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 10.5p
+CGK   G    K 14.5p
+CAK   A    K 12.2p
+.ENDS
+*
+* Generic triode model: 6RA2
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:44 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6RA2 A G K
+BGG   GG   0 V=V(G,K)+0.99999998
+BM1   M1   0 V=(0.16011188*(URAMP(V(A,K))+1e-10))**-0.98934882
+BM2   M2   0 V=(0.60256722*(URAMP(V(GG)+URAMP(V(A,K))/2.4822192)+1e-10))**2.4893488
+BP    P    0 V=0.0023398311*(URAMP(V(GG)+URAMP(V(A,K))/4.1194063)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0015501289*V(M1)*V(M2)
+BIG   IG   0 V=0.0011699156*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0020717035*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 5.2p
+CGK   G    K 6.9p
+CAK   A    K 5.4p
+.ENDS
+*
+* Generic triode model: 6RA3
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:45 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6RA3 A G K
+BGG   GG   0 V=V(G,K)+0.99999995
+BM1   M1   0 V=(0.17083943*(URAMP(V(A,K))+1e-10))**-1.0578391
+BM2   M2   0 V=(0.5864325*(URAMP(V(GG)+URAMP(V(A,K))/2.4207966)+1e-10))**2.5578391
+BP    P    0 V=0.0037228747*(URAMP(V(GG)+URAMP(V(A,K))/4.1280055)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0025729671*V(M1)*V(M2)
+BIG   IG   0 V=0.0018614373*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0032931125*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 5.2p
+CGK   G    K 6.9p
+CAK   A    K 5.4p
+.ENDS
+*
+* Generic triode model: 6RA6
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:46 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6RA6 A G K
+BGG   GG   0 V=V(G,K)+-0.45045978
+BM1   M1   0 V=(0.022786797*(URAMP(V(A,K))+1e-10))**-0.63709179
+BM2   M2   0 V=(0.70188843*(URAMP(V(GG)+URAMP(V(A,K))/13.082645)+1e-10))**2.1370918
+BP    P    0 V=0.005552851*(URAMP(V(GG)+URAMP(V(A,K))/18.639209)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0032180177*V(M1)*V(M2)
+BIG   IG   0 V=0.0027764255*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0032292352*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 6.5p
+CGK   G    K 5p
+CAK   A    K 1.2p
+.ENDS
+*
+* Generic triode model: 6RA8
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:47 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6RA8 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.044109598*(URAMP(V(A,K))+1e-10))**-0.88419381
+BM2   M2   0 V=(0.62914349*(URAMP(V(GG)+URAMP(V(A,K))/8.4076149)+1e-10))**2.3841938
+BP    P    0 V=0.0062736966*(URAMP(V(GG)+URAMP(V(A,K))/13.363589)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0039315365*V(M1)*V(M2)
+BIG   IG   0 V=0.0031368483*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0038540551*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 5.2p
+CGK   G    K 6.9p
+CAK   A    K 5.4p
+.ENDS
+*
+* Generic triode model: 6RB11T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:50 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT 6RB11T A G K
+BGG   GG   0 V=V(G,K)+0.65537204
+BM1   M1   0 V=(0.11100294*(URAMP(V(A,K))+1e-10))**-2.2938121
+BM2   M2   0 V=(0.39538068*(URAMP(V(GG)+URAMP(V(A,K))/5.4468766)+1e-10))**3.7938121
+BP    P    0 V=0.0034776823*(URAMP(V(GG)+URAMP(V(A,K))/13.776284)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0092134348*V(M1)*V(M2)
+BIG   IG   0 V=0.0017388412*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0021242915*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.4p
+CGK   G    K 5.6p
+CAK   A    K 6.3p
+.ENDS
+*
+* Generic triode model: 6RP15T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:50 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT 6RP15T A G K
+BGG   GG   0 V=V(G,K)+0.81734398
+BM1   M1   0 V=(0.014236687*(URAMP(V(A,K))+1e-10))**-0.37474407
+BM2   M2   0 V=(0.80010921*(URAMP(V(GG)+URAMP(V(A,K))/14.040541)+1e-10))**1.8747441
+BP    P    0 V=0.0033159507*(URAMP(V(GG)+URAMP(V(A,K))/17.548281)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0019718712*V(M1)*V(M2)
+BIG   IG   0 V=0.0016579754*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0019454182*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.6p
+CGK   G    K 6.2p
+CAK   A    K 6p
+.ENDS
+*
+* Generic triode model: 6S4A
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:51 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6S4A A G K
+BGG   GG   0 V=V(G,K)+0.32778768
+BM1   M1   0 V=(0.034282937*(URAMP(V(A,K))+1e-10))**-1.0247707
+BM2   M2   0 V=(0.59411337*(URAMP(V(GG)+URAMP(V(A,K))/11.839319)+1e-10))**2.5247707
+BP    P    0 V=0.0017432762*(URAMP(V(GG)+URAMP(V(A,K))/19.92771)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0011797852*V(M1)*V(M2)
+BIG   IG   0 V=0.00087163808*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0010044908*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.4p
+CGK   G    K 4.2p
+CAK   A    K 0.6p
+.ENDS
+*
+* Generic triode model: 6SC7
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:53 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6SC7 A G K
+BGG   GG   0 V=V(G,K)+0.44106944
+BM1   M1   0 V=(0.0042907324*(URAMP(V(A,K))+1e-10))**-0.48871674
+BM2   M2   0 V=(0.75425523*(URAMP(V(GG)+URAMP(V(A,K))/57.273385)+1e-10))**1.9887167
+BP    P    0 V=0.00077042152*(URAMP(V(GG)+URAMP(V(A,K))/75.933693)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00044535539*V(M1)*V(M2)
+BIG   IG   0 V=0.00038521076*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00040047972*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2p
+CGK   G    K 2p
+CAK   A    K 3p
+.ENDS
+*
+* Generic triode model: 6SH7T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:54 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6SH7T A G K
+BGG   GG   0 V=V(G,K)+0.69566782
+BM1   M1   0 V=(0.0053973753*(URAMP(V(A,K))+1e-10))**-0.3342013
+BM2   M2   0 V=(0.81779465*(URAMP(V(GG)+URAMP(V(A,K))/33.758141)+1e-10))**1.8342013
+BP    P    0 V=0.0026548433*(URAMP(V(GG)+URAMP(V(A,K))/41.279484)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0016073552*V(M1)*V(M2)
+BIG   IG   0 V=0.0013274216*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0014244744*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 3.4p
+CGK   G    K 5.1p
+CAK   A    K 7p
+.ENDS
+*
+* Generic triode model: 6SJ7T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:55 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6SJ7T A G K
+BGG   GG   0 V=V(G,K)+0.40161932
+BM1   M1   0 V=(0.02462593*(URAMP(V(A,K))+1e-10))**-0.84287662
+BM2   M2   0 V=(0.64023858*(URAMP(V(GG)+URAMP(V(A,K))/14.609049)+1e-10))**2.3428766
+BP    P    0 V=0.0011655656*(URAMP(V(GG)+URAMP(V(A,K))/22.818133)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00071703729*V(M1)*V(M2)
+BIG   IG   0 V=0.00068041382*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00044226898*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.4p
+CGK   G    K 3.6p
+CAK   A    K 7p
+.ENDS
+*
+* Generic triode model: 6SL7
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:56 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6SL7 A G K
+BGG   GG   0 V=V(G,K)+0.34892993
+BM1   M1   0 V=(0.00093777395*(URAMP(V(A,K))+1e-10))**-0.098159943
+BM2   M2   0 V=(0.9385794*(URAMP(V(GG)+URAMP(V(A,K))/65.496168)+1e-10))**1.5981599
+BP    P    0 V=0.00080166786*(URAMP(V(GG)+URAMP(V(A,K))/69.782235)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00061341966*V(M1)*V(M2)
+BIG   IG   0 V=0.00040083393*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00041812772*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.8p
+CGK   G    K 3.4p
+CAK   A    K 3.8p
+.ENDS
+*
+* Generic triode model: 6SN7
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:58 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6SN7 A G K
+BGG   GG   0 V=V(G,K)+0.54900933
+BM1   M1   0 V=(0.020494606*(URAMP(V(A,K))+1e-10))**-0.76277031
+BM2   M2   0 V=(0.66290422*(URAMP(V(GG)+URAMP(V(A,K))/16.448024)+1e-10))**2.2627703
+BP    P    0 V=0.0012465111*(URAMP(V(GG)+URAMP(V(A,K))/24.812067)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00074417047*V(M1)*V(M2)
+BIG   IG   0 V=0.0003834058*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0006816103*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 3p
+CAK   A    K 1.2p
+.ENDS
+*
+* Generic triode model: 6SQ7
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:40:59 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6SQ7 A G K
+BGG   GG   0 V=V(G,K)+0.73774817
+BM1   M1   0 V=(0.0014361986*(URAMP(V(A,K))+1e-10))**-0.21629832
+BM2   M2   0 V=(0.87397394*(URAMP(V(GG)+URAMP(V(A,K))/87.749749)+1e-10))**1.7162983
+BP    P    0 V=0.00075255807*(URAMP(V(GG)+URAMP(V(A,K))/100.40316)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00049502244*V(M1)*V(M2)
+BIG   IG   0 V=0.00037627904*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00038755003*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.7p
+CGK   G    K 1.7p
+CAK   A    K 3.8p
+.ENDS
+*
+* Generic triode model: 6U8PT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:03 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6U8PT A G K
+BGG   GG   0 V=V(G,K)+0.65071871
+BM1   M1   0 V=(0.046006989*(URAMP(V(A,K))+1e-10))**-2.7651713
+BM2   M2   0 V=(0.35168575*(URAMP(V(GG)+URAMP(V(A,K))/14.091647)+1e-10))**4.2651713
+BP    P    0 V=0.003445744*(URAMP(V(GG)+URAMP(V(A,K))/40.068859)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.018698107*V(M1)*V(M2)
+BIG   IG   0 V=0.001722872*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0018526668*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2p
+CGK   G    K 3p
+CAK   A    K 3.5p
+.ENDS
+*
+* Generic triode model: 6U8T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:00 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6U8T A G K
+BGG   GG   0 V=V(G,K)+0.99995916
+BM1   M1   0 V=(0.035181787*(URAMP(V(A,K))+1e-10))**-2.5690962
+BM2   M2   0 V=(0.36863223*(URAMP(V(GG)+URAMP(V(A,K))/17.94587)+1e-10))**4.0690962
+BP    P    0 V=0.0033085897*(URAMP(V(GG)+URAMP(V(A,K))/48.682314)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.013182953*V(M1)*V(M2)
+BIG   IG   0 V=0.0016542949*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0017567609*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.8p
+CGK   G    K 2.8p
+CAK   A    K 2p
+.ENDS
+*
+* Generic triode model: 6V6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:04 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6V6T A G K
+BGG   GG   0 V=V(G,K)+0.99999998
+BM1   M1   0 V=(0.048335289*(URAMP(V(A,K))+1e-10))**-0.77023894
+BM2   M2   0 V=(0.6607234*(URAMP(V(GG)+URAMP(V(A,K))/7.0192317)+1e-10))**2.2702389
+BP    P    0 V=0.0010053341*(URAMP(V(GG)+URAMP(V(A,K))/10.623555)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00060166202*V(M1)*V(M2)
+BIG   IG   0 V=0.00051429562*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00061491868*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 5p
+CAK   A    K 6.9p
+.ENDS
+*
+* Generic triode model: 6W6T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:06 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6W6T A G K
+BGG   GG   0 V=V(G,K)+0.99999997
+BM1   M1   0 V=(0.032441217*(URAMP(V(A,K))+1e-10))**-0.3672418
+BM2   M2   0 V=(0.80332392*(URAMP(V(GG)+URAMP(V(A,K))/6.062537)+1e-10))**1.8672418
+BP    P    0 V=0.0022625178*(URAMP(V(GG)+URAMP(V(A,K))/7.546815)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.001349448*V(M1)*V(M2)
+BIG   IG   0 V=0.0012737812*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0012049281*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 6.5p
+CGK   G    K 8.6p
+CAK   A    K 8.2p
+.ENDS
+*
+* Generic triode model: 71A
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:45 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT 71A A G K
+BGG   GG   0 V=V(G,K)+-0.99999999
+BM1   M1   0 V=(0.058225528*(URAMP(V(A,K))+1e-10))**-0.29538374
+BM2   M2   0 V=(0.83547598*(URAMP(V(GG)+URAMP(V(A,K))/2.8256337)+1e-10))**1.7953837
+BP    P    0 V=0.00034434696*(URAMP(V(GG)+URAMP(V(A,K))/3.3820645)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00021307994*V(M1)*V(M2)
+BIG   IG   0 V=0.00017217348*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00033568367*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 7.5p
+CGK   G    K 3.2p
+CAK   A    K 2.9p
+.ENDS
+*
+* Generic triode model: 75
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:46 2008
+*          Plate
+*          | Grid
+*          | | Cathode
+*          | | |
+.SUBCKT 75 A G K
+BGG   GG   0 V=V(G,K)+0.62861222
+BM1   M1   0 V=(0.0015984063*(URAMP(V(A,K))+1e-10))**-0.25776155
+BM2   M2   0 V=(0.85335807*(URAMP(V(GG)+URAMP(V(A,K))/91.742588)+1e-10))**1.7577615
+BP    P    0 V=0.00073974709*(URAMP(V(GG)+URAMP(V(A,K))/107.50773)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00046981663*V(M1)*V(M2)
+BIG   IG   0 V=0.00036987355*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00038021882*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.7p
+CGK   G    K 1.7p
+CAK   A    K 3.8p
+.ENDS
+*
+* Generic triode model: 7591T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:23 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 7591T A G K
+BGG   GG   0 V=V(G,K)+0.99926889
+BM1   M1   0 V=(0.013694604*(URAMP(V(A,K))+1e-10))**-0.39656351
+BM2   M2   0 V=(0.79090417*(URAMP(V(GG)+URAMP(V(A,K))/15.268483)+1e-10))**1.8965635
+BP    P    0 V=0.0034491916*(URAMP(V(GG)+URAMP(V(A,K))/19.305098)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0020351267*V(M1)*V(M2)
+BIG   IG   0 V=0.0017245958*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0019960381*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.2p
+CGK   G    K 5.9p
+CAK   A    K 4.8p
+.ENDS
+*
+* Generic triode model: 76
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:47 2008
+*          Plate
+*          | Grid
+*          | | Cathode
+*          | | |
+.SUBCKT 76 A G K
+BGG   GG   0 V=V(G,K)+0.99999999
+BM1   M1   0 V=(0.021188923*(URAMP(V(A,K))+1e-10))**-0.55369678
+BM2   M2   0 V=(0.7303902*(URAMP(V(GG)+URAMP(V(A,K))/12.724092)+1e-10))**2.0536968
+BP    P    0 V=0.00075511262*(URAMP(V(GG)+URAMP(V(A,K))/17.420951)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00043487165*V(M1)*V(M2)
+BIG   IG   0 V=0.00037755631*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00044349824*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.8p
+CGK   G    K 3.5p
+CAK   A    K 2.5p
+.ENDS
+*
+* Generic triode model: 77T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:48 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT 77T A G K
+BGG   GG   0 V=V(G,K)+-1
+BM1   M1   0 V=(0.0016865419*(URAMP(V(A,K))+1e-10))**-0.038461538
+BM2   M2   0 V=(0.975*(URAMP(V(GG)+URAMP(V(A,K))/14.823231)+1e-10))**1.5384615
+BP    P    0 V=0.00049759802*(URAMP(V(GG)+URAMP(V(A,K))/15.203314)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00043219909*V(M1)*V(M2)
+BIG   IG   0 V=0.00024879901*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00029869203*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.9p
+CGK   G    K 2.8p
+CAK   A    K 11p
+.ENDS
+*
+* Generic triode model: 801
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:56 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT 801 A G K
+BGG   GG   0 V=V(G,K)+0.99999971
+BM1   M1   0 V=(0.0050075033*(URAMP(V(A,K))+1e-10))**-0.062819059
+BM2   M2   0 V=(0.95980401*(URAMP(V(GG)+URAMP(V(A,K))/8.027152)+1e-10))**1.5628191
+BP    P    0 V=0.00024894009*(URAMP(V(GG)+URAMP(V(A,K))/8.3633241)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00020395304*V(M1)*V(M2)
+BIG   IG   0 V=4.8000001e-05*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.000225*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 6p
+CGK   G    K 4.5p
+CAK   A    K 1.5p
+.ENDS
+*
+* Generic triode model: 8045G
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:25 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 8045G A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.16254949*(URAMP(V(A,K))+1e-10))**-1.8473377
+BM2   M2   0 V=(0.44811732*(URAMP(V(GG)+URAMP(V(A,K))/3.3951672)+1e-10))**3.3473377
+BP    P    0 V=0.006744417*(URAMP(V(GG)+URAMP(V(A,K))/7.5765141)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0099093555*V(M1)*V(M2)
+BIG   IG   0 V=0.0033722085*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0047506048*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 16p
+CGK   G    K 24p
+CAK   A    K 16p
+.ENDS
+*
+* Generic triode model: 829BT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:56 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 829BT A G K
+BGG   GG   0 V=V(G,K)+-0.31275554
+BM1   M1   0 V=(0.031067512*(URAMP(V(A,K))+1e-10))**-0.44774132
+BM2   M2   0 V=(0.7701228*(URAMP(V(GG)+URAMP(V(A,K))/7.3992794)+1e-10))**1.9477413
+BP    P    0 V=0.0023834096*(URAMP(V(GG)+URAMP(V(A,K))/9.6079215)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0013870937*V(M1)*V(M2)
+BIG   IG   0 V=0.0013863621*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0016211493*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 5.9p
+CGK   G    K 8.6p
+CAK   A    K 6.9p
+.ENDS
+*
+* Generic triode model: 8417T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:26 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 8417T A G K
+BGG   GG   0 V=V(G,K)+0.63054378
+BM1   M1   0 V=(0.036846957*(URAMP(V(A,K))+1e-10))**-1.2260611
+BM2   M2   0 V=(0.55024446*(URAMP(V(GG)+URAMP(V(A,K))/12.206043)+1e-10))**2.7260611
+BP    P    0 V=0.0099006053*(URAMP(V(GG)+URAMP(V(A,K))/22.182946)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0077318666*V(M1)*V(M2)
+BIG   IG   0 V=0.0049503027*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0056272659*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9.4p
+CGK   G    K 12.7p
+CAK   A    K 8.1p
+.ENDS
+*
+* Generic triode model: 845
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:41:58 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT 845 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.097678365*(URAMP(V(A,K))+1e-10))**-1.1468909
+BM2   M2   0 V=(0.56670261*(URAMP(V(GG)+URAMP(V(A,K))/4.4359607)+1e-10))**2.6468909
+BP    P    0 V=0.00074300992*(URAMP(V(GG)+URAMP(V(A,K))/7.8276694)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00054613816*V(M1)*V(M2)
+BIG   IG   0 V=0.00037150496*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00051834132*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 13.5p
+CGK   G    K 6p
+CAK   A    K 6.5p
+.ENDS
+*
+* Generic triode model: 9002
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:28 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 9002 A G K
+BGG   GG   0 V=V(G,K)+0.90658712
+BM1   M1   0 V=(0.01433184*(URAMP(V(A,K))+1e-10))**-0.61356953
+BM2   M2   0 V=(0.70969986*(URAMP(V(GG)+URAMP(V(A,K))/20.255608)+1e-10))**2.1135695
+BP    P    0 V=0.00098929697*(URAMP(V(GG)+URAMP(V(A,K))/28.541091)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00057163937*V(M1)*V(M2)
+BIG   IG   0 V=0.00049464849*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00054709459*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.4p
+CGK   G    K 1.2p
+CAK   A    K 1.1p
+.ENDS
+*
+* Generic triode model: AD1
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:28 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT AD1 A G K
+BGG   GG   0 V=V(G,K)+0.99548209
+BM1   M1   0 V=(0.033599669*(URAMP(V(A,K))+1e-10))**-0.23303356
+BM2   M2   0 V=(0.8655343*(URAMP(V(GG)+URAMP(V(A,K))/4.0019946)+1e-10))**1.7330336
+BP    P    0 V=0.0011960914*(URAMP(V(GG)+URAMP(V(A,K))/4.6237273)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00077502632*V(M1)*V(M2)
+BIG   IG   0 V=0.00059804568*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0010063534*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 23p
+CGK   G    K 7.5p
+CAK   A    K 5.5p
+.ENDS
+*
+* Generic triode model: DA30
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:30 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT DA30 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.07753701*(URAMP(V(A,K))+1e-10))**-0.45364741
+BM2   M2   0 V=(0.76779464*(URAMP(V(GG)+URAMP(V(A,K))/2.9947681)+1e-10))**1.9536474
+BP    P    0 V=0.00090166046*(URAMP(V(GG)+URAMP(V(A,K))/3.9004806)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00052412019*V(M1)*V(M2)
+BIG   IG   0 V=0.00045083023*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00081893623*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 13p
+CGK   G    K 10p
+CAK   A    K 6.5p
+.ENDS
+*
+* Generic triode model: E180CC
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:33 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT E180CC A G K
+BGG   GG   0 V=V(G,K)+0.56698133
+BM1   M1   0 V=(0.01851887*(URAMP(V(A,K))+1e-10))**-1.618055
+BM2   M2   0 V=(0.48106912*(URAMP(V(GG)+URAMP(V(A,K))/28.021736)+1e-10))**3.118055
+BP    P    0 V=0.004697796*(URAMP(V(GG)+URAMP(V(A,K))/58.248876)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0053104514*V(M1)*V(M2)
+BIG   IG   0 V=0.002348898*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0024703913*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.3p
+CGK   G    K 3.5p
+CAK   A    K 0.5p
+.ENDS
+*
+* Generic triode model: E182CC
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:34 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT E182CC A G K
+BGG   GG   0 V=V(G,K)+0.56912497
+BM1   M1   0 V=(0.020096637*(URAMP(V(A,K))+1e-10))**-0.83371956
+BM2   M2   0 V=(0.64275075*(URAMP(V(GG)+URAMP(V(A,K))/17.776569)+1e-10))**2.3337196
+BP    P    0 V=0.0068220515*(URAMP(V(GG)+URAMP(V(A,K))/27.657018)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0041807778*V(M1)*V(M2)
+BIG   IG   0 V=0.0034110257*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0037843497*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.1p
+CGK   G    K 6p
+CAK   A    K 1.1p
+.ENDS
+*
+* Generic triode model: E83FT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:32 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT E83FT A G K
+BGG   GG   0 V=V(G,K)+0.67775811
+BM1   M1   0 V=(0.012440248*(URAMP(V(A,K))+1e-10))**-0.83377528
+BM2   M2   0 V=(0.6427354*(URAMP(V(GG)+URAMP(V(A,K))/28.718446)+1e-10))**2.3337753
+BP    P    0 V=0.0069226192*(URAMP(V(GG)+URAMP(V(A,K))/44.6816)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0042425066*V(M1)*V(M2)
+BIG   IG   0 V=0.0034613096*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0036950034*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 3.2p
+CGK   G    K 4.8p
+CAK   A    K 3.5p
+.ENDS
+*
+* Generic triode model: EC86
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:35 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT EC86 A G K
+BGG   GG   0 V=V(G,K)+0.22760069
+BM1   M1   0 V=(0.0026112468*(URAMP(V(A,K))+1e-10))**-0.29355976
+BM2   M2   0 V=(0.83632563*(URAMP(V(GG)+URAMP(V(A,K))/62.680543)+1e-10))**1.7935598
+BP    P    0 V=0.0095464624*(URAMP(V(GG)+URAMP(V(A,K))/74.947533)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0059140675*V(M1)*V(M2)
+BIG   IG   0 V=0.0047732312*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00496493*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.2p
+CGK   G    K 3.5p
+CAK   A    K 0.2p
+.ENDS
+*
+* Generic triode model: ECC33
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:38 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT ECC33 A G K
+BGG   GG   0 V=V(G,K)+0.39854224
+BM1   M1   0 V=(0.00456874*(URAMP(V(A,K))+1e-10))**-0.2251333
+BM2   M2   0 V=(0.86949802*(URAMP(V(GG)+URAMP(V(A,K))/28.564106)+1e-10))**1.7251333
+BP    P    0 V=0.001087821*(URAMP(V(GG)+URAMP(V(A,K))/32.85126)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00070978374*V(M1)*V(M2)
+BIG   IG   0 V=0.00054391049*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00059395688*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.5p
+CGK   G    K 3.5p
+CAK   A    K 1.5p
+.ENDS
+*
+* Generic triode model: ECC35
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:39 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT ECC35 A G K
+BGG   GG   0 V=V(G,K)+0.62544373
+BM1   M1   0 V=(0.0050202395*(URAMP(V(A,K))+1e-10))**-0.5890158
+BM2   M2   0 V=(0.71804148*(URAMP(V(GG)+URAMP(V(A,K))/56.164356)+1e-10))**2.0890158
+BP    P    0 V=0.001261268*(URAMP(V(GG)+URAMP(V(A,K))/78.218818)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00072725712*V(M1)*V(M2)
+BIG   IG   0 V=0.000630634*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00065489844*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 3p
+CGK   G    K 3p
+CAK   A    K 1.3p
+.ENDS
+*
+* Generic triode model: ECC84
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:42 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT ECC84 A G K
+BGG   GG   0 V=V(G,K)+0.84230976
+BM1   M1   0 V=(0.028730107*(URAMP(V(A,K))+1e-10))**-1.1882664
+BM2   M2   0 V=(0.55798041*(URAMP(V(GG)+URAMP(V(A,K))/15.38524)+1e-10))**2.6882664
+BP    P    0 V=0.0027771882*(URAMP(V(GG)+URAMP(V(A,K))/27.573083)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0021056179*V(M1)*V(M2)
+BIG   IG   0 V=0.0013885941*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0015410372*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.3p
+CGK   G    K 4.7p
+CAK   A    K 0.4p
+.ENDS
+*
+* Generic triode model: ECC86
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:40 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT ECC86 A G K
+BGG   GG   0 V=V(G,K)+0.38539466
+BM1   M1   0 V=(0.057387275*(URAMP(V(A,K))+1e-10))**-1.5833861
+BM2   M2   0 V=(0.48647816*(URAMP(V(GG)+URAMP(V(A,K))/8.9483573)+1e-10))**3.0833861
+BP    P    0 V=0.0043259684*(URAMP(V(GG)+URAMP(V(A,K))/18.394161)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.004712875*V(M1)*V(M2)
+BIG   IG   0 V=0.0021629842*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0025205087*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.3p
+CGK   G    K 3p
+CAK   A    K 1.8p
+.ENDS
+*
+* Generic triode model: ECC88
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:43 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT ECC88 A G K
+BGG   GG   0 V=V(G,K)+0.34001426
+BM1   M1   0 V=(0.009343174*(URAMP(V(A,K))+1e-10))**-0.49661195
+BM2   M2   0 V=(0.75127268*(URAMP(V(GG)+URAMP(V(A,K))/26.621288)+1e-10))**1.9966119
+BP    P    0 V=0.007130155*(URAMP(V(GG)+URAMP(V(A,K))/35.434921)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0041180199*V(M1)*V(M2)
+BIG   IG   0 V=0.0035650775*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0038690245*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.4p
+CGK   G    K 3.3p
+CAK   A    K 1.8p
+.ENDS
+*
+* Generic triode model: ECL85PT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Wed Oct 22 16:34:56 2008
+*               Plate
+*               | Grid
+*               | | Cathode
+*               | | |
+.SUBCKT ECL85PT A G K
+BGG   GG   0 V=V(G,K)+0.61401316
+BM1   M1   0 V=(0.075869075*(URAMP(V(A,K))+1e-10))**-1.148877
+BM2   M2   0 V=(0.56627772*(URAMP(V(GG)+URAMP(V(A,K))/5.7167203)+1e-10))**2.648877
+BP    P    0 V=0.0037731888*(URAMP(V(GG)+URAMP(V(A,K))/10.095259)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0027774625*V(M1)*V(M2)
+BIG   IG   0 V=0.0018865944*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0024608947*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.4p
+CGK   G    K 5.1p
+CAK   A    K 7.1p
+.ENDS
+*
+* Generic triode model: ECL85T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Wed Oct 22 16:34:55 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT ECL85T A G K
+BGG   GG   0 V=V(G,K)+0.53083873
+BM1   M1   0 V=(0.0093163171*(URAMP(V(A,K))+1e-10))**-0.90408466
+BM2   M2   0 V=(0.6239381*(URAMP(V(GG)+URAMP(V(A,K))/40.365941)+1e-10))**2.4040847
+BP    P    0 V=0.0035136299*(URAMP(V(GG)+URAMP(V(A,K))/64.695426)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0022231252*V(M1)*V(M2)
+BIG   IG   0 V=0.0017568149*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0018385944*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 2.7p
+CAK   A    K 4p
+.ENDS
+*
+* Generic triode model: EF39T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:46:08 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT EF39T A G K
+BGG   GG   0 V=V(G,K)+0.0036430998
+BM1   M1   0 V=(0.43484193*(URAMP(V(A,K))+1e-10))**-13.214995
+BM2   M2   0 V=(0.10193683*(URAMP(V(GG)+URAMP(V(A,K))/2.0652635)+1e-10))**14.714995
+BP    P    0 V=0.0015911301*(URAMP(V(GG)+URAMP(V(A,K))/20.260228)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*4892774400*V(M1)*V(M2)
+BIG   IG   0 V=0.00079556505*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00091480891*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 16.5p
+CGK   G    K 23.5p
+CAK   A    K 15.2p
+.ENDS
+*
+* Generic triode model: EL12T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:44 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT EL12T A G K
+BGG   GG   0 V=V(G,K)+0.99999993
+BM1   M1   0 V=(0.014506242*(URAMP(V(A,K))+1e-10))**-0.43509457
+BM2   M2   0 V=(0.77515592*(URAMP(V(GG)+URAMP(V(A,K))/15.499816)+1e-10))**1.9350946
+BP    P    0 V=0.0044414767*(URAMP(V(GG)+URAMP(V(A,K))/19.99574)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0025921537*V(M1)*V(M2)
+BIG   IG   0 V=0.0022207383*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0025580516*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.4p
+CGK   G    K 5.7p
+CAK   A    K 5.9p
+.ENDS
+*
+* Generic triode model: EL156T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:51 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT EL156T A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.011748081*(URAMP(V(A,K))+1e-10))**-0.24110473
+BM2   M2   0 V=(0.86152198*(URAMP(V(GG)+URAMP(V(A,K))/11.787288)+1e-10))**1.7411047
+BP    P    0 V=0.0036416815*(URAMP(V(GG)+URAMP(V(A,K))/13.681935)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0023436481*V(M1)*V(M2)
+BIG   IG   0 V=0.0018208407*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0022273001*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 7.9p
+CGK   G    K 11.1p
+CAK   A    K 7p
+.ENDS
+*
+* Generic triode model: EL32T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:47 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT EL32T A G K
+BGG   GG   0 V=V(G,K)+0.99999999
+BM1   M1   0 V=(0.12471331*(URAMP(V(A,K))+1e-10))**-1.9909547
+BM2   M2   0 V=(0.42968188*(URAMP(V(GG)+URAMP(V(A,K))/4.5730334)+1e-10))**3.4909547
+BP    P    0 V=0.0011713028*(URAMP(V(GG)+URAMP(V(A,K))/10.642835)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0020582453*V(M1)*V(M2)
+BIG   IG   0 V=0.00058565141*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00075455382*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 5.6p
+CGK   G    K 2.4p
+CAK   A    K 4p
+.ENDS
+*
+* Generic triode model: EL34T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:48 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT EL34T A G K
+BGG   GG   0 V=V(G,K)+0.29360503
+BM1   M1   0 V=(0.040003405*(URAMP(V(A,K))+1e-10))**-0.73308055
+BM2   M2   0 V=(0.67171782*(URAMP(V(GG)+URAMP(V(A,K))/8.2063559)+1e-10))**2.2330806
+BP    P    0 V=0.0033402929*(URAMP(V(GG)+URAMP(V(A,K))/12.216969)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0019762451*V(M1)*V(M2)
+BIG   IG   0 V=0.0016701465*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0020885491*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 7.2p
+CGK   G    K 9.1p
+CAK   A    K 8.4p
+.ENDS
+*
+* Generic triode model: EL95T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:50 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT EL95T A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.012612458*(URAMP(V(A,K))+1e-10))**-0.34815571
+BM2   M2   0 V=(0.81161992*(URAMP(V(GG)+URAMP(V(A,K))/14.936032)+1e-10))**1.8481557
+BP    P    0 V=0.001923993*(URAMP(V(GG)+URAMP(V(A,K))/18.402742)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0011570767*V(M1)*V(M2)
+BIG   IG   0 V=0.00096199651*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0011209319*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.5p
+CGK   G    K 3.2p
+CAK   A    K 3.5p
+.ENDS
+*
+* Generic triode model: KT33CT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:52 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT KT33CT A G K
+BGG   GG   0 V=V(G,K)+0.96267547
+BM1   M1   0 V=(0.055090322*(URAMP(V(A,K))+1e-10))**-0.90062349
+BM2   M2   0 V=(0.62483768*(URAMP(V(GG)+URAMP(V(A,K))/6.8099498)+1e-10))**2.4006235
+BP    P    0 V=0.0032650112*(URAMP(V(GG)+URAMP(V(A,K))/10.89875)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0020623072*V(M1)*V(M2)
+BIG   IG   0 V=0.0016325056*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0020920259*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 8.4p
+CGK   G    K 10.8p
+CAK   A    K 10.9p
+.ENDS
+*
+* Generic triode model: KT66T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:54 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT KT66T A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.051887963*(URAMP(V(A,K))+1e-10))**-0.76669755
+BM2   M2   0 V=(0.66175569*(URAMP(V(GG)+URAMP(V(A,K))/6.5187433)+1e-10))**2.2666975
+BP    P    0 V=0.0018223197*(URAMP(V(GG)+URAMP(V(A,K))/9.8506796)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0010893248*V(M1)*V(M2)
+BIG   IG   0 V=0.00091115984*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0011955789*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 6.5p
+CGK   G    K 8.1p
+CAK   A    K 9p
+.ENDS
+*
+* Generic triode model: KT88T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:55 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT KT88T A G K
+BGG   GG   0 V=V(G,K)+0.99999999
+BM1   M1   0 V=(0.097534908*(URAMP(V(A,K))+1e-10))**-1.4398564
+BM2   M2   0 V=(0.51022901*(URAMP(V(GG)+URAMP(V(A,K))/5.0214944)+1e-10))**2.9398564
+BP    P    0 V=0.0031096914*(URAMP(V(GG)+URAMP(V(A,K))/9.8416483)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0029317575*V(M1)*V(M2)
+BIG   IG   0 V=0.0015548457*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0020406477*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 7.2p
+CGK   G    K 9p
+CAK   A    K 10.9p
+.ENDS
+*
+* Generic triode model: MH4
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:57 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT MH4 A G K
+BGG   GG   0 V=V(G,K)+0.58255619
+BM1   M1   0 V=(0.0059036471*(URAMP(V(A,K))+1e-10))**-0.42275823
+BM2   M2   0 V=(0.78012928*(URAMP(V(GG)+URAMP(V(A,K))/37.243201)+1e-10))**1.9227582
+BP    P    0 V=0.017484357*(URAMP(V(GG)+URAMP(V(A,K))/47.739781)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.010236064*V(M1)*V(M2)
+BIG   IG   0 V=0.0087421787*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00929441*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 5.7p
+CGK   G    K 7p
+CAK   A    K 6.5p
+.ENDS
+*
+* Generic triode model: MH40
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:57 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT MH40 A G K
+BGG   GG   0 V=V(G,K)+0.39906513
+BM1   M1   0 V=(0.011821777*(URAMP(V(A,K))+1e-10))**-0.91482169
+BM2   M2   0 V=(0.62116387*(URAMP(V(GG)+URAMP(V(A,K))/32.045617)+1e-10))**2.4148217
+BP    P    0 V=0.0012108021*(URAMP(V(GG)+URAMP(V(A,K))/51.589634)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00077021291*V(M1)*V(M2)
+BIG   IG   0 V=0.00060540103*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00064077588*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 7.3p
+CGK   G    K 6p
+CAK   A    K 4p
+.ENDS
+*
+* Generic triode model: MH41
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:42:59 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT MH41 A G K
+BGG   GG   0 V=V(G,K)+0.69037329
+BM1   M1   0 V=(0.016743849*(URAMP(V(A,K))+1e-10))**-2.3893886
+BM2   M2   0 V=(0.38566473*(URAMP(V(GG)+URAMP(V(A,K))/36.690206)+1e-10))**3.8893886
+BP    P    0 V=0.0031372081*(URAMP(V(GG)+URAMP(V(A,K))/95.134979)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0095426065*V(M1)*V(M2)
+BIG   IG   0 V=0.0015686041*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0016181984*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 3.2p
+CGK   G    K 8.5p
+CAK   A    K 4.1p
+.ENDS
+*
+* Generic triode model: MHL4
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:43:00 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT MHL4 A G K
+BGG   GG   0 V=V(G,K)+0.4016137
+BM1   M1   0 V=(0.017679176*(URAMP(V(A,K))+1e-10))**-0.56606943
+BM2   M2   0 V=(0.72601626*(URAMP(V(GG)+URAMP(V(A,K))/15.49754)+1e-10))**2.0660694
+BP    P    0 V=0.00078960956*(URAMP(V(GG)+URAMP(V(A,K))/21.345996)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00045482006*V(M1)*V(M2)
+BIG   IG   0 V=0.00039480478*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00045093613*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 3.9p
+CGK   G    K 5.4p
+CAK   A    K 4.5p
+.ENDS
+*
+* Generic triode model: ML4
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:43:01 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT ML4 A G K
+BGG   GG   0 V=V(G,K)+1
+BM1   M1   0 V=(0.09991405*(URAMP(V(A,K))+1e-10))**-2.2677255
+BM2   M2   0 V=(0.39811818*(URAMP(V(GG)+URAMP(V(A,K))/6.0239958)+1e-10))**3.7677255
+BP    P    0 V=0.0012796938*(URAMP(V(GG)+URAMP(V(A,K))/15.131175)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0032670893*V(M1)*V(M2)
+BIG   IG   0 V=0.0006398469*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00076878036*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 4p
+CAK   A    K 4p
+.ENDS
+*
+* Generic triode model: Pen45T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:43:02 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT Pen45T A G K
+BGG   GG   0 V=V(G,K)+0.77688676
+BM1   M1   0 V=(0.013260501*(URAMP(V(A,K))+1e-10))**-0.37488998
+BM2   M2   0 V=(0.80004694*(URAMP(V(GG)+URAMP(V(A,K))/15.078846)+1e-10))**1.87489
+BP    P    0 V=0.0032965978*(URAMP(V(GG)+URAMP(V(A,K))/18.847452)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0019602521*V(M1)*V(M2)
+BIG   IG   0 V=0.0016482989*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.001914113*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 9.6p
+CGK   G    K 13.2p
+CAK   A    K 11.9p
+.ENDS
+*
+* Generic triode model: PX25
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:43:05 2008
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT PX25 A G K
+BGG   GG   0 V=V(G,K)+-1
+BM1   M1   0 V=(0.042915161*(URAMP(V(A,K))+1e-10))**-0.71624142
+BM2   M2   0 V=(0.67682157*(URAMP(V(GG)+URAMP(V(A,K))/7.5306353)+1e-10))**2.2162414
+BP    P    0 V=0.0019818048*(URAMP(V(GG)+URAMP(V(A,K))/11.126471)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0011671444*V(M1)*V(M2)
+BIG   IG   0 V=0.00099090241*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0012639928*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 14.8p
+CGK   G    K 11.4p
+CAK   A    K 8.3p
+.ENDS
+*
+* Generic triode model: PX25A
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:43:06 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT PX25A A G K
+BGG   GG   0 V=V(G,K)+-0.75925792
+BM1   M1   0 V=(0.10259158*(URAMP(V(A,K))+1e-10))**-0.6493098
+BM2   M2   0 V=(0.69789846*(URAMP(V(GG)+URAMP(V(A,K))/2.944701)+1e-10))**2.1493098
+BP    P    0 V=0.0013209842*(URAMP(V(GG)+URAMP(V(A,K))/4.2193831)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00076697829*V(M1)*V(M2)
+BIG   IG   0 V=0.00066049212*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0011569181*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 14.8p
+CGK   G    K 11.4p
+CAK   A    K 8.3p
+.ENDS
+*
+* Generic triode model: PX4
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:43:04 2008
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT PX4 A G K
+BGG   GG   0 V=V(G,K)+-0.81287548
+BM1   M1   0 V=(0.047093515*(URAMP(V(A,K))+1e-10))**-0.41642857
+BM2   M2   0 V=(0.78270592*(URAMP(V(GG)+URAMP(V(A,K))/4.6140976)+1e-10))**1.9164286
+BP    P    0 V=0.0010767826*(URAMP(V(GG)+URAMP(V(A,K))/5.895059)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.000631487*V(M1)*V(M2)
+BIG   IG   0 V=0.00053839132*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00082368923*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 13.7p
+CGK   G    K 7.7p
+CAK   A    K 3.9p
+.ENDS
+*
+* Generic triode model: RE604
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:43:07 2008
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT RE604 A G K
+BGG   GG   0 V=V(G,K)+0.99997938
+BM1   M1   0 V=(0.030921607*(URAMP(V(A,K))+1e-10))**-0.18515194
+BM2   M2   0 V=(0.89012745*(URAMP(V(GG)+URAMP(V(A,K))/3.5532613)+1e-10))**1.6851519
+BP    P    0 V=0.00042470572*(URAMP(V(GG)+URAMP(V(A,K))/3.9918568)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00028831412*V(M1)*V(M2)
+BIG   IG   0 V=0.00021235286*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00038155471*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4p
+CGK   G    K 4p
+CAK   A    K 4p
+.ENDS
+*
+* Generic triode model: WE104D
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:43:08 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT WE104D A G K
+BGG   GG   0 V=V(G,K)+-0.56998685
+BM1   M1   0 V=(0.125122*(URAMP(V(A,K))+1e-10))**-0.50749668
+BM2   M2   0 V=(0.74719924*(URAMP(V(GG)+URAMP(V(A,K))/2.0204341)+1e-10))**2.0074967
+BP    P    0 V=0.00015779238*(URAMP(V(GG)+URAMP(V(A,K))/2.7040098)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*9.1039243e-05*V(M1)*V(M2)
+BIG   IG   0 V=7.8896192e-05*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00017408127*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 4.9p
+CGK   G    K 4.1p
+CAK   A    K 3.4p
+.ENDS
+*
+* Generic triode model: WE262B
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:43:09 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT WE262B A G K
+BGG   GG   0 V=V(G,K)+0.88434569
+BM1   M1   0 V=(0.017408503*(URAMP(V(A,K))+1e-10))**-0.46076878
+BM2   M2   0 V=(0.76500606*(URAMP(V(GG)+URAMP(V(A,K))/13.498802)+1e-10))**1.9607688
+BP    P    0 V=0.00032011417*(URAMP(V(GG)+URAMP(V(A,K))/17.645353)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00018582795*V(M1)*V(M2)
+BIG   IG   0 V=0.00016005708*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0001876514*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.9p
+CGK   G    K 2.4p
+CAK   A    K 3.8p
+.ENDS
+*
+* Generic triode model: WE310AT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:43:11 2008
+*               Plate
+*               | Grid
+*               | | Cathode
+*               | | |
+.SUBCKT WE310AT A G K
+BGG   GG   0 V=V(G,K)+0.54054476
+BM1   M1   0 V=(0.010235898*(URAMP(V(A,K))+1e-10))**-0.32209043
+BM2   M2   0 V=(0.82323027*(URAMP(V(GG)+URAMP(V(A,K))/17.269587)+1e-10))**1.8220904
+BP    P    0 V=0.00076747724*(URAMP(V(GG)+URAMP(V(A,K))/20.977833)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.00046759791*V(M1)*V(M2)
+BIG   IG   0 V=0.00038373862*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.00043926524*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 2.4p
+CGK   G    K 3.6p
+CAK   A    K 9p
+.ENDS
+*
+* Generic triode model: WE396A
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:43:12 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT WE396A A G K
+BGG   GG   0 V=V(G,K)+0.052879817
+BM1   M1   0 V=(0.014753653*(URAMP(V(A,K))+1e-10))**-0.87734793
+BM2   M2   0 V=(0.63095518*(URAMP(V(GG)+URAMP(V(A,K))/25.013793)+1e-10))**2.3773479
+BP    P    0 V=0.0026962883*(URAMP(V(GG)+URAMP(V(A,K))/39.644326)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.0016842826*V(M1)*V(M2)
+BIG   IG   0 V=0.0013481441*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0014508027*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 1.3p
+CGK   G    K 2.2p
+CAK   A    K 1p
+.ENDS
+*
+* Generic triode model: WE421A
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Mar  8 22:43:13 2008
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT WE421A A G K
+BGG   GG   0 V=V(G,K)+0.99947463
+BM1   M1   0 V=(0.16037928*(URAMP(V(A,K))+1e-10))**-1.9202159
+BM2   M2   0 V=(0.4385688*(URAMP(V(GG)+URAMP(V(A,K))/3.5006467)+1e-10))**3.4202159
+BP    P    0 V=0.0067402387*(URAMP(V(GG)+URAMP(V(A,K))/7.9819784)+1e-10)**1.5
+BIK   IK   0 V=U(V(GG))*V(P)+(1-U(V(GG)))*0.010830172*V(M1)*V(M2)
+BIG   IG   0 V=0.0033701193*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+0.4)
+BIAK  A    K I=URAMP(V(IK,IG)-URAMP(V(IK,IG)-(0.0046756479*URAMP(V(A,K))**1.5)))+1e-10*V(A,K)
+BIGK  G    K I=V(IG)
+* CAPS
+CGA   G    A 8.6p
+CGK   G    K 6p
+CAK   A    K 2.2p
+.ENDS
+
+*
+* Generic triode model: 100TH
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Fri Nov 26 13:06:10 2010
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 100TH A G K
+.PARAM X1=-0.99906964 X2=0.0014094818 X3=-0.083738904
+PARAM X4=0.94712581 X5=37.513209 X6=1.5837389
+.PARAM X7=0.00034469629 X8=39.607419 X9=0.00027070609
+.PARAM Y1=0.00017234814 Y2=0.00018548443
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(A,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(A,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(A,K))/X5))**X
+BA A K I=URAMP((Y2*URAMP(V(A,K))**1.5)-URAMP((Y2*URAMP(V(A,K))**1.5)-V(IK)+Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)))+1E-10*V(A,K)
+BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+CGA G A 2p
+CGK G K 2.9p
+CAK A K 0.3p
+.ENDS
+
+* Generic triode model: 2SK79
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sun Feb 28 23:48:12 2010
+*               Plate
+*               | Grid
+*               | | Cathode
+*               | | |
+ .SUBCKT 2SK79 A G K
+.PARAM X1=0.10157886 X2=0.005502006 X3=-0.28096081
+.PARAM X4=0.84224201 X5=28.672814 X6=1.7809608
+.PARAM X7=0.019995035 X8=34.043439 X9=0.012489311
+.PARAM Y1=0.0099975173 Y2=0.010884964
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(A,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(A,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(A,K))/X5))**X6
+BA A K I=URAMP((Y2*URAMP(V(A,K))**1.5)-URAMP((Y2*URAMP(V(A,K))**1.5)-V(IK)+Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)))+1E-10*V(A,K)
+BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+CGA G A 15p
+CGK G K 16p
+CAK A K 4p
+.ENDS
+*
+* Generic triode model: 4E27(T)
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Thu Jun 04 17:35:18 2009
+*               Plate
+*               | Grid
+*               | | Cathode
+*               | | |
+.SUBCKT 4E27(T) A G K.
+.PARAM X1=0.99999999 X2=0.038865244 X3=-0.2993371.
+.PARAM X4=0.83364034 X5=4.2804222 X6=1.7993371
+.PARAM X7=0.00048970507 X8=5.134615 X9=0.00030228693
+.PARAM Y1=0.00024485253 Y2=0.00039466689
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(A,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(A,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(A,K))/X5))**X6
+BA A K I=URAMP((Y2*URAMP(V(A,K))**1.5)-URAMP((Y2*URAMP(V(A,K))**1.5)-V(IK)+Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)))+1E-10*V(A,K)
+BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+CGA G A 5p
+CGK G K 8p
+CAK A K 6.5p
+.ENDS
+*
+* Generic triode model: 6N3P
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Thu Jun 11 18:27:43 2009
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6N3P A G K
+.PARAM X1=-0.069189567 X2=0.019068965 X3=-1.2621392
+.PARAM X4=0.54305736 X5=23.962635 X6=2.7621392
+.PARAM X7=0.0034531579 X8=44.125422 X9=0.0027770019
+.PARAM Y1=0.001726579 Y2=0.0018446282
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(A,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(A,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(A,K))/X5))**X6
+BA A K I=URAMP((Y2*URAMP(V(A,K))**1.5)-URAMP((Y2*URAMP(V(A,K))**1.5)-V(IK)+Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)))+1E-10*V(A,K)
+BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+CGA G A 1.6p
+CGK G K 2.8p
+CAK A K 1.4p
+.ENDS
+*
+* Generic triode model: 6N6
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Fri Sep 27 17:21:24 2013
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT 6N6 A G K
+.PARAM X1=-0.12412617 X2=0.017099117 X3=-0.49413473
+.PARAM X4=0.75220594 X5=14.491629 X6=1.9941347
+.PARAM X7=0.0034675681 X8=19.265507 X9=0.0020032288
+.PARAM Y1=0.001733784 Y2=0.0020072404
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(A,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(A,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(A,K))/X5))**X6
+BA A K I=URAMP((Y2*URAMP(V(A,K))**1.5)-URAMP((Y2*URAMP(V(A,K))**1.5)-V(IK)+Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)))+1E-10*V(A,K)
+BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+ CGA G A 3.5p
+CGK G K 4.4p
+CAK A K 1.8p
+.ENDS
+*
+* Generic triode model: 6H30
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Tue Aug 10 23:01:40 2010
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 6H30 A G K
+.PARAM X1=1 X2=0.0016665882 X3=-0.038461562
+.PARAM X4=0.97499998 X5=15.000715 X6=1.5384616
+.PARAM X7=0.0038313265 X8=15.385349 X9=0.003327778
+.PARAM Y1=0.0019156633 Y2=0.0022952053
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(A,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(A,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(A,K))/X5))**X6BA A K I=URAMP((Y2*URAMP(V(A,K))**1.5)-URAMP((Y2*URAMP(V(A,K))**1.5)-V(IK)+Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)))+1E-10*V(A,K)BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+CGA G A 5p
+CGK G K 6.3p
+CAK A K 2.4p
+.ENDS
+*
+* Generic pentode model: 6J4PP
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved
+* Version 3.10, Generated on Mon Oct 05 17:00:49 2009
+*             Plate
+*             | Screen Grid
+*             | | Control Grid
+*             | | | Cathode
+*             | | | |
+.SUBCKT 6J4PP A S G K
+.PARAM X1=0.35903154 X2=0.0051230024 X3=-0.3031279.
+.PARAM X4=0.83188775 X5=32.815182 X6=1.8031279
+.PARAM X7=0.0040192654 X8=39.446647 X9=0.00247534
+.PARAM Y1=0.0020096327 Y2=0.7737796 Y3=0.2262204
+.PARAM Y4=0.002163434 EA=14848.5
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(S,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(S,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(S,K))/X5))**X6
+BL IL 0 V=(V(IK)-Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4))*(1-.4*(EXP(-URAMP(V(A,K))/URAMP(V(S,K))*15)-EXP(-15)))
+BM IM 0 V=V(IL)*(URAMP(V(A,K))+EA)/(URAMP(V(S,K))+EA)-URAMP(V(IL)*(URAMP(V(A,K))+EA)/(URAMP(V(S,K))+EA)-(Y4*(URAMP(V(A,K))+URAMP(URAMP(V(S,K))-URAMP(V(A,K))))**1.5))
+BA A K I=URAMP(Y4*URAMP(V(A,K))**1.5-URAMP(Y4*URAMP(V(A,K))**1.5-V(IM)+V(IL)*(Y2*(1-URAMP(V(A,K))/(URAMP(V(A,K))+10))**1.5+Y3)))+1E-10*V(A,K)
+BS S K I=URAMP(V(IM)-URAMP(Y4*URAMP(V(A,K))**1.5-URAMP(Y4*URAMP(V(A,K))**1.5-V(IM)+V(IL)*(Y2*(1-URAMP(V(A,K))/(URAMP(V(A,K))+10))**1.5+Y3))))
+BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+CGA G A 0.015p
+CGK G K 6.6p
+CGS G S 4.4p
+CAK A K 6p
+.ENDS
+*
+* Generic triode model: 6J4PT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Mon Oct 05 16:34:25 2009
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6J4PT A G K
+.PARAM X1=0.35903154 X2=0.0051230024 X3=-0.3031279
+.PARAM X4=0.83188775 X5=32.815182 X6=1.8031279
+.PARAM X7=0.0040192654 X8=39.446647 X9=0.00247534
+.PARAM Y1=0.0020096327 Y2=0.002163434
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(A,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(A,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(A,K))/X5))**X6
+BA A K I=URAMP((Y2*URAMP(V(A,K))**1.5)-URAMP((Y2*URAMP(V(A,K))**1.5)-V(IK)+Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)))+1E-10*V(A,K)
+BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+CGA G A 0.015p
+CGK G K 11p
+CAK A K 6p
+.ENDS
+
+* Generic triode model: C3GT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved
+* Version 3.10, Generated on Tue Jun 23 00:43:12 2009
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT C3GT A G K
+.PARAM X1=-0.16053394 X2=0.0043084008 X3=-0.28973288
+.PARAM X4=0.8381139 X5=37.574522 X6=1.7897329
+.PARAM X7=0.0098836949 X8=44.832238 X9=0.0061379447
+.PARAM Y1=0.0049418474 Y2=0.005274374
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(A,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(A,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(A,K))/X5))**X6
+BA A K I=URAMP((Y2*URAMP(V(A,K))**1.5)-URAMP((Y2*URAMP(V(A,K))**1.5)-V(IK)+Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)))+1E-10*V(A,K)
+BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+CGA G A 3.3p
+CGK G K 4.9p
+CAK A K 3.5p
+.ENDS
+*
+* Generic triode model: E92CC
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sun Sep 01 19:47:13 2013
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT E92CC A G K
+.PARAM X1=0.55400106 X2=0.014847333 X3=-1.2515442
+.PARAM X4=0.54514842 X5=30.635239 X6=2.7515442
+.PARAM X7=0.0039106914 X8=56.196144 X9=0.0031176387
+.PARAM Y1=0.0019553457 Y2=0.0020601937
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(A,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(A,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(A,K))/X5))**X6
+BA A K I=URAMP((Y2*URAMP(V(A,K))**1.5)-URAMP((Y2*URAMP(V(A,K))**1.5)-V(IK)+Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)))+1E-10*V(A,K)
+BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+CGA G A 2.2p
+CGK G K 3.1p
+CAK A K 0.3p
+.ENDS
+
+** Generic triode model: 6688T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Wed Jun 24 22:55:42 2009
+*             Plate
+*             | Grid
+*             | | Cathode
+*             | | |
+.SUBCKT 6688T A G K
+.PARAM X1=-0.59576533 X2=0.0094827837 X3=-0.8531559.
+.PARAM X4=0.63744183 X5=38.233306 X6=2.3531559
+.PARAM X7=0.01902963 X8=59.979286 X9=0.011758543
+.PARAM Y1=0.0095148149 Y2=0.009992698
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(A,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(A,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(A,K))/X5))**X6
+BA A K I=URAMP((Y2*URAMP(V(A,K))**1.5)-URAMP((Y2*URAMP(V(A,K))**1.5)-V(IK)+Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)))+1E-10*V(A,K)
+BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+CGA G A 3.43p
+CGK G K 5.1p
+CAK A K 3.5p
+.ENDS
+*
+* Generic triode model: 805
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sat Aug 01 11:40:19 2009
+*           Plate
+*           | Grid
+*           | | Cathode
+*           | | |
+.SUBCKT 805 A G K
+.PARAM X1=-1 X2=0.19254103 X3=-16.929908
+.PARAM X4=0.081389445 X5=4.7709859 X6=18.429908
+.PARAM X7=0.00078806053 X8=58.619221 X9=5.2042766e+14
+.PARAM Y1=0.00039403026 Y2=0.00041428161
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(A,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(A,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(A,K))/X5))**X6
+BA A K I=URAMP((Y2*URAMP(V(A,K))**1.5)-URAMP((Y2*URAMP(V(A,K))**1.5)-V(IK)+Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)))+1E-10*V(A,K)
+BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+CGA G A 8p
+CGK G K 6.5p
+CAK A K 5p
+.ENDS
+
+* Generic triode model: 814T
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Sun Nov 21 21:29:55 2010
+*            Plate
+*            | Grid
+*            | | Cathode
+*            | | |
+.SUBCKT 814T A G K.
+PARAM X1=0.99997793 X2=0.0050824018 X3=-0.057991999
+PARAM X4=0.96277773 X5=7.3237559 X6=1.557992
+.PARAM X7=0.00052636102 X8=7.6069021 X9=0.0004358701
+.PARAM Y1=0.00026318051 Y2=0.00037031315
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(A,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(A,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(A,K))/X5))**X6
+BA A K  I=URAMP((Y2*URAMP(V(A,K))**1.5)-URAMP((Y2*URAMP(V(A,K))**1.5)-V(IK)+Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)))+1E-10*V(A,K)
+BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+CGA G A 4p
+CGK G K 10p
+CAK A K 13.5p
+.ENDS
+*
+*
+* Generic triode model: GU50TT
+* Copyright 2003--2008 by Ayumi Nakabayashi, All rights reserved.
+* Version 3.10, Generated on Mon Oct 07 14:44:14 2013
+*              Plate
+*              | Grid
+*              | | Cathode
+*              | | |
+.SUBCKT GU50TT A G K
+.PARAM X1=0.99999999 X2=0.095744324 X3=-0.93076058
+.PARAM X4=0.61709081 X5=3.9992887 X6=2.4307606
+.PARAM X7=0.001292662 X8=6.4808755 X9=0.00082905208
+.PARAM Y1=0.00064633102 Y2=0.00095677822
+BK IK 0 V=U(V(G,K)+X1)*X7*URAMP(V(G,K)+X1+URAMP(V(A,K))/X8)**1.5+(1-U(V(G,K)+X1))*X9*(X2*URAMP(V(A,K)))**X3*(X4*URAMP(V(G,K)+X1+URAMP(V(A,K))/X5))**X6
+BA A K I=URAMP((Y2*URAMP(V(A,K))**1.5)-URAMP((Y2*URAMP(V(A,K))**1.5)-V(IK)+Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)))+1E-10*V(A,K)
+BG G K I=Y1*URAMP(V(G,K))**1.5*(URAMP(V(G,K))/(URAMP(V(A,K))+URAMP(V(G,K)))*1.2+.4)
+* CAPS
+CGA G A 0.1p
+CGK G K 1p
+CAK A K 10p
+.ENDS
+
+
+

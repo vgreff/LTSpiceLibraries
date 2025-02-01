@@ -1,0 +1,47 @@
+.Subckt Balun 1 2 3 4 params: Ro=100 Len=0.1 R=100m  C=50p  G=0 Lmag=100u
+.param L=Ro**2*C N=10  L1=L/N*Len*0.5  R1=R/N*Len  C1=C/N*Len  R2=N/max(0.001f,G)/Len kx=1-L1*n/Lmag FF=400Meg
+.param Rpar=Lmag*2*pi*FF/10
+V1 1 A[0] 0
+V2 2 B[0] 0
+L1[1] A[0] A[1] {Lmag/10} Rser={R1} Rpar={Rpar}
+L1[2] A[1] A[2] {Lmag/10} Rser={R1} Rpar={Rpar}
+L1[3] A[2] A[3] {Lmag/10} Rser={R1} Rpar={Rpar}
+L1[4] A[3] A[4] {Lmag/10} Rser={R1} Rpar={Rpar}
+L1[5] A[4] A[5] {Lmag/10} Rser={R1} Rpar={Rpar}
+L1[6] A[5] A[6] {Lmag/10} Rser={R1} Rpar={Rpar}
+L1[7] A[6] A[7] {Lmag/10} Rser={R1} Rpar={Rpar}
+L1[8] A[7] A[8] {Lmag/10} Rser={R1} Rpar={Rpar}
+L1[9] A[8] A[9] {Lmag/10} Rser={R1} Rpar={Rpar}
+C1[1] A[1] B[1] {C1} Rser=0 Rpar={R2}
+C1[2] A[2] B[2] {C1} Rser=0 Rpar={R2}
+C1[3] A[3] B[3] {C1} Rser=0 Rpar={R2}
+C1[4] A[4] B[4] {C1} Rser=0 Rpar={R2}
+C1[5] A[5] B[5] {C1} Rser=0 Rpar={R2}
+C1[6] A[6] B[6] {C1} Rser=0 Rpar={R2}
+C1[7] A[7] B[7] {C1} Rser=0 Rpar={R2}
+C1[8] A[8] B[8] {C1} Rser=0 Rpar={R2}
+C1[9] A[9] B[9] {C1} Rser=0 Rpar={R2}
+L2[1] B[0] B[1] {Lmag/10} Rser={R1} Rpar={Rpar}
+L2[2] B[1] B[2] {Lmag/10} Rser={R1} Rpar={Rpar}
+L2[3] B[2] B[3] {Lmag/10} Rser={R1} Rpar={Rpar}
+L2[4] B[3] B[4] {Lmag/10} Rser={R1} Rpar={Rpar}
+L2[5] B[4] B[5] {Lmag/10} Rser={R1} Rpar={Rpar}
+L2[6] B[5] B[6] {Lmag/10} Rser={R1} Rpar={Rpar}
+L2[7] B[6] B[7] {Lmag/10} Rser={R1} Rpar={Rpar}
+L2[8] B[7] B[8] {Lmag/10} Rser={R1} Rpar={Rpar}
+L2[9] B[8] B[9] {Lmag/10} Rser={R1} Rpar={Rpar}
+C2 A[0] B[0] {C1/2} Rser=0 Rpar={R2*2}
+L1 A[9] 3 {Lmag/10} Rser={R1} Rpar={Rpar}
+L2 B[9] 4 {Lmag/10} Rser={R1} Rpar={Rpar}
+C1 3 4 {C1/2} Rser=0 Rpar={R2*2}
+K1 L1[1] L2[1] {kx}
+K12 L1 L2 {kx}
+K2 L1[2] L2[2] {kx}
+K3 L1[3] L2[3] {kx}
+K4 L1[4] L2[4] {kx}
+K5 L1[5] L2[5] {kx}
+K6 L1[6] L2[6] {kx}
+K7 L1[7] L2[7] {kx}
+K8 L1[8] L2[8] {kx}
+K9 L1[9] L2[9] {kx}
+.ends balun

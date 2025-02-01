@@ -1,0 +1,24 @@
+Version 4
+SymbolType CELL
+LINE Normal 32 96 32 32
+LINE Normal 64 64 32 64
+LINE Normal -32 48 -48 48
+LINE Normal -32 80 -48 80
+LINE Normal 32 32 -32 32
+LINE Normal -32 96 32 96
+LINE Normal -32 32 -32 96
+CIRCLE Normal 39 57 26 70
+TEXT 1 48 Center 2 &
+SYMATTR Prefix X
+SYMATTR SpiceModel VDD VSS
+SYMATTR ModelFile SN7400.txt
+SYMATTR Value K155LA3_
+PIN -48 48 NONE 0
+PINATTR PinName A
+PINATTR SpiceOrder 1
+PIN -48 80 NONE 0
+PINATTR PinName B
+PINATTR SpiceOrder 2
+PIN 64 64 NONE 0
+PINATTR PinName Y
+PINATTR SpiceOrder 3

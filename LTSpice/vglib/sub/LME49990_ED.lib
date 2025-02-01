@@ -1,0 +1,68 @@
+;************************************************************************
+; Operational amplifier-simple opamp model with 2 pole compensation,
+; slew rate limit, output stage harmonics, power supply clipping,
+; voltage and current noise
+; To be used with LME49990_ED.asy symbol
+; based on http://www.ecircuitcenter.com/OpModels/OpampModels.htm
+; Developed by Eugene Dvoskin
+;**************************************************************************
+*Pin functions:
+*       IN_PLUS - positive input (in)
+*       IN_MINUS - negative input (in)
+*       VP: positive supply voltage, clip limit
+*       VN: negative supply voltage, clip limit
+*       OUT - output voltage (out)
+********************************************************
+* Parameters:
+*       GAIN: differential gain   *  GBW: Gain bandwidth
+*       Fo: unity gain frequency, approx. adjusted to include second pole
+*       F45: frequency of 45 degree phase margin, second pole
+*       SLEW_v_mks: Slew rate, V/mkS
+*       R_OUT: output impedance  *  R_IN: input impedance
+*       Hn -harmonics, n range 2-5, H2=1e-2 means 1% of second harmonic
+*       Aout - output amplitude for normalisation of Harmonics
+*       Do not set Hn more than 1e-2 or compensate for Gain change
+*       SVn - voltage noise spectral density, V/sqrt(Hz)
+*		SIn - current noise spectral density, I/sqrt(Hz)
+* Internal components:
+*       R1p and C1p: RC to make 1 pole compensation,
+*       R2p and C2p: RC to add second pole
+********************************************************
+.SUBCKT LME49990_ED IN_PLUS IN_MINUS VP VN OUT
++ PARAMS: GAIN=1meg GBW=100MEG F45=100MEG SLEW_v_mks=20 R_OUT=5 R_IN=100MEG
++ H2=1e-12 H3=1e-12 H4=1e-12 H5=1e-12 Aout=10
++ SVn=1e-9 SIn=2.8e-12
+.param I_slew=0.01  ; to set some current for slew limit
+.param Fo={{GBW}*sqrt(1+{GBW}/{F45})}
+.param F1p={{Fo}/{GAIN}}
+.param C1p={1e-6*{I_slew}/{SLEW_v_mks}}
+.param R1p={1/(2*pi*{C1p}*{F1p})}
+.param R2p=1
+.param C2p={1/(2*pi*{R2p}*{F45})}
+.param Rsvn=(SVn/1.287e-10)*(SVn/1.287e-10) ; for voltage noise generation, considering 1 Ohm ~1.287e-10 v/sqrt(Hz)
+.param Rsin=(SIn/1.287e-10)*(SIn/1.287e-10)  ; for current noise generation
+****************************************
+R_IN IN_PLUS IN_MINUS {R_IN}
+**** Noise  ***************************
+Rsin Inp 0 {Rsin}
+Gnoise IN_PLUS IN_MINUS Inp 0 1
+Rsvn Vnp 0 {Rsvn}
+Enoise IN_PLUS IN_P Vnp 0 1
+**** 1-st Pole ************************
+C1p 1 0 {C1p}
+R1p 1 0 {R1p} noiseless
+G_GAIN 0 1 value={{I_slew}*tanh(V(IN_P,IN_MINUS)*{GAIN}/({I_slew}*{R1p}))}
+**** 2-nd Pole ************************
+C2p 2 0 {C2p}
+R2p 2 0 {R2p} noiseless
+G_2p 0 2 value={V(1)/{R2p}}
+**** Harmonics ************************
+B_norm 4 0 V=V(2)/Aout  ; Normalisation
+  ** Chebishev orthogonal poly & Denormalisation
+B_THD 5 0 V=Aout*(H2*(2*V(4)**2-1)+H3*(4*V(4)**3-3*V(4))+H4*(8*V(4)**4-8*V(4)**2+1)+H5*(16*V(4)**5-20*V(4)**3+5*V(4)))
+**** Clipping *************************
+B_SUM 6 0 V=V(2)+V(5)
+B_CLIP 3 0 V=If(V(6) < V(VN), V(VN),(If(V(6)> V(VP), V(VP), V(6))))
+**** OUT ******************************
+R_OUT 3 OUT {R_OUT}
+.ENDS

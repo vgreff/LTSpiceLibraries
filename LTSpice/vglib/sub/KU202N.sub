@@ -1,0 +1,16 @@
+*400V 10A 
+.SUBCKT KU202N 1 2 3 it=300mA
+*    TERMINALS:  A G K
+QP  6 4 1  POUT OFF
+QN  4 6 5  NOUT OFF
+RF  6 4    150MEG
+RR  1 4    100MEG
+RGK 6 5   {0.6/it}
+RG  2 6     15
+RK  3 5    0.15
+Dcb 6 4 dz 
+.model dz d Vfwd=3 Ron=1 Roff=1G  Rrev=100m Vrev=420 Revepsilon=1
+.MODEL POUT PNP (IS=10P BF=1 CJE=1.07N TF=3U BVbe=420 Ibvbe=1m)
+.MODEL NOUT NPN (IS=10P BF=100 RC=0.533 CJE=1N CJC=7.5N TF=0.2U
++ BVbe=10 Ibvbe=1m VAF=100)
+.ENDS KU202N

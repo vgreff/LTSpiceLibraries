@@ -1,0 +1,37 @@
+.subckt lm393_ab  in- in+  VCC VSS OUT
+Q1 VSS in- 1 0 Pv
+Q2 VSS in+ 2 0 Pv
+Q3 4 1 3 0 Ph
+Q4 5 2 3 0 Ph
+Q5 5 4 VSS 0 N1 0.1
+Q6 4 4 VSS 0 N1 0.1
+Q8 OUT 7 VSS 0 N1
+I3 VCC 7 TBL(0 0 0.4 100u 100V 110u)
+I5 VCC P001 TBL(0 0 0.4 3.5u 100V 3.6u)
+I6 VCC N001 TBL(0 0 0.4 3.5u 100V 3.6u)
+D2 P001 1 Di
+Q7 7 5 VSS 0 N1 0.1
+D1 N001 2 Di
+D3 VSS OUT Di
+D4 in- 1 Di
+D5 in+ 2 Di
+I1 VCC 3 TBL(0 0 0.4 100u 100V 110u)
+C1 1 VSS 0.1p
+C2 2 VSS 0.1p
+C3 3 VCC 0.05p
+C4 4 VSS 0.05p
+C5 5 VSS 0.05p
+C6 6 VCC 0.05p
+C7 7 VSS 2p
+*
+*Cout out VSS 1p
+Cin- in- Vss 1.p
+Cin+ in+ Vss 1.p
+.MODEL N1 NPN IS=1e-16 BF=500  TF=.5n cjs=2p rb=500
++TR=50NS CJE=0.3PF CJC=0.3PF VAF=100  Br=10 ikf=20m )
+.MODEL Pv PNP IS=1e-17 BF=500 RB=200 TF=1NS
++ TR=200NS CJE=100f CJC=.1PF VAF=50 br=5
+.MODEL Ph LPNP IS=1e-17 BF=100 RB=300 TF=3NS br=10
++ TR=200NS CJE=100f CJC=100F VAF=50 ikf=1m  cjs=2p
+.model di d Vfwd=0.6 ron=10
+.ends lm393_ab

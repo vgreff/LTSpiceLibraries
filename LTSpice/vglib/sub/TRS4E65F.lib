@@ -1,0 +1,42 @@
+*  TNOM                 :25 degree
+*  Pin Assign           :1=Anode 2=Cathode
+
+.SUBCKT TRS4E65F 1 2
+D1 11 2 TRS4E65F
+J1 1 11 11 j1
+R1 11 2 0.5E+11
+C1 1 2 5p
+D2 1 2 PDIODE1
+.MODEL TRS4E65F D (
++ IS = 8.5368e-014
++ N = 1.2844
++ RS = 0.097489
++ BV = 650
++ IBV = 1E-10
++ CJO = 1.8021e-010
++ M = 0.48144
++ VJ = 1.4786
++ TT = 0
++ TNOM = 25
++ XTI = 9.771 )
+.MODEL j1 NJF (
++ VTO = -54.4275
++ IS = 1E-14 
++ BETA = 0.45663
++ LAMBDA = 11.584
++ VTOTC = 0.35706
++ TNOM = 25
++ XTI = 3 )
+.MODEL PDIODE1 D (
++ IS = 1e-014
++ N = 5.6
++ RS = 0.1
++ BV = 650
++ IBV = 1E-10
++ CJO = 1f
++ M = 0.5
++ VJ = 1
++ TT = 0
++ TNOM = 25
++ XTI = 170.3435 )
+.ENDS

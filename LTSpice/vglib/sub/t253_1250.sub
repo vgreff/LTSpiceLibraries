@@ -1,0 +1,10 @@
+.subckt T253_1250  A G C   BV=1800
+Q1 bn bp A  P off
+Q2 bp bn C  N off
+R1 bn C 2.5 tc1=500u tc2=-33u
+R2 bn G 10 tc1=500u tc2=-33u
+R3 bn bp 100k
+.model P pnp (is=10p  ise=100n ne=2 bf=3 br=3 cje=8n tf=2.u bvbe={BV} ibvbe=.1m re=0.15m Tre1=20m  rc=90u xtb=1.5)
+.model N npn (is=10p  bf=50 bf=10 rc=0.533 cje=1n cjc=1.8n cje=10n  tf=0.15u rc=90u
++ tr=37u  bvbe=10 ibvbe=1m vaf=1000  BVcbo={BV} nBVcbo=5 xtb=1.5 )
+.ends T253_1250

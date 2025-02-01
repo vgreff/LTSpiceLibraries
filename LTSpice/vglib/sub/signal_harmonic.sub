@@ -1,0 +1,12 @@
+* signal_harmonic
+* Created by Alexander Bordodynov
+* 1 June 2022.
+
+*The Fourier transform block
+.subckt signal_harmonic vt a1 p1 f=1kHz
+.func FF(x,T)  {x-delay(x,T)}
+B1 0 isin i=FF(2*f*idt(V(vt)*sin(2*pi*f*time)),1/F) Rpar=1 Cpar={1u/F} tripdt={1u/F}
+B3 0 icos i=FF(2*f*idt(V(vt)*cos(2*pi*f*time)),1/F) Rpar=1 Cpar={1u/F} tripdt={1u/F}
+B5 0 a1 i=hypot(V(isin),V(icos)) Rpar=1 Cpar={10m/F}
+B6 0 p1 i=atan2(V(icos),V(isin))  Rpar=1 Cpar={10m/F}
+.ends signal_harmonic

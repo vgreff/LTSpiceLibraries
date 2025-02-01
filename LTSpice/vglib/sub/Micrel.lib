@@ -1,0 +1,518 @@
+
+
+.subckt MIC4420 4  3   9   2 
+*               In Out Vcc Gnd
+Rin 4 Vind 2k
+C1 4 2 6P
+D2 2 Vind DN 
+D3 4 9 DN 
+RT 4 2 10MEG
+
+Vsctl 13 0   5
+XSctl 13 VindH Vind 2 SWhyste PARAMS: VT=1.25 VH=.15 RON=1 ROFF=1G
+Rsctl VindH 2 1MEG
+
+
+
+I2 9 2   80u Load
+R2 9 2 750k
+I1 9 8   330U Load
+R4 9 8 175k
+D4 8 9 DN 
+cpara 8 2 100f
+.MODEL DN D Vfwd=0.6 Ron=10m epsilon=100m Roff=1g
+BLin 12 2 V=IF ( V(VindH) > 2 , 5 , 0 ) 
+Rind 12 10 100 
+Cind 10 11 215p 
+Vinput 11 2
+Bind 10 2 i= IF ( 7.5-V(9) > 0 , 0.33*I(Vinput)*(7.5-V(9)) , 0 ) 
+XSinput 8 6 10 2 SWhyste PARAMS: VT=1.45 VH=.65 RON=1 ROFF=1G
+Rinput 6 2 6k
+
+XA1 VindH 16 ONESHOTA1 PARAMS: DELAY=473n
+
+Bout 7 3 V=IF ( V(8,2) < 0.5*V(9,2) , V(9,2) , IF ( V(16) > 0.5 , V(9,2) , -V(9,2) ))
+Rout 1 7 100 
+bVS 99 0 V=IF ( V(9)**2/5.625 < 1 , 1 , V(9)**2/5.625 )
+XCout 99 0 98     1 2 yx
+*     Ctl  Ref Cap+ -
+Cref 98 0 1p  
+
+C2 3 2 50p
+
+M4 9 1 3 3 _M4_mod L=1U W=1.84U 
+M5 2 1 3 3 _M5_mod L=1U W=3.366U 
+.MODEL _M5_mod PMOS KP=50m RD=1 VTO=-2.3
+.MODEL _M4_mod NMOS KP=60m RD=1.6 VTO=1.5
+.ENDS
+*$
+.subckt MIC4429 4  3   9   2 
+*               In Out Vcc Gnd
+Rin 4 Vind 2k
+C1 4 2 6P
+D2 2 Vind DN 
+D3 4 9 DN 
+RT 4 2 10MEG
+
+Vsctl 13 0   5
+XSctl 13 VindH Vind 2 SWhyste PARAMS: VT=1.25 VH=.15 RON=1 ROFF=1G
+Rsctl VindH 2 1MEG
+
+I2 9 2   80u Load
+R2 9 2 750k
+I1 9 8   330U
+R4 9 8 175k
+D4 8 9 DN 
+cpara 8 2 100f
+.MODEL DN D Vfwd=0.6 Ron=10m epsilon=100m Roff=1g
+EBLin 12 2 Value={ IF ( V(VindH) > 2 , 5 , 0 ) } 
+Rind 12 10 100 
+Cind 10 11 215p 
+Vinput 11 2
+Bind 10 2 i=IF ( 7.5-V(9) > 0 , 0.33*I(Vinput)*(7.5-V(9)) , 0 )
+XSinput 8 6 10 2 SWhyste PARAMS: VT=1.45 VH=.65 RON=1 ROFF=1G
+Rinput 6 2 6k
+
+XA1 VindH 16 ONESHOTA1 PARAMS: DELAY=510n
+
+EBout 7 3 Value={ IF ( V(8,2) < 0.5*V(9,2) , -V(9,2) , IF ( V(16) > 0.5 , -V(9,2) , V(9,2) )) }
+Rout 1 7 100 
+EVS 99 0 Value={ IF ( V(9)**2/5.625 < 1 , 1 , V(9)**2/5.625 ) }
+XCout 99 0 98     1 2 yx
+*     Ctl  Ref Cap+ -
+Cref 98 0 1p  
+C2 3 2 50p
+M4 9 1 3 3 _M4_mod L=1U W=1.84U 
+M5 2 1 3 3 _M5_mod L=1U W=3.366U 
+.MODEL _M5_mod PMOS KP=50m RD=1 VTO=-2.3
+.MODEL _M4_mod NMOS KP=60m RD=1.6 VTO=1.5
+.ENDS
+*$
+.subckt MIC4421 4  3   9   2 
+*               In Out Vcc Gnd
+Rin 4 Vind 2k
+C1 4 2 6P
+D2 2 Vind DN 
+D3 4 9 DN 
+RT 4 2 10MEG
+
+Vsctl 13 0   5
+XSctl 13 VindH Vind 2 SWhyste PARAMS: VT=1.2 VH=.1 RON=1 ROFF=1G
+Rsctl VindH 2 1MEG
+
+I2 9 2   50u Load
+R2 9 2 600k
+I1 9 8   215U Load
+R4 9 8 150k
+D4 8 9 DN 
+cpara 8 2 1000f
+.MODEL DN D Vfwd=0.6 Ron=10m epsilon=100m Roff=1g
+BLin 2 12 i=IF ( V(VindH) > 2 , 5 , 0 ) Rpar=1 cpar=1n 
+Rind 12 10 100 
+Cind 10 11 85p 
+Vinput 11 2
+Bind 10 2 i=IF ( 13.25-V(9) > 0 , 0.3*I(Vinput)*(13.25-V(9)) , 0 ) rpar=1 cpar=10n
+XSinput 8 6 10 2 SWhyste PARAMS: VT=1.9 VH=.65 RON=1 ROFF=1G
+Rinput 6 2 6k
+
+XA1 VindH 16 ONESHOTA1 PARAMS: DELAY=510n
+
+Bout 7 3 V= IF ( V(8,2) < 0.5*V(9,2) , -V(9,2) , IF ( V(16) > 0.5 , -V(9,2) , V(9,2) )) 
+Rout 1 7 550 
+
+BVS 0 99 i=IF ( V(9)-4 < 1 , 1 , V(9)-4 ) rpar=1 cpar=100n ic=2
+XCout 99 0 98     1 2 yx
+*     Ctl  Ref Cap+ -
+Cref 98 0 1p  
+C2 3 2 1000p
+M4 9 1 3 3 _M4_mod L=1U W=9.88U 
+M5 2 1 3 3 _M5_mod L=1U W=7.296U 
+.MODEL _M5_mod PMOS KP=67m RD=.655 VTO=-1.838
+.MODEL _M4_mod NMOS KP=35m RD=.428 VTO=1.283
+.ENDS
+*$
+.subckt MIC4422 4  3   9   2 
+*               In Out Vcc Gnd
+Rin 4 Vind 2k
+C1 4 2 6P
+D2 2 Vind DN 
+D3 4 9 DN 
+RT 4 2 10MEG
+
+Vsctl 13 0   5
+XSctl 13 VindH Vind 2 SWhyste PARAMS: VT=1.2 VH=.1 RON=1 ROFF=1G
+Rsctl VindH 2 1MEG
+
+I2 9 2   50u Load
+R2 9 2 600k
+I1 9 8   215U 
+R4 9 8 150k
+D4 8 9 DN 
+cpara 8 2 100f
+.MODEL DN D Vfwd=0.6 Ron=10m epsilon=100m Roff=1g
+EBLin 12 2 Value={ IF ( V(VindH) > 2 , 5 , 0 ) } 
+Rind 12 10 100 
+Cind 10 11 85p 
+Vinput 11 2
+GBind 10 2 Value={ IF ( 13.25-V(9) > 0 , 0.3*I(Vinput)*(13.25-V(9)) , 0 ) }
+XSinput 8 6 10 2 SWhyste PARAMS: VT=1.9 VH=.65 RON=1 ROFF=1G
+Rinput 6 2 6k
+
+XA1 VindH 16 ONESHOTA1 PARAMS: DELAY=473n
+
+EBout 7 3 Value={ IF ( V(8,2) < 0.5*V(9,2) , V(9,2) , IF ( V(16) > 0.5 , V(9,2) , -V(9,2) )) }
+Rout 1 7 550 
+
+EVS 99 0 Value={ IF ( V(9)-4 < 1 , 1 , V(9)-4 ) }
+XCout 99 0 98     1 2 yx
+*     Ctl  Ref Cap+ -
+Cref 98 0 1p  
+C2 3 2 1000p
+M4 9 1 3 3 _M4_mod L=1U W=9.88U 
+M5 2 1 3 3 _M5_mod L=1U W=7.296U 
+.MODEL _M5_mod PMOS KP=67m RD=.655 VTO=-1.838
+.MODEL _M4_mod NMOS KP=35m RD=.428 VTO=1.283
+.ENDS
+*$
+.subckt MIC4421A 4  3   9   2 
+*               In Out Vcc Gnd
+Rin 4 Vind 2k
+C1 4 2 6P
+D2 2 Vind DN 
+D3 4 9 DN 
+RT 4 2 10MEG
+
+Vsctl 13 0   5
+XSctl 13 VindH Vind 2 SWhyste PARAMS: VT=1.8 VH=.3 RON=1 ROFF=1G
+Rsctl VindH 2 1MEG
+
+I2 9 2   22u Load
+R2 9 2 600k
+I1 9 8   350U
+R4 9 8 150k
+D4 8 9 DN 
+cpara 8 2 100f
+.MODEL DN D Vfwd=0.6 Ron=10m epsilon=100m Roff=1g
+EBLin 12 2 Value={ IF ( V(VindH) > 2 , 5 , 0 ) } 
+Rind 12 10 100 
+Cind 10 11 85p 
+Vinput 11 2
+GBind 10 2 Value={ IF ( 13.25-V(9) > 0 , 0.3*I(Vinput)*(13.25-V(9)) , 0 ) }
+XSinput 8 6 10 2 SWhyste PARAMS: VT=1.9 VH=.65 RON=1 ROFF=1G
+Rinput 6 2 6k
+
+XA1 VindH 16 ONESHOTA1 PARAMS: DELAY=25n
+
+EBout 7 3 Value={ IF ( V(8,2) < 0.5*V(9,2) , -V(9,2) , IF ( V(16) > 0.5 , -V(9,2) , V(9,2) )) }
+Rout 1 7 550 
+
+EVS 99 0 Value={ IF ( V(9)-4 < 1 , 1 , V(9)-4 ) }
+XCout 99 0 98     1 2 yx
+*     Ctl  Ref Cap+ -
+Cref 98 0 1p  
+C2 3 2 1000p
+M4 9 1 3 3 _M4_mod L=1U W=9.88U 
+M5 2 1 3 3 _M5_mod L=1U W=7.296U 
+.MODEL _M5_mod PMOS KP=67m RD=.655 VTO=-1.838
+.MODEL _M4_mod NMOS KP=35m RD=.428 VTO=1.283
+.ENDS
+*$
+.subckt MIC4422A 4  3   9   2 
+*               In Out Vcc Gnd
+Rin 4 Vind 2k
+C1 4 2 6P
+D2 2 Vind DN 
+D3 4 9 DN 
+RT 4 2 10MEG
+
+Vsctl 13 0   5
+XSctl 13 VindH Vind 2 SWhyste PARAMS: VT=1.8 VH=.3 RON=1 ROFF=1G
+Rsctl VindH 2 1MEG
+
+I2 9 2   22u Load
+R2 9 2 600k
+I1 9 8   350U
+R4 9 8 150k
+D4 8 9 DN 
+cpara 8 2 100f
+.MODEL DN D Vfwd=0.6 Ron=10m epsilon=100m Roff=1g
+EBLin 12 2 Value={ IF ( V(VindH) > 2 , 5 , 0 ) } 
+Rind 12 10 100 
+Cind 10 11 85p 
+Vinput 11 2
+GBind 10 2 Value={ IF ( 13.25-V(9) > 0 , 0.3*I(Vinput)*(13.25-V(9)) , 0 ) }
+XSinput 8 6 10 2 SWhyste PARAMS: VT=1.9 VH=.65 RON=1 ROFF=1G
+Rinput 6 2 6k
+
+XA1 VindH 16 ONESHOTA1 PARAMS: DELAY=46n
+
+EBout 7 3 Value={ IF ( V(8,2) < 0.5*V(9,2) , V(9,2) , IF ( V(16) > 0.5 , V(9,2) , -V(9,2) )) }
+Rout 1 7 550 
+
+EVS 99 0 Value={ IF ( V(9)-4 < 1 , 1 , V(9)-4 ) }
+XCout 99 0 98     1 2 yx
+*     Ctl  Ref Cap+ -
+Cref 98 0 1p  
+C2 3 2 1000p
+M4 9 1 3 3 _M4_mod L=1U W=9.88U 
+M5 2 1 3 3 _M5_mod L=1U W=7.296U 
+.MODEL _M5_mod PMOS KP=67m RD=.655 VTO=-1.838
+.MODEL _M4_mod NMOS KP=35m RD=.428 VTO=1.283
+.ENDS
+*$
+.subckt MIC4423 4  3   9   2 
+*               In Out Vcc Gnd
+Rin 4 Vind 2k
+C1 4 2 6P
+D2 2 Vind DN 
+D3 4 9 DN 
+RT 4 2 10MEG
+
+Vsctl 13 0   5
+XSctl 13 VindH Vind 2 SWhyste PARAMS: VT=2.3 VH=.1 RON=1 ROFF=1G
+Rsctl VindH 2 1MEG
+
+I2 9 2   44u Load
+R2 9 2 560k 
+I1 9 8   510U  
+R4 9 8 88k 
+D4 8 9 DN 
+cpara 8 2 100f
+.MODEL DN D Vfwd=0.6 Ron=10m epsilon=100m Roff=1g
+EBLin 12 2 Value={ IF ( V(VindH) > 2 , 5 , 0 ) } 
+Rind 12 10 100 
+Cind 10 11 55p 
+Vinput 11 2
+GBind 10 2 Value={ IF ( 16-V(9) > 0 , 0.3*I(Vinput)*(16-V(9)) , 0 ) }
+XSinput 8 6 10 2 SWhyste PARAMS: VT=1.9 VH=.65 RON=1 ROFF=1G
+Rinput 6 2 3k
+
+XA1 VindH 16 ONESHOTA1 PARAMS: DELAY=510n
+
+EBout 7 3 Value={ IF ( V(8,2) < 0.5*V(9,2) , -V(9,2) , IF ( V(16) > 0.5 , -V(9,2) , V(9,2) )) }
+Rout 1 7 650 
+EVS 99 0 Value={ IF ( (V(9)+4) < 1 , 1 , (V(9)+4) ) }
+XCout 99 0 98     1 2 yx
+*     Ctl  Ref Cap+ -
+Cref 98 0 1p  
+
+C2 3 2 1000p
+M4 9 1 3 3 _M4_mod L=1U W=1.46U
+M5 2 1 3 3 _M5_mod L=1U W=2.685U
+.MODEL _M5_mod PMOS KP=60m RD=2.43 VTO=-1.043
+.MODEL _M4_mod NMOS KP=58m RD=1.487 VTO=0.977
+.ENDS 
+*$
+.subckt MIC4424 4  3   9   2 
+*               In Out Vcc Gnd
+Rin 4 Vind 2k
+C1 4 2 6P
+D2 2 Vind DN 
+D3 4 9 DN 
+RT 4 2 10MEG
+
+Vsctl 13 0   5
+XSctl 13 VindH Vind 2 SWhyste PARAMS: VT=2.3 VH=.1 RON=1 ROFF=1G
+Rsctl VindH 2 1MEG
+
+I2 9 2   44u Load
+R2 9 2 560k 
+I1 9 8   510U 
+R4 9 8 88k 
+D4 8 9 DN 
+cpara 8 2 100f
+.MODEL DN D Vfwd=0.6 Ron=10m epsilon=100m Roff=1g
+EBLin 12 2 Value={ IF ( V(VindH) > 2 , 5 , 0 ) } 
+Rind 12 10 100 
+Cind 10 11 55p 
+Vinput 11 2
+GBind 10 2 Value={ IF ( 16-V(9) > 0 , 0.3*I(Vinput)*(16-V(9)) , 0 ) }
+XSinput 8 6 10 2 SWhyste PARAMS: VT=1.9 VH=.65 RON=1 ROFF=1G
+Rinput 6 2 3k
+
+XA1 VindH 16 ONESHOTA1 PARAMS: DELAY=473n
+
+EBout 7 3 Value={ IF ( V(8,2) < 0.5*V(9,2) , V(9,2) , IF ( V(16) > 0.5 , V(9,2) , -V(9,2) )) }
+Rout 1 7 650 
+EVS 99 0 Value={ IF ( (V(9)+4) < 1 , 1 , (V(9)+4) ) }
+XCout 99 0 98     1 2 yx
+*     Ctl  Ref Cap+ -
+Cref 98 0 1p  
+
+C2 3 2 1000p
+M4 9 1 3 3 _M4_mod L=1U W=1.46U
+M5 2 1 3 3 _M5_mod L=1U W=2.685U
+.MODEL _M5_mod PMOS KP=60m RD=2.43 VTO=-1.043
+.MODEL _M4_mod NMOS KP=58m RD=1.487 VTO=0.977
+.ENDS
+*$
+.subckt MIC4451 4  3   9   2 
+*               In Out Vcc Gnd
+Rin 4 Vind 2k
+C1 4 2 6P
+D2 2 Vind DN 
+D3 4 9 DN 
+RT 4 2 10MEG
+
+Vsctl 13 0   5
+XSctl 13 VindH Vind 2 SWhyste PARAMS: VT=1.2 VH=.1 RON=1 ROFF=1G
+Rsctl VindH 2 1MEG
+
+I2 9 2   50u Load
+R2 9 2 600k 
+I1 9 8   215U 
+R4 9 8 150k 
+D4 8 9 DN 
+cpara 8 2 100f
+.MODEL DN D Vfwd=0.6 Ron=10m epsilon=100m Roff=1g
+EBLin 12 2 Value={ IF ( V(VindH) > 2 , 5 , 0 ) } 
+Rind 12 10 100 
+Cind 10 11 85p 
+Vinput 11 2
+GBind 10 2 Value={ IF ( 12-V(9) > 0 , 0.3*I(Vinput)*(12-V(9)) , 0 ) }
+XSinput 8 6 10 2 SWhyste PARAMS: VT=1.9 VH=.65 RON=1 ROFF=1G
+Rinput 6 2 6k
+
+XA1 VindH 16 ONESHOTA1 PARAMS: DELAY=510n
+
+EBout 7 3 Value={ IF ( V(8,2) < 0.5*V(9,2) , -V(9,2) , IF ( V(16) > 0.5 , -V(9,2) , V(9,2) )) }
+Rout 1 7 500 
+
+EVS 99 0 Value={ IF ( V(9)-4 < 1 , 1 , V(9)-4 ) }
+XCout 99 0 98     1 2 yx
+*     Ctl  Ref Cap+ -
+Cref 98 0 1p  
+
+C2 3 2 1500p
+MHS 9 1 3 3 _MHS_mod L=1U W=3.45u 
+MLS 2 1 3 3 _MLS_mod L=1U W=4.352u  
+.MODEL _MLS_mod PMOS KP=0.077 VTO=-1.3 RD=.565
+.MODEL _MHS_mod NMOS KP=.074 VTO=.015 RD=.372
+.ENDS
+*$
+.subckt MIC4452 4  3   9   2 
+*               In Out Vcc Gnd
+Rin 4 Vind 2k
+C1 4 2 6P
+D2 2 Vind DN 
+D3 4 9 DN 
+RT 4 2 10MEG
+
+Vsctl 13 0   5
+XSctl 13 VindH Vind 2 SWhyste PARAMS: VT=1.2 VH=.1 RON=1 ROFF=1G
+Rsctl VindH 2 1MEG
+
+I2 9 2   50u Load
+R2 9 2 600k 
+I1 9 8   215U
+R4 9 8 150k 
+D4 8 9 DN 
+cpara 8 2 100f
+.MODEL DN D Vfwd=0.6 Ron=10m epsilon=100m Roff=1g
+EBLin 12 2 Value={ IF ( V(VindH) > 2 , 5 , 0 ) } 
+Rind 12 10 100 
+Cind 10 11 85p 
+Vinput 11 2
+GBind 10 2 Value={ IF ( 12-V(9) > 0 , 0.3*I(Vinput)*(12-V(9)) , 0 ) }
+XSinput 8 6 10 2 SWhyste PARAMS: VT=1.9 VH=.65 RON=1 ROFF=1G
+Rinput 6 2 6k
+
+XA1 VindH 16 ONESHOTA1 PARAMS: DELAY=473n
+
+EBout 7 3 Value={ IF ( V(8,2) < 0.5*V(9,2) , V(9,2) , IF ( V(16) > 0.5 , V(9,2) , -V(9,2) )) }
+Rout 1 7 500 
+
+EVS 99 0 Value={ IF ( V(9)-4 < 1 , 1 , V(9)-4 ) }
+XCout 99 0 98     1 2 yx
+*     Ctl  Ref Cap+ -
+Cref 98 0 1p  
+
+C2 3 2 1500p
+MHS 9 1 3 3 _MHS_mod L=1U W=3.45u 
+MLS 2 1 3 3 _MLS_mod L=1U W=4.352u  
+.MODEL _MLS_mod PMOS KP=0.077 VTO=-1.3 RD=.565
+.MODEL _MHS_mod NMOS KP=.074 VTO=.015 RD=.372
+.ENDS
+*$
+* Variable admittance: Yout = Yref * V
+*           control input: voltage
+*           |  reference capacitor/conductance (connect other lead to ground)
+*          / \ |  output: floating admittance
+*          + - | / \
+.subckt yx 1 2 3 4 5
+  ecopy  3 6 poly(2) (1,2) (4,5) 0 0 0 0 1
+  fout   4 5 vsense 1
+  rin    1 2 1G
+  vsense 0 6 0
+.ends
+*$
+.subckt SWhyste NodeMinus NodePlus Plus Minus PARAMS: RON=1 ROFF=100MEG VT=1.5 VH=.5
+S5 NodePlus NodeMinus plus  minus  SW
+.model SW sw (RON={RON} ROFF={ROFF} Vt={vt} Vt={vt})
+.ends SWhyste
+*$
+.SUBCKT ONESHOTA1 In Out PARAMS: DELAY=473n
+R3 1 0 10k
+C3 1 2 10pF
+X2 Out 4 DLOS PARAMS: TD={DELAY}
+X9 4 5 INVOS
+X10 1 6 Out Qbb LATCHOS
+R4 0 6 10k
+C4 7 6 10pF
+X11 5 Out 7 NAND2OS
+X12 In 8 2 AND2OS
+R5 8 Qbb 100
+C5 8 0 100p
+.ENDS
+.SUBCKT DLOS 1 2 PARAMS: TD=473n
+*
+RIN 1 0 1E15
+B 0 2 i=delay(v(1),td) Rpar=1 Cpar=100p
+.ENDS
+.SUBCKT INVOS 1 2
+A1 1 0 0 0 0 2 0 0 BUF Rout=100 Cout=10p REF=0.35 Vhigh=5 td=1n
+.ENDS
+*
+.SUBCKT NAND2OS 1 2 3
+A1 1 2 0 0 0 3 0 0 AND Rout=100 Cout=10p REF=0.35 Vhigh=5 td=1n
+.ENDS
+.SUBCKT AND2OS 1 2 3
+A1 1 2 0 0 0 0 3 0 AND Rout=100 Cout=10p REF=0.35 Vhigh=5 td=1n
+.ENDS
+*$
+.SUBCKT LATCHOS 6 8 2 1
+*             S R Q Q\
+BQB 0 10  i =  IF (      (V(8)<300M) & (V(2)>300M), 0, 5 )  rpar=1 cpar=5n ic=5
+BQ  0 20    i= IF (        (V(6)<300M) & (V(1)>300M), 0, 5 )  rpar=1 cpar=5n
+RD1   10 1 100
+CD1   1 0 10P IC=5
+RD2   20 2 100
+CD2   2 0 10P IC=0
+.ENDS
+.SUBCKT ONESHOTA1 In Out PARAMS: DELAY=473n
+R3 1 0 10k
+C3 1 2 10pF
+X2 Out 4 DLOS PARAMS: TD={DELAY}
+*+++ X9 4 5 INV -> X9 4 5 INVOS
+X9 4 5 INVOS
+X10 1 6 Out Qbb LATCHOS
+R4 0 6 10k
+C4 7 6 10pF
+X11 5 Out 7 NAND2OS
+X12 In 8 2 AND2OS
+R5 8 Qbb 100
+C5 8 0 100p
+.ENDS
+.SUBCKT DLOS 1 2 PARAMS: TD=473n
+*
+RIN 1 0 1E15
+E1 3 0 1 0 1
+T1 3 0 2 0 Z0=1 TD={TD}
+R1 2 0 1
+.ENDS
+.SUBCKT INVOS 1 2
+EB1 4 0 VALUE = { IF ( V(1)>300M, 0, 5V ) }
+RD 4 2 100
+CD 2 0 10P
+.ENDS
+

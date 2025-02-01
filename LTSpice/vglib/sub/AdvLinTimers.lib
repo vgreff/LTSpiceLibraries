@@ -1,0 +1,148 @@
+** Advanced Linear Devices Timer library
+** Devices renamed to clarify manufacturer
+** 0.1p capacitance added to output pin
+** ires_p model added
+**
+** This line marks this library as a system library
+** Models in this library will not appear in the
+** "User Models" or "New Models" categories
+**
+** 19.11.2010 - changed cgso/cgdo to 1e-10 in 1502_x
+**
+**
+* Library of Advanced Linear Devices, Inc. definitions
+*
+* Copyright 2004 Advanced Linear Devices, Inc.
+*   Neither this library nor any part may be copied without the express
+*   written consent of Advanced Linear Devices, Inc.
+*
+* $Revision:  1.3  $
+* $Date:    6 Feb 2004 00:00:00  $
+* -----------------------------------------------------------------------------
+*
+* This library of models and macromodels is being supplied to users as an aid to
+* circuit design. While it reflects reasonably close similarity to the actual device
+* in terms of performance, it is not suggested as a replacement for bread-
+* boarding. Simulation should be used as a forerunner or a supplement to
+* traditional lab testing.
+*
+* Users should very carefully note the following factors regarding these 
+* models:
+* Advanced Linear Devices, Inc.
+* Customer Support Group
+* 415 Tasman Drive
+* Sunnyvale, California. 94089
+* Tel: (408) 747-1155 
+* Fax: (408) 747-1286
+* techsupport@aldinc.com
+* -----------------------------------------------------------------------------
+**
+* TIMER MACROMODEL
+* Advanced Linear Devices.
+*
+*  connections a,s package pins.
+.subckt 555/ALD 1 2 3 4 5 6 7 8
+x1       1  2  3  4  5  6  7  8  B 1502_x
+r1   8   5  ires_p 450K
+r2   5   B  ires_p 450K
+r3   B   1  ires_p 450K
+c1   5   8  4.6p
+c2   B   8  4.6p
+.model ires_p RES R=1
+.ends 555
+*
+* connections  a,s package.
+.subckt 1502/ALD 1 2 3 4 5 6 7 8
+x1       1  2  3  4  5  6  7  8  B 1502_x
+r1   8   5  ires_p 450K
+r2   5   B  ires_p 450K
+r3   B   1  ires_p 450K
+c1   5   8  4.6p
+c2   B   8  4.6p
+.model ires_p RES R=1
+.ends 1502
+*
+* connections a,s package but with an extra node, the trigger bias node.
+.subckt 1502_b/ALD 1 2 3 4 5 6 7 8 B 
+x1       1  2  3  4  5  6  7  8  B 1502_x
+r1   8   5  ires_p 450K
+r2   5   B  ires_p 450K
+r3   B   1  ires_p 450K
+c1   5   8  4.6p
+c2   B   8  4.6p
+.model ires_p RES R=1
+.ends 1502_b
+*
+*
+* 1502_x simplified, (current sources) transistor level model for MACRO. 
+* Advanced Linear Devices
+*
+* connections:   gnd (global common 0 )
+*                |  trigger
+*                |  |  output
+*                |  |  |  reset
+*                |  |  |  |  control
+*                |  |  |  |  |  threshold
+*                |  |  |  |  |  |  discharge
+*                |  |  |  |  |  |  |  vcc supply
+*                |  |  |  |  |  |  |  |  |-bias input
+.subckt  1502_x  1  2  3  4  5  6  7  8  14
+*
+* trigger comparator
+mp1  19   2  13   8 pch w=240u l=9u
+mp2  15  14  13   8 pch w=240u l=9u
+mn3  15  15   1   1 nch w=120u l=11u
+mn4  19  15   1   1 nch w=120u l=11u
+* reset logic
+mn5  19  18   1   1 nch w=80.u l=6u  
+mn6  18   4   1   1 nch w=80.u l=6u
+mn7  20  19   1   1 nch w=80.u l=6u  
+qt9   8  18  20   8 bn
+
+mn8  21  20   1   1 nch w=80.u l=6u 
+mp10 21  20   8   8 pch w=200u l=6u 
+mn11 22  21   1   1 nch w=560u l=6u 
+mp12 22  21   8   8 pch w=1400u l=6u 
+mn13 20  21   1   1 nch w=5.9u  l=30.u 
+mp14 20  21   8   8 pch w=5.9u  l=10u 
+mp15 20  23   8   8 pch w=88u   l=6u  
+*
+* output stage
+mp16  3  22   8   8 pch w=720u l=6u 
+mn17  3  22   1   1 nch w=2800u l=6u 
+mn18  7  22   1   1 nch w=8400u l=6u 
+*
+* threshold comparator
+mn19  23   6  10  10 nch w=240u l=11u 
+mn20   9   5  10  10 nch w=240u l=11u 
+mp21   9   9   8   8 pch w=134u  l=9u 
+mp22  23   9   8   8 pch w=134u  l=9u 
+*
+*bias current
+r18   18   8   100K
+i10   10   1   15u
+i13   13   8   -5u
+* capacitors
+c09    9   1  0.1p
+c10   10   1  0.1p
+c15   15   1  0.1p
+c18   18   1  0.1p
+c19   19   1  0.1p
+c20   20   1  0.08p
+c21   21   1  0.1p
+c22   22   1  0.2p
+c23   23   1  0.12p
+
+Cout 3 1 0.1p
+*
+.model bn npn (bf=100 va=200 cje=4p cjc=5p cjs=5p tf=1.4n
++              tr=200n rb=1000 rc=3000 re=20 ikr=100u is=4e-16)
+*
+** Added by SIMetrix Technologies Ltd - CGDO parameter to help convergence.
+** Value used is much lower than is likely for real device
+.model nch nmos (level=1 VTO=0.6 TOX=.055u UO=600  
++                LAMBDA=.05 GAMMA=1.1 RD=7 RS=7 CGDO=1e-10)
+.model pch pmos (level=1 VTO=-0.7 TOX=.055u UO=260  
++                LAMBDA=.06 GAMMA=.58 RD=14 RS=14 CGDO=1e-10)
+.ends
+*

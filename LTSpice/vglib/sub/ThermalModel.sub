@@ -1,0 +1,10 @@
+.subckt ThermalModel  Tj Ta Tc params:
++ Rth1=0.484 Rth2=1.46 Rth3=1.23
++ Cth1=1.11m Cth2=10.3m Cth3=443m
+C1 Tj Ta {Cth1}
+R1 Tj 1  {Rth1}
+C2 1  Ta {Cth2}
+R2 1 2   {Rth2}
+C3 2  Ta {Cth3}
+R3 2  Tc {Rth3}
+.ends

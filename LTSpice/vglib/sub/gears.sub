@@ -1,0 +1,6 @@
+.subckt gears Win Wout
+XU1 Win 0 P001 Winding_RC Rser=1m Cpar=1p N=1
+XU2 Wout 0 P001 Winding_RC Rser=1m Cpar=1p N={Gear_ratio}
+.param Gear_ratio=1
+.ends gears
+.lib Transformers.lib

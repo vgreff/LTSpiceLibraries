@@ -1,0 +1,487 @@
+* LM25118*
+** Released by: WEBENCH Design Center, Texas Instruments Inc.
+* Part: LM25118
+* Date: 14 MAR 2014
+* Model Type: Transient
+* Simulator Version: 16.2.0.s003
+* EVM Order Number: AN-2205
+* EVM Users Guide: SNVA614 19 Jan 2012
+* Datasheet: SNVS726A 28 Nov 2011
+*
+* Model Version: Final 1.20
+*
+*****************************************************************************
+*
+* Updates:
+*
+* Final 1.20
+* Updated for Current limit Equation
+*
+* Final 1.10
+* Updated for Current limit thresholds
+*
+* Final 1.00
+* Release to Web.
+*
+*****************************************************************************
+.SUBCKT LM25118  VIN UVLO RT EN RAMP AGND SS FB COMP VOUT Sync PGND CSG
++ CS LO HB HO HS VCC VCCX
+Cs Sync gnd 10p rpar=100k ic=0
+Cz1 GND AGND 10u rpar=10u ic=0
+Cz2 GND PGND 10u rpar=10u ic=0
+E_LDO LDOctl GND VALUE = {50 - V(REGctl)}
+Rtst tst GND 1K
+RL_ECS CSo GND 10K
+DB VCC HB _D1_mod
+.MODEL _D1_mod D IS=100nA N=1
+E_D2AA3 tst_int 0 VALUE={IF( V(enable)< 2.5,0,5)}
+R_D2AA3 tst_int tst 1
+C_D2AA3 tst 0 0.2n
+Eboostmode boostmode GND VALUE={IF(V(Vout)>V(Vin)*0.75,5,0)}
+E_A2DA4 enable_init 0 VALUE={IF(V(Vstart)<1.75,0.3,3.5)}
+R_A2DA4 enable_init enable 1
+C_A2DA4 enable 0 0.2n
+S_VccOK VccTST VIN VCC GND _S3_mod
+.MODEL _S3_mod vswitch von=3.7 voff=3.5 RON=10m
+V_FBoffs SSclmp FB DC=150mV
+XA15 bstCLKinv Lorst2 bstminTon rstloQ AND3_BASIC_GEN
+G_Isaw GND sawtooth VALUE = {IF(V(tst)< 3,0,IF(V(sawCTL)<2.5,
++ I(Vrt_sense)/(V(RT) + 3020*I(Vrt_sense)),(-V(sawtooth)/100)))}
+XA_loqset setloQ loQ loQN NOR2_BASIC_GEN
+E_PWM_COMP endTonA GND EmulatedIL COMP 100
+E_curlimTH curlim GND VALUE = {IF(V(Vout)<0.75*V(Vin),1.45,
++ IF(V(Vout)>0.866*V(Vin),2.70,10.776*V(Vout)/V(Vin)-6.625))}
+V_Iscs CSout EmulatedIL 0
+RVccxPulldn VCCX GND 70K
+E_DriveBuckAint DriveBuckAint 0 Value={IF(V(DriveBuck)<1.75,-1,+1)}
+R_DriveBuck DriveBuckAint DriveBuckA 1
+C_DriveBuck DriveBuckA 0 80n
+E_bkdrv gateHI HO VALUE = {IF(V(DriveBuckA)<-1,-3,
++ IF(V(DriveBuckA)<-0.2,(2*V(DriveBuckA))-1,
++ IF(V(DriveBuckA)<0.2,7*V(DriveBuckA),
++ IF(V(DriveBuckA)<1,(2*V(DriveBuckA))+1,3))))}
+S_LDO VIN regout LDOctl GND _S1_mod
+.MODEL _S1_mod vswitch VT=49 RON=1m
+S_UVLO Vstart VccTST UVLO GND _S4_mod
+.MODEL _S4_mod vswitch VT=1.18 VH=0.05 RON=10m
+G_35maLIMIT Vccval Vccgen VALUE = {IF(I(V_ccsense2)>35mA,
++ I(V_ccsense2)-35mA,0)}
+S_EN_REG regout V7 REGctl GND _S2_mod
+.MODEL _S2_mod vswitch VT=1 RON=10m
+V_reg V7 GND DC=7
+V_ccsense2 Vccval VCC DC=0
+XA_loqrst loQN rstloQ loQ NOR2_BASIC_GEN
+E_Srampctl SRampctl GND GND DriveBuckA 1
+Ren2gnd EN GND 1/gmin
+M1L VCC gateLO LO LO _M3_mod
+.MODEL _M3_mod NMOS KP=1 RD=3.05 VTO=2
+M2L GND gateLO LO LO _M5_mod
+.MODEL _M5_mod PMOS KP=1 RD=1.65 VTO=-2
+R_curlim2gnd curlim GND 10K
+E_CURrst CURrst GND VALUE = {IF(V(EmulatedIL)>V(curlim),5,0)}
+XA7 genPWMrst minTon rstPWM AND2_BASIC_GEN
+Econv2 CS2CSGmagnified 0 CSG CS 1000
+XA18 DriveBuck DriveBoost DRV NOR2_BASIC_GEN
+S_ssCLMP SS SSmax SS SSclmp _S5_mod
+.MODEL _S5_mod vswitch VT=-1mV VH=1mV RON=10m
+E_unity SSmax GND SSclmp GND 1
+S_ssLO SS SSmin GND tst _S6_mod
+.MODEL _S6_mod vswitch VT=-3 RON=10m
+VssLO SSmin GND DC=7mV
+C_saw sawtooth GND 156.25pF IC=0
+Rsawtooth sawtooth GND  1G
+XA33 boostmode clk bstCLKinv NAND2_BASIC_GEN
+Rconv2 CS2CSGmagnified 0 10K
+XA19 DRV DRVdly narrowctl AND2_BASIC_GEN
+D_pkrmp rmpplusdiode pkrmp _D2_mod
+.MODEL _D2_mod D IS=1u RS=5
+XA20 clk buckCLKinv INV_BASIC_GEN
+E_D2AA25 SCSctl_init 0 VALUE={IF(V(narrowctl)<1.75,-1,+1)}
+R_D2AA25 SCSctl_init SCSctl 1
+C_D2AA25 SCSctl 0 8n
+Cout Vout GND 0.001uF
+H_stabilizeCS conv3 0 V_Iscs 10K
+XA21 buckCLKinv setPWM INV_BASIC_GEN
+Rconv3 conv3 0 10K
+M1H HB gateHI HO HO _M1_mod
+.MODEL _M1_mod NMOS KP=1 RD=5.05 VTO=2
+M2H HS gateHI HO HO _M2_mod
+.MODEL _M2_mod PMOS KP=1 RD=3.05 VTO=-2
+Rconv1 HSmagnified 0 10K
+E_erramp unsat GND VALUE = {IF(V(SS)>1.23,100*(1.23 - v(FB)),
++ 100*(v(SS) - v(FB)))}
+R_amp erramp erramp1 10K
+C_amp erramp1 GND 53pF
+XA250n DRV DRVdly BUF250n_BASIC_GEN
+G_Iss GND SS VALUE = {IF(V(tst)<3,0,10uA)}
+XA30 triggen CLK enable oscQN trigon AND4_BASIC_GEN
+Errout COMP GND erramp1 GND 1
+XA_DFF clk oscQN trigger oscQN logic1 enable DFFSBRB_SHPBASIC_GEN
+Rpullup logic1 VCC 10MEG
+G_I_uvlo EN UVLO VALUE = {IF(V(Vin)<3.7V,0,
++ IF(V(UVLO)<V(Vin),5uA,0))}
+XA37 CLK triggen INV1_BASIC_GEN
+XA_Toggle trigon trigoff trigger OR2_BASIC_GEN
+XA_400ns_dlyx trigon trigoff BUF472n_BASIC_GEN
+Rstart_pldn Vstart GND 100MEG
+Vrt_sense GND ground DC=0
+E_bstdrv gateLO LO VALUE = {IF(V(DriveBoostA)<-1,-3,
++ IF(V(DriveBoostA)<-0.2,(2*V(DriveBoostA))-1,
++ IF(V(DriveBoostA)<0.2,7*V(DriveBoostA),
++ IF(V(DriveBoostA)<1,(2*V(DriveBoostA))+1,3))))}
+Esat erramp GND VALUE = {IF(V(unsat)>V(maxerr),V(maxerr),
++IF(V(unsat)<-0.3,-0.3,V(unsat)))}
+Ra2g unsat GND 10MEG
+E_D2AA24 DriveBoostA_init 0 VALUE={IF(V(DriveBoost)<1.75,-1,+1)}
+R_D2AA24 DriveBoostA_init DriveBoostA 2
+C_D2AA24 DriveBoostA 0 8n
+XA26 clk clkdly sawCTL AND2_BASIC_GEN
+XA200n clk clkdly BUF200n_BASIC_GEN
+XVCOA1 RT CLK1 CLK_GEN
+R4 CLK1 0 1
+E1 CLK 0 CLK1 0 1
+E_EN_REG REGctl GND VALUE={IF(V(VIN)<10,0,50)}
+S_Vccx_on Vccgen VCCX VCCX GND _S24_mod
+.MODEL _S24_mod vswitch VT=3.75 VH=0.1 RON=5 ROFF=24MEG
+S_Vccx_off regout Vccgen GND VCCX _S25_mod
+.MODEL _S25_mod vswitch VT=-3.75 VH=0.1 RON=1m
+V_ccsense1 Vccgen Vccval DC=0
+XA_pwmset setPWM PWMQ PWMQN NOR2_BASIC_GEN
+E_endBOOST endBOOST GND VALUE = {IF(V(tst)<3,-1,
++ 100*(V(sawtooth) - 4*(V(Vout)/V(Vin) - 0.75)))}
+C_pkrmp pkrmp GND 100pF IC=1V
+R_pkrmp pkrmp GND 1MEG
+Econv1 HSmagnified 0 0 HS 100
+E_pkrmp rmpplusdiode GND VALUE = {100*V(RAMP) + 1.0}
+XA14 HIrst CURrst genPWMrst OR2_BASIC_GEN
+E_maxerr maxerr GND VALUE={0.01*V(pkrmp)+0.5+V(EmulatedIL)-V(Ramp)}
+R_maxerr2g maxerr GND 100K
+RCSG1 CSG CSGi 1K
+RCS1 CS CSi 1K
+ECS CSo GND CSGi CSi 1000
+RCSfb CSi CSo 10K
+RCSoffs CSGi CSoffs 10K
+VCSoffset CSoffs GND DC=0.2
+S_CS CSout CSo SCSctl GND _S15_mod
+.MODEL _S15_mod vswitch VT=0 VH=0 RON=30
+Ccs EmulatedIL RAMP 2nF
+SRamp RAMP GND SRampctl GND _S16_mod
+.MODEL _S16_mod vswitch VT=0 VH=0 RON=100
+G_Iramp GND RAMP VALUE = {IF(V(tst)<3,0,IF(V(DriveBuckA)<0,0,
++ IF(V(DriveBoostA)<0,5uA*(V(Vin)-V(Vout))+50uA,5uA*V(Vin)+50uA)))}
+XA28 enable initrst INV_BASIC_GEN
+XA29 initrst endTonA clk HIrst OR3_BASIC_GEN
+XA16 HIrst CURrst Lorst Lorst2 OR3_BASIC_GEN
+XA13 DriveBoost bstminTon BUF70n_BASIC_GEN
+E_lo_rst Lorst GND VALUE = {IF(V(endBOOST)>0,5,0)}
+XA_pwmrst PWMQN rstPWM PWMQ NOR2_BASIC_GEN
+XA_minTon DriveBuck minTon BUF70n_BASIC_GEN
+XA22 buckCLKinv enable PWMQ DriveBuck AND3_BASIC_GEN
+XA32 bstCLKinv setloQ INV_BASIC_GEN
+XA6 bstCLKinv enable loQ DriveBoost AND3_BASIC_GEN
+.ENDS
+*$
+.SUBCKT DFFSBRB_SHPBASIC_GEN Q QB CLK D RB SB
++ PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75
+X1 CLK CLKdel INV_DELAY_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS}
++  VTHRESH={VTHRESH} DELAY = 1n
+X2 CLK CLKdel CLKint AND2_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS}
++ VTHRESH={VTHRESH}
+GQ 0 Qint VALUE = {IF(V(SB) < {VTHRESH},5,IF(V(RB)<{VTHRESH},-5,
++ IF(V(CLKint)> {VTHRESH},
++ IF(V(D)> {VTHRESH},5,-5),0)))}
+CQint Qint 0 1n
+RQint Qint 0 1000MEG
+D_D10 Qint MY5 D_D1
+V1 MY5 0 {VDD}
+D_D11 MYVSS Qint D_D1
+.MODEL D_D1 D( IS=1e-15 TT=10p Rs=0.05 N=.1  )
+V2 MYVSS 0 {VSS}
+EQ Qqq 0 Qint 0 1
+X3 Qqq Qqqd1 BUF_DELAY_BASIC_GEN PARAMS: VDD={VDD} VSS={VSS}
++ VTHRESH={VTHRESH} DELAY = 1n
+RQq Qqqd1 Q 1
+EQb Qbr 0 VALUE = {IF( V(Q) > {VTHRESH}, {VSS},{VDD})}
+RQb Qbr Qb 1
+Cdummy1 Q 0 1nF
+Cdummy2 QB 0 1nF
+.IC V(Qint) {VSS}
+.ENDS
+*$
+.SUBCKT INV_DELAY_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0
++ VTHRESH=1.75 DELAY = 1n
+E_ABMGATE1 YINT1 0 VALUE {IF(V(A)>{VTHRESH},{VDD},{VSS})}
+RINT YINT1 YINT2 1
+CINT YINT2 0 {DELAY*1.3}
+E_ABMGATE2 YINT3 0 VALUE {IF(V(YINT2)>{VTHRESH},{VSS},{VDD})}
+RINT2 YINT3 Y 1
+CINT2 Y 0 1n
+.ENDS
+*$
+.SUBCKT BUF_DELAY_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0
++  VTHRESH=1.75 DELAY = 1n
+E_ABMGATE1    YINT1 0 VALUE {{IF(V(A) > {VTHRESH} ,
++ {VDD},{VSS})}}
+RINT YINT1 YINT2 1
+CINT YINT2 0 {DELAY*1.3}
+E_ABMGATE2    YINT3 0 VALUE {{IF(V(YINT2) > {VTHRESH} ,
++ {VDD},{VSS})}}
+RINT2 YINT3 Y 1
+CINT2 Y 0 1n
+.ENDS
+*$
+.SUBCKT BUF472n_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0
++ VTHRESH=1.75 DELAY = 640n
+E_ABMGATE3 YINT1 0 VALUE {{IF(V(A) > {VTHRESH} ,
++ {VDD},{VSS})}}
+RINT YINT1 YINT2 1
+CINT YINT2 0 {DELAY*1}
+E_ABMGATE4 YINT3 0 VALUE {{IF(V(YINT2) > {VTHRESH} ,
++ {VDD},{VSS})}}
+RINT2 YINT3 Y 1
+CINT2 Y 0 1n
+.ENDS
+*$
+.SUBCKT BUF250n_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0
++ VTHRESH=1.75 DELAY = 400n
+E_ABMGATE1    YINT1 0 VALUE {{IF(V(A) > {VTHRESH} ,
++ {VDD},{VSS})}}
+RINT YINT1 YINT2 1
+CINT YINT2 0 {DELAY*1}
+E_ABMGATE2    YINT3 0 VALUE {{IF(V(YINT2) > {VTHRESH} ,
++ {VDD},{VSS})}}
+RINT2 YINT3 Y 1
+CINT2 Y 0 1n
+.ENDS
+*$
+.SUBCKT BUF200n_BASIC_GEN A  Y PARAMS: VDD=3.5
++ VSS=0.3 VTHRESH=1.75
+E_ABMGATE    YINT 0 VALUE {{IF(V(A) > {VTHRESH} ,
++ {VDD},{VSS})}}
+RINT YINT Y 10
+CINT Y 0 4n
+.ENDS
+*$
+.SUBCKT BUF70n_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0
++ VTHRESH=1.75
+E_ABMGATE    YINT 0 VALUE={{IF(V(A) > {VTHRESH} ,
++ {VDD},{VSS})}}
+RINT YINT Y 2
+CINT Y 0 7n
+.ENDS
+*$
+.SUBCKT AND4_BASIC_GEN A B C D Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75
+E_ABMGATE YINT 0 VALUE = {IF(V(A) > {VTHRESH} & V(B) > {VTHRESH} &
++ V(C) > {VTHRESH} & V(D) > {VTHRESH}, {VDD},
++ IF(V(A) < {VTHRESH} | V(B) < {VTHRESH} | V(C) < {VTHRESH} |
++ V(D) < {VTHRESH}, {VSS}, V(Y)))}
+RINT YINT Y 5.05
+CINT Y 0 2n
+.ENDS
+*$
+.SUBCKT AND3_BASIC_GEN A B C Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75
+E_ABMGATE YINT 0 VALUE = {IF(V(A) > {VTHRESH} & V(B) > {VTHRESH} &
++ V(C) > {VTHRESH},{VDD},
++ IF(V(A) < {VTHRESH} | V(B) < {VTHRESH} | V(C) < {VTHRESH},
++ {VSS}, V(Y)))}
+RINT YINT Y 1
+CINT Y 0 0.2n
+.ENDS
+*$
+.SUBCKT OR3_BASIC_GEN A B C Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75
+E_ABMGATE YINT 0 VALUE = {IF(V(A) > {VTHRESH} | V(B) > {VTHRESH} |
++ V(C) > {VTHRESH}, {VDD},
++ IF(V(A) < {VTHRESH} & V(B) < {VTHRESH} & V(C) < {VTHRESH}, {VSS},
++ V(Y)))}
+RINT YINT Y 1
+CINT Y 0 0.2n
+.ENDS
+*$
+.SUBCKT INV_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0.3 VTHRESH=1.75
+E_ABMGATE1 YINT 0 VALUE = {IF(V(A) > {VTHRESH} , {VSS},
++ IF(V(A) < {VTHRESH}, {VDD}, V(Y)))}
+RINT YINT Y 1
+CINT Y 0 0.2n
+.ENDS
+*$
+.SUBCKT INV1_BASIC_GEN A  Y PARAMS: VDD=3.5 VSS=0.3 VTHRESH=1.75
+E_ABMGATE YINT 0 VALUE = {IF(V(A) > {VTHRESH} , {VSS},
++ IF(V(A) < {VTHRESH} , {VDD}, V(Y)))}
+RINT YINT Y 5
+CINT Y 0 4n
+.ENDS
+*$
+.SUBCKT OR2_BASIC_GEN A B Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75
+E_ABMGATE YINT 0 VALUE = {IF(V(A) > {VTHRESH} | V(B) > {VTHRESH}, {VDD},
++ IF(V(A) < {VTHRESH} & V(B) < {VTHRESH}, {VSS}, V(Y)))}
+RINT YINT Y 1
+CINT Y 0 0.2n
+.ENDS
+*$
+.SUBCKT AND2_BASIC_GEN A B Y PARAMS: VDD=3.5 VSS=0 VTHRESH= 1.75
+E_ABMGATE YINT 0 VALUE = {IF(V(A) > {VTHRESH} & V(B) > {VTHRESH},{VDD},
++ IF(V(A) < {VTHRESH} | V(B) < {VTHRESH},{VSS}, V(Y)))}
+RINT YINT Y 1
+CINT Y 0 1n
+.ENDS
+*$
+.SUBCKT NOR2_BASIC_GEN A B Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75
+E_ABMGATE YINT 0 VALUE = {IF(V(A) > {VTHRESH} | V(B) > {VTHRESH},{VSS},
++ IF(V(A) < {VTHRESH} & V(B) < {VTHRESH},{VDD}, V(Y)))}
+RINT YINT Y 1
+CINT Y 0 0.2n
+*CINT Y 0 0.087n
+.ENDS
+*$
+.SUBCKT NAND2_BASIC_GEN A B Y PARAMS: VDD=3.5 VSS=0 VTHRESH=1.75
+E_ABMGATE YINT 0 VALUE = {IF(V(A) > {VTHRESH} & V(B) > {VTHRESH}, {VSS},
++ IF(V(A) < {VTHRESH} | V(B) < {VTHRESH}, {VDD}, V(Y)))}
+RINT YINT Y 1
+CINT Y 0 0.2n
+.ENDS
+*$
+.SUBCKT CLK_GEN RT CLK
+IS1         0 RT 1U
+XU6         4 3 RT VCR_0
+XU5         4 3 D_D1_0
+C2          3 0 1U
+XU2         5 4 INV_0
+R5          6 0 1G
+*R5          6 0 1MEG
+XU4         6 5 RT VCR_1
+XU3         5 3 CLK AND_0
+XU1         7 6 5 COMPARATOR_0
+C1          6 0 1U
+R2          0 7 1K
+R1          7 5 1K
+.ENDS
+*$
+.SUBCKT VCR_0 1 2 RT
+G1 1 2 VALUE {(V(1,2)/(20*V(RT)+0.121))}
+.ENDS
+*$
+.SUBCKT D_D1_0  1 2
+D1 1 2 DD1
+.MODEL DD1 D
++ IS=1E-011
++ TT=1E-09
++ RS=0
++ N=1.1
+.ENDS
+*$
+.SUBCKT INV_0 IN OUT
+E1 OUT 0 VALUE {IF(V(IN)> 0 , -4 , +4)}
+.ENDS
+*$
+.SUBCKT VCR_1 1 2 RT
+G1 1 2 VALUE {((V(1,2)*2*1.098*1E-6)/(1E6*V(RT)*0.156E-09+3.02E3*0.156E-09))}
+.ENDS
+*$
+.SUBCKT AND_0  1 2 OUT
+E1 OUT 0 VALUE = {IF(V(1)>0 & V(2)>0, 3.5, 0.3)}
+.ENDS
+*$
+.SUBCKT COMPARATOR_0 P N Y
+E1 Y 0 VALUE {IF(V(P,N)>0,4,-4)}
+.ENDS
+*$
+.SUBCKT CIN 1 2
++ PARAMS: C=1F ESR=1 IC=0
+* C = 3.0000000000000004E-5 F
+* ESR = 0.0010 Ohm
+*Ccap 1 3 3.0000000000000004E-5 IC = 0
+Ccap 1 3 {C} IC={IC}
+Resr 3 2 {ESR}
+*Ccap 1 3 10E-6
+*Resr 3 2 0.003
+.ENDS
+*$
+.SUBCKT COUT 2 4 PARAMS: IC=0
+R1 2 3 0.012
+C1 3 1 1.52E-4 IC = { IC }
+R3 5 4 150; "free space" reduced by sqrt(dielectric constant)
+R2 2 4 6578947.368421053
+R4 3 26 1.5E9
+R6 3 7 1500.0
+C5 7 1 6.080000000000001E-5 IC = { IC }
+R7 3 10 1500.0
+C6 10 1 6.080000000000001E-5 IC = { IC }
+R8 3 13 1500.0
+C7 13 1 6.080000000000001E-5 IC = { IC }
+C2 26 1 6.080000000000001E-5 IC = { IC }
+R9 3 28 1.5E7
+C3 28 1 6.080000000000001E-5 IC = { IC }
+R10 3 29 150000.0
+C4 29 1 6.080000000000001E-5 IC = { IC }
+L8 1 5 0.2e-9
+R24 1 5 0.036000000000000004
+L12 5 4 10e-12
+.ENDS
+*$
+.SUBCKT VB40100C-E3/4W A K
+D1 A K DIODE_D1
+.MODEL DIODE_D1 D BV=500 CJO=470E-12 EG=0.69 IBV=1E-6
++ IS=9E-6 M=0.8 N=1.442 RS=60E-3 VJ=1 XTI=2
+.ENDS
+*$
+.SUBCKT VB40100C-E3/4W_1 A K
+D1 A K DIODE_D3
+.MODEL DIODE_D3 D BV=500 CJO=470E-12 EG=0.69 IBV=1E-6
++ IS=9E-6 M=0.8 N=1.442 RS=60E-3 VJ=1 XTI=2
+.ENDS
+*$
+.SUBCKT MBRD1035CTLT4G A K
+D1 A K DIODE_D2
+.MODEL DIODE_D2 D BV=500 CJO=470E-12 EG=0.69 IBV=1E-6
++ IS=9E-6 M=0.8 N=1.442 RS=60E-3 VJ=1 XTI=2
+.ENDS
+*$
+.SUBCKT MBRD1035CTLT4G_1 A K
+D1 A K DIODE_D3
+.MODEL DIODE_D3 D BV=500 CJO=470E-12 EG=0.69 IBV=1E-6
++ IS=9E-6 M=0.8 N=1.442 RS=60E-3 VJ=1 XTI=2
+.ENDS
+*$
+.SUBCKT SER2915H-103KL 1 2
++ PARAMS: L=1 DCR=0.01 IC=0
+*{ L = 1.0E-5 DCR = 0.0255 }
+* PARAMETERS: L INDUCTANCE IN HENRIES, DCR DC SERIES RESISTANCE IN OHMS
+*L1 2 3 1.0E-5 IC =
+L1 2 3 {L} IC={IC}
+RDCR 3 1 {DCR}
+.ENDS
+*$
+.SUBCKT Si7148DP_1 drain gate source
+* Cgd = 3.555E-10 F -> Gate to drain Capacitance fit to approximate gate charge
+* Cgs = 2.7690000000000003E-9 F -> Gate to source Capacitance
+* Cj0 = 2.8136E-9 F -> Approximated Source to Drain Capacitance at Vds=0 (by given Coss at certain Vds)
+* VdsMax = 44.0 V -> Maximum drain to source Voltage
+* RdsON = (2 * 0.0029 ) Ohms -> MOSFET on resistance
+* Rgate = 0.8 Ohms -> Gate Resistance
+* Vth = 2.3 V -> Threshold Voltage
+Cgd g d 3.555E-10
+M1 d g s s _M1_modX L=1u W=1u
+.MODEL _M1_modX NMOS CGDO=0 CGSO=0 KP=100 RD=0 RS=0
++ TOX=1E-7 UO=600 VTO= 2.3
+Rds2 source s 0.0029
+Rds1 drain d 0.0029
+RG gate g 0.8
+Cgs g s 2.7690000000000003E-9
+Dbd source drain Dbt
+.MODEL Dbt D(BV= 44.0 CJO= 2.8136E-9 M= .35 VJ= .9 )
+.ENDS
+*$
+.SUBCKT Si7148DP_2 drain gate source
+*General N-MOSFET Model 01/11/2010
+* Cgd = 1.9000000000000002E-10 F -> Gate to drain Capacitance fit to approximate gate charge
+* Cgs = 6.05E-10 F -> Gate to source Capacitance
+* Cj0 = 1.0900000000000002E-9 F -> Approximated Source to Drain Capacitance at Vds=0 (by given Coss at certain Vds)
+* VdsMax = 33.0 V -> Maximum drain to source Voltage
+* RdsON = (2 * 0.0047 ) Ohms -> MOSFET on resistance
+* Rgate = 0.9 Ohms -> Gate Resistance
+* Vth = 1.8 V -> Threshold Voltage
+Cgd g d 1.9000000000000002E-10
+M1 d g s s _M1_modX L=1u W=1u
+.MODEL _M1_modX NMOS CGDO=0 CGSO=0
+.ENDS
+*$

@@ -1,0 +1,101 @@
+************************************************************
+* CD4033 CMOS Decade Counter/Divider with 7 segment driver *
+*      (C) 2021 Daniel Luginbuehl www.ltspiceusers.ch      *
+*                      V1.2 25.09.2021                     *
+************************************************************
+*
+.subckt CD4033 Clock Clock_Inhibit LampTest RBI Reset A B C CarryOut D E F G RBO vhigh1={vdd}
+r:u1:in1:1 n010 u1:in1:out10 10k
+c:u1:in1:11 u1:in1:out10 0 1e-012 
+r:u1:in1:2 n010 0 1e8
+b:u1:in1:11 u1:in1:out20 0 v=limit(0,v(u1:in1:out10,0)* 0.111111111111111 ,1)
+a:u1:in1:e1 u1:in1:out20 0 0 0 0 0 u1:mri 0 buf ref=0.5 vhigh={vhigh1} tripdt=5e-009 
+r:u1:in2:1 n011 u1:in2:out10 10k
+c:u1:in2:11 u1:in2:out10 0 1e-012 
+r:u1:in2:2 n011 0 1e8
+b:u1:in2:11 u1:in2:out20 0 v=limit(0,v(u1:in2:out10,0)* 0.111111111111111 ,1)
+a:u1:in2:e1 u1:in2:out20 0 0 0 0 0 u1:cp1i 0 buf ref=0.5 vhigh={vhigh1} tripdt=5e-009 
+r:u1:in3:1 n012 u1:in3:out10 10k
+c:u1:in3:11 u1:in3:out10 0 1e-012 
+r:u1:in3:2 n012 0 1e8
+b:u1:in3:11 u1:in3:out20 0 v=limit(0,v(u1:in3:out10,0)* 0.111111111111111 ,1)
+a:u1:in3:e1 u1:in3:out20 0 0 0 0 0 u1:cp0i 0 buf ref=0.5 vhigh={vhigh1} tripdt=5e-009 
+a:u1:r u1:mri 0 0 0 0 0 u1:mrp 0 buf tripdt=5e-009 td=3.88888888888889e-008 
+a:u1:c1 u1:cp1i 0 0 0 0 u1:cp1n 0 0 buf tripdt=5e-009 td=3.88888888888889e-008 
+a:u1:c0 u1:cp0i 0 0 0 0 0 u1:cp0p 0 buf tripdt=5e-009 td=3.88888888888889e-008 
+a:u1:cp u1:cp1n u1:cp0p 0 0 0 0 u1:cpp 0 and tripdt=5e-009 
+a:u1:ff1 u1:q5n 0 u1:cpp 0 u1:mrp u1:q1n u1:q1p 0 dflop tripdt=5e-009 td=5.55555555555556e-009 
+a:u1:ff2 u1:q1p 0 u1:cpp 0 u1:mrp u1:q2n u1:q2p 0 dflop tripdt=5e-009 td=5.55555555555556e-009 
+a:u1:or u1:q1p u1:q3p 0 0 0 0 u1:yor 0 or tripdt=5e-009 
+a:u1:and u1:yor u1:q2p 0 0 0 0 u1:d3p 0 and tripdt=5e-009 
+a:u1:ff3 u1:d3p 0 u1:cpp 0 u1:mrp u1:q3n u1:q3p 0 dflop tripdt=5e-009 td=5.55555555555556e-009 
+a:u1:ff4 u1:q3p 0 u1:cpp 0 u1:mrp u1:q4n u1:q4p 0 dflop tripdt=5e-009 td=5.55555555555556e-009 
+a:u1:ff5 u1:q4p 0 u1:cpp 0 u1:mrp u1:q5n u1:q5p 0 dflop tripdt=5e-009 td=5.55555555555556e-009 
+a:u1:nor0 u1:q5p u1:q1p 0 0 0 u1:o0n 0 0 or tripdt=5e-009 
+a:u1:nor1 u1:q2p u1:q1n 0 0 0 u1:o1n 0 0 or tripdt=5e-009 
+a:u1:nor2 u1:q2n u1:q3p 0 0 0 u1:o2n 0 0 or tripdt=5e-009 
+a:u1:nor3 u1:q4p u1:q3n 0 0 0 u1:o3n 0 0 or tripdt=5e-009 
+a:u1:nor4 u1:q5p u1:q4n 0 0 0 u1:o4n 0 0 or tripdt=5e-009 
+a:u1:nor5 u1:q1n u1:q5n 0 0 0 u1:o5n 0 0 or tripdt=5e-009 
+a:u1:nor6 u1:q1p u1:q2n 0 0 0 u1:o6n 0 0 or tripdt=5e-009 
+a:u1:nor7 u1:q2p u1:q3n 0 0 0 u1:o7n 0 0 or tripdt=5e-009 
+a:u1:nor8 u1:q4n u1:q3p 0 0 0 u1:o8n 0 0 or tripdt=5e-009 
+a:u1:nor9 u1:q4p u1:q5n 0 0 0 u1:o9n 0 0 or tripdt=5e-009 
+a:u1:59 u1:q5n 0 0 0 0 0 u1:o59n 0 buf tripdt=5e-009 
+a:u1:out0:e1 u1:o0n 0 0 0 0 0 u1:out0:out10 0 buf tripdt=5e-009 trise=4.44444444444444e-008 
+e:u1:out0:11 u1:out0:out20 0 u1:out0:out10 0 {vhigh1}
+r:u1:out0:out u1:out0:out20 o 277.777777777778 
+a:u1:out1:e1 u1:o1n 0 0 0 0 0 u1:out1:out10 0 buf tripdt=5e-009 trise=4.44444444444444e-008 
+e:u1:out1:11 u1:out1:out20 0 u1:out1:out10 0 {vhigh1}
+r:u1:out1:out u1:out1:out20 1 277.777777777778 
+a:u1:out2:e1 u1:o2n 0 0 0 0 0 u1:out2:out10 0 buf tripdt=5e-009 trise=4.44444444444444e-008 
+e:u1:out2:11 u1:out2:out20 0 u1:out2:out10 0 {vhigh1}
+r:u1:out2:out u1:out2:out20 2 277.777777777778 
+a:u1:out3:e1 u1:o3n 0 0 0 0 0 u1:out3:out10 0 buf tripdt=5e-009 trise=4.44444444444444e-008 
+e:u1:out3:11 u1:out3:out20 0 u1:out3:out10 0 {vhigh1}
+r:u1:out3:out u1:out3:out20 3 277.777777777778 
+a:u1:out4:e1 u1:o4n 0 0 0 0 0 u1:out4:out10 0 buf tripdt=5e-009 trise=4.44444444444444e-008 
+e:u1:out4:11 u1:out4:out20 0 u1:out4:out10 0 {vhigh1}
+r:u1:out4:out u1:out4:out20 4 277.777777777778 
+a:u1:out5:e1 u1:o5n 0 0 0 0 0 u1:out5:out10 0 buf tripdt=5e-009 trise=4.44444444444444e-008 
+e:u1:out5:11 u1:out5:out20 0 u1:out5:out10 0 {vhigh1}
+r:u1:out5:out u1:out5:out20 5 277.777777777778 
+a:u1:out6:e1 u1:o6n 0 0 0 0 0 u1:out6:out10 0 buf tripdt=5e-009 trise=4.44444444444444e-008 
+e:u1:out6:11 u1:out6:out20 0 u1:out6:out10 0 {vhigh1}
+r:u1:out6:out u1:out6:out20 6 277.777777777778 
+a:u1:out7:e1 u1:o7n 0 0 0 0 0 u1:out7:out10 0 buf tripdt=5e-009 trise=4.44444444444444e-008 
+e:u1:out7:11 u1:out7:out20 0 u1:out7:out10 0 {vhigh1}
+r:u1:out7:out u1:out7:out20 7 277.777777777778 
+a:u1:out8:e1 u1:o8n 0 0 0 0 0 u1:out8:out10 0 buf tripdt=5e-009 trise=4.44444444444444e-008 
+e:u1:out8:11 u1:out8:out20 0 u1:out8:out10 0 {vhigh1}
+r:u1:out8:out u1:out8:out20 8 277.777777777778 
+a:u1:out9:e1 u1:o9n 0 0 0 0 0 u1:out9:out10 0 buf tripdt=5e-009 trise=4.44444444444444e-008 
+e:u1:out9:11 u1:out9:out20 0 u1:out9:out10 0 {vhigh1}
+r:u1:out9:out u1:out9:out20 9 277.777777777778 
+a:u1:out59:e1 u1:o59n 0 0 0 0 0 u1:out59:out10 0 buf tripdt=5e-009 trise=4.44444444444444e-008 
+e:u1:out59:11 u1:out59:out20 0 u1:out59:out10 0 {vhigh1}
+r:u1:out59:out u1:out59:out20 n014 277.777777777778 
+a1 n001 2 3 5 6 0 n002 0 or vhigh={vhigh1}
+a2 n002 7 8 9 n003 0 a 0 or vhigh={vhigh1}
+a3 n001 1 2 3 4 0 n004 0 or vhigh={vhigh1}
+a4 n004 7 8 9 n003 0 b 0 or vhigh={vhigh1}
+a5 n001 1 3 4 5 0 n005 0 or vhigh={vhigh1}
+a6 n005 6 7 8 9 0 n006 0 or vhigh={vhigh1}
+a7 n001 2 3 5 6 0 n009 0 or vhigh={vhigh1}
+a8 n009 8 9 n003 0 0 d 0 or vhigh={vhigh1}
+a9 n001 2 6 8 n003 0 e 0 or vhigh={vhigh1}
+a10 n001 4 5 6 8 0 n013 0 or vhigh={vhigh1}
+a11 n013 9 n003 0 0 0 f 0 or vhigh={vhigh1}
+a12 2 3 4 5 6 0 n015 0 or vhigh={vhigh1}
+a13 n015 8 9 n003 0 0 g 0 or vhigh={vhigh1}
+a14 0 n006 n003 0 0 0 c 0 or vhigh={vhigh1}
+a15 rbi 0 0 0 0 n007 0 0 buf vhigh={vhigh1}
+a17 0 o 0 n007 0 n008 0 0 and vhigh={vhigh1}
+a16 0 o 0 n008 0 0 n001 0 and vhigh={vhigh1}
+a18 0 n014 0 0 0 0 carryout 0 or vhigh={vhigh1}
+a19 0 n008 0 0 0 0 rbo 0 or vhigh={vhigh1}
+a20 0 0 lamptest 0 0 0 n003 0 and vhigh={vhigh1}
+a21 0 0 reset 0 0 0 n010 0 and vhigh={vhigh1}
+a22 0 0 clock_inhibit 0 0 0 n011 0 and vhigh={vhigh1}
+a23 0 0 0 clock 0 0 n012 0 and vhigh={vhigh1}
+.end

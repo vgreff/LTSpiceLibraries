@@ -1,0 +1,6 @@
+.subckt BR Vin1 Vin2 V- V+
+d1 vin1 V+ |did|
+d2 vin2 V+ |did|
+d3 v- vin1 |did|
+d4 v- Vin2 |did|
+.ends BR

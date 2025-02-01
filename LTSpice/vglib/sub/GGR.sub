@@ -1,0 +1,14 @@
+.subckt GGR 1 4 R_off=999t R0=100 Ron=10m V_fall=10 Tau=5u Doza=5
+R_off 1 2 {R_off} ; dark resistance (affects breakdown voltage)
+R_ion 1 2 R={R0}/V(ion)**.75 ; dynamic ionization resistance
+Dfall 2 3 VV ; bidirectional cathode fall voltage
+Cdfall 2 3 50p Rser=10k ; for convergence
+V_ion 3 4 0 ; current sense for behavioral sources
+B_ion 0 ion I=I(V_ion)**2 Cpar={tau} Rpar=1 ; measure of channel ionization and ionization time constant
+.param  b=50u
+B x 0 v=rand(Doza*time)
+B2  0 ion i=v(q)*b cpar=200p
+a1 x 0 0 0 0 n002 0  0 buf td=150u
+a2 n002 0 x 0 0 _q q 0 and td=100n
+.model VV d(Vfwd={V_fall} Vrev={V_fall} Ron={Ron})
+.ends GGR

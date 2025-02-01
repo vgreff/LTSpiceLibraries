@@ -1,0 +1,5 @@
+.subckt bandpass_filter in OUT 
+R1 in 0 1G noiseless
+B1 OUT  0 v=v(in) Mag Freq |AFR|     window=1u nfft=4096 ;cache=2
+.ends bandpass_filte
+

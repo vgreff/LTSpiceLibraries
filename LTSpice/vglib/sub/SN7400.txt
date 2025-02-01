@@ -1,0 +1,113 @@
+.SUBCKT SN7400 in1 in2 vcc vss out
+* 2-INPUT-NAND SN7400
+*
+Q1 4 6 in1 0 N1
+Q2 4 6 in2 0 N1
+Q4 3 4 5 0 N1
+Q5 out 5 vss 0 N1
+Q6 2 3 1 0 N1
+D1 1 out DD
+RC4 vcc 3 1.6k
+RC6 vcc 2 130
+RB1 vcc 6 4k
+RE4 5 vss 1k
+D2 vss in2 DD
+D3 vss in1 DD
+.MODEL N1 NPN BF=50 RB=70 RC=40 CJS=2p TF=0.1n
++TR=10n CJE=1p CJC=1.5p VJC=0.85 VAF=50
+.MODEL DD D RS=40 TT=0.1n CJ0=0.9p
+.ENDS
+
+.SUBCKT SN7404  in1  vcc vss out
+* 2-INPUT-NAND SN7400
+*
+Q1 4 6 in1 0 N1
+*Q2 4 6 in2 0 N1
+Q4 3 4 5 0 N1
+Q5 out 5 vss 0 N1
+Q6 2 3 1 0 N1
+D1 1 out DD
+RC4 vcc 3 1.6k
+RC6 vcc 2 130
+RB1 vcc 6 4k
+RE4 5 vss 1k
+*D2 vss in2 DD
+D3 vss in1 DD
+.MODEL N1 NPN BF=50 RB=70 RC=40 CJS=2p TF=0.1n
++TR=10n CJE=1p CJC=1.5p VJC=0.85 VAF=50
+.MODEL DD D RS=40 TT=0.1n CJ0=0.9p
+.ENDS
+.subckt k155la3 A B  VDD VSS OUT
+Q1 N004 N002 A 0 q74
+Q2 N001 N004 N005 0 q74
+Q3 P001 N001 N003 0 q74 7
+R1 VDD N002 4K
+R2 VDD N001 1.6K
+R3 N005 N006 1K
+D1 VSS A D74CLMP
+D2 VSS OUT D74
+Q4 OUT N005 VSS 0 q74 7
+R5 VDD P001 130
+Q5 N003 N003 OUT 0 q74
+CR1 VDD N002 3p
+CR3 N005 vdd 1p5
+Q6 N006 N007 VSS 0 q74
+R4 N005 N007 500
+Q7 N004 N002 B 0 q74
+D3 VSS B D74CLMP
+CR2 N001 VDD 1.5p
+.model D74 d (
++               is=1e-16        rs=25           cjo=2pf   BV=31
++               )
+.model D74CLMP d (
++               is=1e-15        rs=2            cjo=2pf
++               )
+.model Q74 npn ( is=3e-16
++               ise=1e-16       isc=4e-16
++               bf=50          br=.03
++               cje=1pf         cjc=.5pf
++               cjs=3pf         vje=0.9v
++               vjc=0.8v        vjs=0.7v
++               mje=0.5         mjc=0.33
++               mjs=0.33        tf=0.1ns
++               tr=10ns         rb=300
++               rc=100               )
+.ends k155la3
+
+.subckt k155la3_ A B OUT VDD VSS 
+Q1 N004 N002 A 0 q74
+Q2 N001 N004 N005 0 q74
+Q3 P001 N001 N003 0 q74 7
+R1 VDD N002 4K
+R2 VDD N001 1.6K
+R3 N005 N006 1K
+D1 VSS A D74CLMP
+D2 VSS OUT D74
+Q4 OUT N005 VSS 0 q74 7
+R5 VDD P001 130
+Q5 N003 N003 OUT 0 q74
+CR1 VDD N002 3p
+CR3 N005 vdd 1p5
+Q6 N006 N007 VSS 0 q74
+R4 N005 N007 500
+Q7 N004 N002 B 0 q74
+D3 VSS B D74CLMP
+CR2 N001 VDD 1.5p
+.model D74 d (
++               is=1e-16        rs=25           cjo=2pf   BV=31
++               )
+.model D74CLMP d (
++               is=1e-15        rs=2            cjo=2pf
++               )
+.model Q74 npn ( is=3e-16
++               ise=1e-16       isc=4e-16
++               bf=50          br=.03
++               cje=1pf         cjc=.5pf
++               cjs=3pf         vje=0.9v
++               vjc=0.8v        vjs=0.7v
++               mje=0.5         mjc=0.33
++               mjs=0.33        tf=0.1ns
++               tr=10ns         rb=300
++               rc=100               )
+.ends k155la3_
+

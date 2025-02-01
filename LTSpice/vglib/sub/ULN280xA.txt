@@ -1,0 +1,81 @@
+* Source File: ULN280xABlk.asc
+* Developer: ETech (eetech00@yahoo.com)
+* Created: Nov 07 2016
+* Revision: Feb 02 2023
+*
+* This spice model was tested with LTSpice.
+* Temperature is not modeled.
+*
+* Texas Instruments
+* ULN2803A Darlington Transistor Arrays, 8-channel
+*
+* block symbol definitions
+.subckt ULN2803A 1B 2B 3B 4B 5B 6B 7B 8B VEE CO 8C 7C 6C 5C 4C 3C 2C 1C
+XX1 1B 1C VEE CO dpchannel params: Rb=2.7k
+XX2 2B 2C VEE CO dpchannel params: Rb=2.7k
+XX3 3B 3C VEE CO dpchannel params: Rb=2.7k
+XX4 4B 4C VEE CO dpchannel params: Rb=2.7k
+XX5 5B 5C VEE CO dpchannel params: Rb=2.7k
+XX6 6B 6C VEE CO dpchannel params: Rb=2.7k
+XX7 7B 7C VEE CO dpchannel params: Rb=2.7k
+XX8 8B 8C VEE CO dpchannel params: Rb=2.7k
+.ends ULN2803A
+*
+* Texas Instruments
+* ULN2804A Darlington Transistor Arrays, 7-Channel
+.subckt ULN2804A 1B 2B 3B 4B 5B 6B 7B VEE CO 7C 6C 5C 4C 3C 2C 1C
+XX1 1B 1C VEE CO dpchannel params: Rb=10.5k
+XX2 2B 2C VEE CO dpchannel params: Rb=10.5k
+XX3 3B 3C VEE CO dpchannel params: Rb=10.5k
+XX4 4B 4C VEE CO dpchannel params: Rb=10.5k
+XX5 5B 5C VEE CO dpchannel params: Rb=10.5k
+XX6 6B 6C VEE CO dpchannel params: Rb=10.5k
+XX7 7B 7C VEE CO dpchannel params: Rb=10.5k
+.ends ULN2804A
+
+.subckt dpchannel B C E CO PARAMS: Rb=2.7k
+Q1 C B1 B2 0 NP 5.1
+Q2 C B2 E 0 NP 5.1
+R1 B1 B {Rb}
+R2 B2 B1 7.2k
+R3 E B2 3k
+D4 E C DClamp
+D2 E B Di
+D3 C CO DClamp
+.model Di d Roff=150k Epsilon=1
+.model DClamp D(Is=5.89829e-05 Rs=0.155649 N=7.3717
++ Cjo=4e-12 M=0.4 tt=20e-9 Bv=50 Ibv=50e-6)
+.param Rb=2.7k
+*
+.model NP NPN (
++ is=5.6e-16
++ bf=86
++ br=0.7
++ ise=0
++ ikf=0.12
++ ikr=0.32
++ ne=1.5
++ nc=1.5
++ tf=2.27e-10
++ tr=2.27e-9
++ cje=2.27e-12
++ cjc=1.35e-12
++ vje=0.88
++ vjc=0.74
++ mje=0.42
++ mjc=0.41
++ cjs=1.27e-12
++ vjs=0.67
++ mjs=0.44
++ vaf=29
++ var=7.3
++ rc=18.88
++ rb=7.48
++ re=0.036
++ xtb=1.58936
++ eg=1.17
++ fc=0.5
++ xti=3.5
++ xcjc=0.10
++)
+.ends dpchannel
